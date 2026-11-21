@@ -52,7 +52,6 @@ def evaluate_allow(
     Returns:
         An EligibilityResult with the decision value and reason codes.
     """
-    reasons: list[str] = []
     fact_map = {f.key: f for f in facts}
 
     # Check for missing facts.

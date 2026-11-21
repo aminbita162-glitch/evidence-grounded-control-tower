@@ -151,6 +151,16 @@
 | T-KRN-0040 | PROPOSED to VERIFIED transition is allowed | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0040_proposed_to_verified |
 | T-KRN-0041 | VERIFIED to SUPERSEDED transition is allowed | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0041_verified_to_superseded |
 | T-KRN-0042 | REJECTED is a terminal state | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0042_rejected_is_terminal |
+| T-KRN-0043 | Every (state, event) pair covered by the table | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0043_all_states_in_table |
+| T-KRN-0044 | Undefined transitions are rejected | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0044_undefined_transition_rejected |
+| T-KRN-0045 | Same idempotency key returns an identical result | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0045_idempotency_key_identical |
+| T-KRN-0046 | A stale version yields the conflict error | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0046_stale_version_conflict |
+| T-KRN-0047 | Two approvals of one proposal: the first wins | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0047_first_approval_wins |
+| T-KRN-0048 | Timeouts move to BLOCKED, never approve | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0048_timeout_to_blocked |
+| T-KRN-0049 | Re-evaluation supersedes by reference | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0049_re_evaluation_supersede |
+| T-KRN-0050 | QUARANTINED state exists and can transition | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0050_quarantined_state |
+| T-KRN-0051 | FAILED is a terminal state | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0051_failed_is_terminal |
+| T-KRN-0052 | Normal lifecycle path is valid | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0052_normal_lifecycle |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

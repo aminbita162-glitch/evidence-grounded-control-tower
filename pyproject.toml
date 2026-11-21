@@ -66,7 +66,7 @@ module = ["kernel.contracts._generated.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*"]
+module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*"]
 disallow_any_explicit = false
 
 [tool.pytest.ini_options]
