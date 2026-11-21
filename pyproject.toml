@@ -54,7 +54,7 @@ python_version = "3.14"
 exclude = ["tools/gate/fixtures/", "\\.venv/", "build/"]
 
 [[tool.mypy.overrides]]
-module = ["yaml"]
+module = ["yaml", "jcs", "rfc8785"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
@@ -63,6 +63,10 @@ disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
 module = ["kernel.contracts._generated.*"]
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+module = ["kernel.canonical.*", "kernel.hashing.*"]
 disallow_any_explicit = false
 
 [tool.pytest.ini_options]

@@ -117,6 +117,16 @@
 | T-KRN-0006 | Models validate against strict typing | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0006_models_strict_typing |
 | T-KRN-0007 | Generated files carry the AUTO-GENERATED header | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0007_generated_files_have_header |
 | T-KRN-0008 | __init__.py re-exports all entity models | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0008_init_reexports_all_models |
+| T-KRN-0009 | Known-answer vector for RFC 8785 canonical JSON | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0009_rfc8785_known_answer |
+| T-KRN-0010 | Known-answer vector for SHA-256 domain hash | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0010_sha256_known_answer |
+| T-KRN-0011 | Cross-purpose hash separation | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0011_cross_purpose_hash_separation |
+| T-KRN-0012 | Decimals serialize without exponent or trailing zeros ambiguity | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0012_decimal_serialization |
+| T-KRN-0013 | Key order stability under random input order | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0013_key_order_stability |
+| T-KRN-0014 | Number formatting stability under random input | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0014_number_formatting_stability |
+| T-KRN-0015 | Unknown tag rejected | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0015_unknown_tag_rejected |
+| T-KRN-0016 | Algorithm identifier present | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0016_algorithm_identifier |
+| T-KRN-0017 | Tag registry validates and all tags are unique | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0017_tag_registry_validates |
+| T-KRN-0018 | Differential test: rfc8785 vs jcs produce identical output | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0018_differential_rfc8785_vs_jcs |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
