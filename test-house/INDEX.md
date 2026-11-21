@@ -161,6 +161,18 @@
 | T-KRN-0050 | QUARANTINED state exists and can transition | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0050_quarantined_state |
 | T-KRN-0051 | FAILED is a terminal state | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0051_failed_is_terminal |
 | T-KRN-0052 | Normal lifecycle path is valid | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0052_normal_lifecycle |
+| T-KRN-0053 | Every code has title, status and documentation text | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0053_every_code_has_fields |
+| T-KRN-0054 | Codes are unique and never reused | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0054_codes_unique |
+| T-KRN-0055 | The problem-details object validates | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0055_problem_details_validates |
+| T-KRN-0056 | A broad exception handler in the core is rejected by lint | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0056_no_broad_except_in_core |
+| T-KRN-0057 | Typed result types for expected failures | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0057_typed_result_types |
+| T-KRN-0058 | get_error raises for unknown codes | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0058_unknown_code_raises |
+| T-KRN-0059 | Invalid configuration is rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0059_invalid_config_rejected |
+| T-KRN-0060 | Hash is stable and changes with any field | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0060_hash_changes_with_field |
+| T-KRN-0061 | Defaults equal the registry parameters | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0061_defaults_match_spec |
+| T-KRN-0062 | Unknown keys are rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0062_unknown_keys_rejected |
+| T-KRN-0063 | Hash is deterministic across calls | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0063_hash_deterministic |
+| T-KRN-0064 | Negative values are rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0064_negative_values_rejected |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

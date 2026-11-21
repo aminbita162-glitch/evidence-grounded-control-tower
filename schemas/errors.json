@@ -1,0 +1,70 @@
+{
+  "errors": [
+    {
+      "code": "MISSING_FACT",
+      "title": "Missing Fact",
+      "status": 422,
+      "documentation": "A required fact was not present."
+    },
+    {
+      "code": "UNVERIFIED_FACT",
+      "title": "Unverified Fact",
+      "status": 422,
+      "documentation": "A fact was not in VERIFIED status."
+    },
+    {
+      "code": "WEAK_LABEL",
+      "title": "Weak Label",
+      "status": 422,
+      "documentation": "A datum label is too weak for ALLOW."
+    },
+    {
+      "code": "RULE_FAILURE",
+      "title": "Rule Failure",
+      "status": 422,
+      "documentation": "A rule evaluation failed."
+    },
+    {
+      "code": "VERSION_CONFLICT",
+      "title": "Version Conflict",
+      "status": 409,
+      "documentation": "A stale version was used."
+    },
+    {
+      "code": "IDEMPOTENCY_CONFLICT",
+      "title": "Idempotency Conflict",
+      "status": 409,
+      "documentation": "A duplicate idempotency key was used."
+    },
+    {
+      "code": "UNKNOWN_TAG",
+      "title": "Unknown Hash Tag",
+      "status": 400,
+      "documentation": "An unregistered hash tag was used."
+    },
+    {
+      "code": "INVALID_CONFIG",
+      "title": "Invalid Configuration",
+      "status": 422,
+      "documentation": "Configuration validation failed."
+    },
+    {
+      "code": "REGION_POLICY",
+      "title": "Region Policy Violation",
+      "status": 403,
+      "documentation": "A model call region is outside the tenant profile."
+    },
+    {
+      "code": "BUDGET_EXCEEDED",
+      "title": "Budget Exceeded",
+      "status": 422,
+      "documentation": "The per-case budget was exceeded."
+    },
+    {
+      "code": "QUARANTINED",
+      "title": "Case Quarantined",
+      "status": 423,
+      "documentation": "The case is under quarantine."
+    }
+  ]
+}
