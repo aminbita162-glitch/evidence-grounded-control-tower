@@ -292,7 +292,7 @@ def _cmd_phase_end(phase_id: str, repo_root: Path, state_path: Path) -> int:
             print(f"  STOP: exit check {result.item} failed — {result.evidence}", file=sys.stderr)
             return 1
 
-    # 10.2 — END1: report written (in real use, by the agent; here we validate).
+    # 10.2 — END1: report written (in real use, by the worker; here we validate).
     report: dict[str, object] = {
         "entry_report": "see entry results",
         "exit_report": "see exit results",

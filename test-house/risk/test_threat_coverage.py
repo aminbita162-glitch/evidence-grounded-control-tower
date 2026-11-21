@@ -27,7 +27,7 @@ _P3_S15_THREATS: tuple[str, ...] = (
     "data exfiltration through the model",
     "poisoned reference data",
     "memory poisoning",
-    "agent goal drift and runaway behavior",
+    "worker goal drift and runaway behavior",
     "evidence tampering and replay",
     "cross-case and cross-tenant leakage",
     "hostile files",

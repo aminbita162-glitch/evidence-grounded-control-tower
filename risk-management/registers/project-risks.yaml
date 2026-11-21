@@ -6,10 +6,10 @@
 
 records:
   - id: RSK-J-01
-    title: Dev-agent drift or hallucinated fact
+    title: Dev-worker drift or hallucinated fact
     area: project
     description: >-
-      The development agent drifts from the directive or produces a
+      The development worker drifts from the directive or produces a
       hallucinated fact. Mitigated by phase gates, scope check and directive
       lint (Part 6 §6.14, §6.15), and the self-review of Part 1 §9.3.
     cause: >-
@@ -63,7 +63,7 @@ records:
       Too many tool calls; too much context; a phase that is larger than
       budgeted.
     consequence: >-
-      The phase is truncated; tasks are left incomplete; the agent is
+      The phase is truncated; tasks are left incomplete; the worker is
       interrupted mid-task.
     inherent_likelihood: 4
     inherent_severity: 2
@@ -159,7 +159,7 @@ records:
       The directive is edited outside an owner decision; the hash is not
       checked; a maintenance directive is not recorded.
     consequence: >-
-      An agent runs against a wrong directive; a phase is executed with
+      A worker runs against a wrong directive; a phase is executed with
       outdated instructions; a scope fence is bypassed.
     inherent_likelihood: 2
     inherent_severity: 4

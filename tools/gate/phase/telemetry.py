@@ -3,7 +3,7 @@
 At ``Pnn-END2`` the gate copies the budget figures of the phase report (tool
 calls and tokens split into fixed overhead and task work, retries used per
 task, STOP count) into ``docs/state/telemetry.json``.  The figures are
-self-reported by the agent and labelled so; they feed the calibration of
+self-reported by the worker and labelled so; they feed the calibration of
 decision D-34 and are never used as evidence of correctness.
 
 Spec: Part 6 §6.18, P00-T12.

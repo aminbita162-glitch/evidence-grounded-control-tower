@@ -22,7 +22,7 @@ records:
     title: Tool abuse
     area: security
     description: >-
-      An agent uses tools outside its contract, budget or autonomy level.
+      A worker uses tools outside its contract, budget or autonomy level.
       Trust boundary: operators (authenticated, role-bound).
     trust_boundary: operators
     controls: [CTL-PROD-09]
@@ -60,10 +60,10 @@ records:
     source: Part 3 section 3.15
 
   - id: THR-SEC-06
-    title: Agent goal drift and runaway behavior
+    title: Worker goal drift and runaway behavior
     area: security
     description: >-
-      An agent drifts from its assigned goal or runs away without bounds.
+      A worker drifts from its assigned goal or runs away without bounds.
       Trust boundary: operators (authenticated, role-bound).
     trust_boundary: operators
     controls: [CTL-PROD-09]

@@ -223,13 +223,13 @@ records:
     source: P7-RISK section 4
 
   - id: RSK-P-09
-    title: Agent runaway
+    title: Worker runaway
     area: product
     description: >-
-      An agent exceeds its contract, budget or autonomy level. Violates I14
-      (agents are contained) and I6 (no external effect without a human gate).
+      A worker exceeds its contract, budget or autonomy level. Violates I14
+      (workers are contained) and I6 (no external effect without a human gate).
       Requirements PR-07 (no consequential action without human approval) and
-      PR-08 (agent actions stay inside their contract, budget and autonomy
+      PR-08 (worker actions stay inside their contract, budget and autonomy
       level) are directly affected.
     cause: >-
       A kill switch is missing or not reachable; a budget is not enforced; an

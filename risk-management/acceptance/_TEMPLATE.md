@@ -5,7 +5,7 @@
   (not this template).  Copy this template, fill in the fields, and name
   the file after the acceptance id (e.g. ACC-001.yaml).
 
-  Only the owner accepts risk; the agent proposes, never accepts
+  Only the owner accepts risk; the worker proposes, never accepts
   (Part 1 §3.1, Part 7 Risk Management section 4).
 
   Every acceptance references a decision record in docs/decisions/.

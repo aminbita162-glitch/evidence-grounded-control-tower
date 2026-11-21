@@ -8,13 +8,13 @@ dimensions:
 1. **Product risk in use**: risks that arise when the product operates on
    cases — wrong ALLOW, wrong or invented extraction, document-borne prompt
    injection, rule pack staleness, wrong classification, missed screening
-   hit, cross-tenant leakage, ledger tampering or loss, agent runaway, cost
+   hit, cross-tenant leakage, ledger tampering or loss, worker runaway, cost
    overrun, model provider outage or deprecation, solver plan errors, personal
    data in logs, SYNTHETIC data presented as real, explanation misread as
    advice, key compromise, and stale reference data treated as current.
 
 2. **Project risk in build**: risks that arise during development —
-   dev-agent drift or hallucinated fact, gate tampering, token budget
+   dev-worker drift or hallucinated fact, gate tampering, token budget
    overrun, dependency compromise, external terms not matching licence or
    data conditions, unverified source used, directive integrity, single-owner
    dependency, loss of repository, release differing from audited code, audit
@@ -28,7 +28,7 @@ crypto-erasure, exit to a second host).
 
 ## Roles
 
-Only the owner accepts risk. The agent proposes risk treatments and
+Only the owner accepts risk. The worker proposes risk treatments and
 registers findings; it never accepts a risk. A risk above the register
 threshold (residual score 10 or higher, or any residual severity 5) requires
 a written owner acceptance recorded in `risk-management/acceptance/`.

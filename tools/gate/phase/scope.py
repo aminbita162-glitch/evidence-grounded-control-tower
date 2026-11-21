@@ -6,7 +6,7 @@ given phase, lists every file changed on the phase branch against main
 any path outside the globs or on a protected path (Part 1 §5.5) that no task
 names.
 
-The agent never edits the ``Scope paths:`` line; it is a protected part of
+The worker never edits the ``Scope paths:`` line; it is a protected part of
 the directive.
 
 Spec: Part 6 §6.14; P00-T11.

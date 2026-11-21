@@ -23,7 +23,7 @@ medium, 10 to 14 high, 15 to 25 critical. Scales and anchors are in
 ## Treatment order
 
 Treatments are applied in order: eliminate, reduce, detect, transfer,
-accept. Only the owner accepts a risk; the agent proposes and never
+accept. Only the owner accepts a risk; the worker proposes and never
 accepts.
 
 ## Control lifecycle

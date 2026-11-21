@@ -226,7 +226,7 @@ def _parse_p00_baseline(repo_root: Path) -> dict[str, object]:
         "attempts_per_task": apt,
         "repair_share": repair_share,
         "open_findings": findings,
-        "stop_interruption": 1,  # F5: first agent run ended at tool-iteration cap
+        "stop_interruption": 1,  # F5: first worker run ended at tool-iteration cap
     }
 
 
