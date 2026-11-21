@@ -13,6 +13,11 @@ Animated capture of a synthetic case moving from creation to its Passport in the
 
 SYNTHETIC DATA
 
+
+## Code Quality
+
+A machine-generated quality report is available at [docs/quality-report.md](docs/quality-report.md).
+
 ## 2 Level label
 
 Enterprise Production-Grade Tier 5
