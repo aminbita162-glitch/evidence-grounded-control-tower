@@ -7,7 +7,7 @@ Evidence-grounded advisory pre-checks for customs and transit cases.
 
 ## 1 Hero capture
 
-![Dubai Control Tower](docs/assets/dubai-tower.svg)
+![Dubai Control Tower](https://raw.githubusercontent.com/aminbita162-glitch/evidence-grounded-control-tower/phase/02-source-registry/docs/assets/dubai-tower.svg)
 
 Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
 
