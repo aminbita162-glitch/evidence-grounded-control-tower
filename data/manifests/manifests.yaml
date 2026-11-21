@@ -1,10 +1,222 @@
-# License manifests for the Source Registry (P02-T03).
-# One manifest per dataset file under data/. Every dataset must have a manifest
-# before it can be used. A dataset without a manifest, or with UNVERIFIED license,
-# is excluded by the data gate (gate data).
+# License manifests for the Source Registry (P02-T04).
+# One manifest per registered source entry in sources.yaml.
+# Every dataset must have a manifest before it can be used.
 #
 # Schema: schemas/license-manifest.json
-# Spec: Part 3 §3.12, P02-T03.
-#
-# This file is populated by P02-T04 from the seed content of <<<P8-SOURCES>>>.
-manifests: []
+# Spec: Part 3 §3.12, P02-T03, P02-T04.
+manifests:
+  - source_id: SRC-OFAC-SDN
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-OFAC-CONS
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-UN-CONS
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-EOCN-LTL
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-EU-FSF
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-DUBAI-PULSE
+    terms: "draft Open Data Licence seen; final terms not verified"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-UAE-OPENDATA
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-DXB-NOTICES
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-DXB-POLICY-35-2011
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-UAE-TARIFF
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-WCO-HS
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "reference only; no content stored"
+    redistribution_permission: "no"
+    notes: >-
+      No table or heading text stored. Reference-only use: identifiers only.
+      See Part 3 §3.12 and P8-SOURCES S-11.
+
+  - source_id: SRC-ICC-INCOTERMS
+    terms: >-
+      copyright and trademark policy seen on the publisher page; permission for
+      anything beyond three-letter codes not obtained
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "three-letter codes only; no rule text, no paraphrase"
+    redistribution_permission: "no"
+    notes: >-
+      Only the eleven three-letter Incoterms codes are used. No rule text or
+      explanatory notes are stored. See Part 3 §3.12 and P8-SOURCES S-12.
+
+  - source_id: SRC-UAE-CALENDAR
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-ISO-4217
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-ISO-3166
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-UN-LOCODE
+    terms: "not read; UNVERIFIED"
+    attribution_text: "not read; UNVERIFIED"
+    permitted_uses: "not verified"
+    redistribution_permission: unknown
+
+  - source_id: SRC-DUAL-USE
+    terms: "not applicable; no list selected"
+    attribution_text: "not applicable"
+    permitted_uses: "not applicable; no list selected"
+    redistribution_permission: not-applicable
+    notes: "No dual-use control list is selected. Owner must record decision D-39 before use."
+
+  - source_id: SIM-FREIGHT-RATES
+    terms: "project-owned, covered by the project licence"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted within the project"
+    redistribution_permission: "yes"
+    notes: "SYNTHETIC/SIMULATED_RULE data; invented values only."
+
+  - source_id: SIM-FREE-DAYS
+    terms: "project-owned, covered by the project licence"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted within the project"
+    redistribution_permission: "yes"
+    notes: "SYNTHETIC/SIMULATED_RULE data; invented values only."
+
+  - source_id: SIM-SURCHARGES
+    terms: "project-owned, covered by the project licence"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted within the project"
+    redistribution_permission: "yes"
+    notes: "SYNTHETIC/SIMULATED_RULE data; invented values only."
+
+  - source_id: SRC-DEP-PYYAML
+    terms: "MIT (basis F)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-RUFF
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-MYPY
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYTEST
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYTEST-COV
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYTEST-XDIST
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYTEST-RANDOMLY
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYTEST-TIMEOUT
+    terms: "MIT (basis F)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-BANDIT
+    terms: "Apache-2.0 (basis F)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under Apache-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PIP-AUDIT
+    terms: "Apache-2.0 expected (basis C)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under Apache-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-UV
+    terms: "MIT OR Apache-2.0 (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT or Apache-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-GITLEAKS
+    terms: "MIT (basis G)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-ACTIONS-CHECKOUT
+    terms: "MIT (basis G)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-ACTIONS-UPLOAD-ARTIFACT
+    terms: "MIT (basis G)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"

@@ -1,4 +1,4 @@
-# Source Gap Register (P02-T03).
+# Source Gap Register (P02-T04).
 # Lists needed but unverified facts with the next check date and a verification
 # item id (V-xx). Every entry with status UNVERIFIED and a V-item in the Source
 # Registry must have a gap entry naming it.
@@ -8,7 +8,94 @@
 # never sets any source status to VERIFIED.
 #
 # Schema: schemas/gap.json
-# Spec: Part 3 §3.12, P02-T03.
+# Spec: Part 3 §3.12, P02-T03, P02-T04.
 #
-# This file is populated by P02-T04 from the seed content of <<<P8-SOURCES>>>.
-gaps: []
+# Note: sources with multiple V-items list the primary (first) V-item here.
+# SIMULATION and DEPENDENCY entries have v_item none and have no gap entries.
+gaps:
+  - source_id: SRC-OFAC-SDN
+    reason: "terms not verified; publisher identity, licence and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-05"
+
+  - source_id: SRC-OFAC-CONS
+    reason: "terms not verified; publisher identity, licence and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-05"
+
+  - source_id: SRC-UN-CONS
+    reason: "terms not verified; publisher identity, licence and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-05"
+
+  - source_id: SRC-EOCN-LTL
+    reason: "terms not verified; publisher identity, licence and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-05"
+
+  - source_id: SRC-EU-FSF
+    reason: "terms not verified; publisher identity, licence and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-05"
+
+  - source_id: SRC-DUBAI-PULSE
+    reason: "draft licence only; final terms not verified"
+    v_item: "V-04"
+    next_check: "2027-11"
+
+  - source_id: SRC-UAE-OPENDATA
+    reason: "terms not verified; applicability to seeded datasets not confirmed"
+    v_item: "V-04"
+    next_check: "2027-11"
+
+  - source_id: SRC-DXB-NOTICES
+    reason: "terms not verified; official text and validity dates not confirmed"
+    v_item: "V-07"
+    next_check: "2027-02"
+
+  - source_id: SRC-DXB-POLICY-35-2011
+    reason: "terms not verified; current validity of policy not confirmed"
+    v_item: "V-07"
+    next_check: "2027-05"
+
+  - source_id: SRC-UAE-TARIFF
+    reason: "terms not verified; edition, digit levels and redistribution not confirmed"
+    v_item: "V-07"
+    next_check: "2027-05"
+
+  - source_id: SRC-WCO-HS
+    reason: "terms not verified; reference-only use, no content stored"
+    v_item: "V-04"
+    next_check: "2027-11"
+
+  - source_id: SRC-ICC-INCOTERMS
+    reason: >-
+      copyright and trademark policy seen; permission for anything beyond three-letter codes
+      not obtained; full verification not read
+    v_item: "V-04"
+    next_check: "2027-11"
+
+  - source_id: SRC-UAE-CALENDAR
+    reason: "terms not verified; publisher page and official announcement source not confirmed"
+    v_item: "V-06"
+    next_check: "2027-02"
+
+  - source_id: SRC-ISO-4217
+    reason: "terms not verified; publisher page and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-05"
+
+  - source_id: SRC-ISO-3166
+    reason: "terms not verified; publisher page and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-11"
+
+  - source_id: SRC-UN-LOCODE
+    reason: "terms not verified; publisher page and redistribution conditions not read"
+    v_item: "V-04"
+    next_check: "2027-11"
+
+  - source_id: SRC-DUAL-USE
+    reason: "publisher not selected; no dual-use control list registered; owner decision D-39 required"
+    v_item: "V-04"
+    next_check: "2027-11"

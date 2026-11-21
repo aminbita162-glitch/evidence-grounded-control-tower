@@ -32,6 +32,8 @@
 | T-DATA-0020 | Gap entry missing required field fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0020_gap_missing_field_fails |
 | T-DATA-0021 | Invalid redistribution_permission fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0021_invalid_redistribution_permission_fails |
 | T-DATA-0022 | Gap entry invalid next_check date fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0022_gap_invalid_date_fails |
+| T-DATA-0023 | Seed entry count equals 20 | fast | data/test_T_DATA_0023_to_0024.py | test_T_DATA_0023_seed_entry_count_equals_20 |
+| T-DATA-0024 | All fields valid and data V-items covered | fast | data/test_T_DATA_0023_to_0024.py | test_T_DATA_0024_all_fields_valid_and_v_items_covered |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
