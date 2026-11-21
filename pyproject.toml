@@ -69,6 +69,15 @@ disallow_any_explicit = false
 module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*"]
 disallow_any_explicit = false
 
+[tool.importlinter]
+root_packages = ["kernel"]
+
+[[tool.importlinter.contracts]]
+name = "Kernel isolation"
+type = "forbidden"
+source_modules = ["kernel"]
+forbidden_modules = ["capabilities", "agents", "adapters", "views", "api"]
+
 [tool.pytest.ini_options]
 markers = [
     "fast: fast tests (at most 1 second per test)",

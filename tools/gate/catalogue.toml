@@ -179,11 +179,11 @@ clean_fixture = "fixtures/labels_clean"
 
 [gate.arch]
 cadence = "QP"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.arch"
 timeout = 120
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/arch_violation"
+clean_fixture = "fixtures/arch_clean"
 
 [gate.generated-files]
 cadence = "P"
@@ -195,15 +195,15 @@ clean_fixture = "fixtures/generated_files_clean"
 
 [gate.contract]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.contract"
 timeout = 120
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/contract_violation"
+clean_fixture = "fixtures/contract_clean"
 
 [gate.property]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.property"
 timeout = 300
 activates_in = "P03"
 violation_fixture = ""

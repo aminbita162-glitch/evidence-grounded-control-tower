@@ -79,7 +79,7 @@ def test_T_KRN_0060_hash_changes_with_field() -> None:
 # level: fast
 # requirement: P03-T07, Part 3 §3.14
 # input: the DEFAULTS constant
-# expected: max_model_calls=20, max_tokens=60000, max_wall_time_seconds=120, max_tool_calls=50, max_workflow_steps=200
+# expected: 20 model calls, 60000 tokens, 120s, 50 tool calls, 200 steps
 # risk: defaults do not match the spec
 # capability: kernel-contracts
 

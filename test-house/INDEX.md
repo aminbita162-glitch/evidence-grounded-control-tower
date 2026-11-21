@@ -173,6 +173,16 @@
 | T-KRN-0062 | Unknown keys are rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0062_unknown_keys_rejected |
 | T-KRN-0063 | Hash is deterministic across calls | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0063_hash_deterministic |
 | T-KRN-0064 | Negative values are rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0064_negative_values_rejected |
+| T-KRN-0065 | A seeded forbidden import fails the arch gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0065_forbidden_import_fails |
+| T-KRN-0066 | A seeded display name in kernel fails the arch gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0066_display_name_fails |
+| T-KRN-0067 | An actor outside the closed kinds is rejected | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0067_actor_kinds_closed |
+| T-KRN-0068 | A seeded clock call in the core fails | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0068_clock_call_fails |
+| T-KRN-0069 | A modified schema without a change task fails the contract gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0069_modified_schema_fails |
+| T-KRN-0070 | A consistent contracts.lock passes the contract gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0070_consistent_lock_passes |
+| T-KRN-0071 | contracts.lock regenerates identically | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0071_contracts_lock_regen_identical |
+| T-KRN-0072 | All hashes in contracts.lock match actual files | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0072_contract_gate_real_repo |
+| T-KRN-0073 | gate run arch contract property generated-files exits 0 | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0073_gate_run_all_four |
+| T-KRN-0074 | Display names not in schemas or kernel source | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0074_no_display_names_in_schemas |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
