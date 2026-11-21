@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400" width="200" height="400">
+  <defs>
+    <style>
+      .tower { fill: none; stroke: #1a365d; stroke-width: 2; stroke-linejoin: round; }
+      .glow { animation: pulse 4s ease-in-out infinite; }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </defs>
+  <path class="tower glow" d="M100,20 L110,80 L105,120 L115,180 L108,250 L120,340 L100,380 L80,340 L92,250 L85,180 L95,120 L90,80 Z"/>
+  <line class="tower" x1="100" y1="20" x2="100" y2="380" stroke-width="1" opacity="0.4"/>
+</svg>

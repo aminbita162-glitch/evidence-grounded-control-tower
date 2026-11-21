@@ -7,6 +7,8 @@ Evidence-grounded advisory pre-checks for customs and transit cases.
 
 ## 1 Hero capture
 
+![Dubai Control Tower](docs/assets/dubai-tower.svg)
+
 Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
 
 SYNTHETIC DATA
