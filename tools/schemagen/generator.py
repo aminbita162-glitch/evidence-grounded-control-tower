@@ -156,8 +156,12 @@ def generate_all(schemas_dir: Path, output_dir: Path) -> list[Path]:
         "labels.json",
         "license-manifest.json",
         "gap.json",
+        "hash-tags.json",
     }
     entity_files = sorted(f for f in schemas_dir.glob("*.json") if f.name not in _skip)
+
+    # Track which .py stems we generate so we can clean up stale files.
+    expected_stems: set[str] = set()
 
     for schema_file in entity_files:
         schema = json.loads(schema_file.read_text(encoding="utf-8"))
@@ -166,6 +170,12 @@ def generate_all(schemas_dir: Path, output_dir: Path) -> list[Path]:
         out_path = output_dir / f"{schema_file.stem}.py"
         out_path.write_text(source, encoding="utf-8")
         generated.append(out_path)
+        expected_stems.add(schema_file.stem)
+
+    # Remove stale generated .py files (no longer corresponding to any schema).
+    for existing in output_dir.glob("*.py"):
+        if existing.stem != "__init__" and existing.stem not in expected_stems:
+            existing.unlink()
 
     # Generate __init__.py that re-exports all models.
     init_lines: list[str] = [

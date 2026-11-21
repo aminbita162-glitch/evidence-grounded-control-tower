@@ -127,6 +127,18 @@
 | T-KRN-0016 | Algorithm identifier present | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0016_algorithm_identifier |
 | T-KRN-0017 | Tag registry validates and all tags are unique | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0017_tag_registry_validates |
 | T-KRN-0018 | Differential test: rfc8785 vs jcs produce identical output | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0018_differential_rfc8785_vs_jcs |
+| T-KRN-0019 | Lattice combine is associative | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0019_combine_associative |
+| T-KRN-0020 | Lattice combine is commutative | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0020_combine_commutative |
+| T-KRN-0021 | Lattice combine is idempotent | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0021_combine_idempotent |
+| T-KRN-0022 | Lattice combine is monotone | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0022_combine_monotone |
+| T-KRN-0023 | Combined reasons equal the union of inputs | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0023_combined_reasons_union |
+| T-KRN-0024 | Floats are rejected in Money | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0024_floats_rejected_in_money |
+| T-KRN-0025 | Floats are rejected in Quantity | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0025_floats_rejected_in_quantity |
+| T-KRN-0026 | Rounding mode is mandatory in Money | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0026_rounding_mode_mandatory |
+| T-KRN-0027 | Weakest-of agrees with the P02 helper on all label pairs | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0027_weakest_of_agrees_with_p2 |
+| T-KRN-0028 | Money add with mismatched currency fails | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0028_money_currency_mismatch |
+| T-KRN-0029 | Duration rejects negative values | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0029_duration_rejects_negative |
+| T-KRN-0030 | Identifier is opaque and immutable | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0030_identifier_immutable |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
