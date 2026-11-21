@@ -7,9 +7,16 @@ Evidence-grounded advisory pre-checks for customs and transit cases.
 
 ## 1 Hero capture
 
+![Burj Khalifa](docs/assets/burj-khalifa-tiny.gif)
+
 Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
 
 SYNTHETIC DATA
+
+
+## Code Quality
+
+A machine-generated quality report is available at [docs/quality-report.md](docs/quality-report.md).
 
 ## 2 Level label
 

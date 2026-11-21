@@ -44,8 +44,9 @@ records:
     mechanism: >-
       Pack validity windows (P02, P06); freshness check (P30, P32);
       maintenance rule M-4.
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0030]
     source: P7-RISK section 11
 
   - id: CTL-PROD-05
@@ -223,8 +224,9 @@ records:
     type: preventive
     mechanism: >-
       Source Registry and label rules (P02).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0027, T-DATA-0028, T-DATA-0029, T-DATA-0030]
     source: P7-RISK section 11
 
   - id: CTL-PROJ-07
@@ -487,8 +489,9 @@ records:
     mechanism: >-
       The data gate checks every dataset has a verified licence; the Source
       Registry records the licence summary (V-04).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0026, T-DATA-0030]
     source: P7-RISK section 8, V-04
 
   - id: CTL-DLR-03
@@ -497,8 +500,9 @@ records:
     mechanism: >-
       The data gate verifies the public-domain status of list data; the
       Source Registry records the status (V-05).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0030]
     source: P7-RISK section 8, V-05
 
   - id: CTL-DLR-04
@@ -507,8 +511,9 @@ records:
     mechanism: >-
       The data gate checks the validity of official text; the source is
       verified as authoritative (V-07).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0030]
     source: P7-RISK section 8, V-07
 
   - id: CTL-DLR-05
@@ -517,8 +522,9 @@ records:
     mechanism: >-
       The data gate verifies secondary legal claims against the primary
       source (V-08).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0030]
     source: P7-RISK section 8, V-08
 
   - id: CTL-DLR-06
@@ -527,6 +533,7 @@ records:
     mechanism: >-
       The data gate checks the privacy of public list data; personal data is
       redacted before use (V-16).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P02
+    verifying_test_ids: [T-DATA-0030]
     source: P7-RISK section 8, V-16

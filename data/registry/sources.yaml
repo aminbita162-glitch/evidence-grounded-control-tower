@@ -1,0 +1,515 @@
+# Source Registry (P02-T04).
+# Entries transcribed from <<<P8-SOURCES>>> plus DEPENDENCY entries from docs/dependencies.json.
+# Every entry with status UNVERIFIED and a V-item has a matching gap entry in gaps.yaml.
+#
+# Schema: schemas/source.json
+# Spec: Part 3 §3.12, P02-T02, P02-T04.
+#
+# DO NOT edit entries manually. Changes go through gate data --update-baseline.
+sources:
+  # ---- Seed entries S-01 to S-20 from <<<P8-SOURCES>>> (count: 20) ----
+
+  - source_id: SRC-OFAC-SDN
+    publisher: US Department of the Treasury, Office of Foreign Assets Control
+    reference: >-
+      Sanctions List Service (SLS), SDN list files
+    retrieved_month: "2026-11"
+    label: OFFICIAL
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 1
+    v_item: "V-04, V-05, V-16"
+
+  - source_id: SRC-OFAC-CONS
+    publisher: US Department of the Treasury, Office of Foreign Assets Control
+    reference: >-
+      Sanctions List Service (SLS), Consolidated (non-SDN) list files
+    retrieved_month: "2026-11"
+    label: OFFICIAL
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 1
+    v_item: "V-04, V-05, V-16"
+
+  - source_id: SRC-UN-CONS
+    publisher: United Nations Security Council, Consolidated List
+    reference: >-
+      Security Council Consolidated List, machine-readable files on the Security Council website
+    retrieved_month: "2026-11"
+    label: OFFICIAL
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 1
+    v_item: "V-04, V-05, V-16"
+
+  - source_id: SRC-EOCN-LTL
+    publisher: Executive Office for Control and Non-Proliferation (UAE)
+    reference: >-
+      Local Terrorist List and UN list pages on the publisher site; host and file format not
+      verified from the publisher
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 1
+    v_item: "V-04, V-05, V-16"
+
+  - source_id: SRC-EU-FSF
+    publisher: European Commission, Financial Sanctions Files (FSF)
+    reference: >-
+      consolidated list of persons, groups and entities subject to EU financial sanctions;
+      access conditions (including any token) not verified
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 1
+    v_item: "V-04, V-05, V-16"
+
+  - source_id: SRC-DUBAI-PULSE
+    publisher: Dubai Pulse (Dubai Data Establishment)
+    reference: "open data portal; draft Open Data Licence seen, final terms not verified"
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "draft licence only; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: CATALOGUE
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: "V-04"
+
+  - source_id: SRC-UAE-OPENDATA
+    publisher: Federal Competitiveness and Statistics Centre (UAE), national open data terms
+    reference: >-
+      UAE open data terms of use; applicability to any seeded dataset not verified
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: STANDARD
+    use_class: TERMS
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: "V-04"
+
+  - source_id: SRC-DXB-NOTICES
+    publisher: Dubai Customs
+    reference: >-
+      customs notices (series CN, for example CN5_2026) published on the publisher site;
+      official text and validity dates not verified
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: SOURCE
+    use_class: MEASURE
+    status: UNVERIFIED
+    max_age_months: 3
+    v_item: "V-07"
+
+  - source_id: SRC-DXB-POLICY-35-2011
+    publisher: Dubai Customs
+    reference: >-
+      customs policy number 35 of 2011 as published by the publisher; current validity
+      not verified
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: SOURCE
+    use_class: MEASURE
+    status: UNVERIFIED
+    max_age_months: 6
+    v_item: "V-07"
+
+  - source_id: SRC-UAE-TARIFF
+    publisher: UAE federal customs authority, unified customs tariff of the Gulf Cooperation Council
+    reference: >-
+      tariff schedule as published by the federal authority; digit levels and edition
+      not verified
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: TARIFF
+    status: UNVERIFIED
+    max_age_months: 6
+    v_item: "V-07, V-09"
+
+  - source_id: SRC-WCO-HS
+    publisher: World Customs Organization
+    reference: >-
+      Harmonized System nomenclature; reference only, no table is stored and no heading
+      text is copied; terms of use not read
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: "no"
+    kind: STANDARD
+    use_class: CODELIST
+    status: UNVERIFIED
+    max_age_months: 24
+    v_item: "V-04, V-09"
+
+  - source_id: SRC-ICC-INCOTERMS
+    publisher: International Chamber of Commerce
+    reference: >-
+      ICC page "Incoterms rules trademark and copyright policy" (iccwbo.org/incoterms-copyright/).
+      The page states that the rules text is copyright-protected and that the name is a trademark.
+      Use here: the eleven three-letter codes only; no rule text, no explanatory notes, no paraphrase
+      of the rules. Required notice wording is taken from the publisher page at build time.
+    retrieved_month: "2026-11"
+    label: OFFICIAL
+    license_summary: >-
+      copyright and trademark policy seen on the publisher page; permission for anything
+      beyond the codes not obtained
+    redistributable: "no"
+    kind: STANDARD
+    use_class: CODELIST
+    status: UNVERIFIED
+    max_age_months: 36
+    v_item: "V-04"
+
+  - source_id: SRC-UAE-CALENDAR
+    publisher: >-
+      UAE federal government (Cabinet resolution on public holidays; announcements through
+      the government portal and the federal HR authority)
+    reference: >-
+      official public-holiday list and working-week rules; Islamic dates depend on official
+      announcements; emirate-level rules differ. Only publisher pages are used; press and
+      blog calendars are not sources.
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: SOURCE
+    use_class: CALENDAR
+    status: UNVERIFIED
+    max_age_months: 3
+    v_item: "V-06"
+
+  - source_id: SRC-ISO-4217
+    publisher: SIX, maintenance agency of ISO 4217
+    reference: >-
+      currency code lists (List One, current currencies and funds) and the amendment
+      notices on the maintenance agency pages; the edition used is recorded at load
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: STANDARD
+    use_class: CODELIST
+    status: UNVERIFIED
+    max_age_months: 6
+    v_item: "V-04, V-13"
+
+  - source_id: SRC-ISO-3166
+    publisher: ISO 3166 Maintenance Agency
+    reference: "country codes; publisher page and terms not verified"
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: STANDARD
+    use_class: CODELIST
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: "V-04"
+
+  - source_id: SRC-UN-LOCODE
+    publisher: United Nations Economic Commission for Europe
+    reference: "UN/LOCODE code list; publisher page and terms not verified"
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not read; UNVERIFIED"
+    redistributable: unknown
+    kind: DATASET
+    use_class: CODELIST
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: "V-04"
+
+  - source_id: SRC-DUAL-USE
+    publisher: not selected
+    reference: >-
+      a dual-use or strategic-goods control list is needed only if a K-capability pack cites one.
+      No list is chosen here. If none is registered, K01 reports K01.ABSTAIN.LIST_UNAVAILABLE
+      for a case whose goods category needs it and no build phase stops; the owner names the
+      publisher in decision D-39, due before goods-control screening is enabled for a tenant.
+    retrieved_month: "2026-11"
+    label: UNVERIFIED
+    license_summary: "not applicable"
+    redistributable: unknown
+    kind: DATASET
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: "V-04, V-08"
+
+  - source_id: SIM-FREIGHT-RATES
+    publisher: project (synthetic rule set)
+    reference: "illustrative freight-rate table for scenarios; invented values, no real carrier or market data"
+    retrieved_month: "2026-11"
+    label: SIMULATED_RULE
+    license_summary: "project-owned, covered by the project licence"
+    redistributable: "yes"
+    kind: SOURCE
+    use_class: SIMULATION
+    status: UNVERIFIED
+    max_age_months: 36
+    v_item: none
+
+  - source_id: SIM-FREE-DAYS
+    publisher: project (synthetic rule set)
+    reference: "illustrative free-time and storage-day rules for scenarios; invented values"
+    retrieved_month: "2026-11"
+    label: SIMULATED_RULE
+    license_summary: "project-owned, covered by the project licence"
+    redistributable: "yes"
+    kind: SOURCE
+    use_class: SIMULATION
+    status: UNVERIFIED
+    max_age_months: 36
+    v_item: none
+
+  - source_id: SIM-SURCHARGES
+    publisher: project (synthetic rule set)
+    reference: "illustrative surcharge rules for scenarios; invented values"
+    retrieved_month: "2026-11"
+    label: SIMULATED_RULE
+    license_summary: "project-owned, covered by the project licence"
+    redistributable: "yes"
+    kind: SOURCE
+    use_class: SIMULATION
+    status: UNVERIFIED
+    max_age_months: 36
+    v_item: none
+
+  # ---- DEPENDENCY entries from docs/dependencies.json (p00 set) ----
+
+  - source_id: SRC-DEP-PYYAML
+    publisher: PyYAML project
+    reference: "pyyaml 6.0.3 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "registers, Source Registry and workflow files; safe_load only"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-RUFF
+    publisher: Astral
+    reference: "ruff 0.17.4 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "format and lint"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-MYPY
+    publisher: mypy project
+    reference: "mypy 2.4.1 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "strict typing"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-PYTEST
+    publisher: pytest project
+    reference: "pytest 9.2.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "test runner"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-PYTEST-COV
+    publisher: pytest-cov project
+    reference: "pytest-cov 7.1.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "branch coverage"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-PYTEST-XDIST
+    publisher: pytest-xdist project
+    reference: "pytest-xdist 3.8.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "parallel runs"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-PYTEST-RANDOMLY
+    publisher: pytest-randomly project
+    reference: "pytest-randomly 5.0.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "random order with recorded seed"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-PYTEST-TIMEOUT
+    publisher: pytest-timeout project
+    reference: "pytest-timeout 2.4.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "per-test limits"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-BANDIT
+    publisher: PyCQA
+    reference: "bandit 1.9.4 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Apache-2.0 (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "static security analysis"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-PIP-AUDIT
+    publisher: trailofbits
+    reference: "pip-audit 2.10.1 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Apache-2.0 expected (basis C)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "dependency vulnerability audit"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-UV
+    publisher: Astral
+    reference: "uv 0.13.7 tool"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT OR Apache-2.0 (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "package management, hash-locked lock file"
+    dep_class: TOOL
+
+  - source_id: SRC-DEP-GITLEAKS
+    publisher: gitleaks project
+    reference: "gitleaks v8.30.1 binary tool"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis G)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "secret scanning"
+    dep_class: TOOL
+
+  - source_id: SRC-DEP-ACTIONS-CHECKOUT
+    publisher: GitHub
+    reference: "actions/checkout v7.0.1 CI action"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis G)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "checkout repository in CI"
+    dep_class: ACTION
+
+  - source_id: SRC-DEP-ACTIONS-UPLOAD-ARTIFACT
+    publisher: GitHub
+    reference: "actions/upload-artifact v7.0.2 CI action"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis G)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "upload artifacts in CI"
+    dep_class: ACTION

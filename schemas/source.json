@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Source Registry Entry",
+  "description": "One entry in the Source Registry (data/registry/sources.yaml). Every external fact, dataset and dependency used by the product must be listed here with its provenance and license. Spec: Part 3 §3.12, P02-T02.",
+  "type": "object",
+  "required": [
+    "source_id",
+    "publisher",
+    "reference",
+    "retrieved_month",
+    "label",
+    "license_summary",
+    "redistributable",
+    "kind",
+    "use_class",
+    "status",
+    "max_age_months"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Unique identifier for the source. Format: SRC- or SIM- followed by upper-case letters, digits and hyphens.",
+      "pattern": "^(SRC|SIM)-[A-Z0-9-]+$"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Name of the organization or project that publishes or owns the source.",
+      "minLength": 1
+    },
+    "reference": {
+      "type": "string",
+      "description": "URL or document reference identifying the specific resource.",
+      "minLength": 1
+    },
+    "retrieved_month": {
+      "type": "string",
+      "description": "Month the entry was authored or last retrieved, in YYYY-MM format. Never day-level.",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Provenance label of the content once loaded.",
+      "enum": [
+        "OFFICIAL",
+        "DERIVED",
+        "SECONDARY",
+        "SIMULATED_RULE",
+        "SYNTHETIC",
+        "ASSUMPTION",
+        "UNVERIFIED"
+      ]
+    },
+    "license_summary": {
+      "type": "string",
+      "description": "Brief human-readable summary of the license terms or 'not read; UNVERIFIED'.",
+      "minLength": 1
+    },
+    "redistributable": {
+      "type": "string",
+      "description": "Whether the content may be redistributed.",
+      "enum": ["yes", "no", "unknown"]
+    },
+    "kind": {
+      "type": "string",
+      "description": "Kind of source.",
+      "enum": ["SOURCE", "DATASET", "DEPENDENCY", "STANDARD"]
+    },
+    "use_class": {
+      "type": "string",
+      "description": "Intended use class.",
+      "enum": [
+        "SCREENING",
+        "MEASURE",
+        "TARIFF",
+        "CODELIST",
+        "CALENDAR",
+        "CATALOGUE",
+        "TERMS",
+        "SIMULATION",
+        "LIBRARY"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Whether the publisher identity, edition and terms have been verified. Only the owner sets VERIFIED.",
+      "enum": ["UNVERIFIED", "VERIFIED"]
+    },
+    "max_age_months": {
+      "type": "integer",
+      "description": "Maximum age in months of the retrieved copy before HOLD is raised.",
+      "minimum": 1
+    },
+    "v_item": {
+      "type": "string",
+      "description": "Verification item(s) that must be closed before this entry can reach VERIFIED status. 'none' is valid only for SIMULATION use class."
+    },
+    "dep_purpose": {
+      "type": "string",
+      "description": "Human-readable purpose description for DEPENDENCY entries, used to generate docs/dependencies.json.",
+      "minLength": 1
+    },
+    "dep_class": {
+      "type": "string",
+      "description": "Dependency class for DEPENDENCY entries: RUNTIME, DEV, TOOL or ACTION.",
+      "enum": ["RUNTIME", "DEV", "TOOL", "ACTION"]
+    }
+  }
+}

@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Repository bootstrap: governance files, gate runner and catalogue, phase machinery.
+- P02-T05: data and labels gates; generator for docs/dependencies.json; gate fixtures; tests T-DATA-0025 to T-DATA-0030.

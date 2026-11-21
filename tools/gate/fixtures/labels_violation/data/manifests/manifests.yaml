@@ -1,0 +1,7 @@
+manifests:
+  - source_id: SRC-TEST-LABELS-VIOLATION
+    terms: "MIT License"
+    attribution_text: "Test Publisher"
+    permitted_uses: "any"
+    redistribution_permission: "yes"
+    notes: ""

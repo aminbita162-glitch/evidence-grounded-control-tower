@@ -1,20 +1,36 @@
 {
   "p00": [
     {
-      "name": "pyyaml",
-      "version": "6.0.3",
+      "name": "actions/checkout",
+      "version": "7.0.1",
       "license": "MIT",
-      "purpose": "registers, Source Registry and workflow files; safe_load only",
-      "class": "RUNTIME",
+      "purpose": "checkout repository in CI",
+      "class": "ACTION",
+      "basis": "G"
+    },
+    {
+      "name": "actions/upload-artifact",
+      "version": "7.0.2",
+      "license": "MIT",
+      "purpose": "upload artifacts in CI",
+      "class": "ACTION",
+      "basis": "G"
+    },
+    {
+      "name": "bandit",
+      "version": "1.9.4",
+      "license": "Apache-2.0",
+      "purpose": "static security analysis",
+      "class": "DEV",
       "basis": "F"
     },
     {
-      "name": "ruff",
-      "version": "0.17.4",
+      "name": "gitleaks",
+      "version": "8.30.1",
       "license": "MIT",
-      "purpose": "format and lint",
-      "class": "DEV",
-      "basis": "E"
+      "purpose": "secret scanning",
+      "class": "TOOL",
+      "basis": "G"
     },
     {
       "name": "mypy",
@@ -23,6 +39,14 @@
       "purpose": "strict typing",
       "class": "DEV",
       "basis": "E"
+    },
+    {
+      "name": "pip-audit",
+      "version": "2.10.1",
+      "license": "Apache-2.0 expected",
+      "purpose": "dependency vulnerability audit",
+      "class": "DEV",
+      "basis": "C"
     },
     {
       "name": "pytest",
@@ -37,14 +61,6 @@
       "version": "7.1.0",
       "license": "MIT",
       "purpose": "branch coverage",
-      "class": "DEV",
-      "basis": "E"
-    },
-    {
-      "name": "pytest-xdist",
-      "version": "3.8.0",
-      "license": "MIT",
-      "purpose": "parallel runs",
       "class": "DEV",
       "basis": "E"
     },
@@ -65,20 +81,28 @@
       "basis": "F"
     },
     {
-      "name": "bandit",
-      "version": "1.9.4",
-      "license": "Apache-2.0",
-      "purpose": "static security analysis",
+      "name": "pytest-xdist",
+      "version": "3.8.0",
+      "license": "MIT",
+      "purpose": "parallel runs",
       "class": "DEV",
+      "basis": "E"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "license": "MIT",
+      "purpose": "registers, Source Registry and workflow files; safe_load only",
+      "class": "RUNTIME",
       "basis": "F"
     },
     {
-      "name": "pip-audit",
-      "version": "2.10.1",
-      "license": "Apache-2.0",
-      "purpose": "dependency vulnerability audit",
+      "name": "ruff",
+      "version": "0.17.4",
+      "license": "MIT",
+      "purpose": "format and lint",
       "class": "DEV",
-      "basis": "C"
+      "basis": "E"
     },
     {
       "name": "uv",
@@ -87,30 +111,6 @@
       "purpose": "package management, hash-locked lock file",
       "class": "TOOL",
       "basis": "E"
-    },
-    {
-      "name": "gitleaks",
-      "version": "8.30.1",
-      "license": "MIT",
-      "purpose": "secret scanning",
-      "class": "TOOL",
-      "basis": "G"
-    },
-    {
-      "name": "actions/checkout",
-      "version": "v7.0.1",
-      "license": "MIT",
-      "purpose": "checkout repository in CI",
-      "class": "ACTION",
-      "basis": "G"
-    },
-    {
-      "name": "actions/upload-artifact",
-      "version": "v7.0.2",
-      "license": "MIT",
-      "purpose": "upload artifacts in CI",
-      "class": "ACTION",
-      "basis": "G"
     }
   ]
 }

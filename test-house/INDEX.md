@@ -10,6 +10,36 @@
 | T-BASELINE-0006 | baselines.json validates against its schema | fast | gate/test_baseline.py | test_baselines_schema_valid_and_invalid |
 | T-BASELINE-0007 | A missing measured component reports a decrease | fast | gate/test_baseline.py | test_check_baseline_decrease_missing_component |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
+| T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
+| T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
+| T-DATA-0003 | weakest_of is commutative | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0003_weakest_of_commutative |
+| T-DATA-0004 | weakest_of is associative | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0004_weakest_of_associative |
+| T-DATA-0005 | weakest_of is idempotent | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0005_weakest_of_idempotent_pair |
+| T-DATA-0006 | Only OFFICIAL and DERIVED are ALLOW-eligible; unknown label rejected | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0006_allow_eligible |
+| T-DATA-0007 | Missing required field fails validation | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0007_missing_field_fails |
+| T-DATA-0008 | Duplicate source_id fails validation | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0008_duplicate_id_fails |
+| T-DATA-0009 | Day-level retrieved_month date fails validation | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0009_day_level_date_fails |
+| T-DATA-0010 | Valid entry passes validation | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0010_valid_entry_passes |
+| T-DATA-0011 | Changed entry without baseline update fails | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0011_changed_entry_without_baseline_fails |
+| T-DATA-0012 | New entry not in baseline fails | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0012_new_entry_without_baseline_fails |
+| T-DATA-0013 | update_baseline writes correct entry hashes | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0013_update_baseline_writes_correct_hashes |
+| T-DATA-0014 | Invalid source_id format fails validation | fast | data/test_T_DATA_0007_to_0014.py | test_T_DATA_0014_invalid_source_id_format_fails |
+| T-DATA-0015 | Uncovered data file fails the data gate | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0015_uncovered_file_fails |
+| T-DATA-0016 | UNVERIFIED license on a used dataset fails the data gate | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0016_unverified_license_fails |
+| T-DATA-0017 | Third-party copyright table detection | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0017_third_party_table_detected |
+| T-DATA-0018 | Gap entry without verification id fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0018_gap_without_verification_id_fails |
+| T-DATA-0019 | Manifest missing required field fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0019_manifest_missing_field_fails |
+| T-DATA-0020 | Gap entry missing required field fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0020_gap_missing_field_fails |
+| T-DATA-0021 | Invalid redistribution_permission fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0021_invalid_redistribution_permission_fails |
+| T-DATA-0022 | Gap entry invalid next_check date fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0022_gap_invalid_date_fails |
+| T-DATA-0023 | Seed entry count equals 20 | fast | data/test_T_DATA_0023_to_0024.py | test_T_DATA_0023_seed_entry_count_equals_20 |
+| T-DATA-0024 | All fields valid and data V-items covered | fast | data/test_T_DATA_0023_to_0024.py | test_T_DATA_0024_all_fields_valid_and_v_items_covered |
+| T-DATA-0025 | docs/dependencies.json regenerates byte-identically | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0025_dependencies_json_regenerates_identically |
+| T-DATA-0026 | Source without manifest fails data gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0026_dependency_missing_from_registry_fails_data_gate |
+| T-DATA-0027 | Registry entry without label fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0027_record_without_label_fails_labels_gate |
+| T-DATA-0028 | Registry entry with unknown label fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0028_record_with_unknown_label_fails_labels_gate |
+| T-DATA-0029 | Manifest source_id absent from registry fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0029_source_id_absent_from_registry_fails_labels_gate |
+| T-DATA-0030 | Data and labels gates pass on the live repository | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0030_live_data_and_labels_gates_pass |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |

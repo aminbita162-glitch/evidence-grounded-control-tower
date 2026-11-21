@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Label Taxonomy",
+  "description": "Provenance label taxonomy for the Control Tower (Part 3 §3.8, Part 2 §2.14). Seven labels with a total preorder (strength order), weakest-of rule for derived data, and the ALLOW-eligible set. P03 generates kernel types from this file.",
+  "labels": [
+    "OFFICIAL",
+    "DERIVED",
+    "SECONDARY",
+    "SIMULATED_RULE",
+    "SYNTHETIC",
+    "ASSUMPTION",
+    "UNVERIFIED"
+  ],
+  "strength_order": {
+    "description": "Total preorder: higher rank is stronger. SIMULATED_RULE and SYNTHETIC are tied at the same rank.",
+    "ranks": {
+      "OFFICIAL": 6,
+      "DERIVED": 5,
+      "SECONDARY": 4,
+      "SIMULATED_RULE": 3,
+      "SYNTHETIC": 3,
+      "ASSUMPTION": 2,
+      "UNVERIFIED": 1
+    }
+  },
+  "weakest_of_rule": "A derived datum takes the weakest label of its inputs (minimum rank). When ranks are equal, any of the tied labels may be returned; the implementation must be consistent.",
+  "allow_eligible": ["OFFICIAL", "DERIVED"],
+  "note": "A SECONDARY-or-weaker datum in a Decision yields ABSTAIN, never ALLOW (Part 3 §3.8). SIMULATED_RULE and SYNTHETIC are equal in strength and are not ALLOW-eligible."
+}
