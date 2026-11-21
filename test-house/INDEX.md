@@ -10,6 +10,12 @@
 | T-BASELINE-0006 | baselines.json validates against its schema | fast | gate/test_baseline.py | test_baselines_schema_valid_and_invalid |
 | T-BASELINE-0007 | A missing measured component reports a decrease | fast | gate/test_baseline.py | test_check_baseline_decrease_missing_component |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
+| T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
+| T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
+| T-DATA-0003 | weakest_of is commutative | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0003_weakest_of_commutative |
+| T-DATA-0004 | weakest_of is associative | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0004_weakest_of_associative |
+| T-DATA-0005 | weakest_of is idempotent | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0005_weakest_of_idempotent_pair |
+| T-DATA-0006 | Only OFFICIAL and DERIVED are ALLOW-eligible; unknown label rejected | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0006_allow_eligible |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
