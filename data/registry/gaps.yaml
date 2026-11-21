@@ -4,7 +4,7 @@
 # Registry must have a gap entry naming it.
 #
 # A gap entry without a verification id fails the data gate (gate data).
-# Closing a V-item is an owner action recorded in the V register; the dev agent
+# Closing a V-item is an owner action recorded in the V register; the developer
 # never sets any source status to VERIFIED.
 #
 # Schema: schemas/gap.json

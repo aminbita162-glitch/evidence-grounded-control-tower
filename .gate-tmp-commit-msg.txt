@@ -1,3 +1,1 @@
-docs(report): finalize P02 end report and set build progress [P02-END]
-
-P02-END DONE
+fix(docs): remove remaining forbidden process references [P02-FIX]
