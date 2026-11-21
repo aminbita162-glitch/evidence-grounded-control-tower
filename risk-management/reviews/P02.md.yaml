@@ -1,0 +1,32 @@
+# P02 phase risk review — P02-RISK.
+#
+# P02 implemented the Source Registry, License Manifest, Source Gap Register,
+# label taxonomy, and data/labels gates. Controls CTL-DLR-02 to CTL-DLR-06,
+# CTL-PROD-04 and CTL-PROJ-06 moved from PLANNED to IMPLEMENTED.
+# V-04, V-05, V-07, V-08, V-16 remain open (owner verification required).
+
+records:
+  - id: REV-P02
+    phase: "02"
+    review_date: "2026-11"
+    controls_added:
+      - CTL-DLR-02 (IMPLEMENTED, data gate checks dataset licences; V-04)
+      - CTL-DLR-03 (IMPLEMENTED, data gate checks public-domain status; V-05)
+      - CTL-DLR-04 (IMPLEMENTED, data gate checks official text validity; V-07)
+      - CTL-DLR-05 (IMPLEMENTED, data gate checks secondary legal claims; V-08)
+      - CTL-DLR-06 (IMPLEMENTED, data gate checks privacy of public list data; V-16)
+      - CTL-PROD-04 (IMPLEMENTED, registry validity windows enforced; T-DATA-0030)
+      - CTL-PROJ-06 (IMPLEMENTED, Source Registry and label rules enforced; T-DATA-0027 to T-DATA-0030)
+    controls_verified: []
+    residual_risks_above_threshold: []
+    v_items_opened_or_closed:
+      - "V-04: open (dataset licence not yet verified by owner)"
+      - "V-05: open (public-domain status not yet verified by owner)"
+      - "V-07: open (official text validity not yet verified by owner)"
+      - "V-08: open (secondary legal claims not yet verified by owner)"
+      - "V-16: open (privacy of public list data not yet verified by owner)"
+    register_diff: >-
+      P02 moved CTL-DLR-02 through CTL-DLR-06, CTL-PROD-04 and CTL-PROJ-06
+      from PLANNED to IMPLEMENTED. Data gate (T-DATA-0026, T-DATA-0030) and
+      labels gate (T-DATA-0027 to T-DATA-0030) verify the controls. V-04, V-05,
+      V-07, V-08, V-16 remain open until the owner closes them.
