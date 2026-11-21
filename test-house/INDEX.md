@@ -139,6 +139,18 @@
 | T-KRN-0028 | Money add with mismatched currency fails | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0028_money_currency_mismatch |
 | T-KRN-0029 | Duration rejects negative values | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0029_duration_rejects_negative |
 | T-KRN-0030 | Identifier is opaque and immutable | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0030_identifier_immutable |
+| T-KRN-0031 | Every status transition allowed or rejected as tabulated | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0031_status_transitions_tabulated |
+| T-KRN-0032 | A conflicted fact key yields ESCALATE with both citations | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0032_conflicted_fact_escalate |
+| T-KRN-0033 | A missing fact yields ABSTAIN | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0033_missing_fact_abstain |
+| T-KRN-0034 | SECONDARY input never gives ALLOW | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0034_secondary_never_allow |
+| T-KRN-0035 | SYNTHETIC-origin ALLOW carries the stamp | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0035_synthetic_allow_stamped |
+| T-KRN-0036 | Real-data ALLOW with CALIBRATED_SYNTHETIC becomes ESCALATE | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0036_calibrated_synthetic_escalates |
+| T-KRN-0037 | Real-data ALLOW with VALIDATED_TENANT stays ALLOW | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0037_validated_tenant_allows |
+| T-KRN-0038 | ALLOW without a declared basis is rejected | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0038_allow_without_basis_rejected |
+| T-KRN-0039 | The reader never returns a non-VERIFIED fact | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0039_reader_only_verified |
+| T-KRN-0040 | PROPOSED to VERIFIED transition is allowed | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0040_proposed_to_verified |
+| T-KRN-0041 | VERIFIED to SUPERSEDED transition is allowed | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0041_verified_to_superseded |
+| T-KRN-0042 | REJECTED is a terminal state | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0042_rejected_is_terminal |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
