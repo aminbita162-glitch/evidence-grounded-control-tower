@@ -60,7 +60,7 @@ A person decides before any irreversible action. The system does not take an irr
 | Phase | Name | Status |
 |---|---|---|
 | P01 | Risk management system | ✓ November 2026 |
-| P02 | Source Registry and data governance | ☐ |
+| P02 | Source Registry and data governance | ✓ November 2026 |
 | P03 | Kernel contracts | ☐ |
 | P04 | Persistence and tenancy baseline | ☐ |
 | P05 | Evidence Ledger | ☐ |
