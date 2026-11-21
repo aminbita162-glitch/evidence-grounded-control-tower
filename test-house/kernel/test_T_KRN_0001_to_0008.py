@@ -136,6 +136,9 @@ def test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version() -> None:
             "license-manifest.json",
             "gap.json",
             "hash-tags.json",
+            "case-states.json",
+            "config.json",
+            "errors.json",
         }
     ]
     assert len(entity_files) == 15, f"expected 15 entity schemas, got {len(entity_files)}"

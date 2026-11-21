@@ -157,6 +157,9 @@ def generate_all(schemas_dir: Path, output_dir: Path) -> list[Path]:
         "license-manifest.json",
         "gap.json",
         "hash-tags.json",
+        "case-states.json",
+        "config.json",
+        "errors.json",
     }
     entity_files = sorted(f for f in schemas_dir.glob("*.json") if f.name not in _skip)
 
