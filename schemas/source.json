@@ -94,6 +94,16 @@
     "v_item": {
       "type": "string",
       "description": "Verification item(s) that must be closed before this entry can reach VERIFIED status. 'none' is valid only for SIMULATION use class."
+    },
+    "dep_purpose": {
+      "type": "string",
+      "description": "Human-readable purpose description for DEPENDENCY entries, used to generate docs/dependencies.json.",
+      "minLength": 1
+    },
+    "dep_class": {
+      "type": "string",
+      "description": "Dependency class for DEPENDENCY entries: RUNTIME, DEV, TOOL or ACTION.",
+      "enum": ["RUNTIME", "DEV", "TOOL", "ACTION"]
     }
   }
 }

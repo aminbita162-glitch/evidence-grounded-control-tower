@@ -1,0 +1,13 @@
+sources:
+  - source_id: SRC-TEST-LABELS-CLEAN
+    publisher: Test Publisher
+    reference: "Test reference"
+    retrieved_month: "2026-11"
+    label: OFFICIAL
+    license_summary: "MIT (basis F)"
+    redistributable: "yes"
+    kind: SOURCE
+    use_class: SCREENING
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none

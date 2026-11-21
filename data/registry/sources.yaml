@@ -316,6 +316,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "registers, Source Registry and workflow files; safe_load only"
+    dep_class: RUNTIME
 
   - source_id: SRC-DEP-RUFF
     publisher: Astral
@@ -329,6 +331,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "format and lint"
+    dep_class: DEV
 
   - source_id: SRC-DEP-MYPY
     publisher: mypy project
@@ -342,6 +346,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "strict typing"
+    dep_class: DEV
 
   - source_id: SRC-DEP-PYTEST
     publisher: pytest project
@@ -355,6 +361,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "test runner"
+    dep_class: DEV
 
   - source_id: SRC-DEP-PYTEST-COV
     publisher: pytest-cov project
@@ -368,6 +376,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "branch coverage"
+    dep_class: DEV
 
   - source_id: SRC-DEP-PYTEST-XDIST
     publisher: pytest-xdist project
@@ -381,6 +391,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "parallel runs"
+    dep_class: DEV
 
   - source_id: SRC-DEP-PYTEST-RANDOMLY
     publisher: pytest-randomly project
@@ -394,6 +406,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "random order with recorded seed"
+    dep_class: DEV
 
   - source_id: SRC-DEP-PYTEST-TIMEOUT
     publisher: pytest-timeout project
@@ -407,6 +421,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "per-test limits"
+    dep_class: DEV
 
   - source_id: SRC-DEP-BANDIT
     publisher: PyCQA
@@ -420,6 +436,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "static security analysis"
+    dep_class: DEV
 
   - source_id: SRC-DEP-PIP-AUDIT
     publisher: trailofbits
@@ -433,6 +451,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "dependency vulnerability audit"
+    dep_class: DEV
 
   - source_id: SRC-DEP-UV
     publisher: Astral
@@ -446,6 +466,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "package management, hash-locked lock file"
+    dep_class: TOOL
 
   - source_id: SRC-DEP-GITLEAKS
     publisher: gitleaks project
@@ -459,6 +481,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "secret scanning"
+    dep_class: TOOL
 
   - source_id: SRC-DEP-ACTIONS-CHECKOUT
     publisher: GitHub
@@ -472,6 +496,8 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "checkout repository in CI"
+    dep_class: ACTION
 
   - source_id: SRC-DEP-ACTIONS-UPLOAD-ARTIFACT
     publisher: GitHub
@@ -485,3 +511,5 @@ sources:
     status: UNVERIFIED
     max_age_months: 12
     v_item: none
+    dep_purpose: "upload artifacts in CI"
+    dep_class: ACTION

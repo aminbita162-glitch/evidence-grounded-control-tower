@@ -391,8 +391,15 @@ def check_third_party_content(repo_root: Path) -> list[str]:
         if not path.is_file():
             continue
         relative = path.relative_to(repo_root).as_posix()
-        # Skip __pycache__ directories
+        # Skip __pycache__ directories and infrastructure files (Python code,
+        # registry YAML, manifests YAML). These legitimately reference source names
+        # as identifiers or metadata and are not stored content.
         if any(relative.startswith(excl) for excl in EXCLUDED_DATA_DIRS):
+            continue
+        if relative in EXCLUDED_DATA_PATHS:
+            continue
+        # Also skip Python source files in data/ — these are code, not data.
+        if relative.endswith((".py", ".pyc")):
             continue
         try:
             content = path.read_text(encoding="utf-8", errors="replace")

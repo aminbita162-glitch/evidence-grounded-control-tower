@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Generate a simple code quality report."""
+
 from pathlib import Path
+
 report = """# Code Quality Report
 Generated: {date}
 Lint (ruff)

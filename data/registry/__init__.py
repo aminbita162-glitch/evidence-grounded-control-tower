@@ -26,9 +26,8 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
-import yaml  # type: ignore[import-untyped]
+import yaml
 
 __all__ = [
     "RegistryError",
@@ -40,6 +39,7 @@ __all__ = [
     "VALID_USE_CLASSES",
     "VALID_STATUS",
     "VALID_REDISTRIBUTABLE",
+    "VALID_DEP_CLASSES",
     "MONTH_RE",
     "SOURCE_ID_RE",
     "load_registry",
@@ -108,6 +108,9 @@ class RegistryError(ValueError):
     """A registry validation error."""
 
 
+VALID_DEP_CLASSES: frozenset[str] = frozenset({"RUNTIME", "DEV", "TOOL", "ACTION"})
+
+
 @dataclass(frozen=True)
 class RegistryEntry:
     """One validated Source Registry entry."""
@@ -124,6 +127,8 @@ class RegistryEntry:
     status: str
     max_age_months: int
     v_item: str
+    dep_purpose: str = ""
+    dep_class: str = ""
 
 
 @dataclass(frozen=True)
@@ -139,7 +144,7 @@ class RegistryValidationResult:
         return not self.errors
 
 
-def load_registry(path: Path) -> list[dict[str, Any]]:
+def load_registry(path: Path) -> list[dict[str, object]]:
     """Load the raw registry YAML from *path*.
 
     Args:
@@ -167,7 +172,7 @@ def load_registry(path: Path) -> list[dict[str, Any]]:
     return [item for item in sources_raw if isinstance(item, dict)]
 
 
-def validate_entry(raw: dict[str, Any], index: int) -> tuple[RegistryEntry | None, list[str]]:
+def validate_entry(raw: dict[str, object], index: int) -> tuple[RegistryEntry | None, list[str]]:
     """Validate one raw entry dict.
 
     Args:
@@ -229,8 +234,20 @@ def validate_entry(raw: dict[str, Any], index: int) -> tuple[RegistryEntry | Non
 
     # max_age_months
     max_age = raw["max_age_months"]
+    max_age_int: int
     if not isinstance(max_age, int) or max_age < 1:
         errors.append(f"{label}: max_age_months must be a positive integer, got {max_age!r}")
+        max_age_int = 1  # placeholder; errors list ensures early return
+    else:
+        max_age_int = max_age
+
+    # dep_purpose and dep_class: optional, only valid for DEPENDENCY entries
+    dep_purpose = str(raw.get("dep_purpose", "") or "")
+    dep_class_val = str(raw.get("dep_class", "") or "")
+    if dep_class_val and dep_class_val not in VALID_DEP_CLASSES:
+        errors.append(
+            f"{label}: dep_class {dep_class_val!r} must be one of {sorted(VALID_DEP_CLASSES)}"
+        )
 
     if errors:
         return None, errors
@@ -247,8 +264,10 @@ def validate_entry(raw: dict[str, Any], index: int) -> tuple[RegistryEntry | Non
             kind=kind,
             use_class=use_class,
             status=status,
-            max_age_months=int(max_age),
+            max_age_months=max_age_int,
             v_item=str(raw.get("v_item", "none")),
+            dep_purpose=dep_purpose,
+            dep_class=dep_class_val,
         ),
         [],
     )
@@ -291,7 +310,7 @@ def validate_registry(path: Path) -> RegistryValidationResult:
     return RegistryValidationResult(entries=entries, errors=errors)
 
 
-def compute_entry_hash(entry: dict[str, Any]) -> str:
+def compute_entry_hash(entry: dict[str, object]) -> str:
     """SHA-256 of the canonical JSON of an entry dict.
 
     Args:
@@ -384,8 +403,6 @@ def check_baseline(registry_path: Path, baseline_path: Path) -> list[str]:
     # Check for entries in baseline that are no longer in the registry
     for sid in baseline:
         if sid not in current_ids:
-            errors.append(
-                f"source_id {sid!r} is in BASELINE.json but not in the registry"
-            )
+            errors.append(f"source_id {sid!r} is in BASELINE.json but not in the registry")
 
     return errors

@@ -14,10 +14,9 @@ import json
 from pathlib import Path
 
 import pytest
-import yaml  # type: ignore[import-untyped]
+import yaml
 
 from data.registry import (
-    RegistryValidationResult,
     check_baseline,
     compute_entry_hash,
     load_baseline,
@@ -338,8 +337,8 @@ def test_T_DATA_0014_valid_source_id_format_passes(tmp_path: Path, good_id: str)
     purpose: Verify the source_id pattern SRC-/SIM- prefix is enforced.
     level: fast
     requirement: P02-T02; Part 3 §3.12; schemas/source.json
-    input: entry with a valid source_id
-    expected: no source_id format error
+    input: entry with an invalid source_id
+    expected: validation result has errors
     risk: badly formatted IDs cause registry lookups to fail silently
     owning capability: data-registry
     """

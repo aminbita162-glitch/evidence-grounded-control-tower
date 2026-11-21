@@ -163,19 +163,19 @@ clean_fixture = "../../risk-management/fixtures/risk_clean"
 
 [gate.data]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.data"
 timeout = 120
 activates_in = "P02"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/data_violation"
+clean_fixture = "fixtures/data_clean"
 
 [gate.labels]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.labels"
 timeout = 120
 activates_in = "P02"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/labels_violation"
+clean_fixture = "fixtures/labels_clean"
 
 [gate.arch]
 cadence = "QP"

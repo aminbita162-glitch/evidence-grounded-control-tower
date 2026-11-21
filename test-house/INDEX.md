@@ -34,6 +34,12 @@
 | T-DATA-0022 | Gap entry invalid next_check date fails | fast | data/test_T_DATA_0015_to_0022.py | test_T_DATA_0022_gap_invalid_date_fails |
 | T-DATA-0023 | Seed entry count equals 20 | fast | data/test_T_DATA_0023_to_0024.py | test_T_DATA_0023_seed_entry_count_equals_20 |
 | T-DATA-0024 | All fields valid and data V-items covered | fast | data/test_T_DATA_0023_to_0024.py | test_T_DATA_0024_all_fields_valid_and_v_items_covered |
+| T-DATA-0025 | docs/dependencies.json regenerates byte-identically | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0025_dependencies_json_regenerates_identically |
+| T-DATA-0026 | Source without manifest fails data gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0026_dependency_missing_from_registry_fails_data_gate |
+| T-DATA-0027 | Registry entry without label fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0027_record_without_label_fails_labels_gate |
+| T-DATA-0028 | Registry entry with unknown label fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0028_record_with_unknown_label_fails_labels_gate |
+| T-DATA-0029 | Manifest source_id absent from registry fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0029_source_id_absent_from_registry_fails_labels_gate |
+| T-DATA-0030 | Data and labels gates pass on the live repository | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0030_live_data_and_labels_gates_pass |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
