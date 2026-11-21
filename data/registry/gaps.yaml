@@ -1,0 +1,14 @@
+# Source Gap Register (P02-T03).
+# Lists needed but unverified facts with the next check date and a verification
+# item id (V-xx). Every entry with status UNVERIFIED and a V-item in the Source
+# Registry must have a gap entry naming it.
+#
+# A gap entry without a verification id fails the data gate (gate data).
+# Closing a V-item is an owner action recorded in the V register; the dev agent
+# never sets any source status to VERIFIED.
+#
+# Schema: schemas/gap.json
+# Spec: Part 3 §3.12, P02-T03.
+#
+# This file is populated by P02-T04 from the seed content of <<<P8-SOURCES>>>.
+gaps: []

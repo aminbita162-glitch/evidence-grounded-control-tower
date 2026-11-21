@@ -1,0 +1,10 @@
+# License manifests for the Source Registry (P02-T03).
+# One manifest per dataset file under data/. Every dataset must have a manifest
+# before it can be used. A dataset without a manifest, or with UNVERIFIED license,
+# is excluded by the data gate (gate data).
+#
+# Schema: schemas/license-manifest.json
+# Spec: Part 3 §3.12, P02-T03.
+#
+# This file is populated by P02-T04 from the seed content of <<<P8-SOURCES>>>.
+manifests: []

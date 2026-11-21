@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "License Manifest",
+  "description": "License manifest for a dataset or source registered in the Source Registry (data/registry/sources.yaml). Every dataset must have a manifest before it can be used. A dataset without a manifest, or with UNVERIFIED license, is excluded by the data gate. Spec: Part 3 §3.12, P02-T03.",
+  "type": "object",
+  "required": [
+    "source_id",
+    "terms",
+    "attribution_text",
+    "permitted_uses",
+    "redistribution_permission"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Identifier matching a source_id in data/registry/sources.yaml.",
+      "pattern": "^(SRC|SIM)-[A-Z0-9-]+$"
+    },
+    "terms": {
+      "type": "string",
+      "description": "Human-readable summary of the license terms. Use 'not read; UNVERIFIED' until the V-item is closed by the owner.",
+      "minLength": 1
+    },
+    "attribution_text": {
+      "type": "string",
+      "description": "Required attribution text as specified by the license, or 'none required' or 'not read; UNVERIFIED'.",
+      "minLength": 1
+    },
+    "permitted_uses": {
+      "type": "string",
+      "description": "Description of permitted uses, or 'not verified'.",
+      "minLength": 1
+    },
+    "redistribution_permission": {
+      "type": "string",
+      "description": "Whether redistribution is permitted and under what conditions. Must be one of: yes, no, unknown, not-applicable.",
+      "enum": ["yes", "no", "unknown", "not-applicable"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes or caveats about the license or its interpretation."
+    }
+  }
+}
