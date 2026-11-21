@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/passport.json",
+  "title": "Passport",
+  "description": "A signed, offline-verifiable record of a case (Part 3 \u00a73.10).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "passport_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "case_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "signature": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "passport_id",
+    "case_id",
+    "signature"
+  ],
+  "additionalProperties": false
+}

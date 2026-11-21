@@ -187,11 +187,11 @@ clean_fixture = ""
 
 [gate.generated-files]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.generated_files"
 timeout = 120
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/generated_files_violation"
+clean_fixture = "fixtures/generated_files_clean"
 
 [gate.contract]
 cadence = "P"

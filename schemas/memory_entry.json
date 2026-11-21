@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/memory_entry.json",
+  "title": "MemoryEntry",
+  "description": "A governed memory record with provenance (Part 3 \u00a73.23).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "entry_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "memory_class": {
+      "type": "string",
+      "enum": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retention_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expiry": {
+      "$ref": "common.json#/definitions/timestamp"
+    },
+    "provenance": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string",
+      "enum": [
+        "OFFICIAL",
+        "DERIVED",
+        "SECONDARY",
+        "SIMULATED_RULE",
+        "SYNTHETIC",
+        "ASSUMPTION",
+        "UNVERIFIED"
+      ]
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "entry_id",
+    "memory_class",
+    "scope",
+    "retention_class",
+    "label"
+  ],
+  "additionalProperties": false
+}

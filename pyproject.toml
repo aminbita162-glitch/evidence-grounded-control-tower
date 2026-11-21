@@ -7,6 +7,8 @@ license = { text = "Proprietary - All Rights Reserved" }
 
 dependencies = [
     "pyyaml==6.0.3",
+    "pydantic==2.14.3",
+    "rfc8785==0.1.4",
 ]
 
 [project.optional-dependencies]
@@ -20,6 +22,10 @@ dev = [
     "pytest-timeout==2.4.0",
     "bandit==1.9.4",
     "pip-audit==2.10.1",
+    "jcs==0.3.0",
+    "hypothesis==6.170.15",
+    "mutmut==3.8.1",
+    "import-linter==2.16",
 ]
 
 [build-system]
@@ -50,6 +56,14 @@ exclude = ["tools/gate/fixtures/", "\\.venv/", "build/"]
 [[tool.mypy.overrides]]
 module = ["yaml"]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tools.schemagen.*"]
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+module = ["kernel.contracts._generated.*"]
+disallow_any_explicit = false
 
 [tool.pytest.ini_options]
 markers = [

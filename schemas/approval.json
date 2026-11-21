@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/approval.json",
+  "title": "Approval",
+  "description": "A human-gate record bound to a proposal hash (Part 3 \u00a73.9).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "approval_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "proposal_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "APPROVE",
+        "REJECT",
+        "OVERRIDE"
+      ]
+    },
+    "reviewer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "$ref": "common.json#/definitions/timestamp"
+    },
+    "justification": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "approval_id",
+    "proposal_hash",
+    "outcome",
+    "reviewer_id",
+    "timestamp"
+  ],
+  "additionalProperties": false
+}

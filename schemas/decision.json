@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/decision.json",
+  "title": "Decision",
+  "description": "ALLOW, HOLD, ESCALATE or ABSTAIN with reason codes (Part 3 \u00a73.3).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "decision_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "value": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "ABSTAIN",
+        "HOLD",
+        "ESCALATE"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rule_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pack_versions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluation_commitment": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "evaluation_time": {
+      "$ref": "common.json#/definitions/timestamp"
+    },
+    "configuration_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "decision_id",
+    "value",
+    "reason_codes",
+    "evaluation_time",
+    "configuration_hash"
+  ],
+  "additionalProperties": false
+}

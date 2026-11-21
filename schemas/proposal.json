@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/proposal.json",
+  "title": "Proposal",
+  "description": "A model-generated suggestion awaiting verification (Part 3 \u00a73.3).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "proposal_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "proposal_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proposal_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "proposal_id",
+    "proposal_type",
+    "proposal_hash"
+  ],
+  "additionalProperties": false
+}

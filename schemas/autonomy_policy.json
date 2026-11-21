@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/autonomy_policy.json",
+  "title": "AutonomyPolicy",
+  "description": "Agent autonomy level and constraints (Part 3 \u00a73.30).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "policy_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "SUPERVISED",
+        "AUTONOMOUS"
+      ]
+    },
+    "max_model_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_wall_time_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_tool_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_workflow_steps": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "policy_id",
+    "level"
+  ],
+  "additionalProperties": false
+}

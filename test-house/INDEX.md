@@ -109,6 +109,14 @@
 | T-GATE-SELFTEST-T06 | selftest passes against the hygiene, secrets, security, deps, license | slow | gate/test_gates.py | test_selftest_t06_gates |
 | T-GATE-SETS | Set selection resolves quick / phase / nightly correctly | fast | gate/test_runner.py | test_select_sets |
 | T-GATE-STUB | stub.txt equals the two lines of <<<P7-STUB>>> and is protected | fast | gate/test_protect.py | test_stub_txt_matches_directive_bytes |
+| T-KRN-0001 | Regeneration is byte-identical | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0001_regeneration_byte_identical |
+| T-KRN-0002 | A hand edit of a generated file fails the gate | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0002_hand_edit_fails_gate |
+| T-KRN-0003 | Every entity has tenant_id and schema_version | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version |
+| T-KRN-0004 | Models are immutable (mutation returns a new value) | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0004_models_are_immutable |
+| T-KRN-0005 | No untyped dictionary crosses a module boundary | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0005_no_untyped_dict_crosses_boundary |
+| T-KRN-0006 | Models validate against strict typing | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0006_models_strict_typing |
+| T-KRN-0007 | Generated files carry the AUTO-GENERATED header | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0007_generated_files_have_header |
+| T-KRN-0008 | __init__.py re-exports all entity models | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0008_init_reexports_all_models |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/case.json",
+  "title": "Case",
+  "description": "One shipment or consignment under evaluation (Part 3 \u00a73.3).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "case_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "INGESTED",
+        "EXTRACTED",
+        "EVALUATED",
+        "PROPOSED",
+        "AWAITING_HUMAN",
+        "DECIDED",
+        "CLOSED",
+        "BLOCKED",
+        "QUARANTINED",
+        "FAILED",
+        "REOPENED"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "created_at": {
+      "$ref": "common.json#/definitions/timestamp"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "case_id",
+    "state",
+    "version",
+    "created_at"
+  ],
+  "additionalProperties": false
+}
