@@ -110,7 +110,7 @@
   "tools/gate/gates/docs.py": "6b678cef85356beceff84a7fb1d07e0ba5656cb872a18f653b8ee6b51f0a1a9b",
   "tools/gate/gates/generated_files.py": "1ded889936562c6255316fb6967677b8ee06764138b56515e781eaad10c0927f",
   "tools/gate/gates/golden.py": "ff765b4fbabbe95ff7cabe34c01dc620bd36f03bf4a61071d64459052027ee80",
-  "tools/gate/gates/hygiene.py": "d6582ac3c47506c5b7e42c95df2c514b9a3c5b5032b8f055866a6ab91f538ba9",
+  "tools/gate/gates/hygiene.py": "fb37bda4fe7589fb0db7f29638777555609b124ab9367f405e44339561f1b166",
   "tools/gate/gates/index.py": "07c3f15de35f96434a74dbdf248b08909db2e0cc1fd194644cdd2e3048852c44",
   "tools/gate/gates/labels.py": "761477bb20665e74715b5bbafad57a23280ee43446f1c08a0e94c611709a0f95",
   "tools/gate/gates/license.py": "65689e3d4f6222a8ed463b890472dfb2fcf3efdb3a1834ae63a854ef443c8a89",
