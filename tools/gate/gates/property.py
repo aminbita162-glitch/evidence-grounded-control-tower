@@ -5,6 +5,7 @@ Runs the hypothesis property tests to verify laws hold.
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -24,6 +25,10 @@ def main() -> int:
     """Entry point: run property tests."""
     root = _gate_root()
     py = sys.executable
+    # Prepend root to PYTHONPATH so fixture test files are found first
+    # when the project is installed in editable mode (uv sync).
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(root) + os.pathsep + env.get("PYTHONPATH", "")
     r = subprocess.run(
         [
             py,
@@ -36,6 +41,7 @@ def main() -> int:
             "--no-cov",
         ],
         cwd=str(root),
+        env=env,
         capture_output=True,
         text=True,
     )

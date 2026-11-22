@@ -28,6 +28,11 @@ def main() -> int:
     cov_file = root / ".gate-logs" / "coverage.json"
     cov_file.parent.mkdir(parents=True, exist_ok=True)
 
+    # Prepend root to PYTHONPATH so the fixture's kernel/ is found first
+    # when the project is installed in editable mode (uv sync).
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(root) + os.pathsep + env.get("PYTHONPATH", "")
+
     r = subprocess.run(
         [
             py,
@@ -44,6 +49,7 @@ def main() -> int:
             "no:randomly",
         ],
         cwd=str(root),
+        env=env,
         capture_output=True,
         text=True,
         timeout=300,
