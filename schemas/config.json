@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/config.json",
+  "title": "Configuration",
+  "description": "Per-case budget configuration (Part 3 \u00a73.14, P03-T07).",
+  "type": "object",
+  "properties": {
+    "max_model_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_wall_time_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_tool_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_workflow_steps": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "max_model_calls",
+    "max_tokens",
+    "max_wall_time_seconds",
+    "max_tool_calls",
+    "max_workflow_steps"
+  ],
+  "additionalProperties": false
+}

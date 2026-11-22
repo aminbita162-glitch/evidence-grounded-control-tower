@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/document.json",
+  "title": "Document",
+  "description": "An input file stored by hash (Part 3 \u00a73.3).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "document_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "sha256": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "content_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "ar"
+      ]
+    },
+    "created_at": {
+      "$ref": "common.json#/definitions/timestamp"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "document_id",
+    "sha256",
+    "content_type",
+    "language",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

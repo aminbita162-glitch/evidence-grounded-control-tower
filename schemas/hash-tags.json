@@ -1,0 +1,29 @@
+{
+  "tags": [
+    {
+      "tag": "ctc/record/v1",
+      "purpose": "Evidence ledger record hash",
+      "version": 1
+    },
+    {
+      "tag": "ctc/leaf/v1",
+      "purpose": "Merkle tree leaf hash",
+      "version": 1
+    },
+    {
+      "tag": "ctc/node/v1",
+      "purpose": "Merkle tree internal node hash",
+      "version": 1
+    },
+    {
+      "tag": "ctc/commit/v1",
+      "purpose": "Cryptographic commitment hash",
+      "version": 1
+    },
+    {
+      "tag": "ctc/payload/v1",
+      "purpose": "Payload hash for salted or unsalted data",
+      "version": 1
+    }
+  ]
+}

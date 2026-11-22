@@ -7,8 +7,10 @@ Evidence-grounded advisory pre-checks for customs and transit cases.
 
 ## 1 Hero capture
 
-Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
+![Burj Khalifa](docs/assets/burj-khalifa-tiny.gif)
 
+Burj Khalifa
+Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
 SYNTHETIC DATA
 
 
@@ -59,7 +61,7 @@ A person decides before any irreversible action. The system does not take an irr
 |---|---|---|
 | P01 | Risk management system | ✓ November 2026 |
 | P02 | Source Registry and data governance | ✓ November 2026 |
-| P03 | Kernel contracts | ☐ |
+| P03 | Kernel contracts | ✓ November 2026 |
 | P04 | Persistence and tenancy baseline | ☐ |
 | P05 | Evidence Ledger | ☐ |
 | P06 | Rule Engine | ☐ |

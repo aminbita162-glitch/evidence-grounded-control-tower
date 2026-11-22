@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/evidence_record.json",
+  "title": "EvidenceRecord",
+  "description": "An append-only ledger record (Part 3 \u00a73.5).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "record_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "case_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_kind": {
+      "type": "string",
+      "enum": [
+        "ROLE",
+        "HUMAN",
+        "SYSTEM"
+      ]
+    },
+    "actor_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "salt_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload_ref": {
+      "type": "string"
+    },
+    "prev_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "record_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "alg": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "record_id",
+    "seq",
+    "case_id",
+    "stage",
+    "actor_kind",
+    "actor_id",
+    "payload_hash",
+    "prev_hash",
+    "record_hash",
+    "alg"
+  ],
+  "additionalProperties": false
+}

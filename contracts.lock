@@ -1,0 +1,109 @@
+{
+  "contracts": [
+    {
+      "path": "schemas/approval.json",
+      "hash": "89903a1e3cb077fd944943213d518128527ee7335948dc8e85615d1537b9a478",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/autonomy_policy.json",
+      "hash": "8adfd5f5ce46413db131c3feeec1f5e6876c57cf3b3f8a56e0321b640b2c1517",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/case-states.json",
+      "hash": "f80785595f8e2908b72ab618c654a91b52c37ccf53a8b7f08df719a9f1cda5fe",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/case.json",
+      "hash": "d93686419c6715a310e829652218cd545e6dffa96c6a9a55937021238f2b8fe6",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/config.json",
+      "hash": "da4a762ea24c10c9570a0786371a79ed845624a6acbb2b405e38e7dc7c054fd8",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/decision.json",
+      "hash": "45d20f0fe17687aad2a4dc11515e19c962b67d639b184344fd5d347a67d345ba",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/document.json",
+      "hash": "1733abe1a0559d19d4af4f48fcfbfa2134f978daba99109141712052b666605e",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/errors.json",
+      "hash": "72b2f9608f32a933f176e7f7f361afa19223f2edae7960f727876c7c64fd6d8d",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/evidence_record.json",
+      "hash": "ddea1faf8bdbb8efd97bc74b44b478ddeb72711fce4bad4b0c8f0ba151a6cef5",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/fact.json",
+      "hash": "14597ae441d880329e23713589223472df8d00ce2deb5bc4059a21db3f14f3e6",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/gap.json",
+      "hash": "9a544f38c24f14babad0fc250fc21dd644a2a1740c42b07b188c277dd89b891e",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/hash-tags.json",
+      "hash": "a953bb275d6b97504425215a79616173aad8c29fd55dfc40a775982e912727c2",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/license-manifest.json",
+      "hash": "a2cd6a4a6d0c5669cc4cbbde946f4936e583b6169d0a77c9b1a5b880e4bc4cde",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/memory_entry.json",
+      "hash": "c40b65884d21a65e0b0f3be17eced682fc2e57ee72d79949dc8022ac3de53e3f",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/pack.json",
+      "hash": "37e6c103a572d3c19013a82ea579ed1cfe49a30d2365df4d597de2bdcf72013b",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/passport.json",
+      "hash": "cfc6734388d948874955ff3eee209caaa857e04345c04cba5ddaf9c35e5474c2",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/proposal.json",
+      "hash": "ef4ae783aafc8d58c191402ae77f6668b5785e31a06489cd6a2eef77500ee182",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/rule_result.json",
+      "hash": "9d14232a03cea7505008bea559772b6fc6e8f7d10f124e7cb375a03762e38d92",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/simulation.json",
+      "hash": "73e4ac9451b10a5a8b7cde9622eeeb3b591b3c058558ec53d05498017e2f44d2",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/source.json",
+      "hash": "0e0cd4edc65ba89c18c2a002bcc8dc896f99460fb3dccc19f8051f661b0f4b01",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/tenant.json",
+      "hash": "6820fdf19b0063f94fa7d4f46658a398ff33d9dfacea85af57f9972f6a33d6a8",
+      "type": "schema"
+    }
+  ]
+}

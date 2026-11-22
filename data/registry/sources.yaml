@@ -513,3 +513,95 @@ sources:
     v_item: none
     dep_purpose: "upload artifacts in CI"
     dep_class: ACTION
+
+  # ---- DEPENDENCY entries from docs/dependencies.json (p03 set) ----
+
+  - source_id: SRC-DEP-PYDANTIC
+    publisher: Pydantic
+    reference: "pydantic 2.14.3 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "typed models and schema generation"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-RFC8785
+    publisher: rfc8785 project
+    reference: "rfc8785 0.1.4 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Apache-2.0 (basis C)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "canonical JSON of RFC 8785 for hashed or signed byte sequences"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-JCS
+    publisher: jcs project
+    reference: "jcs 0.3.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Apache-2.0 (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "second implementation of RFC 8785 used only as a differential test oracle"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-HYPOTHESIS
+    publisher: Hypothesis Project
+    reference: "hypothesis 6.170.15 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MPL-2.0 (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "property-based tests (unmodified use)"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-MUTMUT
+    publisher: mutmut project
+    reference: "mutmut 3.8.1 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "BSD-3-Clause (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "mutation tests"
+    dep_class: DEV
+
+  - source_id: SRC-DEP-IMPORT-LINTER
+    publisher: import-linter project
+    reference: "import-linter 2.16 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "BSD-2-Clause (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "architecture contracts"
+    dep_class: DEV

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import datetime as _dt
 import json
+import os
 import subprocess
 import sys
 import tomllib
@@ -41,7 +42,11 @@ def _repo_root() -> Path:
 
 
 def _gate_dir() -> Path:
-    return Path(__file__).resolve().parents[2]
+    """The gate package directory (``tools/gate/``), respecting GATE_ROOT."""
+    gate_root = os.environ.get("GATE_ROOT")
+    if gate_root:
+        return Path(gate_root).resolve()
+    return Path(__file__).resolve().parents[1]
 
 
 def load_exceptions(path: Path) -> list[dict[str, str]]:

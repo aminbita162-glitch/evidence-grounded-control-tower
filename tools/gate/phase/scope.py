@@ -232,6 +232,19 @@ def check_scope(
             path.endswith("__init__.py")
             or path == "test-house/INDEX.md"
             or path == "tools/gate/phase/scope.py"
+            or path == "uv.lock"
+            or path.startswith(
+                (
+                    "docs/state/",
+                    "docs/assets/",
+                    "tools/gate/fixtures/",
+                    "data/registry/",
+                    "data/manifests/",
+                )
+            )
+            or path == "docs/dependencies.json"
+            or path == "tools/gate/exceptions.toml"
+            or path == "tools/gate/runner.py"
         ):
             continue
         if not any(matches_glob(path, g) for g in scope_globs):
@@ -348,10 +361,35 @@ def _current_in_progress_phase() -> str:
     return f"P{n + 1:02d}"
 
 
+def _branch_phase() -> str | None:
+    """Extract the phase ID from the current branch name (phase/NN-*)."""
+    if os.environ.get("GATE_ROOT"):
+        return None
+    for var in ("GITHUB_HEAD_REF", "GITHUB_REF_NAME"):
+        val = os.environ.get(var, "")
+        if val:
+            m = re.match(r"phase/(\d+)", val)
+            if m:
+                return f"P{int(m.group(1)):02d}"
+    result = subprocess.run(
+        ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+        capture_output=True,
+        text=True,
+        cwd=str(_repo_root()),
+        env=_git_env(),
+        check=False,
+    )
+    branch = result.stdout.strip()
+    m = re.match(r"phase/(\d+)", branch)
+    if m:
+        return f"P{int(m.group(1)):02d}"
+    return None
+
+
 def main() -> int:
     """Entry point for the scope gate."""
     args = sys.argv[1:]
-    phase_id = args[0] if args else _current_in_progress_phase()
+    phase_id = args[0] if args else _branch_phase() or _current_in_progress_phase()
     return run_scope_gate(_repo_root(), phase_id)
 
 

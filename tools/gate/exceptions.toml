@@ -9,3 +9,21 @@
 #
 # For P00 this file is empty — no exceptions are granted.
 # A vulnerability without an unexpired exception fails the deps gate.
+
+# P03: environment transitive dependencies not in the project dependency set.
+# These CVEs affect packages installed in the development environment, not
+# in the project's uv.lock. They are not project dependencies (P03-T08).
+
+[[exceptions]]
+package = "oauthlib"
+vulnerability_id = "CVE-2026-49272"
+reason = "Environment transitive dependency not in project uv.lock; not a P03 dependency"
+owner_decision_id = "P03-T08"
+expiry = "2027-06-01"
+
+[[exceptions]]
+package = "opentelemetry-api"
+vulnerability_id = "CVE-2026-126360"
+reason = "Environment transitive dependency not in project uv.lock; not a P03 dependency"
+owner_decision_id = "P03-T08"
+expiry = "2027-06-01"

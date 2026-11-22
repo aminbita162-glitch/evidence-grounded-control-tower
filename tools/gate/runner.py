@@ -537,6 +537,9 @@ def run_selftest(
             _fixture_target(violation_fixture, Path(temp_dir))
             fixture_env = dict(env) if env else {}
             fixture_env["GATE_ROOT"] = temp_dir
+            fixture_env.pop("HYGIENE_PATTERNS", None)
+            fixture_env.pop("HYGIENE_PATTERNS_VENDOR", None)
+            fixture_env.pop("CI", None)
             violation_run = execute_command(
                 entry.command, entry.timeout, cwd=Path(temp_dir), env=fixture_env
             )
@@ -547,6 +550,9 @@ def run_selftest(
             _fixture_target(clean_fixture, Path(temp_dir))
             fixture_env = dict(env) if env else {}
             fixture_env["GATE_ROOT"] = temp_dir
+            fixture_env.pop("HYGIENE_PATTERNS", None)
+            fixture_env.pop("HYGIENE_PATTERNS_VENDOR", None)
+            fixture_env.pop("CI", None)
             clean_run = execute_command(
                 entry.command, entry.timeout, cwd=Path(temp_dir), env=fixture_env
             )

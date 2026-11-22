@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/common.json",
+  "title": "Common Types",
+  "definitions": {
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "id_field": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

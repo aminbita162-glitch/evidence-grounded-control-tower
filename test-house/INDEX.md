@@ -109,6 +109,80 @@
 | T-GATE-SELFTEST-T06 | selftest passes against the hygiene, secrets, security, deps, license | slow | gate/test_gates.py | test_selftest_t06_gates |
 | T-GATE-SETS | Set selection resolves quick / phase / nightly correctly | fast | gate/test_runner.py | test_select_sets |
 | T-GATE-STUB | stub.txt equals the two lines of <<<P7-STUB>>> and is protected | fast | gate/test_protect.py | test_stub_txt_matches_directive_bytes |
+| T-KRN-0001 | Regeneration is byte-identical | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0001_regeneration_byte_identical |
+| T-KRN-0002 | A hand edit of a generated file fails the gate | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0002_hand_edit_fails_gate |
+| T-KRN-0003 | Every entity has tenant_id and schema_version | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version |
+| T-KRN-0004 | Models are immutable (mutation returns a new value) | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0004_models_are_immutable |
+| T-KRN-0005 | No untyped dictionary crosses a module boundary | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0005_no_untyped_dict_crosses_boundary |
+| T-KRN-0006 | Models validate against strict typing | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0006_models_strict_typing |
+| T-KRN-0007 | Generated files carry the AUTO-GENERATED header | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0007_generated_files_have_header |
+| T-KRN-0008 | __init__.py re-exports all entity models | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0008_init_reexports_all_models |
+| T-KRN-0009 | Known-answer vector for RFC 8785 canonical JSON | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0009_rfc8785_known_answer |
+| T-KRN-0010 | Known-answer vector for SHA-256 domain hash | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0010_sha256_known_answer |
+| T-KRN-0011 | Cross-purpose hash separation | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0011_cross_purpose_hash_separation |
+| T-KRN-0012 | Decimals serialize without exponent or trailing zeros ambiguity | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0012_decimal_serialization |
+| T-KRN-0013 | Key order stability under random input order | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0013_key_order_stability |
+| T-KRN-0014 | Number formatting stability under random input | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0014_number_formatting_stability |
+| T-KRN-0015 | Unknown tag rejected | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0015_unknown_tag_rejected |
+| T-KRN-0016 | Algorithm identifier present | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0016_algorithm_identifier |
+| T-KRN-0017 | Tag registry validates and all tags are unique | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0017_tag_registry_validates |
+| T-KRN-0018 | Differential test: rfc8785 vs jcs produce identical output | fast | kernel/test_T_KRN_0009_to_0018.py | test_T_KRN_0018_differential_rfc8785_vs_jcs |
+| T-KRN-0019 | Lattice combine is associative | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0019_combine_associative |
+| T-KRN-0020 | Lattice combine is commutative | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0020_combine_commutative |
+| T-KRN-0021 | Lattice combine is idempotent | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0021_combine_idempotent |
+| T-KRN-0022 | Lattice combine is monotone | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0022_combine_monotone |
+| T-KRN-0023 | Combined reasons equal the union of inputs | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0023_combined_reasons_union |
+| T-KRN-0024 | Floats are rejected in Money | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0024_floats_rejected_in_money |
+| T-KRN-0025 | Floats are rejected in Quantity | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0025_floats_rejected_in_quantity |
+| T-KRN-0026 | Rounding mode is mandatory in Money | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0026_rounding_mode_mandatory |
+| T-KRN-0027 | Weakest-of agrees with the P02 helper on all label pairs | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0027_weakest_of_agrees_with_p2 |
+| T-KRN-0028 | Money add with mismatched currency fails | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0028_money_currency_mismatch |
+| T-KRN-0029 | Duration rejects negative values | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0029_duration_rejects_negative |
+| T-KRN-0030 | Identifier is opaque and immutable | fast | kernel/test_T_KRN_0019_to_0030.py | test_T_KRN_0030_identifier_immutable |
+| T-KRN-0031 | Every status transition allowed or rejected as tabulated | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0031_status_transitions_tabulated |
+| T-KRN-0032 | A conflicted fact key yields ESCALATE with both citations | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0032_conflicted_fact_escalate |
+| T-KRN-0033 | A missing fact yields ABSTAIN | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0033_missing_fact_abstain |
+| T-KRN-0034 | SECONDARY input never gives ALLOW | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0034_secondary_never_allow |
+| T-KRN-0035 | SYNTHETIC-origin ALLOW carries the stamp | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0035_synthetic_allow_stamped |
+| T-KRN-0036 | Real-data ALLOW with CALIBRATED_SYNTHETIC becomes ESCALATE | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0036_calibrated_synthetic_escalates |
+| T-KRN-0037 | Real-data ALLOW with VALIDATED_TENANT stays ALLOW | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0037_validated_tenant_allows |
+| T-KRN-0038 | ALLOW without a declared basis is rejected | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0038_allow_without_basis_rejected |
+| T-KRN-0039 | The reader never returns a non-VERIFIED fact | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0039_reader_only_verified |
+| T-KRN-0040 | PROPOSED to VERIFIED transition is allowed | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0040_proposed_to_verified |
+| T-KRN-0041 | VERIFIED to SUPERSEDED transition is allowed | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0041_verified_to_superseded |
+| T-KRN-0042 | REJECTED is a terminal state | fast | kernel/test_T_KRN_0031_to_0042.py | test_T_KRN_0042_rejected_is_terminal |
+| T-KRN-0043 | Every (state, event) pair covered by the table | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0043_all_states_in_table |
+| T-KRN-0044 | Undefined transitions are rejected | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0044_undefined_transition_rejected |
+| T-KRN-0045 | Same idempotency key returns an identical result | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0045_idempotency_key_identical |
+| T-KRN-0046 | A stale version yields the conflict error | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0046_stale_version_conflict |
+| T-KRN-0047 | Two approvals of one proposal: the first wins | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0047_first_approval_wins |
+| T-KRN-0048 | Timeouts move to BLOCKED, never approve | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0048_timeout_to_blocked |
+| T-KRN-0049 | Re-evaluation supersedes by reference | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0049_re_evaluation_supersede |
+| T-KRN-0050 | QUARANTINED state exists and can transition | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0050_quarantined_state |
+| T-KRN-0051 | FAILED is a terminal state | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0051_failed_is_terminal |
+| T-KRN-0052 | Normal lifecycle path is valid | fast | kernel/test_T_KRN_0043_to_0052.py | test_T_KRN_0052_normal_lifecycle |
+| T-KRN-0053 | Every code has title, status and documentation text | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0053_every_code_has_fields |
+| T-KRN-0054 | Codes are unique and never reused | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0054_codes_unique |
+| T-KRN-0055 | The problem-details object validates | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0055_problem_details_validates |
+| T-KRN-0056 | A broad exception handler in the core is rejected by lint | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0056_no_broad_except_in_core |
+| T-KRN-0057 | Typed result types for expected failures | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0057_typed_result_types |
+| T-KRN-0058 | get_error raises for unknown codes | fast | kernel/test_T_KRN_0053_to_0058.py | test_T_KRN_0058_unknown_code_raises |
+| T-KRN-0059 | Invalid configuration is rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0059_invalid_config_rejected |
+| T-KRN-0060 | Hash is stable and changes with any field | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0060_hash_changes_with_field |
+| T-KRN-0061 | Defaults equal the registry parameters | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0061_defaults_match_spec |
+| T-KRN-0062 | Unknown keys are rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0062_unknown_keys_rejected |
+| T-KRN-0063 | Hash is deterministic across calls | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0063_hash_deterministic |
+| T-KRN-0064 | Negative values are rejected | fast | kernel/test_T_KRN_0059_to_0064.py | test_T_KRN_0064_negative_values_rejected |
+| T-KRN-0065 | A seeded forbidden import fails the arch gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0065_forbidden_import_fails |
+| T-KRN-0066 | A seeded display name in kernel fails the arch gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0066_display_name_fails |
+| T-KRN-0067 | An actor outside the closed kinds is rejected | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0067_actor_kinds_closed |
+| T-KRN-0068 | A seeded clock call in the core fails | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0068_clock_call_fails |
+| T-KRN-0069 | A modified schema without a change task fails the contract gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0069_modified_schema_fails |
+| T-KRN-0070 | A consistent contracts.lock passes the contract gate | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0070_consistent_lock_passes |
+| T-KRN-0071 | contracts.lock regenerates identically | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0071_contracts_lock_regen_identical |
+| T-KRN-0072 | All hashes in contracts.lock match actual files | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0072_contract_gate_real_repo |
+| T-KRN-0073 | gate run arch contract property generated-files exits 0 | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0073_gate_run_all_four |
+| T-KRN-0074 | Display names not in schemas or kernel source | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0074_no_display_names_in_schemas |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

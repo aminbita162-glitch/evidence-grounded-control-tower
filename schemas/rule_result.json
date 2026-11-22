@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/rule_result.json",
+  "title": "RuleResult",
+  "description": "A deterministic rule evaluation result (Part 3 \u00a73.3).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rule_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "APPLIED",
+        "NOT_APPLICABLE",
+        "SKIPPED"
+      ]
+    },
+    "reason_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "citation_source_id": {
+      "type": "string"
+    },
+    "citation_locator": {
+      "type": "string"
+    },
+    "evaluation_time": {
+      "$ref": "common.json#/definitions/timestamp"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "rule_id",
+    "rule_version",
+    "state",
+    "reason_code",
+    "evaluation_time"
+  ],
+  "additionalProperties": false
+}

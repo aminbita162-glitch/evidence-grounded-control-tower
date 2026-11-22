@@ -1,0 +1,78 @@
+{
+  "states": [
+    "CREATED",
+    "INGESTED",
+    "EXTRACTED",
+    "EVALUATED",
+    "PROPOSED",
+    "AWAITING_HUMAN",
+    "DECIDED",
+    "CLOSED"
+  ],
+  "side_states": [
+    "BLOCKED",
+    "QUARANTINED",
+    "FAILED",
+    "REOPENED"
+  ],
+  "transitions": {
+    "CREATED": [
+      "INGESTED",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "INGESTED": [
+      "EXTRACTED",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "EXTRACTED": [
+      "EVALUATED",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "EVALUATED": [
+      "PROPOSED",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "PROPOSED": [
+      "AWAITING_HUMAN",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "AWAITING_HUMAN": [
+      "DECIDED",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "DECIDED": [
+      "CLOSED",
+      "REOPENED",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "CLOSED": [
+      "REOPENED"
+    ],
+    "BLOCKED": [
+      "CREATED",
+      "INGESTED",
+      "EXTRACTED",
+      "EVALUATED",
+      "PROPOSED",
+      "AWAITING_HUMAN",
+      "FAILED"
+    ],
+    "QUARANTINED": [
+      "CREATED",
+      "FAILED"
+    ],
+    "FAILED": [],
+    "REOPENED": [
+      "EVALUATED",
+      "BLOCKED",
+      "FAILED"
+    ]
+  }
+}

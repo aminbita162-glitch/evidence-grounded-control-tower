@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/simulation.json",
+  "title": "Simulation",
+  "description": "A what-if or as-of simulation (Part 3 \u00a73.3).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "simulation_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "case_id": {
+      "$ref": "common.json#/definitions/id_field"
+    },
+    "sim_type": {
+      "type": "string",
+      "enum": [
+        "WHAT_IF",
+        "AS_OF"
+      ]
+    },
+    "parameters": {
+      "type": "string"
+    },
+    "result": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "simulation_id",
+    "case_id",
+    "sim_type"
+  ],
+  "additionalProperties": false
+}

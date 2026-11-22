@@ -1,0 +1,43 @@
+# P03 phase risk review — P03-RISK.
+#
+# P03 implemented kernel contracts: entity schemas, a frozen-typed-model
+# generator, canonical JSON (RFC 8785), domain-separated SHA-256 hashing,
+# core value types (identifiers, money, time, quantity, labels, decision
+# lattice), fact statuses and ALLOW eligibility, case state machine, error
+# model, configuration contract, architecture enforcement, and the mutation
+# baseline gate.
+#
+# Controls verified by the T-KRN test suite:
+#   - Lattice monotonicity (T-KRN-0022): combine result >= max(inputs).
+#   - Label ordering (T-KRN-0027): kernel weakest_of agrees with P02 helper.
+#   - State machine completeness (T-KRN-0043 to T-KRN-0052): all states and
+#     transitions covered; terminal states enforced; lifecycle path valid.
+#   - Canonical hashing (T-KRN-0009, T-KRN-0018): RFC 8785 known-answer
+#     vectors; differential test against jcs.
+#   - Cross-purpose hash separation (T-KRN-0011): different domain tags
+#     never produce the same hash for the same payload.
+
+records:
+  - id: REV-P03
+    phase: "03"
+    review_date: "2026-11"
+    controls_added:
+      - CTL-KRN-01 (IMPLEMENTED, lattice combine is monotone; T-KRN-0022)
+      - CTL-KRN-02 (IMPLEMENTED, label rank order matches P02 helper; T-KRN-0027)
+      - CTL-KRN-03 (IMPLEMENTED, state machine covers all states and transitions; T-KRN-0043 to T-KRN-0052)
+      - CTL-KRN-04 (IMPLEMENTED, canonical JSON per RFC 8785; T-KRN-0009, T-KRN-0018)
+      - CTL-KRN-05 (IMPLEMENTED, cross-purpose hash separation; T-KRN-0011)
+      - CTL-KRN-06 (IMPLEMENTED, fact status transitions enforced; T-KRN-0031, T-KRN-0040 to T-KRN-0042)
+      - CTL-KRN-07 (IMPLEMENTED, ALLOW eligibility with calibration basis; T-KRN-0033 to T-KRN-0038)
+      - CTL-KRN-08 (IMPLEMENTED, forbidden patterns banned in kernel; T-KRN-0065, T-KRN-0068)
+      - CTL-KRN-09 (IMPLEMENTED, contracts.lock consistency; T-KRN-0069 to T-KRN-0072)
+      - CTL-KRN-10 (IMPLEMENTED, mutation baseline at 95.3pct branch coverage; T-KRN-T09)
+    controls_verified: []
+    residual_risks_above_threshold: []
+    v_items_opened_or_closed: []
+    register_diff: >-
+      P03 added CTL-KRN-01 through CTL-KRN-10 as IMPLEMENTED controls for
+      lattice monotonicity, label ordering, state machine completeness,
+      canonical hashing, cross-purpose hash separation, fact status
+      transitions, ALLOW eligibility, forbidden pattern enforcement,
+      contract registry consistency, and mutation baseline coverage.

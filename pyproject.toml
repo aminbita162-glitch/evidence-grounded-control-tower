@@ -7,6 +7,8 @@ license = { text = "Proprietary - All Rights Reserved" }
 
 dependencies = [
     "pyyaml==6.0.3",
+    "pydantic==2.14.3",
+    "rfc8785==0.1.4",
 ]
 
 [project.optional-dependencies]
@@ -20,6 +22,10 @@ dev = [
     "pytest-timeout==2.4.0",
     "bandit==1.9.4",
     "pip-audit==2.10.1",
+    "jcs==0.3.0",
+    "hypothesis==6.170.15",
+    "mutmut==3.8.1",
+    "import-linter==2.16",
 ]
 
 [build-system]
@@ -40,6 +46,7 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 [tool.ruff.lint.per-file-ignores]
 "test-house/**" = ["S101", "S602", "S603", "S607"]
 "tools/gate/**" = ["S602", "S603", "S607"]
+"tools/schemagen/generator.py" = ["S603"]
 
 [tool.mypy]
 strict = true
@@ -48,8 +55,29 @@ python_version = "3.14"
 exclude = ["tools/gate/fixtures/", "\\.venv/", "build/"]
 
 [[tool.mypy.overrides]]
-module = ["yaml"]
+module = ["yaml", "jcs", "rfc8785"]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tools.schemagen.*"]
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+module = ["kernel.contracts._generated.*"]
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*"]
+disallow_any_explicit = false
+
+[tool.importlinter]
+root_packages = ["kernel"]
+
+[[tool.importlinter.contracts]]
+name = "Kernel isolation"
+type = "forbidden"
+source_modules = ["kernel"]
+forbidden_modules = ["capabilities", "agents", "adapters", "views", "api"]
 
 [tool.pytest.ini_options]
 markers = [

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/pack.json",
+  "title": "Pack",
+  "description": "Versioned rules with validity windows and sources (Part 3 \u00a73.6).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "pack_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "valid_from": {
+      "$ref": "common.json#/definitions/timestamp"
+    },
+    "valid_to": {
+      "$ref": "common.json#/definitions/timestamp"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "pack_id",
+    "version",
+    "valid_from",
+    "valid_to",
+    "jurisdiction"
+  ],
+  "additionalProperties": false
+}

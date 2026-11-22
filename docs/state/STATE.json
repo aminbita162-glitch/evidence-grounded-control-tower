@@ -1,10 +1,10 @@
 {
-  "awaiting_merge_phase": "P02",
+  "awaiting_merge_phase": "P03",
   "capability_status_map": {},
   "directive_hash": "c07cef90e548e63bb2010e977eb97d73ab5f5e1a6baa0db039637978094b7b75",
   "label_counts": {},
-  "last_completed_phase": "P02",
+  "last_completed_phase": "P03",
   "open_stop_items": [],
   "previous_merge_hash": null,
-  "state_hash": "24228cc032d8e48e9d576ac0a3eb2ee23c136addb41b14656d46c09e59a56264"
+  "state_hash": "9a619ff74a3666acb67b8c8e54a01eaa9119a597af8a4c76ece34ef43f3a8e70"
 }

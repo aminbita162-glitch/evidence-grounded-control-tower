@@ -225,8 +225,9 @@ def get_commit_messages(root: Path) -> list[str]:
     """
     if _is_git_repo(root):
         # Try the PR range: commits on this branch not on main.
+        # Use -z (NUL-separated) to correctly handle multi-line commit bodies.
         result = subprocess.run(
-            ["git", "log", "--format=%B", "main..HEAD"],
+            ["git", "log", "-z", "--format=%B", "main..HEAD"],
             capture_output=True,
             text=True,
             cwd=str(root),
@@ -234,8 +235,8 @@ def get_commit_messages(root: Path) -> list[str]:
             check=False,
         )
         if result.returncode == 0 and result.stdout.strip():
-            messages = _split_git_log(result.stdout)
-            return drop_merge_messages([m for m in messages if m.strip()])
+            messages = [m.strip() for m in result.stdout.split("\0") if m.strip()]
+            return drop_merge_messages(messages)
         # Fallback (on main, or no main branch): the HEAD commit only.
         result = subprocess.run(
             ["git", "log", "-n", "1", "--format=%B", "HEAD"],
@@ -246,8 +247,7 @@ def get_commit_messages(root: Path) -> list[str]:
             check=False,
         )
         if result.returncode == 0:
-            messages = _split_git_log(result.stdout)
-            return drop_merge_messages([m for m in messages if m.strip()])
+            return drop_merge_messages([m for m in [result.stdout.strip()] if m.strip()])
         return []
     # Fallback for non-git directories (selftest temp dirs).
     commit_msg = root / "COMMIT_MSG"
@@ -310,6 +310,20 @@ def is_scope_matched(file_path: str, entries: list[ScopeEntry]) -> bool:
 # ---------------------------------------------------------------------------
 
 
+def _is_binary(path: Path) -> bool:
+    """Return True if the file appears to be binary (contains NUL bytes).
+
+    Text pattern scanning only applies to text files; binary assets (GIFs,
+    PNGs, etc.) are skipped to avoid false positives from byte sequences.
+    """
+    try:
+        with path.open("rb") as stream:
+            chunk = stream.read(8192)
+        return b"\x00" in chunk
+    except OSError:
+        return True
+
+
 def _scan_files(
     files: list[Path],
     root: Path,
@@ -320,6 +334,8 @@ def _scan_files(
     """Scan files for pattern violations. Returns file paths with violations."""
     violations: list[str] = []
     for file_path in files:
+        if _is_binary(file_path):
+            continue
         try:
             content = file_path.read_text(encoding="utf-8", errors="replace")
         except OSError:

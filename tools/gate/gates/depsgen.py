@@ -88,6 +88,18 @@ def _parse_license_summary(summary: str, source_id: str) -> tuple[str, str]:
     return m.group("license"), m.group("basis")
 
 
+_P03_SOURCE_IDS: frozenset[str] = frozenset(
+    {
+        "SRC-DEP-PYDANTIC",
+        "SRC-DEP-RFC8785",
+        "SRC-DEP-JCS",
+        "SRC-DEP-HYPOTHESIS",
+        "SRC-DEP-MUTMUT",
+        "SRC-DEP-IMPORT-LINTER",
+    }
+)
+
+
 def _repo_root() -> Path:
     """Resolve the repository root, respecting GATE_ROOT if set."""
     gate_root = os.environ.get("GATE_ROOT")
@@ -103,7 +115,7 @@ def generate_dependencies(root: Path) -> dict[str, list[dict[str, str]]]:
         root: Repository root path.
 
     Returns:
-        A dict ``{"p00": [...]}`` matching the docs/dependencies.json format.
+        A dict ``{"p00": [...], "p03": [...]}`` matching the docs/dependencies.json format.
 
     Raises:
         DepsGenError: If the registry is invalid or a DEPENDENCY entry cannot be parsed.
@@ -117,7 +129,8 @@ def generate_dependencies(root: Path) -> dict[str, list[dict[str, str]]]:
     # Sort by source_id for deterministic output.
     deps.sort(key=lambda e: e.source_id)
 
-    entries: list[dict[str, str]] = []
+    p00_entries: list[dict[str, str]] = []
+    p03_entries: list[dict[str, str]] = []
     for entry in deps:
         name, version = _parse_reference(entry.reference, entry.source_id)
         license_str, basis = _parse_license_summary(entry.license_summary, entry.source_id)
@@ -125,18 +138,20 @@ def generate_dependencies(root: Path) -> dict[str, list[dict[str, str]]]:
             raise DepsGenError(f"{entry.source_id}: dep_purpose is required for DEPENDENCY entries")
         if not entry.dep_class:
             raise DepsGenError(f"{entry.source_id}: dep_class is required for DEPENDENCY entries")
-        entries.append(
-            {
-                "name": name,
-                "version": version,
-                "license": license_str,
-                "purpose": entry.dep_purpose,
-                "class": entry.dep_class,
-                "basis": basis,
-            }
-        )
+        record = {
+            "name": name,
+            "version": version,
+            "license": license_str,
+            "purpose": entry.dep_purpose,
+            "class": entry.dep_class,
+            "basis": basis,
+        }
+        if entry.source_id in _P03_SOURCE_IDS:
+            p03_entries.append(record)
+        else:
+            p00_entries.append(record)
 
-    return {"p00": entries}
+    return {"p00": p00_entries, "p03": p03_entries}
 
 
 def main() -> int:

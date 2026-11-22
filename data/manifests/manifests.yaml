@@ -220,3 +220,39 @@ manifests:
     attribution_text: "none required"
     permitted_uses: "unrestricted under MIT"
     redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYDANTIC
+    terms: "MIT (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under MIT"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-RFC8785
+    terms: "Apache-2.0 (basis C)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under Apache-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-JCS
+    terms: "Apache-2.0 (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under Apache-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-HYPOTHESIS
+    terms: "MPL-2.0 (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unmodified use under MPL-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-MUTMUT
+    terms: "BSD-3-Clause (basis E)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under BSD-3-Clause"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-IMPORT-LINTER
+    terms: "BSD-2-Clause (basis F)"
+    attribution_text: "none required"
+    permitted_uses: "unrestricted under BSD-2-Clause"
+    redistribution_permission: "yes"

@@ -179,43 +179,43 @@ clean_fixture = "fixtures/labels_clean"
 
 [gate.arch]
 cadence = "QP"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.arch"
 timeout = 120
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/arch_violation"
+clean_fixture = "fixtures/arch_clean"
 
 [gate.generated-files]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.generated_files"
 timeout = 120
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/generated_files_violation"
+clean_fixture = "fixtures/generated_files_clean"
 
 [gate.contract]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.contract"
 timeout = 120
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/contract_violation"
+clean_fixture = "fixtures/contract_clean"
 
 [gate.property]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.property"
 timeout = 300
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/property_violation"
+clean_fixture = "fixtures/property_clean"
 
 [gate.mutation]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.mutation"
 timeout = 300
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/mutation_violation"
+clean_fixture = "fixtures/mutation_clean"
 
 [gate.integration]
 cadence = "P"
