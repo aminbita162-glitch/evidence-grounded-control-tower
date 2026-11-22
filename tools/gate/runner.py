@@ -557,9 +557,7 @@ def run_selftest(
         if clean_run.exit_code != 0:
             _debug = Path(project_root) / ".gate-logs" / "selftest-debug.txt"
             _debug.parent.mkdir(parents=True, exist_ok=True)
-            _debug.write_text(
-                f"CLEAN FAILED: {name} (exit {clean_run.exit_code})\n"
-            )
+            _debug.write_text(f"CLEAN FAILED: {name} (exit {clean_run.exit_code})\n")
             return 1
     return 0
 
