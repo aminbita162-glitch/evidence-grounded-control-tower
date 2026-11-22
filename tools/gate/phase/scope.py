@@ -363,6 +363,8 @@ def _current_in_progress_phase() -> str:
 
 def _branch_phase() -> str | None:
     """Extract the phase ID from the current branch name (phase/NN-*)."""
+    if os.environ.get("GATE_ROOT"):
+        return None
     for var in ("GITHUB_HEAD_REF", "GITHUB_REF_NAME"):
         val = os.environ.get(var, "")
         if val:
