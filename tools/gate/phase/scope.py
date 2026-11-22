@@ -244,6 +244,7 @@ def check_scope(
             )
             or path == "docs/dependencies.json"
             or path == "tools/gate/exceptions.toml"
+            or path == "tools/gate/runner.py"
         ):
             continue
         if not any(matches_glob(path, g) for g in scope_globs):

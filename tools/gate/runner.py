@@ -14,6 +14,7 @@ import json
 import os
 import signal
 import subprocess
+import sys
 import tempfile
 import time
 import tomllib
@@ -541,6 +542,10 @@ def run_selftest(
                 entry.command, entry.timeout, cwd=Path(temp_dir), env=fixture_env
             )
         if violation_run.exit_code == 0:
+            print(
+                f"selftest: {name} violation passed (should fail)",
+                file=sys.stderr,
+            )
             return 1
         # clean fixture must make the gate pass
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -551,6 +556,10 @@ def run_selftest(
                 entry.command, entry.timeout, cwd=Path(temp_dir), env=fixture_env
             )
         if clean_run.exit_code != 0:
+            print(
+                f"selftest: {name} clean failed (exit {clean_run.exit_code})",
+                file=sys.stderr,
+            )
             return 1
     return 0
 
