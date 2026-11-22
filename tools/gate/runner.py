@@ -537,26 +537,26 @@ def run_selftest(
             _fixture_target(violation_fixture, Path(temp_dir))
             fixture_env = dict(env) if env else {}
             fixture_env["GATE_ROOT"] = temp_dir
+            fixture_env.pop("HYGIENE_PATTERNS", None)
+            fixture_env.pop("HYGIENE_PATTERNS_VENDOR", None)
+            fixture_env.pop("CI", None)
             violation_run = execute_command(
                 entry.command, entry.timeout, cwd=Path(temp_dir), env=fixture_env
             )
         if violation_run.exit_code == 0:
-            _debug = Path(project_root) / ".gate-logs" / "selftest-debug.txt"
-            _debug.parent.mkdir(parents=True, exist_ok=True)
-            _debug.write_text(f"VIOLATION PASSED: {name}\n")
             return 1
         # clean fixture must make the gate pass
         with tempfile.TemporaryDirectory() as temp_dir:
             _fixture_target(clean_fixture, Path(temp_dir))
             fixture_env = dict(env) if env else {}
             fixture_env["GATE_ROOT"] = temp_dir
+            fixture_env.pop("HYGIENE_PATTERNS", None)
+            fixture_env.pop("HYGIENE_PATTERNS_VENDOR", None)
+            fixture_env.pop("CI", None)
             clean_run = execute_command(
                 entry.command, entry.timeout, cwd=Path(temp_dir), env=fixture_env
             )
         if clean_run.exit_code != 0:
-            _debug = Path(project_root) / ".gate-logs" / "selftest-debug.txt"
-            _debug.parent.mkdir(parents=True, exist_ok=True)
-            _debug.write_text(f"CLEAN FAILED: {name} (exit {clean_run.exit_code})\n")
             return 1
     return 0
 
