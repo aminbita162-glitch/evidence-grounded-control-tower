@@ -112,5 +112,55 @@
       "class": "TOOL",
       "basis": "E"
     }
+  ],
+  "p03": [
+    {
+      "name": "hypothesis",
+      "version": "6.170.15",
+      "license": "MPL-2.0",
+      "purpose": "property-based tests (unmodified use)",
+      "class": "DEV",
+      "basis": "E"
+    },
+    {
+      "name": "import-linter",
+      "version": "2.16",
+      "license": "BSD-2-Clause",
+      "purpose": "architecture contracts",
+      "class": "DEV",
+      "basis": "F"
+    },
+    {
+      "name": "jcs",
+      "version": "0.3.0",
+      "license": "Apache-2.0",
+      "purpose": "second implementation of RFC 8785 used only as a differential test oracle",
+      "class": "DEV",
+      "basis": "E"
+    },
+    {
+      "name": "mutmut",
+      "version": "3.8.1",
+      "license": "BSD-3-Clause",
+      "purpose": "mutation tests",
+      "class": "DEV",
+      "basis": "E"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.3",
+      "license": "MIT",
+      "purpose": "typed models and schema generation",
+      "class": "RUNTIME",
+      "basis": "E"
+    },
+    {
+      "name": "rfc8785",
+      "version": "0.1.4",
+      "license": "Apache-2.0",
+      "purpose": "canonical JSON of RFC 8785 for hashed or signed byte sequences",
+      "class": "RUNTIME",
+      "basis": "C"
+    }
   ]
 }

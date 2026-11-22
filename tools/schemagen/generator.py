@@ -13,7 +13,7 @@ Properties:
 from __future__ import annotations
 
 import json
-import subprocess
+import subprocess  # nosec B404
 import sys
 from pathlib import Path
 from typing import Any
@@ -207,7 +207,7 @@ def generate_all(schemas_dir: Path, output_dir: Path) -> list[Path]:
     # Format generated files with ruff for byte-identical, consistent output.
     ruff_bin = Path(sys.executable).parent / "ruff"
     if ruff_bin.exists():
-        subprocess.run(  # noqa: S603
+        subprocess.run(  # nosec
             [str(ruff_bin), "format", str(output_dir)],
             check=True,
             capture_output=True,
