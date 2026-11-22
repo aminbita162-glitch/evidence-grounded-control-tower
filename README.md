@@ -7,9 +7,10 @@ Evidence-grounded advisory pre-checks for customs and transit cases.
 
 ## 1 Hero capture
 
+![Burj Khalifa](docs/assets/burj-khalifa-tiny.gif)
+
 Burj Khalifa
 Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
-
 SYNTHETIC DATA
 
 

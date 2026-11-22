@@ -24,7 +24,7 @@ def _gate_root() -> Path:
 def main() -> int:
     """Entry point: run coverage on kernel/ and verify thresholds."""
     root = _gate_root()
-    py = str(root / ".venv" / "bin" / "python")
+    py = sys.executable
     cov_file = root / ".gate-logs" / "coverage.json"
     cov_file.parent.mkdir(parents=True, exist_ok=True)
 

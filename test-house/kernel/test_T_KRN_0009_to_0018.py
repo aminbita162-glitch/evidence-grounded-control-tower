@@ -143,6 +143,7 @@ def test_T_KRN_0012_decimal_serialization() -> None:
     )
 )
 @settings(max_examples=100, derandomize=True)
+@pytest.mark.fast
 def test_T_KRN_0013_key_order_stability(d: dict[str, int]) -> None:
     """Key order does not affect canonical JSON output."""
     from kernel.canonical import canonical_dumps
@@ -167,6 +168,7 @@ def test_T_KRN_0013_key_order_stability(d: dict[str, int]) -> None:
 
 @given(st.integers(min_value=-(2**53) + 1, max_value=2**53 - 1))
 @settings(max_examples=100, derandomize=True)
+@pytest.mark.fast
 def test_T_KRN_0014_number_formatting_stability(n: int) -> None:
     """The same integer always produces the same canonical form."""
     from kernel.canonical import canonical_dumps

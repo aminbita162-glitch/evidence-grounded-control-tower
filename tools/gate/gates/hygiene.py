@@ -310,6 +310,20 @@ def is_scope_matched(file_path: str, entries: list[ScopeEntry]) -> bool:
 # ---------------------------------------------------------------------------
 
 
+def _is_binary(path: Path) -> bool:
+    """Return True if the file appears to be binary (contains NUL bytes).
+
+    Text pattern scanning only applies to text files; binary assets (GIFs,
+    PNGs, etc.) are skipped to avoid false positives from byte sequences.
+    """
+    try:
+        with path.open("rb") as stream:
+            chunk = stream.read(8192)
+        return b"\x00" in chunk
+    except OSError:
+        return True
+
+
 def _scan_files(
     files: list[Path],
     root: Path,
@@ -320,6 +334,8 @@ def _scan_files(
     """Scan files for pattern violations. Returns file paths with violations."""
     violations: list[str] = []
     for file_path in files:
+        if _is_binary(file_path):
+            continue
         try:
             content = file_path.read_text(encoding="utf-8", errors="replace")
         except OSError:

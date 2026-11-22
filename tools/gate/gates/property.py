@@ -23,7 +23,7 @@ def _gate_root() -> Path:
 def main() -> int:
     """Entry point: run property tests."""
     root = _gate_root()
-    py = str(root / ".venv" / "bin" / "python")
+    py = sys.executable
     r = subprocess.run(
         [
             py,

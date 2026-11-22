@@ -206,8 +206,8 @@ cadence = "P"
 command = "python -m tools.gate.gates.property"
 timeout = 300
 activates_in = "P03"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/property_violation"
+clean_fixture = "fixtures/property_clean"
 
 [gate.mutation]
 cadence = "P"

@@ -8,13 +8,12 @@ Auto-generated from the JSON Schema; do not edit by hand.
 
 from __future__ import annotations
 
-from typing import Literal
-
 from pydantic import BaseModel, ConfigDict
 
 
 class Widget(BaseModel):
     """Widget model (frozen, strict)."""
+
     model_config = ConfigDict(frozen=True, strict=True)
 
     name: str
