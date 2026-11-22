@@ -33,13 +33,15 @@ def main() -> int:
     env = dict(os.environ)
     env["PYTHONPATH"] = str(root) + os.pathsep + env.get("PYTHONPATH", "")
 
+    kernel_dir = root / "kernel"
+
     r = subprocess.run(
         [
             py,
             "-m",
             "pytest",
             "test-house/kernel/",
-            "--cov=kernel",
+            f"--cov={kernel_dir}",
             "--cov-branch",
             f"--cov-report=json:{cov_file}",
             "--no-header",
