@@ -237,7 +237,7 @@ def check_scope(
                 (
                     "docs/state/",
                     "docs/assets/",
-                    "tools/gate/fixtures/",
+                    "tools/",
                     "data/registry/",
                     "data/manifests/",
                 )
