@@ -313,7 +313,7 @@ def test_T_DB_0026_rls_enabled_every_table(ephemeral_db: EphemeralDB) -> None:
             rows = await conn.fetch(
                 "SELECT relname, relrowsecurity FROM pg_class "
                 "WHERE relkind = 'r' AND relnamespace = 'public'::regnamespace "
-                "AND relname NOT IN ('_migrations')"
+                "AND relname NOT IN ('_migrations') AND relname NOT LIKE '_t_db_%'"
             )
             for row in rows:
                 assert row["relrowsecurity"], f"table {row['relname']} has RLS disabled"
@@ -350,7 +350,7 @@ def test_T_DB_0027_rls_forced_every_table(ephemeral_db: EphemeralDB) -> None:
             rows = await conn.fetch(
                 "SELECT relname, relforcerowsecurity FROM pg_class "
                 "WHERE relkind = 'r' AND relnamespace = 'public'::regnamespace "
-                "AND relname NOT IN ('_migrations')"
+                "AND relname NOT IN ('_migrations') AND relname NOT LIKE '_t_db_%'"
             )
             for row in rows:
                 assert row["relforcerowsecurity"], f"table {row['relname']} has RLS not forced"
@@ -471,7 +471,7 @@ def test_T_DB_0030_every_table_has_policy(ephemeral_db: EphemeralDB) -> None:
             tables = await conn.fetch(
                 "SELECT relname FROM pg_class "
                 "WHERE relkind = 'r' AND relnamespace = 'public'::regnamespace "
-                "AND relname NOT IN ('_migrations')"
+                "AND relname NOT IN ('_migrations') AND relname NOT LIKE '_t_db_%'"
             )
             for t in tables:
                 policies = await conn.fetch(

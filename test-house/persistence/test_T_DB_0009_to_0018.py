@@ -156,21 +156,26 @@ def test_T_DB_0012_foreign_tenant_fk_rejected(ephemeral_db: EphemeralDB) -> None
         await apply_migrations(ephemeral_db.migration_dsn, _MIGRATIONS_DIR)
         conn = await asyncpg.connect(ephemeral_db.migration_dsn)
         try:
-            await conn.execute(
-                'INSERT INTO "case" (id, tenant_id, schema_version, state, version) '
-                "VALUES ($1, $2, 1, 'CREATED', 1)",
-                "case-001",
-                "tenant-a",
-            )
-            with pytest.raises(Exception, match="foreign key"):
+            async with conn.transaction():
+                await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
                 await conn.execute(
-                    'INSERT INTO "evidence_record" '
-                    "(id, tenant_id, schema_version, case_id, seq, stage) "
-                    "VALUES ($1, $2, 1, $3, 1, 'INGEST')",
-                    "ev-001",
-                    "tenant-b",
+                    'INSERT INTO "case" (id, tenant_id, schema_version, '
+                    "state, version) VALUES ($1, $2, 1, 'CREATED', 1)",
                     "case-001",
+                    "tenant-a",
                 )
+            with pytest.raises(Exception, match="foreign key"):
+                async with conn.transaction():
+                    await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
+                    await conn.execute(
+                        'INSERT INTO "evidence_record" '
+                        "(id, tenant_id, schema_version, "
+                        "case_id, seq, stage) "
+                        "VALUES ($1, $2, 1, $3, 1, 'INGEST')",
+                        "ev-001",
+                        "tenant-b",
+                        "case-001",
+                    )
         finally:
             await conn.close()
 

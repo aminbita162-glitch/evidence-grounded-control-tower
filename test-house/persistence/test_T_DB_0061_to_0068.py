@@ -54,10 +54,9 @@ def test_T_DB_0061_update_append_only_fails(ephemeral_db: EphemeralDB) -> None:
                 await mg_conn.execute("SET LOCAL ctc.tenant_id = 't-a'")
                 await mg_conn.execute(
                     'INSERT INTO "evidence_record" (id, tenant_id, schema_version, '
-                    "case_id, seq, stage) VALUES ($1, $2, 1, $3, 1, 'INGEST')",
+                    "seq, stage) VALUES ($1, $2, 1, 1, 'INGEST')",
                     "ev-001",
                     "t-a",
-                    "c-001",
                 )
         finally:
             await mg_conn.close()
@@ -104,10 +103,9 @@ def test_T_DB_0062_delete_append_only_fails(ephemeral_db: EphemeralDB) -> None:
                 await mg_conn.execute("SET LOCAL ctc.tenant_id = 't-a'")
                 await mg_conn.execute(
                     'INSERT INTO "evidence_record" (id, tenant_id, schema_version, '
-                    "case_id, seq, stage) VALUES ($1, $2, 1, $3, 1, 'INGEST')",
+                    "seq, stage) VALUES ($1, $2, 1, 1, 'INGEST')",
                     "ev-002",
                     "t-a",
-                    "c-002",
                 )
         finally:
             await mg_conn.close()
@@ -182,7 +180,7 @@ def test_T_DB_0064_forward_migration_passes(ephemeral_db: EphemeralDB) -> None:
 # ---------------------------------------------------------------------------
 
 
-@pytest.mark.slow
+@pytest.mark.fast
 def test_T_DB_0065_gate_run_migration() -> None:
     """T-DB-0065: gate run migration exit 0.
 
