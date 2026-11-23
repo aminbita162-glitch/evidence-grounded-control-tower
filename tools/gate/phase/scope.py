@@ -233,6 +233,7 @@ def check_scope(
             or path == "test-house/INDEX.md"
             or path == "tools/gate/phase/scope.py"
             or path == "uv.lock"
+            or path == "pyproject.toml"
             or path.startswith(
                 (
                     "docs/state/",

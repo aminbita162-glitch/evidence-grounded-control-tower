@@ -219,11 +219,11 @@ clean_fixture = "fixtures/mutation_clean"
 
 [gate.integration]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.integration"
 timeout = 300
 activates_in = "P04"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/integration_violation"
+clean_fixture = "fixtures/integration_clean"
 
 [gate.migration]
 cadence = "P"

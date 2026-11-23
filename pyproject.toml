@@ -9,6 +9,9 @@ dependencies = [
     "pyyaml==6.0.3",
     "pydantic==2.14.3",
     "rfc8785==0.1.4",
+    "sqlalchemy[asyncio]==2.1.8",
+    "alembic==1.20.1",
+    "asyncpg==0.32.0",
 ]
 
 [project.optional-dependencies]
@@ -46,6 +49,7 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 [tool.ruff.lint.per-file-ignores]
 "test-house/**" = ["S101", "S602", "S603", "S607"]
 "tools/gate/**" = ["S602", "S603", "S607"]
+"tools/migrate/**" = ["S603", "S607", "S311"]
 "tools/schemagen/generator.py" = ["S603"]
 
 [tool.mypy]
@@ -55,7 +59,7 @@ python_version = "3.14"
 exclude = ["tools/gate/fixtures/", "\\.venv/", "build/"]
 
 [[tool.mypy.overrides]]
-module = ["yaml", "jcs", "rfc8785"]
+module = ["yaml", "jcs", "rfc8785", "alembic", "asyncpg"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
@@ -67,7 +71,15 @@ module = ["kernel.contracts._generated.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*"]
+module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*", "kernel.persistence.*"]
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+module = ["adapters.*"]
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+module = ["tools.migrate.*", "tools.faultlab.*", "tools.threat_matrix.*"]
 disallow_any_explicit = false
 
 [tool.importlinter]

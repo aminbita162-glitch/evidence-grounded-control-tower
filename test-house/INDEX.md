@@ -40,6 +40,14 @@
 | T-DATA-0028 | Registry entry with unknown label fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0028_record_with_unknown_label_fails_labels_gate |
 | T-DATA-0029 | Manifest source_id absent from registry fails labels gate | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0029_source_id_absent_from_registry_fails_labels_gate |
 | T-DATA-0030 | Data and labels gates pass on the live repository | fast | data/test_T_DATA_0025_to_0030.py | test_T_DATA_0030_live_data_and_labels_gates_pass |
+| T-DB-0001 | Roles have exactly the stated privileges | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0001_role_privileges |
+| T-DB-0002 | Application role cannot create tables | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0002_application_cannot_create |
+| T-DB-0003 | Application role cannot alter tables | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0003_application_cannot_alter |
+| T-DB-0004 | Application role cannot drop tables | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0004_application_cannot_drop |
+| T-DB-0005 | Ephemeral database starts from the lock file only | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0005_ephemeral_starts_from_lock_file |
+| T-DB-0006 | Migration owner can create tables | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0006_migration_owner_can_create |
+| T-DB-0007 | Audit role is read-only | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0007_audit_readonly |
+| T-DB-0008 | Gate run integration exits 0 | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0008_gate_run_integration |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
