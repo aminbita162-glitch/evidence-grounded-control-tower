@@ -100,6 +100,30 @@
 | T-DB-0058 | Dead letter entry fields | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0058_dead_letter_fields |
 | T-DB-0059 | Outbox entry fields | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0059_outbox_entry_fields |
 | T-DB-0060 | Outbox pending entries | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0060_outbox_pending |
+| T-DB-0061 | UPDATE on append-only table fails | slow | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0061_update_append_only_fails |
+| T-DB-0062 | DELETE on append-only table fails | slow | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0062_delete_append_only_fails |
+| T-DB-0063 | Grant UPDATE on append-only table fails lint | fast | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0063_grant_update_fails_lint |
+| T-DB-0064 | Forward migration on seeded data passes | slow | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0064_forward_migration_passes |
+| T-DB-0065 | Gate run migration exits 0 | slow | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0065_gate_run_migration |
+| T-DB-0066 | Append-only lint catches GRANT UPDATE | fast | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0066_lint_catches_grant_update |
+| T-DB-0067 | Append-only lint catches GRANT DELETE | fast | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0067_lint_catches_grant_delete |
+| T-DB-0068 | Append-only tables identified correctly | fast | persistence/test_T_DB_0061_to_0068.py | test_T_DB_0068_append_only_tables_identified |
+| T-DB-0069 | Kill point before_commit recovers | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0069_kill_before_commit |
+| T-DB-0070 | Kill point after_commit_before_outbox recovers | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0070_kill_after_commit_before_outbox |
+| T-DB-0071 | Kill point during_delivery recovers | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0071_kill_during_delivery |
+| T-DB-0072 | Kill point during_migration recovers | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0072_kill_during_migration |
+| T-DB-0073 | No partial write visible after recovery | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0073_no_partial_write |
+| T-DB-0074 | Lab reports registered kill points | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0074_lab_reports_kill_points |
+| T-DB-0075 | Lab fails if registered point has no scenario | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0075_missing_scenario_fails |
+| T-DB-0076 | Scenario compares by hash | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0076_scenario_compares_by_hash |
+| T-DB-0077 | Lab is a shared tool | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0077_lab_shared_tool |
+| T-DB-0078 | All kill points recover to equal state | fast | persistence/test_T_DB_0069_to_0078.py | test_T_DB_0078_all_points_recover |
+| T-DB-0079 | Catalog parses to the full item list | fast | tenancy/test_T_DB_0079_to_0084.py | test_T_DB_0079_catalog_full_list |
+| T-DB-0080 | Item without test is listed | fast | tenancy/test_T_DB_0079_to_0084.py | test_T_DB_0080_item_without_test_listed |
+| T-DB-0081 | Mapping covers identifier-reference items | fast | tenancy/test_T_DB_0079_to_0084.py | test_T_DB_0081_identifier_coverage |
+| T-DB-0082 | Mapping covers RLS bypass items | fast | tenancy/test_T_DB_0079_to_0084.py | test_T_DB_0082_rls_bypass_coverage |
+| T-DB-0083 | Mapping covers pooled-connection items | fast | tenancy/test_T_DB_0079_to_0084.py | test_T_DB_0083_pooled_connection_coverage |
+| T-DB-0084 | Mapping covers shared-sequence items | fast | tenancy/test_T_DB_0079_to_0084.py | test_T_DB_0084_shared_sequence_coverage |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
