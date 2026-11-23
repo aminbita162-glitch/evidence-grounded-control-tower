@@ -9,8 +9,8 @@ Evidence-grounded advisory pre-checks for customs and transit cases.
 
 ![Burj Khalifa](docs/assets/burj-khalifa-tiny.gif)
 
-Burj Khalifa
 Animated capture of a synthetic case moving from creation to its Passport in the interactive API documentation.
+
 SYNTHETIC DATA
 
 
@@ -59,9 +59,10 @@ A person decides before any irreversible action. The system does not take an irr
 
 | Phase | Name | Status |
 |---|---|---|
+| P00 | Repository bootstrap | ✓ November 2026 |
 | P01 | Risk management system | ✓ November 2026 |
-| P02 | Source Registry and data governance | ✓ November 2026 |
-| P03 | Kernel contracts | ✓ November 2026 |
+| P02 | Source Registry and data governance | ☐ |
+| P03 | Kernel contracts | ☐ |
 | P04 | Persistence and tenancy baseline | ☐ |
 | P05 | Evidence Ledger | ☐ |
 | P06 | Rule Engine | ☐ |
@@ -75,6 +76,22 @@ A person decides before any irreversible action. The system does not take an irr
 | P14 | Intake | ☐ |
 | P15 | Valuation and classification | ☐ |
 | P16 | Clock, freight cost and charge control | ☐ |
+| P17 | Screening, credentials and transit | ☐ |
+| P18 | Rule change and simulation | ☐ |
+| P19 | Evidence reports | ☐ |
+| P20 | Reconciliation and readiness | ☐ |
+| P21 | Release planning | ☐ |
+| P22 | Disruption planning | ☐ |
+| P23 | Yard and priority | ☐ |
+| P24 | Cost and cover analysis | ☐ |
+| P25 | Risk, cash and cost ledger | ☐ |
+| P26 | Red-flags, confidence and adversarial review | ☐ |
+| P27 | Views and demonstration | ☐ |
+| P28 | Full-system verification | ☐ |
+| P29 | Security and supply-chain audit | ☐ |
+| P30 | Architecture-conformance and claims audit | ☐ |
+| P31 | Documentation | ☐ |
+| P32 | Release | ☐ |
 
 ## 9 Quality gates
 
@@ -98,11 +115,7 @@ Version 1, November 2026.
 
 ## 13 Author
 
-AI Architect Amin Azimi — End to End System Development & Business Challenge
+AI Architect Amin Azimi - End to End System Development & Business Challenge
 Azimi Innovation Lab
 Project: Evidence-Grounded Control Tower
 Version 1, November 2026
-
-Evidence-Grounded Control Tower is a production-grade advisory pre-check system engineered for high-stakes customs and transit decision environments. It extracts facts from source documents under strict provenance and labelling discipline, evaluates them against versioned rule packs, and emits a single, auditable Decision—ALLOW, ABSTAIN, HOLD or ESCALATE—accompanied by reason codes and fully cited evidence. Every Decision is immutably recorded in a hash-chained ledger that supports offline verification and complete replay.
-
-The architecture enforces evidence grounding, containment and human oversight as non-negotiable invariants. Each advisory output is independently verifiable, fully traceable to its source facts and rule pack versions, and designed for regulated operational contexts where decisions must be auditable, replayable and defensible.
