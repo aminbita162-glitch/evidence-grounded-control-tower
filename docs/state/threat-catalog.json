@@ -1,0 +1,64 @@
+{
+  "catalog": [
+    {
+      "id": "ATK-001",
+      "name": "insecure direct object reference",
+      "category": "identifier"
+    },
+    {
+      "id": "ATK-002",
+      "name": "tenant identifier forged in body",
+      "category": "identifier"
+    },
+    {
+      "id": "ATK-003",
+      "name": "tenant identifier forged in header",
+      "category": "identifier"
+    },
+    {
+      "id": "ATK-004",
+      "name": "tenant identifier forged in path",
+      "category": "identifier"
+    },
+    {
+      "id": "ATK-005",
+      "name": "tenant identifier forged in token",
+      "category": "identifier"
+    },
+    {
+      "id": "ATK-006",
+      "name": "row-level security bypass by table ownership",
+      "category": "rls"
+    },
+    {
+      "id": "ATK-007",
+      "name": "row-level security bypass by privileged roles",
+      "category": "rls"
+    },
+    {
+      "id": "ATK-008",
+      "name": "row-level security bypass by functions",
+      "category": "rls"
+    },
+    {
+      "id": "ATK-009",
+      "name": "session setting leaking through pooled connections",
+      "category": "pool"
+    },
+    {
+      "id": "ATK-010",
+      "name": "shared sequences revealing other tenants activity",
+      "category": "sequence"
+    },
+    {
+      "id": "ATK-011",
+      "name": "existence oracle through status codes",
+      "category": "oracle"
+    },
+    {
+      "id": "ATK-012",
+      "name": "cache key collision and cache poisoning",
+      "category": "cache"
+    }
+  ]
+}
