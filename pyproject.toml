@@ -47,7 +47,7 @@ extend-exclude = ["tools/gate/fixtures"]
 select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 
 [tool.ruff.lint.per-file-ignores]
-"test-house/**" = ["S101", "S602", "S603", "S607"]
+"test-house/**" = ["S101", "S602", "S603", "S607", "S608", "B017"]
 "tools/gate/**" = ["S602", "S603", "S607"]
 "tools/migrate/**" = ["S603", "S607", "S311"]
 "tools/schemagen/generator.py" = ["S603"]

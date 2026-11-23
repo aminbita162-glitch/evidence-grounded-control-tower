@@ -10,6 +10,7 @@ import asyncio
 from collections.abc import Iterator
 from pathlib import Path
 
+import asyncpg
 import pytest
 
 from tools.migrate.ephemeral import EphemeralDB
@@ -17,6 +18,24 @@ from tools.migrate.migrate import apply_migrations
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _MIGRATIONS_DIR = _REPO_ROOT / "adapters" / "postgres" / "migrations"
+
+_ENTITY_TABLES = [
+    "approval",
+    "autonomy_policy",
+    "case",
+    "decision",
+    "document",
+    "evidence_record",
+    "fact",
+    "memory_entry",
+    "pack",
+    "passport",
+    "proposal",
+    "rule_result",
+    "simulation",
+    "source",
+    "tenant",
+]
 
 
 @pytest.fixture(scope="session")
@@ -34,12 +53,24 @@ def migrated_db(ephemeral_db: EphemeralDB) -> EphemeralDB:
     return ephemeral_db
 
 
-@pytest.fixture()
-def clean_db(ephemeral_db: EphemeralDB) -> EphemeralDB:
-    """Apply migrations on a fresh database for each test.
+@pytest.fixture(autouse=True)
+def _truncate_tables(request: pytest.FixtureRequest) -> None:
+    """Truncate all entity tables before each slow test (autouse).
 
-    Re-applies migrations to ensure a clean state.  The ``_migrations``
-    table and all migrated objects are idempotent (CREATE IF NOT EXISTS).
+    Fast tests that do not need the database are skipped.  The superuser
+    (postgres) has BYPASSRLS, so it can truncate all tables.
     """
-    asyncio.run(apply_migrations(ephemeral_db.migration_dsn, _MIGRATIONS_DIR))
-    return ephemeral_db
+    if "slow" not in request.node.keywords:
+        return
+    ephemeral_db = request.getfixturevalue("ephemeral_db")
+
+    async def _truncate() -> None:
+        await apply_migrations(ephemeral_db.migration_dsn, _MIGRATIONS_DIR)
+        conn = await asyncpg.connect(ephemeral_db.superuser_dsn)
+        try:
+            for table in _ENTITY_TABLES:
+                await conn.execute(f'TRUNCATE "{table}" CASCADE')
+        finally:
+            await conn.close()
+
+    asyncio.run(_truncate())

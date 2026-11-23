@@ -58,6 +58,22 @@
 | T-DB-0016 | Tenant-scoped uniqueness | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0016_tenant_scoped_uniqueness |
 | T-DB-0017 | Expand-then-contract convention recorded in migration header | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0017_expand_then_contract_header |
 | T-DB-0018 | Generator output is deterministic | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0018_generator_deterministic |
+| T-DB-0019 | No read without a tenant setting | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0019_no_read_without_tenant |
+| T-DB-0020 | No write without a tenant setting | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0020_no_write_without_tenant |
+| T-DB-0021 | Foreign tenant sees zero rows | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0021_foreign_tenant_sees_zero |
+| T-DB-0022 | Forced RLS applies to table owner | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0022_forced_policy_on_owner |
+| T-DB-0023 | Pooled connection setting does not leak | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0023_pooled_connection_no_leak |
+| T-DB-0024 | Lint rejects table without RLS policy | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0024_lint_rejects_table_without_policy |
+| T-DB-0025 | Tenant context requires a principal | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0025_tenant_context_requires_principal |
+| T-DB-0026 | RLS enabled on every table | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0026_rls_enabled_every_table |
+| T-DB-0027 | RLS forced on every table | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0027_rls_forced_every_table |
+| T-DB-0028 | Write with tenant setting succeeds | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0028_write_with_tenant_succeeds |
+| T-DB-0029 | Write with mismatched tenant fails | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0029_mismatched_tenant_write_fails |
+| T-DB-0030 | Every table has an RLS policy | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0030_every_table_has_policy |
+| T-DB-0031 | Tenant context set_sql produces valid SQL | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0031_tenant_context_set_sql |
+| T-DB-0032 | Security definer lint catches unlisted functions | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0032_security_definer_lint |
+| T-DB-0033 | RLS lint passes on the actual migration files | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0033_rls_lint_on_migrations |
+| T-DB-0034 | Read with matching tenant succeeds | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0034_read_with_matching_tenant |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
