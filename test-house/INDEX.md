@@ -88,6 +88,18 @@
 | T-DB-0046 | Stale version write rejected with ConflictError | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0046_stale_version_conflict_error |
 | T-DB-0047 | Repository protocol requires a TenantContext parameter | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0047_protocol_requires_tenant_context |
 | T-DB-0048 | Query without tenant context fails at run time | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0048_no_tenant_context_fails |
+| T-DB-0049 | Unit of work rolls back on outbox failure | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0049_uow_rollback_on_failure |
+| T-DB-0050 | Idempotency store returns original result for repeated command | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0050_idempotency_returns_original |
+| T-DB-0051 | Concurrent identical commands produce one effect | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0051_concurrent_one_effect |
+| T-DB-0052 | Dead-lettered event is visible and not lost | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0052_dead_letter_visible |
+| T-DB-0053 | Unit of work atomic commit | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0053_uow_atomic_commit |
+| T-DB-0054 | Outbox relay delivers each event exactly once | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0054_outbox_deliver_once |
+| T-DB-0055 | Outbox does not re-deliver | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0055_outbox_no_redelivery |
+| T-DB-0056 | Idempotency store is tenant-keyed | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0056_idempotency_tenant_keyed |
+| T-DB-0057 | Idempotency store clear | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0057_idempotency_clear |
+| T-DB-0058 | Dead letter entry fields | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0058_dead_letter_fields |
+| T-DB-0059 | Outbox entry fields | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0059_outbox_entry_fields |
+| T-DB-0060 | Outbox pending entries | fast | persistence/test_T_DB_0049_to_0060.py | test_T_DB_0060_outbox_pending |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
