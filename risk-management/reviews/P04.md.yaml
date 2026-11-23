@@ -1,0 +1,49 @@
+# P04 phase risk review — P04-RISK.
+#
+# P04 implemented the persistence and tenancy baseline: ephemeral PostgreSQL
+# with three roles, a forward migration tool, entity tables generated from
+# schemas with tenant_id and RLS, a tenant context requiring a principal,
+# row-level security with deny-by-default policies, repositories in two
+# implementations (in-memory and PostgreSQL), an atomic write path with
+# outbox and idempotency, an append-only guard on evidence tables, a
+# crash-consistency laboratory, and a threat-to-test matrix tool.
+#
+# Controls verified by the T-DB test suite:
+#   - Cross-tenant read denied (T-DB-0019, T-DB-0021): RLS deny-by-default.
+#   - Cross-tenant write denied (T-DB-0020, T-DB-0029): WITH CHECK policy.
+#   - Session setting isolation (T-DB-0023): SET LOCAL does not leak.
+#   - Partial write rollback (T-DB-0049): unit of work atomicity.
+#   - Duplicate effects prevented (T-DB-0050, T-DB-0051): idempotency store.
+#   - Append-only guard (T-DB-0061 to T-DB-0063): UPDATE/DELETE rejected.
+#   - Migration lint (T-DB-0010, T-DB-0024, T-DB-0033): tenant_id, RLS, append-only.
+#   - Crash recovery (T-DB-0069 to T-DB-0078): all kill points recover.
+
+records:
+  - id: REV-P04
+    phase: "04"
+    review_date: "2026-11"
+    controls_added:
+      - CTL-DB-01 (IMPLEMENTED, RLS deny-by-default on every table; T-DB-0019, T-DB-0026)
+      - CTL-DB-02 (IMPLEMENTED, cross-tenant write denied by WITH CHECK; T-DB-0020, T-DB-0029)
+      - CTL-DB-03 (IMPLEMENTED, foreign tenant sees zero rows; T-DB-0021)
+      - CTL-DB-04 (IMPLEMENTED, forced RLS on table owner; T-DB-0022, T-DB-0027)
+      - CTL-DB-05 (IMPLEMENTED, session setting isolation via SET LOCAL; T-DB-0023)
+      - CTL-DB-06 (IMPLEMENTED, tenant context requires principal; T-DB-0025)
+      - CTL-DB-07 (IMPLEMENTED, no SERIAL or shared sequences; T-DB-0013)
+      - CTL-DB-08 (IMPLEMENTED, tenant-scoped uniqueness; T-DB-0016)
+      - CTL-DB-09 (IMPLEMENTED, optimistic concurrency via row version; T-DB-0037, T-DB-0042)
+      - CTL-DB-10 (IMPLEMENTED, unit of work atomicity; T-DB-0049)
+      - CTL-DB-11 (IMPLEMENTED, idempotency store; T-DB-0050, T-DB-0051)
+      - CTL-DB-12 (IMPLEMENTED, dead-letter for poison events; T-DB-0052)
+      - CTL-DB-13 (IMPLEMENTED, append-only guard on evidence tables; T-DB-0061, T-DB-0062)
+      - CTL-DB-14 (IMPLEMENTED, migration lint for tenant_id, RLS, append-only; T-DB-0010, T-DB-0024, T-DB-0033)
+      - CTL-DB-15 (IMPLEMENTED, crash-consistency lab; T-DB-0069 to T-DB-0078)
+      - CTL-DB-16 (IMPLEMENTED, threat-to-test matrix; T-DB-0079 to T-DB-0084)
+    controls_verified: []
+    residual_risks_above_threshold: []
+    v_items_opened_or_closed: []
+    register_diff: >-
+      P04 added CTL-DB-01 through CTL-DB-16 as IMPLEMENTED controls for
+      cross-tenant read/write denial, session setting isolation, partial write
+      rollback, duplicate effect prevention, append-only guard, migration lint,
+      crash recovery, and threat-to-test coverage.
