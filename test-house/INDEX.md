@@ -74,6 +74,20 @@
 | T-DB-0032 | Security definer lint catches unlisted functions | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0032_security_definer_lint |
 | T-DB-0033 | RLS lint passes on the actual migration files | fast | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0033_rls_lint_on_migrations |
 | T-DB-0034 | Read with matching tenant succeeds | slow | persistence/test_T_DB_0019_to_0034.py | test_T_DB_0034_read_with_matching_tenant |
+| T-DB-0035 | In-memory repository get returns None for missing entity | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0035_inmem_get_missing |
+| T-DB-0036 | In-memory repository insert and get | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0036_inmem_insert_get |
+| T-DB-0037 | In-memory repository stale version rejected | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0037_inmem_stale_version |
+| T-DB-0038 | In-memory repository delete | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0038_inmem_delete |
+| T-DB-0039 | In-memory repository list is tenant-scoped | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0039_inmem_tenant_scoped_list |
+| T-DB-0040 | PostgreSQL repository get returns None for missing entity | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0040_pg_get_missing |
+| T-DB-0041 | PostgreSQL repository insert and get | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0041_pg_insert_get |
+| T-DB-0042 | PostgreSQL repository stale version rejected | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0042_pg_stale_version |
+| T-DB-0043 | PostgreSQL repository delete | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0043_pg_delete |
+| T-DB-0044 | PostgreSQL repository list is tenant-scoped | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0044_pg_tenant_scoped_list |
+| T-DB-0045 | Contract test suite runs against both implementations | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0045_contract_suite_both |
+| T-DB-0046 | Stale version write rejected with ConflictError | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0046_stale_version_conflict_error |
+| T-DB-0047 | Repository protocol requires a TenantContext parameter | fast | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0047_protocol_requires_tenant_context |
+| T-DB-0048 | Query without tenant context fails at run time | slow | persistence/test_T_DB_0035_to_0048.py | test_T_DB_0048_no_tenant_context_fails |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |

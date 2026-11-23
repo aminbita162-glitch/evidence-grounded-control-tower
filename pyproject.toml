@@ -50,6 +50,7 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 "test-house/**" = ["S101", "S602", "S603", "S607", "S608", "B017"]
 "tools/gate/**" = ["S602", "S603", "S607"]
 "tools/migrate/**" = ["S603", "S607", "S311"]
+"adapters/**" = ["S608"]
 "tools/schemagen/generator.py" = ["S603"]
 
 [tool.mypy]
