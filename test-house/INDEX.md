@@ -48,6 +48,16 @@
 | T-DB-0006 | Migration owner can create tables | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0006_migration_owner_can_create |
 | T-DB-0007 | Audit role is read-only | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0007_audit_readonly |
 | T-DB-0008 | Gate run integration exits 0 | slow | persistence/test_T_DB_0001_to_0008.py | test_T_DB_0008_gate_run_integration |
+| T-DB-0009 | Every persisted entity has a table | slow | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0009_every_entity_has_table |
+| T-DB-0010 | Table without tenant_id fails the migration lint | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0010_table_without_tenant_id_fails_lint |
+| T-DB-0011 | Generated schema regenerates byte-identical | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0011_generated_schema_byte_identical |
+| T-DB-0012 | Foreign-tenant row cannot satisfy a foreign key | slow | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0012_foreign_tenant_fk_rejected |
+| T-DB-0013 | No SERIAL columns or shared sequences | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0013_no_serial_columns |
+| T-DB-0014 | Every table has schema_version | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0014_every_table_has_schema_version |
+| T-DB-0015 | Every table has a time-sortable primary key (id TEXT) | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0015_every_table_has_id_primary_key |
+| T-DB-0016 | Tenant-scoped uniqueness | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0016_tenant_scoped_uniqueness |
+| T-DB-0017 | Expand-then-contract convention recorded in migration header | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0017_expand_then_contract_header |
+| T-DB-0018 | Generator output is deterministic | fast | persistence/test_T_DB_0009_to_0018.py | test_T_DB_0018_generator_deterministic |
 | T-DOCS-0001 | A missing honesty line makes the docs gate fail | fast | gate/test_docs.py | test_missing_honesty_line_fails |
 | T-DOCS-0002 | A fenced code block makes the docs gate fail | fast | gate/test_docs.py | test_code_block_fails |
 | T-DOCS-0003 | A Build Progress row count mismatch makes the docs gate fail | fast | gate/test_docs.py | test_row_mismatch_fails |
