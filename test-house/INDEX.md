@@ -551,3 +551,11 @@
 | T-RUL-0070 | Double negation is identity | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0070_double_negation |
 | T-RUL-0071 | Eq is symmetric | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0071_eq_symmetric |
 | T-RUL-0072 | Addition is commutative in conditions | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0072_add_commutative |
+| T-RUL-0073 | Determinism under same seed | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0073_same_seed_identical |
+| T-RUL-0074 | Locale independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0074_locale_independence |
+| T-RUL-0075 | Time zone independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0075_timezone_independence |
+| T-RUL-0076 | Thread count independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0076_thread_count_independence |
+| T-RUL-0077 | Working directory independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0077_cwd_independence |
+| T-RUL-0078 | Insertion order independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0078_insertion_order_independence |
+| T-RUL-0079 | Subprocess determinism | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0079_subprocess_determinism |
+| T-RUL-0080 | Iteration order dependence is caught | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0080_iteration_order_caught |

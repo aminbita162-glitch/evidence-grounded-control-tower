@@ -45,6 +45,7 @@ def main() -> int:
             "-m",
             "pytest",
             "test-house/rules/differential/",
+            "test-house/rules/determinism/",
             "-m",
             "fast",
             "-q",
