@@ -541,3 +541,13 @@
 | T-RUL-0060 | Empty results give ABSTAIN | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0060_empty_results_abstain |
 | T-RUL-0061 | ESCALATE citations collected | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0061_escalate_citations |
 | T-RUL-0062 | Combination is monotone | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0062_monotone |
+| T-RUL-0063 | Reordering facts leaves results unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0063_reorder_facts |
+| T-RUL-0064 | Renaming IDs leaves outcomes unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0064_rename_ids |
+| T-RUL-0065 | Adding a non-referenced fact leaves results unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0065_add_non_referenced_fact |
+| T-RUL-0066 | Shifting time within a window leaves results unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0066_shift_time_within_window |
+| T-RUL-0067 | Reordering rules does not change combined outcome | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0067_reorder_rules |
+| T-RUL-0068 | Boolean and is commutative | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0068_and_commutative |
+| T-RUL-0069 | Boolean or is commutative | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0069_or_commutative |
+| T-RUL-0070 | Double negation is identity | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0070_double_negation |
+| T-RUL-0071 | Eq is symmetric | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0071_eq_symmetric |
+| T-RUL-0072 | Addition is commutative in conditions | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0072_add_commutative |

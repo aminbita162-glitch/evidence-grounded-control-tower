@@ -9,7 +9,7 @@ an explicit context.  No clock, no network.
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from decimal import Decimal, getcontext
 from typing import Literal
@@ -264,7 +264,7 @@ def evaluate_condition(
 
 
 def interpret(
-    rules: list[Mapping[str, object]],
+    rules: Sequence[Mapping[str, object]],
     facts: FactSet,
     evaluation_time: str,
 ) -> list[RuleResult]:

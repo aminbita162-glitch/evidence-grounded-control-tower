@@ -251,19 +251,19 @@ clean_fixture = "fixtures/differential_clean"
 
 [gate.metamorphic]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.metamorphic"
 timeout = 300
 activates_in = "P06"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/metamorphic_violation"
+clean_fixture = "fixtures/metamorphic_clean"
 
 [gate.perf]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.perf"
 timeout = 300
 activates_in = "P06"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/perf_violation"
+clean_fixture = "fixtures/perf_clean"
 
 [gate.containment]
 cadence = "P"
