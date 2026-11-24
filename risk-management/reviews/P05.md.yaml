@@ -1,0 +1,75 @@
+# P05 phase risk review — P05-RISK.
+#
+# P05 implemented the evidence ledger: case and system chains with gap-free
+# sequence and hash chaining, Merkle tree (RFC 9162 style) with inclusion and
+# consistency proofs, Ed25519 signed checkpoints with witness co-signatures
+# and anchor port, cryptographic commitments (evaluation, proposal, salted
+# field), offline verification (structural and full) with verification levels
+# (SELF-ATTESTED, WITNESSED-LOCAL, WITNESSED-EXTERNAL, ANCHORED), replay
+# from recorded inputs, a self-contained case bundle, and an independent
+# verifier written in stdlib only.
+#
+# Controls verified by the T-LED test suite:
+#   - Tamper detection (T-LED-0003, T-LED-0031, T-LED-0049, T-LED-0050,
+#     T-LED-0060): every field change alters the record hash; a tampered
+#     record or root is detected by structural verification.
+#   - Gap-free sequence (T-LED-0001, T-LED-0002): concurrent appends produce
+#     a gap-free sequence under the per-case lock.
+#   - Append-only guard (T-LED-0005, T-LED-0006): UPDATE and DELETE are
+#     rejected by the database trigger.
+#   - Tenant isolation (T-LED-0007): RLS hides records from foreign tenants.
+#   - Salted payload (T-LED-0008, T-LED-0009): different salts produce
+#     different hashes; salt destroyed prevents confirmation.
+#   - Cross-purpose replay (T-LED-0004, T-LED-0033, T-LED-0046): domain-
+#     separated tags prevent hash reuse across purposes.
+#   - Signature misuse (T-LED-0032, T-LED-0036): a tampered signature is
+#     detected; a checkpoint without a co-signature is SELF-ATTESTED.
+#   - Verifier divergence (T-LED-0067, T-LED-0068, T-LED-0073): the
+#     independent verifier agrees with the kernel on valid and tampered
+#     records across 50 random bundles.
+#   - Salt loss (T-LED-0009, T-LED-0044): destroying the salt makes the
+#     commitment unlinkable.
+
+records:
+  - id: REV-P05
+    phase: "05"
+    review_date: "2026-11"
+    controls_added:
+      - CTL-LED-01 (IMPLEMENTED, gap-free sequence under per-case lock; T-LED-0001, T-LED-0002)
+      - CTL-LED-02 (IMPLEMENTED, record hash sensitivity to all fields; T-LED-0003)
+      - CTL-LED-03 (IMPLEMENTED, append-only guard rejects UPDATE/DELETE; T-LED-0005, T-LED-0006)
+      - CTL-LED-04 (IMPLEMENTED, RLS hides records from foreign tenants; T-LED-0007)
+      - CTL-LED-05 (IMPLEMENTED, salted payload hash with salt_id and salt; T-LED-0008)
+      - CTL-LED-06 (IMPLEMENTED, salt destroyed prevents confirmation; T-LED-0009)
+      - CTL-LED-07 (IMPLEMENTED, algorithm identifier on every hash; T-LED-0010)
+      - CTL-LED-08 (IMPLEMENTED, payloads stored by reference; T-LED-0011)
+      - CTL-LED-09 (IMPLEMENTED, deployment and tenant system chains; T-LED-0013, T-LED-0014)
+      - CTL-LED-10 (IMPLEMENTED, system chain independence; T-LED-0016, T-LED-0017)
+      - CTL-LED-11 (IMPLEMENTED, tenant isolation of system chain metadata; T-LED-0018)
+      - CTL-LED-12 (IMPLEMENTED, deployment attestation content; T-LED-0019)
+      - CTL-LED-13 (IMPLEMENTED, Merkle tree with RFC 9162 split rule; T-LED-0021 to T-LED-0025)
+      - CTL-LED-14 (IMPLEMENTED, inclusion and consistency proofs; T-LED-0026 to T-LED-0036)
+      - CTL-LED-15 (IMPLEMENTED, Ed25519 signing port with development implementation; T-LED-0032)
+      - CTL-LED-16 (IMPLEMENTED, witness co-signature refuses rewritten history; T-LED-0036)
+      - CTL-LED-17 (IMPLEMENTED, evaluation and proposal commitments; T-LED-0037 to T-LED-0040)
+      - CTL-LED-18 (IMPLEMENTED, salted field commitments; T-LED-0041 to T-LED-0045)
+      - CTL-LED-19 (IMPLEMENTED, cross-purpose hash replay prevention; T-LED-0046)
+      - CTL-LED-20 (IMPLEMENTED, structural and full verification; T-LED-0047, T-LED-0048)
+      - CTL-LED-21 (IMPLEMENTED, erasure reported as ERASED not failure; T-LED-0051)
+      - CTL-LED-22 (IMPLEMENTED, verification levels; T-LED-0052, T-LED-0053)
+      - CTL-LED-23 (IMPLEMENTED, replay from recorded inputs with no network; T-LED-0055, T-LED-0057)
+      - CTL-LED-24 (IMPLEMENTED, case bundle with deterministic export; T-LED-0059 to T-LED-0066)
+      - CTL-LED-25 (IMPLEMENTED, independent verifier with stdlib only; T-LED-0067 to T-LED-0074)
+      - CTL-LED-26 (IMPLEMENTED, crash recovery at kill points; T-LED-0075 to T-LED-0080)
+      - CTL-LED-27 (IMPLEMENTED, threat-to-test matrix mappings; T-LED-0081 to T-LED-0086)
+    controls_verified: []
+    residual_risks_above_threshold: []
+    v_items_opened_or_closed: []
+    register_diff: >-
+      P05 added CTL-LED-01 through CTL-LED-27 as IMPLEMENTED controls for
+      tamper detection, gap-free sequence, append-only guard, tenant
+      isolation, salted payloads, cross-purpose replay prevention, signature
+      misuse, verifier divergence, salt loss, Merkle tree proofs, Ed25519
+      signing, witness co-signatures, cryptographic commitments, offline
+      verification, replay, case bundle, independent verifier, crash
+      recovery, and threat-to-test mappings.
