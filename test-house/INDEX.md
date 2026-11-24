@@ -287,6 +287,22 @@
 | T-LED-0018 | Tenant system chain position is independent of other tenants | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0018_tenant_isolation |
 | T-LED-0019 | Deployment attestation holds digest, not position | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0019_deployment_attestation_content |
 | T-LED-0020 | Case record carries tenant system position | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0020_case_record_carries_tenant_position |
+| T-LED-0021 | Leaf hash known-answer vector | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0021_leaf_hash_known_answer |
+| T-LED-0022 | Node hash known-answer vector | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0022_node_hash_known_answer |
+| T-LED-0023 | Root of a single-leaf tree is the leaf itself | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0023_root_single_leaf |
+| T-LED-0024 | Root of a two-leaf tree is node_hash of the two leaves | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0024_root_two_leaves |
+| T-LED-0025 | Root of an empty tree is all zeros | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0025_root_empty_tree |
+| T-LED-0026 | Inclusion proof verifies for a valid leaf | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0026_inclusion_proof_valid |
+| T-LED-0027 | Inclusion proof fails for a wrong index | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0027_inclusion_proof_wrong_index |
+| T-LED-0028 | Inclusion proof fails for a tampered root | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0028_inclusion_proof_tampered_root |
+| T-LED-0029 | Consistency proof verifies for a valid extension | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0029_consistency_proof_valid |
+| T-LED-0030 | Consistency proof fails for a tampered previous root | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0030_consistency_proof_tampered_prev_root |
+| T-LED-0031 | A changed byte in a record is detected by the tree root | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0031_tampered_record_detected |
+| T-LED-0032 | A changed byte in a checkpoint signature is detected | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0032_tampered_checkpoint_signature_detected |
+| T-LED-0033 | Cross-purpose hash replay fails | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0033_cross_purpose_replay_fails |
+| T-LED-0034 | Inclusion proof verifies for random trees | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0034_inclusion_property_random_trees |
+| T-LED-0035 | Consistency proof verifies for random tree extensions | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0035_consistency_property_random_trees |
+| T-LED-0036 | A checkpoint without a valid co-signature is SELF-ATTESTED | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0036_checkpoint_without_cosign_self_attested |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

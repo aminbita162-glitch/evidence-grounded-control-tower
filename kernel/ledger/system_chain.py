@@ -49,7 +49,7 @@ __all__ = [
 
 ChainType = Literal["DEPLOYMENT", "TENANT"]
 
-#: Sentinel tenant_id for deployment chain records.  RLS naturally hides
+#: Deployment tenant_id for deployment chain records.  RLS naturally hides
 #: these from every real tenant because no tenant sets its id to this value.
 DEPLOYMENT_SENTINEL: str = "__deployment__"
 
