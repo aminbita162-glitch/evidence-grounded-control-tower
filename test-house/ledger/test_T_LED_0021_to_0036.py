@@ -297,8 +297,12 @@ def test_T_LED_0032_tampered_checkpoint_signature_detected() -> None:
     )
     # Verify the original signature.
     assert signer.verify(b"test-checkpoint", cp.signature)
-    # Tamper with the signature.
-    tampered_sig = "0" + cp.signature[1:]
+    # Tamper with the signature — flip a byte to guarantee it differs.
+    sig_bytes = bytes.fromhex(cp.signature)
+    tampered_bytes = bytearray(sig_bytes)
+    tampered_bytes[0] ^= 0xFF  # flip all bits of the first byte
+    tampered_sig = tampered_bytes.hex()
+    assert tampered_sig != cp.signature  # ensure it actually differs
     assert not signer.verify(b"test-checkpoint", tampered_sig)
 
 
