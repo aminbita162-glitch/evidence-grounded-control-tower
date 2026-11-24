@@ -550,7 +550,7 @@
 | T-RUL-0069 | Boolean or is commutative | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0069_or_commutative |
 | T-RUL-0070 | Double negation is identity | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0070_double_negation |
 | T-RUL-0071 | Eq is symmetric | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0071_eq_symmetric |
-| T-RUL-0072 | Addition is commutative in conditions | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0072_add_commutative |
+| T-RUL-0072 | Performance budget for 200 facts | fast | rules/perf/test_T_RUL_0072_perf.py | test_T_RUL_0072_perf_budget_200_facts |
 | T-RUL-0073 | Determinism under same seed | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0073_same_seed_identical |
 | T-RUL-0074 | Locale independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0074_locale_independence |
 | T-RUL-0075 | Time zone independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0075_timezone_independence |
