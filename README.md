@@ -63,7 +63,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P02 | Source Registry and data governance | ✓ November 2026 |
 | P03 | Kernel contracts | ✓ November 2026 |
 | P04 | Persistence and tenancy baseline | ✓ November 2026 |
-| P05 | Evidence Ledger | ☐ |
+| P05 | Evidence Ledger | ✓ November 2026 |
 | P06 | Rule Engine | ☐ |
 | P07 | Orchestration and containment | ☐ |
 | P08 | Model Gateway and Extract stage | ☐ |

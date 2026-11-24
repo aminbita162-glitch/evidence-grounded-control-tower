@@ -13,6 +13,7 @@ __all__ = [
     "ThreatItem",
     "ThreatMatrix",
     "ATTACK_CATALOG",
+    "THREAT_MATRIX",
 ]
 
 ATTACK_CATALOG: list[dict[str, str]] = [
@@ -37,6 +38,44 @@ ATTACK_CATALOG: list[dict[str, str]] = [
     {"id": "ATK-011", "name": "existence oracle through status codes", "category": "oracle"},
     {"id": "ATK-012", "name": "cache key collision and cache poisoning", "category": "cache"},
 ]
+
+#: P05 threat-to-test mappings for the evidence ledger.
+THREAT_MATRIX: dict[str, list[str]] = {
+    "evidence_tampering": [
+        "T-LED-0003",
+        "T-LED-0005",
+        "T-LED-0006",
+        "T-LED-0031",
+        "T-LED-0049",
+        "T-LED-0050",
+        "T-LED-0060",
+    ],
+    "ledger_proof_endpoints": [
+        "T-LED-0026",
+        "T-LED-0027",
+        "T-LED-0028",
+        "T-LED-0029",
+        "T-LED-0030",
+    ],
+    "hash_replay": [
+        "T-LED-0004",
+        "T-LED-0033",
+        "T-LED-0046",
+    ],
+    "signature_misuse": [
+        "T-LED-0032",
+        "T-LED-0036",
+    ],
+    "verifier_divergence": [
+        "T-LED-0067",
+        "T-LED-0068",
+        "T-LED-0073",
+    ],
+    "salt_loss": [
+        "T-LED-0009",
+        "T-LED-0044",
+    ],
+}
 
 
 class ThreatItem:

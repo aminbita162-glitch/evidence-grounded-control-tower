@@ -18,6 +18,7 @@ __all__ = [
     "KillPoint",
     "Scenario",
     "KILL_POINTS",
+    "LEDGER_KILL_POINTS",
 ]
 
 KILL_POINTS = [
@@ -25,6 +26,13 @@ KILL_POINTS = [
     "after_commit_before_outbox",
     "during_delivery",
     "during_migration",
+]
+
+#: P05 ledger kill points (registered separately from the P04 persistence set).
+LEDGER_KILL_POINTS = [
+    "append",
+    "checkpoint",
+    "export",
 ]
 
 

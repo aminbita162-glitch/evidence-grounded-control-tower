@@ -12,6 +12,7 @@ dependencies = [
     "sqlalchemy[asyncio]==2.1.8",
     "alembic==1.20.1",
     "asyncpg==0.32.0",
+    "cryptography==50.0.2",
 ]
 
 [project.optional-dependencies]
@@ -29,6 +30,7 @@ dev = [
     "hypothesis==6.170.15",
     "mutmut==3.8.1",
     "import-linter==2.16",
+    "pynacl==1.6.2",
 ]
 
 [build-system]
@@ -47,7 +49,7 @@ extend-exclude = ["tools/gate/fixtures"]
 select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 
 [tool.ruff.lint.per-file-ignores]
-"test-house/**" = ["S101", "S602", "S603", "S607", "S608", "B017"]
+"test-house/**" = ["S101", "S602", "S603", "S607", "S608", "B017", "S311"]
 "tools/gate/**" = ["S602", "S603", "S607"]
 "tools/migrate/**" = ["S603", "S607", "S311"]
 "adapters/**" = ["S608"]
@@ -57,7 +59,7 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 strict = true
 disallow_any_explicit = true
 python_version = "3.14"
-exclude = ["tools/gate/fixtures/", "\\.venv/", "build/"]
+exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/"]
 
 [[tool.mypy.overrides]]
 module = ["yaml", "jcs", "rfc8785", "alembic", "asyncpg"]

@@ -267,6 +267,92 @@
 | T-KRN-0072 | All hashes in contracts.lock match actual files | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0072_contract_gate_real_repo |
 | T-KRN-0073 | gate run arch contract property generated-files exits 0 | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0073_gate_run_all_four |
 | T-KRN-0074 | Display names not in schemas or kernel source | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0074_no_display_names_in_schemas |
+| T-LED-0001 | Sequence starts at 1 and increments by 1 | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0001_sequence_starts_at_1 |
+| T-LED-0002 | No gaps under concurrent appends | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0002_no_gaps_concurrent |
+| T-LED-0003 | Every field change alters the record hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0003_field_change_alters_hash |
+| T-LED-0004 | Cross-purpose hash replay fails | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0004_cross_purpose_hash_replay_fails |
+| T-LED-0005 | Update is rejected by the database | slow | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0005_update_rejected |
+| T-LED-0006 | Delete is rejected by the database | slow | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0006_delete_rejected |
+| T-LED-0007 | A record of one tenant is invisible to another | slow | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0007_tenant_isolation |
+| T-LED-0008 | Salted payload hash includes salt_id and salt | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0008_salted_payload_hash |
+| T-LED-0009 | With salt destroyed, low-entropy payload cannot be confirmed | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0009_salt_destroyed_unconfirmable |
+| T-LED-0010 | Algorithm identifier on every stored hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0010_algorithm_identifier |
+| T-LED-0011 | Payloads stored by reference | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0011_payload_by_reference |
+| T-LED-0012 | First record prev_hash is all zeros | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0012_first_record_prev_hash_zero |
+| T-LED-0013 | Each deployment event type appends once | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0013_deployment_events_append |
+| T-LED-0014 | Each tenant system event type appends once | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0014_tenant_events_append |
+| T-LED-0015 | Invalid event type is rejected | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0015_invalid_event_rejected |
+| T-LED-0016 | System chain verifies independently of any case chain | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0016_system_chain_independent |
+| T-LED-0017 | Deployment chain is separate from tenant system chain | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0017_deployment_separate_from_tenant |
+| T-LED-0018 | Tenant system chain position is independent of other tenants | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0018_tenant_isolation |
+| T-LED-0019 | Deployment attestation holds digest, not position | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0019_deployment_attestation_content |
+| T-LED-0020 | Case record carries tenant system position | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0020_case_record_carries_tenant_position |
+| T-LED-0021 | Leaf hash known-answer vector | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0021_leaf_hash_known_answer |
+| T-LED-0022 | Node hash known-answer vector | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0022_node_hash_known_answer |
+| T-LED-0023 | Root of a single-leaf tree is the leaf itself | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0023_root_single_leaf |
+| T-LED-0024 | Root of a two-leaf tree is node_hash of the two leaves | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0024_root_two_leaves |
+| T-LED-0025 | Root of an empty tree is all zeros | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0025_root_empty_tree |
+| T-LED-0026 | Inclusion proof verifies for a valid leaf | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0026_inclusion_proof_valid |
+| T-LED-0027 | Inclusion proof fails for a wrong index | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0027_inclusion_proof_wrong_index |
+| T-LED-0028 | Inclusion proof fails for a tampered root | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0028_inclusion_proof_tampered_root |
+| T-LED-0029 | Consistency proof verifies for a valid extension | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0029_consistency_proof_valid |
+| T-LED-0030 | Consistency proof fails for a tampered previous root | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0030_consistency_proof_tampered_prev_root |
+| T-LED-0031 | A changed byte in a record is detected by the tree root | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0031_tampered_record_detected |
+| T-LED-0032 | A changed byte in a checkpoint signature is detected | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0032_tampered_checkpoint_signature_detected |
+| T-LED-0033 | Cross-purpose hash replay fails | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0033_cross_purpose_replay_fails |
+| T-LED-0034 | Inclusion proof verifies for random trees | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0034_inclusion_property_random_trees |
+| T-LED-0035 | Consistency proof verifies for random tree extensions | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0035_consistency_property_random_trees |
+| T-LED-0036 | A checkpoint without a valid co-signature is SELF-ATTESTED | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0036_checkpoint_without_cosign_self_attested |
+| T-LED-0037 | Equal inputs give equal evaluation commitments | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0037_eval_commitment_equal_inputs |
+| T-LED-0038 | Any input change gives a different evaluation commitment | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0038_eval_commitment_input_change |
+| T-LED-0039 | Proposal commitment is deterministic | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0039_proposal_commitment_deterministic |
+| T-LED-0040 | Proposal commitment changes on proposal change | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0040_proposal_commitment_changes |
+| T-LED-0041 | Field commitment with revealed value and salt verifies | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0041_field_commitment_verifies |
+| T-LED-0042 | Field commitment with wrong value fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0042_field_commitment_wrong_value |
+| T-LED-0043 | Field commitment with wrong salt fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0043_field_commitment_wrong_salt |
+| T-LED-0044 | With salt destroyed, value cannot be confirmed | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0044_salt_destroyed_prevents_confirmation |
+| T-LED-0045 | Different salts produce different field commitments | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0045_different_salts_different_commitments |
+| T-LED-0046 | Cross-purpose hash reuse fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0046_cross_purpose_reuse_fails |
+| T-LED-0047 | Structural verification passes on a clean chain | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0047_structural_passes |
+| T-LED-0048 | Full verification passes with payloads | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0048_full_passes |
+| T-LED-0049 | A tampered record is detected by structural verification | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0049_tampered_record_detected |
+| T-LED-0050 | A broken prev_hash link is detected | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0050_chain_broken_prev_hash |
+| T-LED-0051 | An erased payload is reported as ERASED, not as a failure | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0051_erased_not_failure |
+| T-LED-0052 | The verification level is exactly one of the four levels | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0052_verification_level_exactly_one |
+| T-LED-0053 | The bare word "verified" is never printed | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0053_no_bare_verified |
+| T-LED-0054 | An empty chain verifies structurally | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0054_empty_chain_verifies |
+| T-LED-0055 | Replay reproduces results from recorded inputs | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0055_replay_equality |
+| T-LED-0056 | Replay detects a payload mismatch | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0056_replay_mismatch |
+| T-LED-0057 | Replay needs no network | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0057_replay_no_network |
+| T-LED-0058 | Replay with missing evaluation time fails | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0058_replay_missing_eval_time |
+| T-LED-0059 | Export and import round-trip gives equal hashes | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0059_bundle_round_trip |
+| T-LED-0060 | A bundle with one altered record fails verification | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0060_altered_bundle_fails |
+| T-LED-0061 | Two exports of the same case are byte-identical | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0061_byte_identical_exports |
+| T-LED-0062 | Bundle manifest contains correct record count | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0062_manifest_record_count |
+| T-LED-0063 | Bundle manifest contains correct root hash | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0063_manifest_root_hash |
+| T-LED-0064 | Bundle verifies offline with no database or network | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0064_bundle_verifies_offline |
+| T-LED-0065 | An empty bundle verifies | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0065_empty_bundle_verifies |
+| T-LED-0066 | A bundle with a wrong record count fails verification | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0066_wrong_count_fails |
+| T-LED-0067 | Independent verifier agrees with kernel on valid records | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0067_verifier_agrees_valid |
+| T-LED-0068 | Independent verifier detects a tampered record | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0068_verifier_detects_tamper |
+| T-LED-0069 | Independent verifier computes the same leaf hash | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0069_verifier_leaf_hash |
+| T-LED-0070 | Independent verifier computes the same node hash | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0070_verifier_node_hash |
+| T-LED-0071 | Independent verifier computes the same Merkle root | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0071_verifier_root |
+| T-LED-0072 | The independent verifier imports no kernel module | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0072_verifier_no_kernel_import |
+| T-LED-0073 | Verifier agrees with kernel on random bundles including tampers | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0073_verifier_agrees_random_bundles |
+| T-LED-0074 | gate run replay exits 0 | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0074_gate_run_replay |
+| T-LED-0075 | Recovery after a kill at append leaves a verifiable ledger | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0075_crash_at_append |
+| T-LED-0076 | Recovery after a kill at checkpoint write | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0076_crash_at_checkpoint |
+| T-LED-0077 | Recovery after a kill at export | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0077_crash_at_export |
+| T-LED-0078 | The tree root matches the independent verifier's computation | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0078_tree_root_matches_verifier |
+| T-LED-0079 | Kill points are registered in the fault lab | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0079_kill_points_registered |
+| T-LED-0080 | Recovery after a kill at append leaves a gap-free ledger | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0080_recovery_no_gap |
+| T-LED-0081 | Evidence tampering threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0081_threat_evidence_tampering |
+| T-LED-0082 | Ledger and proof endpoint threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0082_threat_ledger_proofs |
+| T-LED-0083 | Hash replay threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0083_threat_hash_replay |
+| T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
+| T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
+| T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

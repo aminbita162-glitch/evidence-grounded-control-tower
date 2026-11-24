@@ -235,11 +235,11 @@ clean_fixture = "fixtures/migration_clean"
 
 [gate.replay]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.replay"
 timeout = 300
 activates_in = "P05"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/replay_violation"
+clean_fixture = "fixtures/replay_clean"
 
 [gate.differential]
 cadence = "P"

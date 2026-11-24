@@ -1,0 +1,14 @@
+{
+  "description": "Test vectors for the independent ledger verifier (P05-T07)",
+  "leaf_tag": "ctc/leaf/v1",
+  "node_tag": "ctc/node/v1",
+  "record_tag": "ctc/record/v1",
+  "zero_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "known_answers": {
+    "leaf_hash_abc123": true,
+    "node_hash_aaa_bbb": true,
+    "root_single_leaf": true,
+    "root_two_leaves": true,
+    "root_empty": true
+  }
+}
