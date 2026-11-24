@@ -429,6 +429,10 @@ def main() -> int:
         if command == "affected":
             catalogue = load_catalogue(_resolve_catalogue())
             return _cmd_affected(catalogue)
+        if command == "replay":
+            from tools.gate.gates.replay import main as replay_main
+
+            return replay_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)

@@ -313,6 +313,18 @@
 | T-LED-0044 | With salt destroyed, value cannot be confirmed | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0044_salt_destroyed_prevents_confirmation |
 | T-LED-0045 | Different salts produce different field commitments | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0045_different_salts_different_commitments |
 | T-LED-0046 | Cross-purpose hash reuse fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0046_cross_purpose_reuse_fails |
+| T-LED-0047 | Structural verification passes on a clean chain | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0047_structural_passes |
+| T-LED-0048 | Full verification passes with payloads | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0048_full_passes |
+| T-LED-0049 | A tampered record is detected by structural verification | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0049_tampered_record_detected |
+| T-LED-0050 | A broken prev_hash link is detected | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0050_chain_broken_prev_hash |
+| T-LED-0051 | An erased payload is reported as ERASED, not as a failure | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0051_erased_not_failure |
+| T-LED-0052 | The verification level is exactly one of the four levels | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0052_verification_level_exactly_one |
+| T-LED-0053 | The bare word "verified" is never printed | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0053_no_bare_verified |
+| T-LED-0054 | An empty chain verifies structurally | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0054_empty_chain_verifies |
+| T-LED-0055 | Replay reproduces results from recorded inputs | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0055_replay_equality |
+| T-LED-0056 | Replay detects a payload mismatch | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0056_replay_mismatch |
+| T-LED-0057 | Replay needs no network | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0057_replay_no_network |
+| T-LED-0058 | Replay with missing evaluation time fails | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0058_replay_missing_eval_time |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
