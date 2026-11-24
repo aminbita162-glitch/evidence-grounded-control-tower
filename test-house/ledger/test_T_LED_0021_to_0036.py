@@ -419,42 +419,14 @@ def test_T_LED_0036_checkpoint_without_cosign_self_attested() -> None:
     cp_witnessed = witness.cosign(cp_self)
     assert cp_witnessed.verification_level() == "WITNESSED-LOCAL"
 
-
-@pytest.mark.fast
-def test_T_LED_0036b_witness_refuses_rewrite() -> None:
-    """T-LED-0036b: The witness refuses a checkpoint that rewrites history.
-
-    id: T-LED-0036
-    title: The witness refuses a checkpoint that rewrites history
-    purpose: Verify that a witness refuses to co-sign a checkpoint with a
-        smaller tree size than the last one it signed.
-    level: fast
-    requirement: P05-T03, Part 3 §3.5
-    input: a witness that signed size 10, then a checkpoint of size 5
-    expected: ValueError raised
-    risk: witness co-signs rewritten history
-    capability: evidence-ledger
-    """
-    signer = DevSigner()
-    witness = LocalWitness(signer=DevSigner())
-
-    cp1 = Checkpoint(
+    # The witness refuses a checkpoint that rewrites history (smaller tree size).
+    cp_rewrite = Checkpoint(
         chain_id="c1",
-        tree_size=10,
-        root_hash="a" + "0" * 63,
-        system_chain_position=1,
-        recorded_at="2026-11",
-        signature=signer.sign(b"cp1"),
-    )
-    witness.cosign(cp1)
-
-    cp2 = Checkpoint(
-        chain_id="c1",
-        tree_size=5,
+        tree_size=3,
         root_hash="b" + "0" * 63,
         system_chain_position=1,
         recorded_at="2026-11",
         signature=signer.sign(b"cp2"),
     )
     with pytest.raises(ValueError, match="witness refuses"):
-        witness.cosign(cp2)
+        witness.cosign(cp_rewrite)
