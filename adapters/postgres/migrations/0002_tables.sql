@@ -125,8 +125,11 @@ CREATE TABLE IF NOT EXISTS "pack" (
     tenant_id TEXT NOT NULL,
     schema_version INTEGER NOT NULL,
     UNIQUE (tenant_id, id),
+    declared_label TEXT CHECK (declared_label IN ('OFFICIAL', 'DERIVED', 'SECONDARY', 'SYNTHETIC', 'SIMULATED_RULE', 'ASSUMPTION', 'UNVERIFIED')),
     jurisdiction TEXT,
     languages JSONB DEFAULT NULL,
+    owning_capability TEXT DEFAULT NULL,
+    sources JSONB,
     valid_from TIMESTAMPTZ,
     valid_to TIMESTAMPTZ,
     version TEXT

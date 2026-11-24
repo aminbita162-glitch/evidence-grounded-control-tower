@@ -479,3 +479,17 @@
 | T-RISK-0033 | risk without area or accountable fails | fast | risk/test_validator.py | test_risk_fields_fail |
 | T-RISK-0034 | risk validate scales fails on invalid scales | fast | risk/test_scales.py | test_validate_scales_fails_on_bad_scales |
 | T-RISK-0035 | check-phrases catches a known compliance-claim violation | fast | risk/test_policy.py | test_forbidden_phrase_detection_finds_violation |
+| T-RUL-0001 | A boolean literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0001_bool_literal_parses |
+| T-RUL-0002 | An integer literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0002_int_literal_parses |
+| T-RUL-0003 | A decimal literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0003_decimal_literal_parses |
+| T-RUL-0004 | A string literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0004_string_literal_parses |
+| T-RUL-0005 | A field reference parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0005_field_ref_parses |
+| T-RUL-0006 | Boolean operators parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0006_boolean_operands_parse |
+| T-RUL-0007 | Comparison operators parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0007_comparisons_parse |
+| T-RUL-0008 | Decimal arithmetic operators parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0008_arithmetic_parse |
+| T-RUL-0009 | Set membership parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0009_in_parses |
+| T-RUL-0010 | Normalized string equality parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0010_string_eq_parses |
+| T-RUL-0011 | Date arithmetic parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0011_date_arithmetic_parses |
+| T-RUL-0012 | Quantifiers parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0012_quantifiers_parse |
+| T-RUL-0013 | Forbidden constructs rejected with stable error codes | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0013_forbidden_constructs_rejected |
+| T-RUL-0014 | Structural depth bound enforced | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0014_depth_bound_enforced |
