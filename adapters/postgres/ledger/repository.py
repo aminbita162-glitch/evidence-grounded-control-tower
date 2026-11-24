@@ -11,6 +11,7 @@ Spec: Part 3 §3.5, §3.24; Part 4 §4.4; P05-T01.
 from __future__ import annotations
 
 import uuid
+from collections.abc import Mapping
 
 import asyncpg
 
@@ -47,7 +48,7 @@ class PostgresCaseChain(CaseChain):
         stage: str,
         actor: Actor,
         record_type: str,
-        payload: dict[str, object],
+        payload: Mapping[str, object],
         *,
         salted: bool = False,
         salt_id: str | None = None,

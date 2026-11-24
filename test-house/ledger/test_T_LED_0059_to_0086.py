@@ -594,11 +594,11 @@ def test_T_LED_0079_kill_points_registered() -> None:
     risk: kill points not registered
     capability: evidence-ledger
     """
-    from tools.faultlab import KILL_POINTS
+    from tools.faultlab import LEDGER_KILL_POINTS
 
-    assert "append" in KILL_POINTS
-    assert "checkpoint" in KILL_POINTS
-    assert "export" in KILL_POINTS
+    assert "append" in LEDGER_KILL_POINTS
+    assert "checkpoint" in LEDGER_KILL_POINTS
+    assert "export" in LEDGER_KILL_POINTS
 
 
 # ---------------------------------------------------------------------------

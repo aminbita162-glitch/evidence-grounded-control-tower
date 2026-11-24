@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import hashlib
 import secrets
+from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Literal
 
@@ -123,7 +124,7 @@ class LedgerRecord:
 
 
 def compute_record_hash(
-    record_without_hash: dict[str, object],
+    record_without_hash: Mapping[str, object],
     prev_hash: str,
 ) -> str:
     """Compute ``record_hash``.
@@ -142,7 +143,7 @@ def compute_record_hash(
     return hashlib.sha256(data).hexdigest()
 
 
-def compute_payload_hash(payload: dict[str, object]) -> str:
+def compute_payload_hash(payload: Mapping[str, object]) -> str:
     """Compute unsalted payload hash.
 
     ``H("ctc/payload/v1" || canonical(payload))``
@@ -153,7 +154,7 @@ def compute_payload_hash(payload: dict[str, object]) -> str:
 def compute_salted_payload_hash(
     salt_id: str,
     salt: bytes,
-    payload: dict[str, object],
+    payload: Mapping[str, object],
 ) -> str:
     """Compute salted payload hash for personal-data payloads.
 

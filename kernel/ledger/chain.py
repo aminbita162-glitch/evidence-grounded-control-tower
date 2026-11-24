@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import asyncio
 import secrets
+from collections.abc import Mapping
 from dataclasses import dataclass
 
 from kernel.ledger.records import (
@@ -48,7 +49,7 @@ class CaseChain:
         stage: str,
         actor: Actor,
         record_type: str,
-        payload: dict[str, object],
+        payload: Mapping[str, object],
         *,
         salted: bool = False,
         salt_id: str | None = None,
@@ -88,7 +89,7 @@ class InMemoryCaseChain(CaseChain):
         stage: str,
         actor: Actor,
         record_type: str,
-        payload: dict[str, object],
+        payload: Mapping[str, object],
         *,
         salted: bool = False,
         salt_id: str | None = None,
