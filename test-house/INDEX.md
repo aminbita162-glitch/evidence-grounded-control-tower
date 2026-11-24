@@ -493,3 +493,15 @@
 | T-RUL-0012 | Quantifiers parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0012_quantifiers_parse |
 | T-RUL-0013 | Forbidden constructs rejected with stable error codes | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0013_forbidden_constructs_rejected |
 | T-RUL-0014 | Structural depth bound enforced | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0014_depth_bound_enforced |
+| T-RUL-0015 | Missing manifest field is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0015_missing_manifest_field |
+| T-RUL-0016 | Invalid window is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0016_invalid_window |
+| T-RUL-0017 | Rule without citation is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0017_rule_without_citation |
+| T-RUL-0018 | Rule without label is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0018_rule_without_label |
+| T-RUL-0019 | Declared label ceiling violation is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0019_label_ceiling_violation |
+| T-RUL-0020 | Overlapping windows without precedence rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0020_overlapping_no_precedence |
+| T-RUL-0021 | Invalid condition expression rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0021_invalid_condition |
+| T-RUL-0022 | Invalid outcome is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0022_invalid_outcome |
+| T-RUL-0023 | Valid pack loads with stable hash | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0023_valid_pack_loads_stable_hash |
+| T-RUL-0024 | Unknown citation source is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0024_unknown_citation_source |
+| T-RUL-0025 | Overlapping windows with precedence are accepted | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0025_overlapping_with_precedence |
+| T-RUL-0026 | Label at ceiling is accepted | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0026_label_at_ceiling |
