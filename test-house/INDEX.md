@@ -267,6 +267,18 @@
 | T-KRN-0072 | All hashes in contracts.lock match actual files | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0072_contract_gate_real_repo |
 | T-KRN-0073 | gate run arch contract property generated-files exits 0 | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0073_gate_run_all_four |
 | T-KRN-0074 | Display names not in schemas or kernel source | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0074_no_display_names_in_schemas |
+| T-LED-0001 | Sequence starts at 1 and increments by 1 | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0001_sequence_starts_at_1 |
+| T-LED-0002 | No gaps under concurrent appends | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0002_no_gaps_concurrent |
+| T-LED-0003 | Every field change alters the record hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0003_field_change_alters_hash |
+| T-LED-0004 | Cross-purpose hash replay fails | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0004_cross_purpose_hash_replay_fails |
+| T-LED-0005 | Update is rejected by the database | slow | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0005_update_rejected |
+| T-LED-0006 | Delete is rejected by the database | slow | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0006_delete_rejected |
+| T-LED-0007 | A record of one tenant is invisible to another | slow | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0007_tenant_isolation |
+| T-LED-0008 | Salted payload hash includes salt_id and salt | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0008_salted_payload_hash |
+| T-LED-0009 | With salt destroyed, low-entropy payload cannot be confirmed | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0009_salt_destroyed_unconfirmable |
+| T-LED-0010 | Algorithm identifier on every stored hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0010_algorithm_identifier |
+| T-LED-0011 | Payloads stored by reference | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0011_payload_by_reference |
+| T-LED-0012 | First record prev_hash is all zeros | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0012_first_record_prev_hash_zero |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
