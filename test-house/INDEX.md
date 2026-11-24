@@ -559,3 +559,23 @@
 | T-RUL-0078 | Insertion order independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0078_insertion_order_independence |
 | T-RUL-0079 | Subprocess determinism | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0079_subprocess_determinism |
 | T-RUL-0080 | Iteration order dependence is caught | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0080_iteration_order_caught |
+| T-RUL-0081 | pack new creates a skeleton | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0081_pack_new_creates_skeleton |
+| T-RUL-0082 | pack check validates a valid pack | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0082_pack_check_valid |
+| T-RUL-0083 | pack check rejects an invalid pack | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0083_pack_check_invalid |
+| T-RUL-0084 | pack explain shows rule details | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0084_pack_explain |
+| T-RUL-0085 | pack explain fails for unknown rule | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0085_pack_explain_unknown |
+| T-RUL-0086 | pack diff detects outcome change | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0086_pack_diff_outcome_change |
+| T-RUL-0087 | pack diff reports no changes for identical packs | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0087_pack_diff_no_changes |
+| T-RUL-0088 | pack simulate leaves the case chain untouched | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0088_pack_simulate_no_chain_change |
+| T-RUL-0089 | pack provenance writes PROVENANCE.json | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0089_pack_provenance |
+| T-RUL-0090 | pack provenance hash is stable | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0090_provenance_hash_stable |
+| T-RUL-0091 | No kit command raises a label | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0091_no_label_change |
+| T-RUL-0092 | No kit command sets a source to VERIFIED | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0092_no_source_status_change |
+| T-RUL-0093 | Rule without firing fixture is reported | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0093_no_firing_fixture |
+| T-RUL-0094 | Rule without non-firing fixture is reported | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0094_no_non_firing_fixture |
+| T-RUL-0095 | Label above source ceiling is refused | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0095_label_ceiling_refused |
+| T-RUL-0096 | Pack new creates an empty rules list | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0096_skeleton_empty_rules |
+| T-RUL-0097 | Pack new creates an empty fixtures list | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0097_skeleton_empty_fixtures |
+| T-RUL-0098 | pack check prints the label ceiling | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0098_check_prints_ceiling |
+| T-RUL-0099 | pack provenance includes source ids | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0099_provenance_includes_sources |
+| T-RUL-0100 | pack diff with version change exits 0 | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0100_diff_with_version_change |
