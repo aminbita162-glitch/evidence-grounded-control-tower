@@ -1,0 +1,81 @@
+# P06 phase risk review — P06-RISK.
+#
+# P06 implemented the rule engine: Pack DSL types and parser, pack
+# validation and loading, reference interpreter, evaluator generator with
+# differential tests, conflict resolution and result combination,
+# metamorphic and performance gates, environment-perturbation determinism
+# gate, and the Pack Authoring Kit.
+#
+# Controls verified by the T-RUL test suite:
+#   - Non-determinism (T-RUL-0073 to T-RUL-0080): same case evaluated
+#     under different locale, timezone, thread count, working directory
+#     and insertion order gives identical hashes; subprocess determinism
+#     verified.
+#   - Evaluator divergence (T-RUL-0043 to T-RUL-0052): the reference
+#     interpreter and the generated evaluator agree on all fixtures and
+#     on 1,000 generated random fact sets; byte-identical regeneration
+#     verified.
+#   - Window errors (T-RUL-0027 to T-RUL-0030): window boundaries are
+#     inclusive; rules outside their window are skipped with a reason.
+#   - Silent skipping (T-RUL-0031, T-RUL-0042): absence of a finding is
+#     recorded as NOT_APPLICABLE; every rule produces exactly one result.
+#   - Floating-point leakage (T-RUL-0035): decimal arithmetic uses
+#     Decimal, not float; 0.1 + 0.2 == 0.3 in Decimal.
+#   - Missing facts (T-RUL-0032, T-RUL-0034): a missing or non-VERIFIED
+#     fact gives ABSTAIN; rules read only VERIFIED facts.
+#   - Conflicted facts (T-RUL-0033): a CONFLICTED fact gives ESCALATE
+#     with both citations.
+#   - Label ceiling (T-RUL-0019, T-RUL-0026, T-RUL-0056): a declared
+#     label stronger than the weakest source is rejected; ALLOW is
+#     impossible with a SECONDARY-or-weaker datum.
+#   - Overlapping windows without precedence (T-RUL-0020, T-RUL-0025,
+#     T-RUL-0058, T-RUL-0059): overlapping rules without precedence are
+#     rejected; with precedence they are accepted.
+#   - Forbidden constructs (T-RUL-0013): loops, recursion, I/O,
+#     randomness, clock and user-defined functions are rejected with
+#     stable error codes.
+#   - Structural depth (T-RUL-0014): expressions exceeding the depth
+#     bound are rejected, guaranteeing termination.
+#   - Packkit integrity (T-RUL-0081 to T-RUL-0100): no kit command
+#     raises a label or sets a source status to VERIFIED; simulate
+#     leaves the case chain untouched.
+
+records:
+  - id: REV-P06
+    phase: "06"
+    review_date: "2026-11"
+    controls_added:
+      - CTL-RUL-01 (IMPLEMENTED, DSL parser rejects forbidden constructs; T-RUL-0013)
+      - CTL-RUL-02 (IMPLEMENTED, structural depth bound guarantees termination; T-RUL-0014)
+      - CTL-RUL-03 (IMPLEMENTED, pack validation checks required fields, windows, citations, labels; T-RUL-0015 to T-RUL-0026)
+      - CTL-RUL-04 (IMPLEMENTED, label ceiling prevents declared label above weakest source; T-RUL-0019, T-RUL-0026)
+      - CTL-RUL-05 (IMPLEMENTED, overlapping windows without precedence rejected; T-RUL-0020, T-RUL-0025)
+      - CTL-RUL-06 (IMPLEMENTED, reference interpreter reads only VERIFIED facts; T-RUL-0032, T-RUL-0034)
+      - CTL-RUL-07 (IMPLEMENTED, CONFLICTED fact gives ESCALATE with both citations; T-RUL-0033)
+      - CTL-RUL-08 (IMPLEMENTED, decimal arithmetic uses Decimal not float; T-RUL-0035)
+      - CTL-RUL-09 (IMPLEMENTED, window boundaries inclusive; T-RUL-0029, T-RUL-0030)
+      - CTL-RUL-10 (IMPLEMENTED, absence of finding recorded as evidence; T-RUL-0031, T-RUL-0042)
+      - CTL-RUL-11 (IMPLEMENTED, evaluator generator produces byte-identical output; T-RUL-0043)
+      - CTL-RUL-12 (IMPLEMENTED, differential test on 1000 random fact sets; T-RUL-0049)
+      - CTL-RUL-13 (IMPLEMENTED, combination takes most severe and keeps all reasons; T-RUL-0053, T-RUL-0054)
+      - CTL-RUL-14 (IMPLEMENTED, combination is order independent; T-RUL-0055)
+      - CTL-RUL-15 (IMPLEMENTED, ALLOW blocked with SECONDARY-or-weaker datum; T-RUL-0056)
+      - CTL-RUL-16 (IMPLEMENTED, unresolved conflicts yield ESCALATE; T-RUL-0058)
+      - CTL-RUL-17 (IMPLEMENTED, metamorphic relations: reorder, rename, add, shift; T-RUL-0063 to T-RUL-0072)
+      - CTL-RUL-18 (IMPLEMENTED, performance budget 200 facts p95 200ms; T-RUL-0072)
+      - CTL-RUL-19 (IMPLEMENTED, determinism under locale, timezone, threads, cwd; T-RUL-0073 to T-RUL-0080)
+      - CTL-RUL-20 (IMPLEMENTED, packkit commands do not raise labels or verify sources; T-RUL-0091, T-RUL-0092)
+      - CTL-RUL-21 (IMPLEMENTED, pack diff detects outcome change without version; T-RUL-0086)
+      - CTL-RUL-22 (IMPLEMENTED, pack simulate leaves case chain untouched; T-RUL-0088)
+      - CTL-RUL-23 (IMPLEMENTED, pack provenance writes deterministic hash; T-RUL-0089, T-RUL-0090)
+    controls_verified: []
+    residual_risks_above_threshold: []
+    v_items_opened_or_closed: []
+    register_diff: >-
+      P06 added CTL-RUL-01 through CTL-RUL-23 as IMPLEMENTED controls for
+      non-determinism, evaluator divergence, window errors, silent
+      skipping, floating-point leakage, missing facts, conflicted facts,
+      label ceiling, overlapping windows, forbidden constructs, structural
+      depth, pack validation, decimal arithmetic, combination, conflict
+      resolution, metamorphic relations, performance budget, determinism,
+      and packkit integrity.
