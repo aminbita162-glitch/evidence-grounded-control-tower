@@ -25,6 +25,9 @@ KILL_POINTS = [
     "after_commit_before_outbox",
     "during_delivery",
     "during_migration",
+    "append",
+    "checkpoint",
+    "export",
 ]
 
 

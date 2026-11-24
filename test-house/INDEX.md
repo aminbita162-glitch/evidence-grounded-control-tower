@@ -325,6 +325,34 @@
 | T-LED-0056 | Replay detects a payload mismatch | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0056_replay_mismatch |
 | T-LED-0057 | Replay needs no network | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0057_replay_no_network |
 | T-LED-0058 | Replay with missing evaluation time fails | fast | ledger/test_T_LED_0047_to_0058.py | test_T_LED_0058_replay_missing_eval_time |
+| T-LED-0059 | Export and import round-trip gives equal hashes | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0059_bundle_round_trip |
+| T-LED-0060 | A bundle with one altered record fails verification | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0060_altered_bundle_fails |
+| T-LED-0061 | Two exports of the same case are byte-identical | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0061_byte_identical_exports |
+| T-LED-0062 | Bundle manifest contains correct record count | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0062_manifest_record_count |
+| T-LED-0063 | Bundle manifest contains correct root hash | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0063_manifest_root_hash |
+| T-LED-0064 | Bundle verifies offline with no database or network | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0064_bundle_verifies_offline |
+| T-LED-0065 | An empty bundle verifies | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0065_empty_bundle_verifies |
+| T-LED-0066 | A bundle with a wrong record count fails verification | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0066_wrong_count_fails |
+| T-LED-0067 | Independent verifier agrees with kernel on valid records | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0067_verifier_agrees_valid |
+| T-LED-0068 | Independent verifier detects a tampered record | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0068_verifier_detects_tamper |
+| T-LED-0069 | Independent verifier computes the same leaf hash | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0069_verifier_leaf_hash |
+| T-LED-0070 | Independent verifier computes the same node hash | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0070_verifier_node_hash |
+| T-LED-0071 | Independent verifier computes the same Merkle root | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0071_verifier_root |
+| T-LED-0072 | The independent verifier imports no kernel module | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0072_verifier_no_kernel_import |
+| T-LED-0073 | Verifier agrees with kernel on random bundles including tampers | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0073_verifier_agrees_random_bundles |
+| T-LED-0074 | gate run replay exits 0 | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0074_gate_run_replay |
+| T-LED-0075 | Recovery after a kill at append leaves a verifiable ledger | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0075_crash_at_append |
+| T-LED-0076 | Recovery after a kill at checkpoint write | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0076_crash_at_checkpoint |
+| T-LED-0077 | Recovery after a kill at export | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0077_crash_at_export |
+| T-LED-0078 | The tree root matches the independent verifier's computation | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0078_tree_root_matches_verifier |
+| T-LED-0079 | Kill points are registered in the fault lab | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0079_kill_points_registered |
+| T-LED-0080 | Recovery after a kill at append leaves a gap-free ledger | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0080_recovery_no_gap |
+| T-LED-0081 | Evidence tampering threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0081_threat_evidence_tampering |
+| T-LED-0082 | Ledger and proof endpoint threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0082_threat_ledger_proofs |
+| T-LED-0083 | Hash replay threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0083_threat_hash_replay |
+| T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
+| T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
+| T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
