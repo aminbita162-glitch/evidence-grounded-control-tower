@@ -182,6 +182,7 @@
 | T-GATE-0049 | the secrets gate reads findings from the report file | fast | gate/test_secrets_report.py | test_report_file_with_finding |
 | T-GATE-0050 | the secrets gate fails closed when the scanner leaves no report | fast | gate/test_secrets_report.py | test_no_report_is_an_error |
 | T-GATE-0051 | the secrets gate passes a run the scanner reports as clean | fast | gate/test_secrets_report.py | test_clean_run_without_report |
+| T-GATE-0052 | merge commits and consistent state updates pass the structural checks | fast | gate/test_gates.py | test_structural_checks_accept_merge_commits |
 | T-GATE-GOLDEN-001 | Golden regenerate refuses a path outside the golden list | fast | gate/test_index.py | test_golden_refuses_outside |
 | T-GATE-GOLDEN-002 | Golden regenerate refuses a dirty tree | fast | gate/test_index.py | test_golden_refuses_dirty |
 | T-GATE-GOLDEN-003 | Golden regenerate commits golden files alone | fast | gate/test_index.py | test_golden_commits_alone |
