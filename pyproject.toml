@@ -54,12 +54,14 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 "tools/migrate/**" = ["S603", "S607", "S311"]
 "adapters/**" = ["S608"]
 "tools/schemagen/generator.py" = ["S603"]
+"kernel/rules/_generated/**" = ["E741", "F401", "I001"]
+"tools/rulegen/**" = ["S603"]
 
 [tool.mypy]
 strict = true
 disallow_any_explicit = true
 python_version = "3.14"
-exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/"]
+exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/", "kernel/rules/_generated/"]
 
 [[tool.mypy.overrides]]
 module = ["yaml", "jcs", "rfc8785", "alembic", "asyncpg"]
@@ -70,7 +72,7 @@ module = ["tools.schemagen.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["kernel.contracts._generated.*"]
+module = ["kernel.contracts._generated.*", "kernel.rules._generated.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]

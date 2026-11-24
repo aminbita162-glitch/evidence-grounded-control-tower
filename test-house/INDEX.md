@@ -521,3 +521,13 @@
 | T-RUL-0040 | Set membership evaluates correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0040_set_membership |
 | T-RUL-0041 | Normalized string equality evaluates correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0041_string_eq_normalized |
 | T-RUL-0042 | Multiple rules produce one result each | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0042_multiple_rules |
+| T-RUL-0043 | Byte-identical regeneration | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0043_byte_identical_regeneration |
+| T-RUL-0044 | Both evaluators agree on simple boolean | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0044_agree_bool |
+| T-RUL-0045 | Both evaluators agree on field access | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0045_agree_field |
+| T-RUL-0046 | Both evaluators agree on comparisons | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0046_agree_comparison |
+| T-RUL-0047 | Both evaluators agree on arithmetic | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0047_agree_arithmetic |
+| T-RUL-0048 | Both evaluators agree on boolean operators | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0048_agree_boolean |
+| T-RUL-0049 | Differential test on random fact sets | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0049_differential_random_1000 |
+| T-RUL-0050 | Both evaluators agree on set membership | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0050_agree_in |
+| T-RUL-0051 | Both evaluators agree on normalized string equality | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0051_agree_string_eq |
+| T-RUL-0052 | Generated evaluator is marked | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0052_generated_marked |

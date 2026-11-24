@@ -243,11 +243,11 @@ clean_fixture = "fixtures/replay_clean"
 
 [gate.differential]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.differential"
 timeout = 300
 activates_in = "P06"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/differential_violation"
+clean_fixture = "fixtures/differential_clean"
 
 [gate.metamorphic]
 cadence = "P"

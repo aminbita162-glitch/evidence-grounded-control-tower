@@ -433,6 +433,10 @@ def main() -> int:
             from tools.gate.gates.replay import main as replay_main
 
             return replay_main()
+        if command == "differential":
+            from tools.gate.gates.differential import main as diff_main
+
+            return diff_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)
