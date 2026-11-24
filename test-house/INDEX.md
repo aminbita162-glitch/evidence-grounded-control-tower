@@ -303,6 +303,16 @@
 | T-LED-0034 | Inclusion proof verifies for random trees | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0034_inclusion_property_random_trees |
 | T-LED-0035 | Consistency proof verifies for random tree extensions | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0035_consistency_property_random_trees |
 | T-LED-0036 | A checkpoint without a valid co-signature is SELF-ATTESTED | fast | ledger/test_T_LED_0021_to_0036.py | test_T_LED_0036_checkpoint_without_cosign_self_attested |
+| T-LED-0037 | Equal inputs give equal evaluation commitments | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0037_eval_commitment_equal_inputs |
+| T-LED-0038 | Any input change gives a different evaluation commitment | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0038_eval_commitment_input_change |
+| T-LED-0039 | Proposal commitment is deterministic | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0039_proposal_commitment_deterministic |
+| T-LED-0040 | Proposal commitment changes on proposal change | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0040_proposal_commitment_changes |
+| T-LED-0041 | Field commitment with revealed value and salt verifies | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0041_field_commitment_verifies |
+| T-LED-0042 | Field commitment with wrong value fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0042_field_commitment_wrong_value |
+| T-LED-0043 | Field commitment with wrong salt fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0043_field_commitment_wrong_salt |
+| T-LED-0044 | With salt destroyed, value cannot be confirmed | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0044_salt_destroyed_prevents_confirmation |
+| T-LED-0045 | Different salts produce different field commitments | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0045_different_salts_different_commitments |
+| T-LED-0046 | Cross-purpose hash reuse fails | fast | ledger/test_T_LED_0037_to_0046.py | test_T_LED_0046_cross_purpose_reuse_fails |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
