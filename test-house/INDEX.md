@@ -505,3 +505,19 @@
 | T-RUL-0024 | Unknown citation source is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0024_unknown_citation_source |
 | T-RUL-0025 | Overlapping windows with precedence are accepted | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0025_overlapping_with_precedence |
 | T-RUL-0026 | Label at ceiling is accepted | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0026_label_at_ceiling |
+| T-RUL-0027 | Rule inside window is evaluated | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0027_rule_inside_window |
+| T-RUL-0028 | Rule outside window is skipped | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0028_rule_outside_window |
+| T-RUL-0029 | Window boundary inclusive at start | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0029_window_boundary_start |
+| T-RUL-0030 | Window boundary inclusive at end | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0030_window_boundary_end |
+| T-RUL-0031 | False condition gives NOT_APPLICABLE | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0031_false_condition |
+| T-RUL-0032 | Missing fact gives ABSTAIN | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0032_missing_fact_abstain |
+| T-RUL-0033 | Conflicted fact gives ESCALATE | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0033_conflicted_fact_escalate |
+| T-RUL-0034 | PROPOSED fact is not read | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0034_proposed_fact_not_read |
+| T-RUL-0035 | Decimal arithmetic uses Decimal | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0035_decimal_arithmetic |
+| T-RUL-0036 | Field condition matches | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0036_field_condition_matches |
+| T-RUL-0037 | Field condition does not match | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0037_field_condition_no_match |
+| T-RUL-0038 | Boolean operators evaluate correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0038_boolean_operators |
+| T-RUL-0039 | Comparison operators evaluate correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0039_comparison_operators |
+| T-RUL-0040 | Set membership evaluates correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0040_set_membership |
+| T-RUL-0041 | Normalized string equality evaluates correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0041_string_eq_normalized |
+| T-RUL-0042 | Multiple rules produce one result each | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0042_multiple_rules |
