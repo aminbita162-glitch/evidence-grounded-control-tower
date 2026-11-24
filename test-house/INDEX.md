@@ -279,6 +279,14 @@
 | T-LED-0010 | Algorithm identifier on every stored hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0010_algorithm_identifier |
 | T-LED-0011 | Payloads stored by reference | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0011_payload_by_reference |
 | T-LED-0012 | First record prev_hash is all zeros | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0012_first_record_prev_hash_zero |
+| T-LED-0013 | Each deployment event type appends once | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0013_deployment_events_append |
+| T-LED-0014 | Each tenant system event type appends once | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0014_tenant_events_append |
+| T-LED-0015 | Invalid event type is rejected | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0015_invalid_event_rejected |
+| T-LED-0016 | System chain verifies independently of any case chain | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0016_system_chain_independent |
+| T-LED-0017 | Deployment chain is separate from tenant system chain | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0017_deployment_separate_from_tenant |
+| T-LED-0018 | Tenant system chain position is independent of other tenants | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0018_tenant_isolation |
+| T-LED-0019 | Deployment attestation holds digest, not position | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0019_deployment_attestation_content |
+| T-LED-0020 | Case record carries tenant system position | fast | ledger/test_T_LED_0013_to_0020.py | test_T_LED_0020_case_record_carries_tenant_position |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
