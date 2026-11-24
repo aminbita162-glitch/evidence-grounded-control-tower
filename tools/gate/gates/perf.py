@@ -53,3 +53,7 @@ def main() -> int:
     if result.returncode != 0:
         sys.stderr.write(result.stderr)
     return result.returncode
+
+
+if __name__ == "__main__":
+    sys.exit(main())

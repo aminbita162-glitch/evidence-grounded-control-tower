@@ -38,7 +38,7 @@ clean_fixture = "fixtures/types_clean.py"
 
 [gate.unit]
 cadence = "QP"
-command = "pytest -m fast"
+command = "pytest -m fast -n0 -o addopts='--cov --cov-branch'"
 timeout = 300
 activates_in = "P00"
 violation_fixture = "fixtures/test_unit_violation.py"
