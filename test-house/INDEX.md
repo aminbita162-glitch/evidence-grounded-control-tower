@@ -531,3 +531,13 @@
 | T-RUL-0050 | Both evaluators agree on set membership | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0050_agree_in |
 | T-RUL-0051 | Both evaluators agree on normalized string equality | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0051_agree_string_eq |
 | T-RUL-0052 | Generated evaluator is marked | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0052_generated_marked |
+| T-RUL-0053 | Combination takes the most severe | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0053_most_severe |
+| T-RUL-0054 | Combination keeps all reasons | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0054_keeps_all_reasons |
+| T-RUL-0055 | Combination is order independent | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0055_order_independent |
+| T-RUL-0056 | ALLOW blocked with SECONDARY datum | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0056_allow_blocked_with_secondary |
+| T-RUL-0057 | ALLOW allowed with OFFICIAL datum | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0057_allow_with_official |
+| T-RUL-0058 | Unresolved conflict yields ESCALATE | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0058_unresolved_conflict |
+| T-RUL-0059 | Resolved conflict with precedence | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0059_resolved_with_precedence |
+| T-RUL-0060 | Empty results give ABSTAIN | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0060_empty_results_abstain |
+| T-RUL-0061 | ESCALATE citations collected | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0061_escalate_citations |
+| T-RUL-0062 | Combination is monotone | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0062_monotone |
