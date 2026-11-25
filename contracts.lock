@@ -71,6 +71,16 @@
       "type": "schema"
     },
     {
+      "path": "schemas/model_call.json",
+      "hash": "2172cd2b7e86b8292fe94b92e990e36db630a3be820cd52f35ee715165301098",
+      "type": "schema"
+    },
+    {
+      "path": "adapters/model/gateway.py",
+      "hash": "3f243bce65136865556467cd9b3187bc23de1bd0f7ab241012eedb3f56bc116f",
+      "type": "interface"
+    },
+    {
       "path": "schemas/pack.json",
       "hash": "e17561cc62f774a2705c4bc153d1c3387df23d39e899ae08150b95570e1917cf",
       "type": "schema"
