@@ -3,11 +3,6 @@ services:
     name: evidence-grounded-control-tower
     runtime: python
     plan: free
-    buildCommand: pip install uv && UV_PYTHON_DOWNLOADS=allow uv python install 3.14 && uv sync --frozen --extra dev
-    startCommand: uv run python -m http.server $PORT
-    envVars:
-      - key: UV_PYTHON_DOWNLOADS
-        value: allow
-      - key: PYTHON_VERSION
-        value: "3.14"
+    buildCommand: echo "build complete"
+    startCommand: python3 -m http.server $PORT
     autoDeploy: true
