@@ -396,6 +396,14 @@
 | T-ORC-0040 | Policy deny cases evaluate to DENY | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0040_deny_cases_fail |
 | T-ORC-0041 | run_policy_tests reports all cases passing | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0041_policy_tests_all_pass |
 | T-ORC-0042 | An unknown policy raises PolicyError | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0042_unknown_policy_raises |
+| T-ORC-0043 | E-irrev without a bound approval is blocked at A0 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0043_eirrev_blocked_at_a0 |
+| T-ORC-0044 | E-irrev without a bound approval is blocked at A2 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0044_eirrev_blocked_without_approval |
+| T-ORC-0045 | E-irrev with a bound approval is allowed at A2 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0045_eirrev_allowed_with_approval |
+| T-ORC-0046 | No level above A2 can be configured | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0046_no_level_above_a2 |
+| T-ORC-0047 | The default level is A1 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0047_default_is_a1 |
+| T-ORC-0048 | A0 allows only R (observe) | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0048_a0_observe_only |
+| T-ORC-0049 | A1 allows R and P but not E-rev or E-irrev | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0049_a1_propose_only |
+| T-ORC-0050 | A level change is recorded as a system-chain event | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0050_change_recorded |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
