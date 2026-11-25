@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "schemas/pack.json",
   "title": "Pack",
-  "description": "Versioned rules with validity windows and sources (Part 3 \u00a73.6).",
+  "description": "Versioned rules with validity windows and sources (Part 3 \u00a73.6, P06-CHG1).",
   "type": "object",
   "properties": {
     "tenant_id": {
@@ -33,6 +33,27 @@
       "items": {
         "type": "string"
       }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "owning_capability": {
+      "type": "string"
+    },
+    "declared_label": {
+      "type": "string",
+      "enum": [
+        "OFFICIAL",
+        "DERIVED",
+        "SECONDARY",
+        "SYNTHETIC",
+        "SIMULATED_RULE",
+        "ASSUMPTION",
+        "UNVERIFIED"
+      ]
     }
   },
   "required": [
@@ -42,7 +63,8 @@
     "version",
     "valid_from",
     "valid_to",
-    "jurisdiction"
+    "jurisdiction",
+    "sources"
   ],
   "additionalProperties": false
 }

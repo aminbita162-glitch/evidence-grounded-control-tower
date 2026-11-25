@@ -182,6 +182,7 @@
 | T-GATE-0049 | the secrets gate reads findings from the report file | fast | gate/test_secrets_report.py | test_report_file_with_finding |
 | T-GATE-0050 | the secrets gate fails closed when the scanner leaves no report | fast | gate/test_secrets_report.py | test_no_report_is_an_error |
 | T-GATE-0051 | the secrets gate passes a run the scanner reports as clean | fast | gate/test_secrets_report.py | test_clean_run_without_report |
+| T-GATE-0052 | merge commits and consistent state updates pass the structural checks | fast | gate/test_gates.py | test_structural_checks_accept_merge_commits |
 | T-GATE-GOLDEN-001 | Golden regenerate refuses a path outside the golden list | fast | gate/test_index.py | test_golden_refuses_outside |
 | T-GATE-GOLDEN-002 | Golden regenerate refuses a dirty tree | fast | gate/test_index.py | test_golden_refuses_dirty |
 | T-GATE-GOLDEN-003 | Golden regenerate commits golden files alone | fast | gate/test_index.py | test_golden_commits_alone |
@@ -479,3 +480,103 @@
 | T-RISK-0033 | risk without area or accountable fails | fast | risk/test_validator.py | test_risk_fields_fail |
 | T-RISK-0034 | risk validate scales fails on invalid scales | fast | risk/test_scales.py | test_validate_scales_fails_on_bad_scales |
 | T-RISK-0035 | check-phrases catches a known compliance-claim violation | fast | risk/test_policy.py | test_forbidden_phrase_detection_finds_violation |
+| T-RUL-0001 | A boolean literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0001_bool_literal_parses |
+| T-RUL-0002 | An integer literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0002_int_literal_parses |
+| T-RUL-0003 | A decimal literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0003_decimal_literal_parses |
+| T-RUL-0004 | A string literal parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0004_string_literal_parses |
+| T-RUL-0005 | A field reference parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0005_field_ref_parses |
+| T-RUL-0006 | Boolean operators parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0006_boolean_operands_parse |
+| T-RUL-0007 | Comparison operators parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0007_comparisons_parse |
+| T-RUL-0008 | Decimal arithmetic operators parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0008_arithmetic_parse |
+| T-RUL-0009 | Set membership parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0009_in_parses |
+| T-RUL-0010 | Normalized string equality parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0010_string_eq_parses |
+| T-RUL-0011 | Date arithmetic parses | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0011_date_arithmetic_parses |
+| T-RUL-0012 | Quantifiers parse | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0012_quantifiers_parse |
+| T-RUL-0013 | Forbidden constructs rejected with stable error codes | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0013_forbidden_constructs_rejected |
+| T-RUL-0014 | Structural depth bound enforced | fast | rules/test_T_RUL_0001_to_0014.py | test_T_RUL_0014_depth_bound_enforced |
+| T-RUL-0015 | Missing manifest field is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0015_missing_manifest_field |
+| T-RUL-0016 | Invalid window is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0016_invalid_window |
+| T-RUL-0017 | Rule without citation is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0017_rule_without_citation |
+| T-RUL-0018 | Rule without label is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0018_rule_without_label |
+| T-RUL-0019 | Declared label ceiling violation is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0019_label_ceiling_violation |
+| T-RUL-0020 | Overlapping windows without precedence rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0020_overlapping_no_precedence |
+| T-RUL-0021 | Invalid condition expression rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0021_invalid_condition |
+| T-RUL-0022 | Invalid outcome is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0022_invalid_outcome |
+| T-RUL-0023 | Valid pack loads with stable hash | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0023_valid_pack_loads_stable_hash |
+| T-RUL-0024 | Unknown citation source is rejected | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0024_unknown_citation_source |
+| T-RUL-0025 | Overlapping windows with precedence are accepted | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0025_overlapping_with_precedence |
+| T-RUL-0026 | Label at ceiling is accepted | fast | rules/test_T_RUL_0015_to_0026.py | test_T_RUL_0026_label_at_ceiling |
+| T-RUL-0027 | Rule inside window is evaluated | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0027_rule_inside_window |
+| T-RUL-0028 | Rule outside window is skipped | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0028_rule_outside_window |
+| T-RUL-0029 | Window boundary inclusive at start | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0029_window_boundary_start |
+| T-RUL-0030 | Window boundary inclusive at end | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0030_window_boundary_end |
+| T-RUL-0031 | False condition gives NOT_APPLICABLE | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0031_false_condition |
+| T-RUL-0032 | Missing fact gives ABSTAIN | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0032_missing_fact_abstain |
+| T-RUL-0033 | Conflicted fact gives ESCALATE | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0033_conflicted_fact_escalate |
+| T-RUL-0034 | PROPOSED fact is not read | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0034_proposed_fact_not_read |
+| T-RUL-0035 | Decimal arithmetic uses Decimal | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0035_decimal_arithmetic |
+| T-RUL-0036 | Field condition matches | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0036_field_condition_matches |
+| T-RUL-0037 | Field condition does not match | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0037_field_condition_no_match |
+| T-RUL-0038 | Boolean operators evaluate correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0038_boolean_operators |
+| T-RUL-0039 | Comparison operators evaluate correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0039_comparison_operators |
+| T-RUL-0040 | Set membership evaluates correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0040_set_membership |
+| T-RUL-0041 | Normalized string equality evaluates correctly | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0041_string_eq_normalized |
+| T-RUL-0042 | Multiple rules produce one result each | fast | rules/test_T_RUL_0027_to_0042.py | test_T_RUL_0042_multiple_rules |
+| T-RUL-0043 | Byte-identical regeneration | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0043_byte_identical_regeneration |
+| T-RUL-0044 | Both evaluators agree on simple boolean | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0044_agree_bool |
+| T-RUL-0045 | Both evaluators agree on field access | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0045_agree_field |
+| T-RUL-0046 | Both evaluators agree on comparisons | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0046_agree_comparison |
+| T-RUL-0047 | Both evaluators agree on arithmetic | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0047_agree_arithmetic |
+| T-RUL-0048 | Both evaluators agree on boolean operators | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0048_agree_boolean |
+| T-RUL-0049 | Differential test on random fact sets | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0049_differential_random_1000 |
+| T-RUL-0050 | Both evaluators agree on set membership | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0050_agree_in |
+| T-RUL-0051 | Both evaluators agree on normalized string equality | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0051_agree_string_eq |
+| T-RUL-0052 | Generated evaluator is marked | fast | rules/differential/test_T_RUL_0043_to_0052.py | test_T_RUL_0052_generated_marked |
+| T-RUL-0053 | Combination takes the most severe | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0053_most_severe |
+| T-RUL-0054 | Combination keeps all reasons | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0054_keeps_all_reasons |
+| T-RUL-0055 | Combination is order independent | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0055_order_independent |
+| T-RUL-0056 | ALLOW blocked with SECONDARY datum | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0056_allow_blocked_with_secondary |
+| T-RUL-0057 | ALLOW allowed with OFFICIAL datum | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0057_allow_with_official |
+| T-RUL-0058 | Unresolved conflict yields ESCALATE | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0058_unresolved_conflict |
+| T-RUL-0059 | Resolved conflict with precedence | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0059_resolved_with_precedence |
+| T-RUL-0060 | Empty results give ABSTAIN | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0060_empty_results_abstain |
+| T-RUL-0061 | ESCALATE citations collected | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0061_escalate_citations |
+| T-RUL-0062 | Combination is monotone | fast | rules/test_T_RUL_0053_to_0062.py | test_T_RUL_0062_monotone |
+| T-RUL-0063 | Reordering facts leaves results unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0063_reorder_facts |
+| T-RUL-0064 | Renaming IDs leaves outcomes unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0064_rename_ids |
+| T-RUL-0065 | Adding a non-referenced fact leaves results unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0065_add_non_referenced_fact |
+| T-RUL-0066 | Shifting time within a window leaves results unchanged | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0066_shift_time_within_window |
+| T-RUL-0067 | Reordering rules does not change combined outcome | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0067_reorder_rules |
+| T-RUL-0068 | Boolean and is commutative | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0068_and_commutative |
+| T-RUL-0069 | Boolean or is commutative | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0069_or_commutative |
+| T-RUL-0070 | Double negation is identity | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0070_double_negation |
+| T-RUL-0071 | Eq is symmetric | fast | rules/metamorphic/test_T_RUL_0063_to_0072.py | test_T_RUL_0071_eq_symmetric |
+| T-RUL-0072 | Performance budget for 200 facts | fast | rules/perf/test_T_RUL_0072_perf.py | test_T_RUL_0072_perf_budget_200_facts |
+| T-RUL-0073 | Determinism under same seed | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0073_same_seed_identical |
+| T-RUL-0074 | Locale independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0074_locale_independence |
+| T-RUL-0075 | Time zone independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0075_timezone_independence |
+| T-RUL-0076 | Thread count independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0076_thread_count_independence |
+| T-RUL-0077 | Working directory independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0077_cwd_independence |
+| T-RUL-0078 | Insertion order independence | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0078_insertion_order_independence |
+| T-RUL-0079 | Subprocess determinism | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0079_subprocess_determinism |
+| T-RUL-0080 | Iteration order dependence is caught | fast | rules/determinism/test_T_RUL_0073_to_0080.py | test_T_RUL_0080_iteration_order_caught |
+| T-RUL-0081 | pack new creates a skeleton | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0081_pack_new_creates_skeleton |
+| T-RUL-0082 | pack check validates a valid pack | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0082_pack_check_valid |
+| T-RUL-0083 | pack check rejects an invalid pack | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0083_pack_check_invalid |
+| T-RUL-0084 | pack explain shows rule details | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0084_pack_explain |
+| T-RUL-0085 | pack explain fails for unknown rule | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0085_pack_explain_unknown |
+| T-RUL-0086 | pack diff detects outcome change | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0086_pack_diff_outcome_change |
+| T-RUL-0087 | pack diff reports no changes for identical packs | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0087_pack_diff_no_changes |
+| T-RUL-0088 | pack simulate leaves the case chain untouched | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0088_pack_simulate_no_chain_change |
+| T-RUL-0089 | pack provenance writes PROVENANCE.json | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0089_pack_provenance |
+| T-RUL-0090 | pack provenance hash is stable | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0090_provenance_hash_stable |
+| T-RUL-0091 | No kit command raises a label | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0091_no_label_change |
+| T-RUL-0092 | No kit command sets a source to VERIFIED | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0092_no_source_status_change |
+| T-RUL-0093 | Rule without firing fixture is reported | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0093_no_firing_fixture |
+| T-RUL-0094 | Rule without non-firing fixture is reported | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0094_no_non_firing_fixture |
+| T-RUL-0095 | Label above source ceiling is refused | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0095_label_ceiling_refused |
+| T-RUL-0096 | Pack new creates an empty rules list | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0096_skeleton_empty_rules |
+| T-RUL-0097 | Pack new creates an empty fixtures list | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0097_skeleton_empty_fixtures |
+| T-RUL-0098 | pack check prints the label ceiling | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0098_check_prints_ceiling |
+| T-RUL-0099 | pack provenance includes source ids | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0099_provenance_includes_sources |
+| T-RUL-0100 | pack diff with version change exits 0 | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0100_diff_with_version_change |

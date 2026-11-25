@@ -433,6 +433,18 @@ def main() -> int:
             from tools.gate.gates.replay import main as replay_main
 
             return replay_main()
+        if command == "differential":
+            from tools.gate.gates.differential import main as diff_main
+
+            return diff_main()
+        if command == "metamorphic":
+            from tools.gate.gates.metamorphic import main as meta_main
+
+            return meta_main()
+        if command == "perf":
+            from tools.gate.gates.perf import main as perf_main
+
+            return perf_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)

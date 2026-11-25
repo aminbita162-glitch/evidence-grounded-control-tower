@@ -21,7 +21,14 @@ import pytest
 
 from tools.gate.commit_check import check_commit_message
 from tools.gate.gates.deps import is_expired, parse_audit
-from tools.gate.gates.hygiene import drop_merge_messages, run_hygiene
+from tools.gate.gates.hygiene import (
+    _structural_checks,
+    drop_merge_messages,
+    is_merge_commit,
+    is_state_update,
+    run_hygiene,
+    state_hashes_match_head,
+)
 from tools.gate.gates.license import check_licenses
 from tools.gate.runner import GateEntry, default_env, run_selftest
 
@@ -821,6 +828,95 @@ def test_drop_merge_messages() -> None:
         "Merge abc123 into def456",
     ]
     assert drop_merge_messages(messages) == ["feat(auth): add login page [P00-T01]"]
+
+
+# ---------------------------------------------------------------------------
+# T-GATE-0052 — merge commits and state updates accepted in structural checks
+# ---------------------------------------------------------------------------
+# id: T-GATE-0052
+# title: merge commits and consistent state updates pass the structural checks
+# purpose: Verify that the hygiene gate's structural commit-message check
+#          accepts GitHub default merge commits and state-file-update commits
+#          whose recomputed hashes match the current HEAD, so that merges and
+#          state syncs do not produce false hygiene violations.
+# level: fast
+# requirement ids: Part 4 section 4.12, Part 1 section 4.9
+# scenario ids: S-GATE-HYGIENE-MERGE-ACCEPT, S-GATE-HYGIENE-STATE-ACCEPT
+# input: merge commit messages and state-update commit messages (with and
+#        without the [Pxx-Tyy] tag) checked by _structural_checks
+# expected result: merge commits always pass; state-update commits pass when
+#                   state hashes match HEAD and fail when they do not
+# risk covered: the hygiene gate fails on every merge commit or state sync
+# owning capability: gate-hygiene
+
+
+@pytest.mark.fast
+def test_structural_checks_accept_merge_commits() -> None:
+    """GitHub merge commit messages pass the structural checks."""
+    messages = [
+        "Merge pull request #7 from aminbita162-glitch/phase/06-rule-engine",
+        "feat(rules): pack DSL types, parser and schema [P06-T01]",
+    ]
+    violations = _structural_checks(messages, None)
+    assert violations == []
+
+
+@pytest.mark.fast
+def test_is_merge_commit_recognises_github_format() -> None:
+    """is_merge_commit recognises GitHub's default merge-commit format."""
+    assert is_merge_commit("Merge pull request #7 from aminbita162-glitch/phase/06-rule-engine")
+    assert is_merge_commit("Merge pull request #1 from owner/phase/00-bootstrap")
+    assert not is_merge_commit("feat(auth): add login page [P00-T01]")
+    assert not is_merge_commit("")
+
+
+@pytest.mark.fast
+def test_is_state_update_recognises_state_scope() -> None:
+    """is_state_update recognises state-scoped and hash-mentioning commits."""
+    assert is_state_update("chore(state): sync STATE.json hash")
+    assert is_state_update("fix(state): update previous_merge_hash [P06-FIX]")
+    assert is_state_update("docs: update protected-hashes.json after merge")
+    assert not is_state_update("feat(auth): add login page [P00-T01]")
+    assert not is_state_update("")
+
+
+@pytest.mark.fast
+def test_structural_checks_accept_state_updates_when_consistent(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """State-update commits pass when state hashes match HEAD."""
+    monkeypatch.setattr(
+        "tools.gate.gates.hygiene.state_hashes_match_head",
+        lambda root: True,
+    )
+    messages = [
+        "chore(state): sync STATE.json hash",
+        "fix(state): update previous_merge_hash to P05 merge commit",
+    ]
+    violations = _structural_checks(messages, None, tmp_path)
+    assert violations == []
+
+
+@pytest.mark.fast
+def test_structural_checks_reject_state_updates_when_inconsistent(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """State-update commits fail when state hashes do NOT match HEAD."""
+    monkeypatch.setattr(
+        "tools.gate.gates.hygiene.state_hashes_match_head",
+        lambda root: False,
+    )
+    messages = [
+        "chore(state): sync STATE.json hash",
+    ]
+    violations = _structural_checks(messages, None, tmp_path)
+    assert violations == ["commit[0]"]
+
+
+@pytest.mark.fast
+def test_state_hashes_match_head_no_state_file(tmp_path: Path) -> None:
+    """state_hashes_match_head returns True when no state file exists."""
+    assert state_hashes_match_head(tmp_path)
 
 
 # ---------------------------------------------------------------------------
