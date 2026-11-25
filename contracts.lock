@@ -96,6 +96,11 @@
       "type": "schema"
     },
     {
+      "path": "schemas/region_profile.json",
+      "hash": "065e8ccbd94d1bf1a1065441e5e89b95786df8857ea85301d4e1242d0708e44c",
+      "type": "schema"
+    },
+    {
       "path": "schemas/rule_result.json",
       "hash": "9d14232a03cea7505008bea559772b6fc6e8f7d10f124e7cb375a03762e38d92",
       "type": "schema"
