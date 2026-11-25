@@ -432,6 +432,18 @@
 | T-ORC-0076 | Approvals expire with the case state | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0076_approval_expires_with_state |
 | T-ORC-0077 | A rejection is recorded | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0077_rejection_recorded |
 | T-ORC-0078 | An override without justification is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0078_override_without_justification_refused |
+| T-ORC-0079 | Hostile instruction to change goals ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0079_goal_change_rejected |
+| T-ORC-0080 | Hostile instruction to call tools ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0080_tool_call_denied |
+| T-ORC-0081 | Hostile instruction to exfiltrate ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0081_exfiltration_denied |
+| T-ORC-0082 | Hostile instruction to loop ends in quarantine | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0082_loop_detected |
+| T-ORC-0083 | Hostile instruction to exceed budget ends in BLOCKED | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0083_budget_exceeded_blocked |
+| T-ORC-0084 | Hostile instruction to skip the Human Gate is rejected | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0084_skip_human_gate_rejected |
+| T-ORC-0085 | Confused deputy: a frozen tenant cannot issue commands | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0085_confused_deputy_frozen |
+| T-ORC-0086 | Confused deputy: a paused case cannot execute steps | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0086_paused_case_rejects |
+| T-ORC-0087 | 100 percent of the adversarial set ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0087_all_adversarial_no_effect |
+| T-ORC-0088 | Crash recovery resumes without duplicate effects | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0088_crash_recovery_no_duplicate |
+| T-ORC-0089 | Mapped threat items have tests | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0089_mapped_items_have_tests |
+| T-ORC-0090 | Orchestrator kill points are registered in the fault lab | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0090_orchestrator_kill_points_registered |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
