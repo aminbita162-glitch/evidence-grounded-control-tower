@@ -380,6 +380,22 @@
 | T-ORC-0024 | Risk failure ends in ESCALATE | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0024_risk_failure_escalate |
 | T-ORC-0025 | An unknown role raises RuntimeError_ | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0025_unknown_role_rejected |
 | T-ORC-0026 | Every role in the closed list has a contract | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0026_all_roles_have_contracts |
+| T-ORC-0027 | An ungranted tool is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0027_ungranted_tool_denied |
+| T-ORC-0028 | A granted tool is allowed | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0028_granted_tool_allowed |
+| T-ORC-0029 | A scope mismatch is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0029_scope_mismatch_denied |
+| T-ORC-0030 | An over-rate call is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0030_over_rate_denied |
+| T-ORC-0031 | An off-list host is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0031_off_list_host_denied |
+| T-ORC-0032 | An on-list host is allowed | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0032_on_list_host_allowed |
+| T-ORC-0033 | A model naming a URL is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0033_model_url_denied |
+| T-ORC-0034 | A model naming a file path is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0034_model_path_denied |
+| T-ORC-0035 | A model naming a destructive command is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0035_model_command_denied |
+| T-ORC-0036 | Every call is recorded | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0036_every_call_recorded |
+| T-ORC-0037 | Each call record has input and output hashes | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0037_hashes_in_record |
+| T-ORC-0038 | Every policy has allow and deny cases | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0038_every_policy_has_cases |
+| T-ORC-0039 | Policy allow cases evaluate to ALLOW | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0039_allow_cases_pass |
+| T-ORC-0040 | Policy deny cases evaluate to DENY | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0040_deny_cases_fail |
+| T-ORC-0041 | run_policy_tests reports all cases passing | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0041_policy_tests_all_pass |
+| T-ORC-0042 | An unknown policy raises PolicyError | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0042_unknown_policy_raises |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
