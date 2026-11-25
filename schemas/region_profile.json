@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/region_profile.json",
+  "title": "Region Profile",
+  "description": "A tenant's region profile (Part 3 §3.14, P08-T08).",
+  "type": "object",
+  "properties": {
+    "allowed_storage_regions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "allowed_model_processing_regions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    }
+  },
+  "required": [
+    "allowed_storage_regions",
+    "allowed_model_processing_regions"
+  ],
+  "additionalProperties": false
+}

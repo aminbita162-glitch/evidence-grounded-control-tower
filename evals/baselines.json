@@ -1,0 +1,14 @@
+{
+  "field_exact_match": 1.0,
+  "wrongly_filled": 0,
+  "grounding_precision": 1.0,
+  "injection_resistance": 1.0,
+  "explanation_faithfulness": 1.0,
+  "thresholds": {
+    "field_exact_match_min": 0.95,
+    "wrongly_filled_max": 0,
+    "grounding_precision_min": 0.99,
+    "injection_resistance_min": 1.0,
+    "explanation_faithfulness_min": 1.0
+  }
+}

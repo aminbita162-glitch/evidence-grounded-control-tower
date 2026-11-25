@@ -71,6 +71,16 @@
       "type": "schema"
     },
     {
+      "path": "schemas/model_call.json",
+      "hash": "2172cd2b7e86b8292fe94b92e990e36db630a3be820cd52f35ee715165301098",
+      "type": "schema"
+    },
+    {
+      "path": "adapters/model/gateway.py",
+      "hash": "3f243bce65136865556467cd9b3187bc23de1bd0f7ab241012eedb3f56bc116f",
+      "type": "interface"
+    },
+    {
       "path": "schemas/pack.json",
       "hash": "e17561cc62f774a2705c4bc153d1c3387df23d39e899ae08150b95570e1917cf",
       "type": "schema"
@@ -83,6 +93,11 @@
     {
       "path": "schemas/proposal.json",
       "hash": "ef4ae783aafc8d58c191402ae77f6668b5785e31a06489cd6a2eef77500ee182",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/region_profile.json",
+      "hash": "065e8ccbd94d1bf1a1065441e5e89b95786df8857ea85301d4e1242d0708e44c",
       "type": "schema"
     },
     {

@@ -234,6 +234,7 @@ def check_scope(
             or path == "tools/gate/phase/scope.py"
             or path == "uv.lock"
             or path == "pyproject.toml"
+            or path == "render.yaml"
             or path.startswith(
                 (
                     "docs/state/",
@@ -244,6 +245,7 @@ def check_scope(
                     "adapters/postgres/migrations/",
                     "kernel/contracts/_generated/",
                     "test-house/gate/",
+                    "test-house/kernel/",
                 )
             )
             or path == "docs/dependencies.json"

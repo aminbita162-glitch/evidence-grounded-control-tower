@@ -1,0 +1,43 @@
+# P08 phase risk review — P08-RISK.
+#
+# P08 implemented the Model Gateway and Extract stage: the provider-neutral
+# Gateway with recorded-response mode, provider adapters and exit path,
+# resilience and budgets, the tool-less secret-less Extract stage with
+# grounding, the Propose-Verify-Gate, the evaluation gate, model-call
+# tracing hooks, threat mapping, and the region profile and residency
+# policy.
+#
+# Controls verified by the T-GWY test suite:
+#   - Prompt injection (T-GWY-0039, T-GWY-0077, T-GWY-0078): an instruction
+#     inside a document has no effect on tools or flow (I3); the threat
+#     matrix maps prompt injection through documents to tests.
+#   - Provider outage (T-GWY-0025 to T-GWY-0036): timeout, bounded retry,
+#     circuit breaker and automatic fallback to the second adapter with
+#     the fallback recorded; the deterministic path continues when the
+#     model is unavailable; a refused call yields ABSTAIN or ESCALATE,
+#     never silent truncation.
+#   - Silent model change (T-GWY-0018 to T-GWY-0021): model identifiers
+#     are pinned by exact version; an identifier change without a recorded
+#     evaluation is rejected.
+#   - Ungrounded values (T-GWY-0051 to T-GWY-0054): proposals committed by
+#     hash; ungrounded claims are rejected; dual extraction disagreement
+#     gives HOLD; verified facts carry their locator.
+#   - Cost runaway (T-GWY-0031, T-GWY-0032): per-case and per-tier budget
+#     limits hold; a call or token budget exceed raises BudgetExceededError.
+#   - Data sent to a provider without policy (T-GWY-0085 to T-GWY-0096):
+#     the region profile refuses any call outside the allowed processing
+#     regions; a missing profile allows only the local adapter; a missing
+#     declared region fails closed; the refusal is an ABSTAIN with reason
+#     REGION_POLICY.
+#   - Evaluation gate (T-GWY-0065 to T-GWY-0076): thresholds of Part 4
+#     section 4.5 are met (exact match 95 percent, wrongly filled zero,
+#     grounding precision 99 percent, injection resistance 100 percent);
+#     baselines move only through the gate.
+#   - Threat mapping (T-GWY-0078, T-GWY-0081): prompt injection through
+#     documents, exfiltration through model output, and tool-authority
+#     escalation items of the threat catalog have tests.
+#
+# Phase: P08
+# Class: L
+# Capabilities: none
+# Gates activated: eval

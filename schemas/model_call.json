@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/model_call.json",
+  "title": "Model Call Record",
+  "description": "A record of a single model call through the Gateway (Part 3 §3.5, §3.14, D-06).",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/definitions/tenant_id"
+    },
+    "schema_version": {
+      "$ref": "common.json#/definitions/schema_version"
+    },
+    "case_id": {
+      "type": ["string", "null"],
+      "description": "Case identifier (null for system-level calls)."
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Provider identifier (e.g. primary, secondary, local)."
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Model identifier pinned by exact version."
+    },
+    "processing_region": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Processing region declared by the adapter."
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Model call parameters (temperature, max_tokens, etc.)."
+    },
+    "tier": {
+      "type": "string",
+      "enum": ["smallest", "middle", "upper", "highest"],
+      "description": "Model tier for this call."
+    },
+    "meter": {
+      "type": "string",
+      "enum": ["extraction", "other"],
+      "description": "Budget meter this call draws from."
+    },
+    "prompt_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "response_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
+    "response_payload": {
+      "type": "object",
+      "description": "The structured output returned by the model."
+    },
+    "tokens_input": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tokens_output": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cost": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Estimated cost in USD for this call."
+    },
+    "fallback": {
+      "type": "boolean",
+      "description": "True if this call used the fallback adapter."
+    }
+  },
+  "required": [
+    "tenant_id",
+    "schema_version",
+    "case_id",
+    "provider",
+    "model_id",
+    "processing_region",
+    "parameters",
+    "tier",
+    "meter",
+    "prompt_hash",
+    "response_hash",
+    "response_payload",
+    "tokens_input",
+    "tokens_output",
+    "cost",
+    "fallback"
+  ],
+  "additionalProperties": false
+}

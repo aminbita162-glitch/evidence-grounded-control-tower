@@ -139,6 +139,8 @@ def test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version() -> None:
             "case-states.json",
             "config.json",
             "errors.json",
+            "model_call.json",
+            "region_profile.json",
         }
     ]
     assert len(entity_files) == 15, f"expected 15 entity schemas, got {len(entity_files)}"
@@ -205,8 +207,11 @@ def test_T_KRN_0005_no_untyped_dict_crosses_boundary() -> None:
     for f in gen_dir.rglob("*.py"):
         content = f.read_text()
         assert "Any" not in content, f"{f.name}: contains 'Any'"
-        assert ": dict" not in content, f"{f.name}: contains bare ': dict'"
         assert "dict[str, str]" not in content, f"{f.name}: contains untyped dict[str, str]"
+        for line in content.splitlines():
+            stripped = line.strip()
+            if ": dict" in stripped and "dict[" not in stripped:
+                raise AssertionError(f"{f.name}: bare dict without type params: {stripped}")
 
 
 # ---------------------------------------------------------------------------

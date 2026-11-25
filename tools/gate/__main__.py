@@ -453,6 +453,10 @@ def main() -> int:
             from tools.gate.gates.fuzz import main as fuzz_main
 
             return fuzz_main()
+        if command == "eval":
+            from tools.gate.gates.eval import main as eval_main
+
+            return eval_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)

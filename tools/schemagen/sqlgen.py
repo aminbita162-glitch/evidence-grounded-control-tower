@@ -39,6 +39,8 @@ _SKIP: set[str] = {
     "case-states.json",
     "config.json",
     "errors.json",
+    "model_call.json",
+    "region_profile.json",
 }
 
 _HEADER = (

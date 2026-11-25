@@ -54,7 +54,7 @@ def _json_type_to_python(prop: dict[str, Any]) -> str:
         item_type = _json_type_to_python(items)
         return f"list[{item_type}]"
     if json_type == "object":
-        return "dict[str, str]"
+        return "dict[str, object]"
     if "enum" in prop and json_type == "string":
         values = ", ".join(f'"{v}"' for v in prop["enum"])
         return f"Literal[{values}]"

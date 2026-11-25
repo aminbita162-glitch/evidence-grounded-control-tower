@@ -1,0 +1,13 @@
+{
+  "label": "SYNTHETIC",
+  "id": "eval-persian-document-fa",
+  "document_type": "customs_declaration",
+  "language": "fa",
+  "document_text": "اظهارنامه گمرکی\nشماره اظهارنامه: ۱۲۳۴۵\nواردکننده: شرکت بازرگانی پارس\nکشور مبدأ: ایران\nارزش کل: ۱۰۰۰۰۰۰ ریال",
+  "expected_fields": {
+    "declaration_number": "12345",
+    "importer": "شرکت بازرگانی پارس",
+    "country_of_origin": "ایران",
+    "total_value": "1000000"
+  }
+}

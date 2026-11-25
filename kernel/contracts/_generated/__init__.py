@@ -12,9 +12,11 @@ from kernel.contracts._generated.document import Document
 from kernel.contracts._generated.evidence_record import EvidenceRecord
 from kernel.contracts._generated.fact import Fact
 from kernel.contracts._generated.memory_entry import MemoryEntry
+from kernel.contracts._generated.model_call import ModelCallRecord
 from kernel.contracts._generated.pack import Pack
 from kernel.contracts._generated.passport import Passport
 from kernel.contracts._generated.proposal import Proposal
+from kernel.contracts._generated.region_profile import RegionProfile
 from kernel.contracts._generated.rule_result import RuleResult
 from kernel.contracts._generated.simulation import Simulation
 from kernel.contracts._generated.source import Source
@@ -29,9 +31,11 @@ __all__ = [
     "EvidenceRecord",
     "Fact",
     "MemoryEntry",
+    "ModelCallRecord",
     "Pack",
     "Passport",
     "Proposal",
+    "RegionProfile",
     "RuleResult",
     "Simulation",
     "Source",

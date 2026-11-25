@@ -1,0 +1,14 @@
+{
+  "label": "SYNTHETIC",
+  "id": "eval-bill-of-lading-en",
+  "document_type": "bill_of_lading",
+  "language": "en",
+  "document_text": "Bill of Lading\nB/L Number: BL-2024-0892\nVessel: SS Pacific Star\nPort of Loading: Shanghai\nPort of Discharge: Rotterdam\nContainer: MSCU-1234567",
+  "expected_fields": {
+    "bl_number": "BL-2024-0892",
+    "vessel": "SS Pacific Star",
+    "port_of_loading": "Shanghai",
+    "port_of_discharge": "Rotterdam",
+    "container": "MSCU-1234567"
+  }
+}
