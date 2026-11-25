@@ -250,9 +250,9 @@
 | T-GWY-0054 | Verified facts carry their locator | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0054_verified_facts_carry_locator |
 | T-GWY-0055 | Grounding exact match passes | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0055_grounding_exact_match |
 | T-GWY-0056 | Grounding normalized match passes | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0056_grounding_normalized_match |
-| T-GWY-0057 | SchemaVerifier rejects missing method | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0057_schema_verifier_missing_method |
-| T-GWY-0058 | RuleConformanceVerifier checks required fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0058_rule_conformance_missing |
-| T-GWY-0059 | RecomputationVerifier rejects UNKNOWN extracted fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0059_recomputation_unknown |
+| T-GWY-0057 | SchemaChecker rejects missing method | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0057_schema_verifier_missing_method |
+| T-GWY-0058 | RuleConformanceChecker checks required fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0058_rule_conformance_missing |
+| T-GWY-0059 | RecomputationChecker rejects UNKNOWN extracted fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0059_recomputation_unknown |
 | T-GWY-0060 | Dual extraction agreement yields ALLOW | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0060_dual_extraction_agreement |
 | T-GWY-0061 | ground_fields grounds multiple fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0061_ground_fields |
 | T-GWY-0062 | ProposeVerifyGate passes a valid proposal | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0062_gate_passes_valid |

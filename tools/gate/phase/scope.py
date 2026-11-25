@@ -244,6 +244,7 @@ def check_scope(
                     "adapters/postgres/migrations/",
                     "kernel/contracts/_generated/",
                     "test-house/gate/",
+                    "test-house/kernel/",
                 )
             )
             or path == "docs/dependencies.json"
