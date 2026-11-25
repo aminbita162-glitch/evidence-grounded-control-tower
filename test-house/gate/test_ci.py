@@ -29,6 +29,7 @@ _ALLOWED_RUN_PREFIXES = (
     "uv python",
     "uv pip",
     "pip install",
+    "docker pull",
     "python -m tools.gate",
     "gate ",
 )
