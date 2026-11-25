@@ -445,6 +445,14 @@ def main() -> int:
             from tools.gate.gates.perf import main as perf_main
 
             return perf_main()
+        if command == "containment":
+            from tools.gate.gates.containment import main as containment_main
+
+            return containment_main()
+        if command == "fuzz":
+            from tools.gate.gates.fuzz import main as fuzz_main
+
+            return fuzz_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)

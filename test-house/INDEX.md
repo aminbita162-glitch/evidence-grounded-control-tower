@@ -404,6 +404,22 @@
 | T-ORC-0048 | A0 allows only R (observe) | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0048_a0_observe_only |
 | T-ORC-0049 | A1 allows R and P but not E-rev or E-irrev | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0049_a1_propose_only |
 | T-ORC-0050 | A level change is recorded as a system-chain event | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0050_change_recorded |
+| T-ORC-0051 | Step cap monitor fires on exceeding the cap | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0051_step_cap_fires |
+| T-ORC-0052 | Loop monitor fires on repeated tool+args | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0052_loop_monitor_fires |
+| T-ORC-0053 | Transition monitor fires on out-of-DAG transition | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0053_transition_monitor_fires |
+| T-ORC-0054 | Budget burn monitor fires on exceeded burn rate | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0054_budget_burn_fires |
+| T-ORC-0055 | Output size monitor fires on oversized output | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0055_output_size_fires |
+| T-ORC-0056 | Verification failure monitor fires on repeated failures | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0056_verification_failure_fires |
+| T-ORC-0057 | Policy denial monitor fires on repeated denials | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0057_policy_denial_fires |
+| T-ORC-0058 | Pause case kill switch rejects new commands | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0058_pause_case_rejects |
+| T-ORC-0059 | Disable capability kill switch rejects | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0059_disable_capability_rejects |
+| T-ORC-0060 | Tenant freeze rejects new commands | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0060_tenant_freeze_rejects |
+| T-ORC-0061 | Tenant freeze is lifted only by the tenant administrator | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0061_tenant_freeze_lift_requires_admin |
+| T-ORC-0062 | Deployment freeze is lifted only by two platform operators | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0062_deployment_freeze_requires_two |
+| T-ORC-0063 | A kill switch records a system-chain event | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0063_kill_switch_records_event |
+| T-ORC-0064 | Monitor suite runs all monitors and returns first violation | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0064_suite_returns_first_violation |
+| T-ORC-0065 | A clean case does not trigger any monitor | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0065_clean_case_no_violation |
+| T-ORC-0066 | Short fuzz of messages finds no crash | fast | containment/test_T_ORC_0066_fuzz.py | test_T_ORC_0066_fuzz_no_crash |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
