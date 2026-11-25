@@ -23,12 +23,12 @@ class ModelCallRecord(BaseModel):
     fallback: bool
     meter: Literal["extraction", "other"]
     model_id: str
-    parameters: dict[str, str]
+    parameters: dict[str, object]
     processing_region: str
     prompt_hash: str
     provider: str
     response_hash: str
-    response_payload: dict[str, str]
+    response_payload: dict[str, object]
     schema_version: int
     tenant_id: str
     tier: Literal["smallest", "middle", "upper", "highest"]
