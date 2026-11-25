@@ -269,14 +269,17 @@ def test_T_ORC_0008_idempotent_execution() -> None:
 @pytest.mark.fast
 def test_T_ORC_0009_config_hash_deterministic() -> None:
     """Two identical DAGs produce the same configuration hash."""
-    make = lambda: WorkflowDAG(  # noqa: E731
-        [
-            WorkflowStep("s1", "ROLE-INTAKE", "INGESTED"),
-            WorkflowStep("s2", "ROLE-COMPLIANCE", "EVALUATED"),
-        ],
-        [WorkflowEdge("s1", "s2")],
-        initial_state="CREATED",
-    )
+
+    def make() -> WorkflowDAG:
+        return WorkflowDAG(
+            [
+                WorkflowStep("s1", "ROLE-INTAKE", "INGESTED"),
+                WorkflowStep("s2", "ROLE-COMPLIANCE", "EVALUATED"),
+            ],
+            [WorkflowEdge("s1", "s2")],
+            initial_state="CREATED",
+        )
+
     assert make().config_hash() == make().config_hash()
 
 

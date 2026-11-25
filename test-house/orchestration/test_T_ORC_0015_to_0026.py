@@ -206,7 +206,9 @@ def test_T_ORC_0021_command_in_value_rejected() -> None:
 def test_T_ORC_0022_failure_never_allow() -> None:
     """No role's failure mode is ALLOW."""
     for role_id, contract in ROLE_CONTRACTS.items():
-        assert contract.failure_mode != "ALLOW", f"{role_id} failure_mode is ALLOW"
+        assert contract.failure_mode in ("ABSTAIN", "BLOCKED", "ESCALATE", "FAILED"), (
+            f"{role_id} failure_mode is {contract.failure_mode}"
+        )
 
 
 # ---------------------------------------------------------------------------
