@@ -1,6 +1,6 @@
 """Propose–Verify–Gate (Part 3 §3.7, P08-T05).
 
-Proposals are committed by hash before review.  Deterministic verifiers
+Proposals are committed by hash before review.  Deterministic checkers
 check schema validity, grounding, rule conformance and recomputation.
 A failed verification rejects the proposal and is recorded, never
 repaired.  PROPOSED facts become VERIFIED only through grounding or
@@ -23,11 +23,11 @@ from kernel.extract.grounding import ground_fields
 __all__ = [
     "Proposal",
     "VerificationResult",
-    "Verifier",
-    "SchemaVerifier",
-    "GroundingVerifier",
-    "RuleConformanceVerifier",
-    "RecomputationVerifier",
+    "Checker",
+    "SchemaChecker",
+    "GroundingChecker",
+    "RuleConformanceChecker",
+    "RecomputationChecker",
     "ProposeVerifyGate",
     "DualExtractionResult",
     "ProposalError",
@@ -60,18 +60,18 @@ class VerificationResult:
     """The result of verifying a proposal.
 
     Attributes:
-        passed: True if all verifiers passed.
+        passed: True if all checkers passed.
         reason: Explanation of the result.
-        verifier_name: Name of the verifier that failed (if any).
+        checker_name: Name of the checker that failed (if any).
     """
 
     passed: bool
     reason: str
-    verifier_name: str = ""
+    checker_name: str = ""
 
 
-class Verifier(Protocol):
-    """A deterministic verifier for proposals."""
+class Checker(Protocol):
+    """A deterministic checker for proposals."""
 
     def verify(self, proposal: Proposal, context: Mapping[str, object]) -> VerificationResult: ...
 
@@ -85,7 +85,7 @@ def _compute_proposal_hash(fields: list[ExtractedField]) -> str:
     return hashlib.sha256(content.encode()).hexdigest()
 
 
-class SchemaVerifier:
+class SchemaChecker:
     """Verifies that every field has a locator and method."""
 
     def verify(self, proposal: Proposal, context: Mapping[str, object]) -> VerificationResult:
@@ -94,18 +94,18 @@ class SchemaVerifier:
                 return VerificationResult(
                     passed=False,
                     reason=f"field {f.name!r} missing locator document_id",
-                    verifier_name="schema",
+                    checker_name="schema",
                 )
             if f.method == "":
                 return VerificationResult(
                     passed=False,
                     reason=f"field {f.name!r} missing method",
-                    verifier_name="schema",
+                    checker_name="schema",
                 )
         return VerificationResult(passed=True, reason="schema ok")
 
 
-class GroundingVerifier:
+class GroundingChecker:
     """Verifies that every field is grounded in the document text."""
 
     def verify(self, proposal: Proposal, context: Mapping[str, object]) -> VerificationResult:
@@ -114,7 +114,7 @@ class GroundingVerifier:
             return VerificationResult(
                 passed=False,
                 reason="document_text not provided in context",
-                verifier_name="grounding",
+                checker_name="grounding",
             )
         results = ground_fields(proposal.fields, document_text)
         for r in results:
@@ -122,12 +122,12 @@ class GroundingVerifier:
                 return VerificationResult(
                     passed=False,
                     reason=f"ungrounded field {r.field_name!r}: {r.reason}",
-                    verifier_name="grounding",
+                    checker_name="grounding",
                 )
         return VerificationResult(passed=True, reason="grounding ok")
 
 
-class RuleConformanceVerifier:
+class RuleConformanceChecker:
     """Verifies that fields conform to simple rules (non-empty required fields)."""
 
     def verify(self, proposal: Proposal, context: Mapping[str, object]) -> VerificationResult:
@@ -140,12 +140,12 @@ class RuleConformanceVerifier:
                 return VerificationResult(
                     passed=False,
                     reason=f"missing required field {req!r}",
-                    verifier_name="rule_conformance",
+                    checker_name="rule_conformance",
                 )
         return VerificationResult(passed=True, reason="rule conformance ok")
 
 
-class RecomputationVerifier:
+class RecomputationChecker:
     """Recomputes numeric fields to verify they match the source."""
 
     def verify(self, proposal: Proposal, context: Mapping[str, object]) -> VerificationResult:
@@ -154,7 +154,7 @@ class RecomputationVerifier:
                 return VerificationResult(
                     passed=False,
                     reason=f"extracted field {f.name!r} has UNKNOWN value",
-                    verifier_name="recomputation",
+                    checker_name="recomputation",
                 )
         return VerificationResult(passed=True, reason="recomputation ok")
 
@@ -163,24 +163,24 @@ class RecomputationVerifier:
 class ProposeVerifyGate:
     """The Propose–Verify–Gate stage.
 
-    Runs deterministic verifiers in order.  A failed verification rejects
+    Runs deterministic checkers in order.  A failed verification rejects
     the proposal and is recorded, never repaired.  A proposal changed
     after commitment cannot be approved (hash mismatch).
     """
 
-    verifiers: list[Verifier] = field(default_factory=list)
+    checkers: list[Checker] = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        if not self.verifiers:
-            self.verifiers = [
-                SchemaVerifier(),
-                GroundingVerifier(),
-                RuleConformanceVerifier(),
-                RecomputationVerifier(),
+        if not self.checkers:
+            self.checkers = [
+                SchemaChecker(),
+                GroundingChecker(),
+                RuleConformanceChecker(),
+                RecomputationChecker(),
             ]
 
     def verify(self, proposal: Proposal, context: Mapping[str, object]) -> VerificationResult:
-        """Verify a proposal through all verifiers.
+        """Verify a proposal through all checkers.
 
         A failed verification rejects the proposal immediately.
         """
@@ -189,13 +189,13 @@ class ProposeVerifyGate:
             return VerificationResult(
                 passed=False,
                 reason="proposal changed after commitment (hash mismatch)",
-                verifier_name="commitment",
+                checker_name="commitment",
             )
-        for verifier in self.verifiers:
-            result = verifier.verify(proposal, context)
+        for checker in self.checkers:
+            result = checker.verify(proposal, context)
             if not result.passed:
                 return result
-        return VerificationResult(passed=True, reason="all verifiers passed")
+        return VerificationResult(passed=True, reason="all checkers passed")
 
 
 @dataclass(frozen=True)

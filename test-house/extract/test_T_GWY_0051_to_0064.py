@@ -2,7 +2,7 @@
 
 Test IDs: T-GWY-0051 to T-GWY-0064.
 Covers: proposal commitment hash, ungrounded claim rejection, dual
-extraction HOLD, verified fact locators, schema/grounding/rule verifiers.
+extraction HOLD, verified fact locators, schema/grounding/rule checkers.
 
 Spec: Part 3 §3.7; D-06 S2; P08-T05.
 """
@@ -18,9 +18,9 @@ from kernel.extract.grounding import ground_field, ground_fields
 from kernel.proposals import (
     Proposal,
     ProposeVerifyGate,
-    RecomputationVerifier,
-    RuleConformanceVerifier,
-    SchemaVerifier,
+    RecomputationChecker,
+    RuleConformanceChecker,
+    SchemaChecker,
     VerificationResult,
     dual_extract,
 )
@@ -232,10 +232,10 @@ def test_T_GWY_0056_grounding_normalized_match() -> None:
 
 
 # --------------------------------------------------------------------------- #
-# T-GWY-0057 — SchemaVerifier rejects missing method
+# T-GWY-0057 — SchemaChecker rejects missing method
 # --------------------------------------------------------------------------- #
 # id: T-GWY-0057
-# title: SchemaVerifier rejects missing method
+# title: SchemaChecker rejects missing method
 # purpose: Verify the schema verifier checks method presence
 # level: fast
 # requirement: P08-T05
@@ -247,7 +247,7 @@ def test_T_GWY_0056_grounding_normalized_match() -> None:
 
 @pytest.mark.fast
 def test_T_GWY_0057_schema_verifier_missing_method() -> None:
-    """SchemaVerifier rejects missing method."""
+    """SchemaChecker rejects missing method."""
     field = _make_field(method="")
     fields = [field]
     proposal = Proposal(
@@ -256,17 +256,17 @@ def test_T_GWY_0057_schema_verifier_missing_method() -> None:
         committed_hash=_proposal_hash(fields),
         fields=fields,
     )
-    verifier = SchemaVerifier()
+    verifier = SchemaChecker()
     result = verifier.verify(proposal, {})
     assert not result.passed
     assert "method" in result.reason
 
 
 # --------------------------------------------------------------------------- #
-# T-GWY-0058 — RuleConformanceVerifier checks required fields
+# T-GWY-0058 — RuleConformanceChecker checks required fields
 # --------------------------------------------------------------------------- #
 # id: T-GWY-0058
-# title: RuleConformanceVerifier checks required fields
+# title: RuleConformanceChecker checks required fields
 # purpose: Verify the rule verifier rejects missing required fields
 # level: fast
 # requirement: P08-T05
@@ -278,7 +278,7 @@ def test_T_GWY_0057_schema_verifier_missing_method() -> None:
 
 @pytest.mark.fast
 def test_T_GWY_0058_rule_conformance_missing() -> None:
-    """RuleConformanceVerifier checks required fields."""
+    """RuleConformanceChecker checks required fields."""
     field = _make_field(name="field_a")
     fields = [field]
     proposal = Proposal(
@@ -287,17 +287,17 @@ def test_T_GWY_0058_rule_conformance_missing() -> None:
         committed_hash=_proposal_hash(fields),
         fields=fields,
     )
-    verifier = RuleConformanceVerifier()
+    verifier = RuleConformanceChecker()
     result = verifier.verify(proposal, {"required_fields": ["field_a", "field_b"]})
     assert not result.passed
     assert "field_b" in result.reason
 
 
 # --------------------------------------------------------------------------- #
-# T-GWY-0059 — RecomputationVerifier rejects UNKNOWN extracted fields
+# T-GWY-0059 — RecomputationChecker rejects UNKNOWN extracted fields
 # --------------------------------------------------------------------------- #
 # id: T-GWY-0059
-# title: RecomputationVerifier rejects UNKNOWN extracted fields
+# title: RecomputationChecker rejects UNKNOWN extracted fields
 # purpose: Verify recomputation rejects fields with UNKNOWN value
 # level: fast
 # requirement: P08-T05
@@ -309,7 +309,7 @@ def test_T_GWY_0058_rule_conformance_missing() -> None:
 
 @pytest.mark.fast
 def test_T_GWY_0059_recomputation_unknown() -> None:
-    """RecomputationVerifier rejects UNKNOWN extracted fields."""
+    """RecomputationChecker rejects UNKNOWN extracted fields."""
     field = _make_field(value="UNKNOWN", status="EXTRACTED")
     fields = [field]
     proposal = Proposal(
@@ -318,7 +318,7 @@ def test_T_GWY_0059_recomputation_unknown() -> None:
         committed_hash=_proposal_hash(fields),
         fields=fields,
     )
-    verifier = RecomputationVerifier()
+    verifier = RecomputationChecker()
     result = verifier.verify(proposal, {})
     assert not result.passed
 
@@ -380,7 +380,7 @@ def test_T_GWY_0061_ground_fields() -> None:
 # level: fast
 # requirement: P08-T05
 # input: a valid proposal with correct hash and grounding
-# expected: all verifiers pass
+# expected: all checkers pass
 # risk: valid proposal rejected
 # capability: proposals
 

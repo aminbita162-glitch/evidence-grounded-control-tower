@@ -65,7 +65,7 @@ async def _empty_model(text: str, schema: Mapping[str, object]) -> dict[str, obj
 # level: fast
 # requirement: P08-T04
 # input: an ExtractedField with empty document_id
-# expected: SchemaVerifier rejects it
+# expected: SchemaChecker rejects it
 # risk: unlocated field accepted
 # capability: extract
 
@@ -73,7 +73,7 @@ async def _empty_model(text: str, schema: Mapping[str, object]) -> dict[str, obj
 @pytest.mark.fast
 def test_T_GWY_0037_field_without_locator_rejected() -> None:
     """A field without a locator is rejected."""
-    from kernel.proposals import Proposal, SchemaVerifier
+    from kernel.proposals import Proposal, SchemaChecker
 
     bad_field = ExtractedField(
         name="invoice_number",
@@ -88,7 +88,7 @@ def test_T_GWY_0037_field_without_locator_rejected() -> None:
         committed_hash="0" * 64,
         fields=[bad_field],
     )
-    verifier = SchemaVerifier()
+    verifier = SchemaChecker()
     result = verifier.verify(proposal, {})
     assert not result.passed
     assert "locator" in result.reason
