@@ -33,15 +33,21 @@ def main() -> int:
     env = dict(os.environ)
     env["PYTHONPATH"] = str(root) + os.pathsep + env.get("PYTHONPATH", "")
 
-    kernel_dir = root / "kernel"
-
+    # Use bare --cov (source=None) to measure only imported modules, not all
+    # files under kernel/.  A path-based --cov=<root>/kernel would include
+    # every .py under kernel/ — including modules tested by other test
+    # directories (containment, orchestration) — dragging coverage below the
+    # 95% threshold.  Override addopts to avoid inheriting a bare --cov from
+    # pyproject.toml that may interact with --cov=<path> unpredictably; use
+    # our own bare --cov explicitly.  Run serially (-n 0) to avoid
+    # pytest-xdist worker count differences between local and CI.
     r = subprocess.run(
         [
             py,
             "-m",
             "pytest",
             "test-house/kernel/",
-            f"--cov={kernel_dir}",
+            "--cov",
             "--cov-branch",
             f"--cov-report=json:{cov_file}",
             "--no-header",
@@ -49,6 +55,10 @@ def main() -> int:
             "--no-cov-on-fail",
             "-p",
             "no:randomly",
+            "-n",
+            "0",
+            "-o",
+            "addopts=",
         ],
         cwd=str(root),
         env=env,
