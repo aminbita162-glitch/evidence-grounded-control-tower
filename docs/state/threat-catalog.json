@@ -79,6 +79,21 @@
       "id": "ATK-016",
       "name": "runaway behavior",
       "category": "containment"
+    },
+    {
+      "id": "ATK-017",
+      "name": "prompt injection through documents",
+      "category": "injection"
+    },
+    {
+      "id": "ATK-018",
+      "name": "data exfiltration through model output",
+      "category": "exfiltration"
+    },
+    {
+      "id": "ATK-019",
+      "name": "tool authority escalation",
+      "category": "escalation"
     }
   ]
 }

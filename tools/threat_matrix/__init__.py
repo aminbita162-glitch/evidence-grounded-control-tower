@@ -41,6 +41,9 @@ ATTACK_CATALOG: list[dict[str, str]] = [
     {"id": "ATK-014", "name": "agent goal drift", "category": "containment"},
     {"id": "ATK-015", "name": "confused deputy", "category": "containment"},
     {"id": "ATK-016", "name": "runaway behavior", "category": "containment"},
+    {"id": "ATK-017", "name": "prompt injection through documents", "category": "injection"},
+    {"id": "ATK-018", "name": "data exfiltration through model output", "category": "exfiltration"},
+    {"id": "ATK-019", "name": "tool authority escalation", "category": "escalation"},
 ]
 
 #: P05 threat-to-test mappings for the evidence ledger.
@@ -97,6 +100,20 @@ THREAT_MATRIX: dict[str, list[str]] = {
         "T-ORC-0051",
         "T-ORC-0052",
         "T-ORC-0054",
+    ],
+    #: P08 model gateway threat-to-test mappings.
+    "prompt_injection_through_documents": [
+        "T-GWY-0039",
+        "T-GWY-0077",
+        "T-GWY-0078",
+    ],
+    "data_exfiltration_through_model": [
+        "T-GWY-0079",
+        "T-GWY-0080",
+    ],
+    "tool_authority_escalation": [
+        "T-GWY-0081",
+        "T-GWY-0082",
     ],
 }
 
