@@ -19,6 +19,7 @@ __all__ = [
     "Scenario",
     "KILL_POINTS",
     "LEDGER_KILL_POINTS",
+    "ORCHESTRATOR_KILL_POINTS",
 ]
 
 KILL_POINTS = [
@@ -33,6 +34,14 @@ LEDGER_KILL_POINTS = [
     "append",
     "checkpoint",
     "export",
+]
+
+#: P07 orchestrator kill points (Part 3 §3.30, P07-T07).
+ORCHESTRATOR_KILL_POINTS = [
+    "before_step",
+    "after_step_before_record",
+    "during_budget_check",
+    "during_human_gate",
 ]
 
 

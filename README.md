@@ -65,7 +65,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P04 | Persistence and tenancy baseline | ✓ November 2026 |
 | P05 | Evidence Ledger | ✓ November 2026 |
 | P06 | Rule Engine | ✓ Nov 2026 |
-| P07 | Orchestration and containment | ☐ |
+| P07 | Orchestration and containment | ✓ Nov 2026 |
 | P08 | Model Gateway and Extract stage | ☐ |
 | P09 | Synthetic data and bench | ☐ |
 | P10 | API foundation, observability and Budget Governor | ☐ |

@@ -37,6 +37,10 @@ ATTACK_CATALOG: list[dict[str, str]] = [
     },
     {"id": "ATK-011", "name": "existence oracle through status codes", "category": "oracle"},
     {"id": "ATK-012", "name": "cache key collision and cache poisoning", "category": "cache"},
+    {"id": "ATK-013", "name": "tool abuse", "category": "containment"},
+    {"id": "ATK-014", "name": "agent goal drift", "category": "containment"},
+    {"id": "ATK-015", "name": "confused deputy", "category": "containment"},
+    {"id": "ATK-016", "name": "runaway behavior", "category": "containment"},
 ]
 
 #: P05 threat-to-test mappings for the evidence ledger.
@@ -74,6 +78,25 @@ THREAT_MATRIX: dict[str, list[str]] = {
     "salt_loss": [
         "T-LED-0009",
         "T-LED-0044",
+    ],
+    #: P07 containment threat-to-test mappings.
+    "tool_abuse": [
+        "T-ORC-0027",
+        "T-ORC-0030",
+        "T-ORC-0031",
+    ],
+    "goal_drift": [
+        "T-ORC-0079",
+        "T-ORC-0080",
+    ],
+    "confused_deputy": [
+        "T-ORC-0085",
+        "T-ORC-0086",
+    ],
+    "runaway": [
+        "T-ORC-0051",
+        "T-ORC-0052",
+        "T-ORC-0054",
     ],
 }
 

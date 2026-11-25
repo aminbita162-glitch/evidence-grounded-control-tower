@@ -1,0 +1,49 @@
+# P07 phase risk review — P07-RISK.
+#
+# P07 implemented the orchestration and containment layer: the workflow
+# DAG and deterministic Manager, the typed agent runtime with role
+# contracts, the deny-by-default Tool Broker with policy as code, action
+# classes and autonomy levels, behavior monitors and kill switches, the
+# Human Gate, and the adversarial containment suite with threat mapping.
+#
+# Controls verified by the T-ORC test suite:
+#   - Agent autonomy (T-ORC-0043 to T-ORC-0050): E-irrev without a bound
+#     approval is blocked at every level; no level above A2 can be
+#     configured; defaults hold (A1); level changes are recorded as
+#     system-chain events.
+#   - Tool abuse (T-ORC-0027 to T-ORC-0042): an ungranted tool, an
+#     over-rate call and an off-list host are denied; a model cannot
+#     name a URL, host, path or command; every policy has allow and
+#     deny cases; each call is recorded with input and output hashes.
+#   - Approval bypass (T-ORC-0067 to T-ORC-0078): approval of a changed
+#     proposal is invalid (hash binding); an override by the same
+#     reviewer twice is refused; the Decision record is unchanged after
+#     an override (I11); the second concurrent approval receives a
+#     conflict; a reviewer role is required; approvals expire with the
+#     case state.
+#   - Kill switch failure (T-ORC-0058 to T-ORC-0063): each kill switch
+#     (pause case, disable capability, freeze tenant, freeze deployment)
+#     rejects new commands when active; a tenant freeze is lifted only
+#     by the tenant administrator; the deployment freeze only by two
+#     platform operators; each activation is recorded as a system-chain
+#     event.
+#   - Budget runaway (T-ORC-0006, T-ORC-0014, T-ORC-0051, T-ORC-0054):
+#     a role cannot exceed its budget share; budget exhaustion moves
+#     the case to BLOCKED; the step cap and budget burn monitors fire
+#     on their seeded violations.
+#   - Agent goal drift (T-ORC-0079, T-ORC-0080): a hostile instruction
+#     to change goals is rejected by the typed runtime; a hostile
+#     tool call is denied by the broker.
+#   - Containment completeness (T-ORC-0087): 100 percent of the
+#     adversarial set ends without an effect (quarantine, ABSTAIN or
+#     ESCALATE, never ALLOW).
+#   - Crash recovery (T-ORC-0088): crash recovery of an interrupted
+#     workflow resumes without duplicate effects (idempotent).
+#   - Threat mapping (T-ORC-0089, T-ORC-0090): tool abuse, goal drift,
+#     confused deputy and runaway items of the threat catalog have
+#     tests; orchestrator kill points are registered in the fault lab.
+#
+# Phase: P07
+# Class: L
+# Capabilities: none
+# Gates activated: containment, fuzz (short)

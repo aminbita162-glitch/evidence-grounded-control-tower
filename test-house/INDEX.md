@@ -354,6 +354,96 @@
 | T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
 | T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
 | T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
+| T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
+| T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
+| T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |
+| T-ORC-0004 | An edge to a non-existent step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0004_edge_to_missing_step_rejected |
+| T-ORC-0005 | A transition outside the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0005_transition_outside_dag_rejected |
+| T-ORC-0006 | A role cannot exceed its budget share | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0006_role_exceeds_budget |
+| T-ORC-0007 | A timeout moves a case to BLOCKED and never approves | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0007_timeout_moves_to_blocked |
+| T-ORC-0008 | Repeated delivery of one step executes once | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0008_idempotent_execution |
+| T-ORC-0009 | The DAG configuration hash is deterministic | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0009_config_hash_deterministic |
+| T-ORC-0010 | The Manager records every step | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0010_steps_recorded |
+| T-ORC-0011 | The Manager chooses the deterministic path | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0011_deterministic_path |
+| T-ORC-0012 | The case budget is split among roles | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0012_budget_split_among_roles |
+| T-ORC-0013 | State transitions follow the case state machine | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0013_state_transitions |
+| T-ORC-0014 | A budget exhaustion moves the case to BLOCKED via run() | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0014_budget_exhaustion_blocks |
+| T-ORC-0015 | A valid input message is accepted | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0015_valid_input_accepted |
+| T-ORC-0016 | An invalid message missing a required field is rejected | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0016_missing_required_rejected |
+| T-ORC-0017 | An unknown field in a message is rejected | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0017_unknown_field_rejected |
+| T-ORC-0018 | A valid output message is accepted and recorded | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0018_valid_output_accepted |
+| T-ORC-0019 | An output not matching the port type is refused | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0019_invalid_output_refused |
+| T-ORC-0020 | A command in an explanation field has no effect | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0020_command_in_explanation_no_effect |
+| T-ORC-0021 | A command in a non-explanation field is rejected | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0021_command_in_value_rejected |
+| T-ORC-0022 | A worker failure never yields ALLOW | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0022_failure_never_allow |
+| T-ORC-0023 | Compliance failure ends in ABSTAIN | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0023_compliance_failure_abstain |
+| T-ORC-0024 | Risk failure ends in ESCALATE | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0024_risk_failure_escalate |
+| T-ORC-0025 | An unknown role raises RuntimeError_ | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0025_unknown_role_rejected |
+| T-ORC-0026 | Every role in the closed list has a contract | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0026_all_roles_have_contracts |
+| T-ORC-0027 | An ungranted tool is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0027_ungranted_tool_denied |
+| T-ORC-0028 | A granted tool is allowed | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0028_granted_tool_allowed |
+| T-ORC-0029 | A scope mismatch is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0029_scope_mismatch_denied |
+| T-ORC-0030 | An over-rate call is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0030_over_rate_denied |
+| T-ORC-0031 | An off-list host is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0031_off_list_host_denied |
+| T-ORC-0032 | An on-list host is allowed | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0032_on_list_host_allowed |
+| T-ORC-0033 | A model naming a URL is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0033_model_url_denied |
+| T-ORC-0034 | A model naming a file path is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0034_model_path_denied |
+| T-ORC-0035 | A model naming a destructive command is denied | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0035_model_command_denied |
+| T-ORC-0036 | Every call is recorded | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0036_every_call_recorded |
+| T-ORC-0037 | Each call record has input and output hashes | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0037_hashes_in_record |
+| T-ORC-0038 | Every policy has allow and deny cases | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0038_every_policy_has_cases |
+| T-ORC-0039 | Policy allow cases evaluate to ALLOW | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0039_allow_cases_pass |
+| T-ORC-0040 | Policy deny cases evaluate to DENY | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0040_deny_cases_fail |
+| T-ORC-0041 | run_policy_tests reports all cases passing | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0041_policy_tests_all_pass |
+| T-ORC-0042 | An unknown policy raises PolicyError | fast | orchestration/test_T_ORC_0027_to_0042.py | test_T_ORC_0042_unknown_policy_raises |
+| T-ORC-0043 | E-irrev without a bound approval is blocked at A0 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0043_eirrev_blocked_at_a0 |
+| T-ORC-0044 | E-irrev without a bound approval is blocked at A2 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0044_eirrev_blocked_without_approval |
+| T-ORC-0045 | E-irrev with a bound approval is allowed at A2 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0045_eirrev_allowed_with_approval |
+| T-ORC-0046 | No level above A2 can be configured | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0046_no_level_above_a2 |
+| T-ORC-0047 | The default level is A1 | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0047_default_is_a1 |
+| T-ORC-0048 | A0 allows only R (observe) | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0048_a0_observe_only |
+| T-ORC-0049 | A1 allows R and P but not E-rev or E-irrev | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0049_a1_propose_only |
+| T-ORC-0050 | A level change is recorded as a system-chain event | fast | orchestration/test_T_ORC_0043_to_0050.py | test_T_ORC_0050_change_recorded |
+| T-ORC-0051 | Step cap monitor fires on exceeding the cap | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0051_step_cap_fires |
+| T-ORC-0052 | Loop monitor fires on repeated tool+args | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0052_loop_monitor_fires |
+| T-ORC-0053 | Transition monitor fires on out-of-DAG transition | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0053_transition_monitor_fires |
+| T-ORC-0054 | Budget burn monitor fires on exceeded burn rate | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0054_budget_burn_fires |
+| T-ORC-0055 | Output size monitor fires on oversized output | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0055_output_size_fires |
+| T-ORC-0056 | Verification failure monitor fires on repeated failures | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0056_verification_failure_fires |
+| T-ORC-0057 | Policy denial monitor fires on repeated denials | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0057_policy_denial_fires |
+| T-ORC-0058 | Pause case kill switch rejects new commands | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0058_pause_case_rejects |
+| T-ORC-0059 | Disable capability kill switch rejects | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0059_disable_capability_rejects |
+| T-ORC-0060 | Tenant freeze rejects new commands | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0060_tenant_freeze_rejects |
+| T-ORC-0061 | Tenant freeze is lifted only by the tenant administrator | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0061_tenant_freeze_lift_requires_admin |
+| T-ORC-0062 | Deployment freeze is lifted only by two platform operators | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0062_deployment_freeze_requires_two |
+| T-ORC-0063 | A kill switch records a system-chain event | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0063_kill_switch_records_event |
+| T-ORC-0064 | Monitor suite runs all monitors and returns first violation | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0064_suite_returns_first_violation |
+| T-ORC-0065 | A clean case does not trigger any monitor | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0065_clean_case_no_violation |
+| T-ORC-0066 | Short fuzz of messages finds no crash | fast | containment/test_T_ORC_0066_fuzz.py | test_T_ORC_0066_fuzz_no_crash |
+| T-ORC-0067 | Approval of a changed proposal is invalid | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0067_changed_proposal_invalid |
+| T-ORC-0068 | A valid approval is accepted | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0068_valid_approval_accepted |
+| T-ORC-0069 | A rejection requires written justification | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0069_rejection_requires_justification |
+| T-ORC-0070 | An override is a separate record | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0070_override_is_separate_record |
+| T-ORC-0071 | An override by the same reviewer twice is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0071_override_same_reviewer_refused |
+| T-ORC-0072 | An override without a second reviewer is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0072_override_no_second_reviewer_refused |
+| T-ORC-0073 | The Decision record is unchanged after an override | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0073_decision_unchanged_after_override |
+| T-ORC-0074 | The second concurrent approval receives a conflict | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0074_concurrent_approval_conflict |
+| T-ORC-0075 | A reviewer role is required | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0075_reviewer_role_required |
+| T-ORC-0076 | Approvals expire with the case state | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0076_approval_expires_with_state |
+| T-ORC-0077 | A rejection is recorded | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0077_rejection_recorded |
+| T-ORC-0078 | An override without justification is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0078_override_without_justification_refused |
+| T-ORC-0079 | Hostile instruction to change goals ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0079_goal_change_rejected |
+| T-ORC-0080 | Hostile instruction to call tools ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0080_tool_call_denied |
+| T-ORC-0081 | Hostile instruction to exfiltrate ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0081_exfiltration_denied |
+| T-ORC-0082 | Hostile instruction to loop ends in quarantine | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0082_loop_detected |
+| T-ORC-0083 | Hostile instruction to exceed budget ends in BLOCKED | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0083_budget_exceeded_blocked |
+| T-ORC-0084 | Hostile instruction to skip the Human Gate is rejected | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0084_skip_human_gate_rejected |
+| T-ORC-0085 | Confused deputy: a frozen tenant cannot issue commands | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0085_confused_deputy_frozen |
+| T-ORC-0086 | Confused deputy: a paused case cannot execute steps | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0086_paused_case_rejects |
+| T-ORC-0087 | 100 percent of the adversarial set ends without an effect | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0087_all_adversarial_no_effect |
+| T-ORC-0088 | Crash recovery resumes without duplicate effects | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0088_crash_recovery_no_duplicate |
+| T-ORC-0089 | Mapped threat items have tests | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0089_mapped_items_have_tests |
+| T-ORC-0090 | Orchestrator kill points are registered in the fault lab | fast | containment/test_T_ORC_0079_to_0090.py | test_T_ORC_0090_orchestrator_kill_points_registered |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |

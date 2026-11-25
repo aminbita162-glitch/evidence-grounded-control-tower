@@ -267,19 +267,19 @@ clean_fixture = "fixtures/perf_clean"
 
 [gate.containment]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.containment"
 timeout = 300
 activates_in = "P07"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/containment_violation"
+clean_fixture = "fixtures/containment_clean"
 
 [gate.fuzz]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.fuzz"
 timeout = 300
 activates_in = "P07"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/fuzz_violation"
+clean_fixture = "fixtures/fuzz_clean"
 
 [gate.eval]
 cadence = "P"
