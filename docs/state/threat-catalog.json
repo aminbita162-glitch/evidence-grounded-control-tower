@@ -59,6 +59,26 @@
       "id": "ATK-012",
       "name": "cache key collision and cache poisoning",
       "category": "cache"
+    },
+    {
+      "id": "ATK-013",
+      "name": "tool abuse",
+      "category": "containment"
+    },
+    {
+      "id": "ATK-014",
+      "name": "agent goal drift",
+      "category": "containment"
+    },
+    {
+      "id": "ATK-015",
+      "name": "confused deputy",
+      "category": "containment"
+    },
+    {
+      "id": "ATK-016",
+      "name": "runaway behavior",
+      "category": "containment"
     }
   ]
 }
