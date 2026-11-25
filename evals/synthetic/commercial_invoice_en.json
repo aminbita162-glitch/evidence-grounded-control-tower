@@ -1,0 +1,14 @@
+{
+  "label": "SYNTHETIC",
+  "id": "eval-commercial-invoice-en",
+  "document_type": "commercial_invoice",
+  "language": "en",
+  "document_text": "Commercial Invoice\nInvoice Number: INV-2024-0567\nSeller: Global Exports Ltd.\nBuyer: Beta Imports Inc.\nTotal Amount: 12500.00 USD\nCurrency: USD",
+  "expected_fields": {
+    "invoice_number": "INV-2024-0567",
+    "seller": "Global Exports Ltd.",
+    "buyer": "Beta Imports Inc.",
+    "total_amount": "12500.00 USD",
+    "currency": "USD"
+  }
+}

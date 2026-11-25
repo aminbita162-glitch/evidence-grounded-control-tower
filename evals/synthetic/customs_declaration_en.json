@@ -1,0 +1,14 @@
+{
+  "label": "SYNTHETIC",
+  "id": "eval-customs-declaration-en",
+  "document_type": "customs_declaration",
+  "language": "en",
+  "document_text": "Customs Declaration\nDeclaration Number: CD-2024-001\nImporter: Acme Trading Co.\nCountry of Origin: United States\nTotal Value: 5000 USD\nHS Code: 8471.30.00",
+  "expected_fields": {
+    "declaration_number": "CD-2024-001",
+    "importer": "Acme Trading Co.",
+    "country_of_origin": "United States",
+    "total_value": "5000 USD",
+    "hs_code": "8471.30.00"
+  }
+}

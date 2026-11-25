@@ -283,11 +283,11 @@ clean_fixture = "fixtures/fuzz_clean"
 
 [gate.eval]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.eval"
 timeout = 300
 activates_in = "P08"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/eval_violation"
+clean_fixture = "fixtures/eval_clean"
 
 [gate.e2e]
 cadence = "P"

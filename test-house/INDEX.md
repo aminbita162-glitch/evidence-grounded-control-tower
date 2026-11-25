@@ -194,6 +194,102 @@
 | T-GATE-SELFTEST-T06 | selftest passes against the hygiene, secrets, security, deps, license | slow | gate/test_gates.py | test_selftest_t06_gates |
 | T-GATE-SETS | Set selection resolves quick / phase / nightly correctly | fast | gate/test_runner.py | test_select_sets |
 | T-GATE-STUB | stub.txt equals the two lines of <<<P7-STUB>>> and is protected | fast | gate/test_protect.py | test_stub_txt_matches_directive_bytes |
+| T-GWY-0001 | A recorded call replays identically | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0001_recorded_call_replays_identically |
+| T-GWY-0002 | An unknown prompt in recorded mode fails closed | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0002_unknown_prompt_fails_closed |
+| T-GWY-0003 | Every call writes a record | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0003_every_call_writes_record |
+| T-GWY-0004 | No module outside adapters/model/ imports a provider client | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0004_no_provider_import_outside_adapters |
+| T-GWY-0005 | compute_prompt_hash is deterministic | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0005_prompt_hash_deterministic |
+| T-GWY-0006 | compute_prompt_hash differs for different prompts | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0006_prompt_hash_differs |
+| T-GWY-0007 | ModelCallRequest is frozen | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0007_request_is_frozen |
+| T-GWY-0008 | ModelCallResponse is frozen | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0008_response_is_frozen |
+| T-GWY-0009 | Schema validation passes for valid output | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0009_schema_validation_passes |
+| T-GWY-0010 | Schema validation fails for invalid output | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0010_schema_validation_fails |
+| T-GWY-0011 | Gateway validates output and raises SchemaValidationError on invalid | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0011_gateway_validates_output |
+| T-GWY-0012 | to_record produces a ModelCallRecord with all fields | fast | gateway/test_T_GWY_0001_to_0012.py | test_T_GWY_0012_to_record_all_fields |
+| T-GWY-0013 | PrimaryAdapter call returns a ModelCallResponse | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0013_primary_adapter_call |
+| T-GWY-0014 | SecondaryAdapter call returns a ModelCallResponse | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0014_secondary_adapter_call |
+| T-GWY-0015 | LocalAdapter call returns a ModelCallResponse | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0015_local_adapter_call |
+| T-GWY-0016 | All three adapters share the same contract (GatewayPort) | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0016_all_adapters_share_contract |
+| T-GWY-0017 | Switching provider is configuration only | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0017_switching_provider_config_only |
+| T-GWY-0018 | PrimaryAdapter has pinned model_id | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0018_primary_pinned_model_id |
+| T-GWY-0019 | SecondaryAdapter has pinned model_id | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0019_secondary_pinned_model_id |
+| T-GWY-0020 | LocalAdapter has pinned model_id | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0020_local_pinned_model_id |
+| T-GWY-0021 | An identifier change without a recorded evaluation is rejected | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0021_identifier_change_rejected |
+| T-GWY-0022 | PrimaryAdapter declares processing_region | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0022_primary_region |
+| T-GWY-0023 | SecondaryAdapter declares processing_region | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0023_secondary_region |
+| T-GWY-0024 | LocalAdapter declares processing_region | fast | gateway/test_T_GWY_0013_to_0024.py | test_T_GWY_0024_local_region |
+| T-GWY-0025 | A timeout ends in fallback or recorded refusal | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0025_timeout_fallback |
+| T-GWY-0026 | Circuit breaker opens after max_failures | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0026_circuit_opens |
+| T-GWY-0027 | Circuit breaker blocks calls when open | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0027_circuit_blocks |
+| T-GWY-0028 | Bounded retry retries up to max_retries | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0028_bounded_retry |
+| T-GWY-0029 | Fallback to second adapter on failure | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0029_fallback_on_failure |
+| T-GWY-0030 | Fallback is recorded (response.fallback == True) | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0030_fallback_recorded |
+| T-GWY-0031 | Budget limits hold for call count | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0031_budget_calls_exceeded |
+| T-GWY-0032 | Budget limits hold for token count | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0032_budget_tokens_exceeded |
+| T-GWY-0033 | Cache hit never crosses tenants | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0033_cache_tenant_isolation |
+| T-GWY-0034 | Cache hit returns same response | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0034_cache_hit |
+| T-GWY-0035 | A refused call yields ABSTAIN or ESCALATE, never silent truncation | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0035_refused_call_explicit |
+| T-GWY-0036 | Deterministic path continues when model unavailable | fast | gateway/test_T_GWY_0025_to_0036.py | test_T_GWY_0036_deterministic_path_continues |
+| T-GWY-0037 | A field without a locator is rejected | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0037_field_without_locator_rejected |
+| T-GWY-0038 | A guessed field on a document lacking it counts as a defect | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0038_guessed_field_is_unknown |
+| T-GWY-0039 | An instruction inside a document has no effect on tools or flow | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0039_instruction_in_document_no_effect |
+| T-GWY-0040 | Extract produces fields matching the schema | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0040_extract_all_fields |
+| T-GWY-0041 | Every extracted field carries a locator | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0041_every_field_has_locator |
+| T-GWY-0042 | Every extracted field carries a method | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0042_every_field_has_method |
+| T-GWY-0043 | An unextractable field becomes UNKNOWN | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0043_unextractable_becomes_unknown |
+| T-GWY-0044 | ExtractRequest is frozen | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0044_extract_request_frozen |
+| T-GWY-0045 | ExtractedField is frozen | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0045_extracted_field_frozen |
+| T-GWY-0046 | FieldLocator is frozen | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0046_field_locator_frozen |
+| T-GWY-0047 | Extract is tool-less (model receives only text and schema) | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0047_extract_toolless |
+| T-GWY-0048 | Extract is secret-less | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0048_extract_secretless |
+| T-GWY-0049 | UNKNOWN constant is defined | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0049_unknown_constant |
+| T-GWY-0050 | ExtractResult has fields list | fast | extract/test_T_GWY_0037_to_0050.py | test_T_GWY_0050_extract_result_has_fields |
+| T-GWY-0051 | A proposal changed after commitment cannot be approved | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0051_changed_proposal_rejected |
+| T-GWY-0052 | Ungrounded claims are rejected | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0052_ungrounded_claims_rejected |
+| T-GWY-0053 | Dual extraction disagreement gives HOLD | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0053_dual_extraction_disagreement_hold |
+| T-GWY-0054 | Verified facts carry their locator | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0054_verified_facts_carry_locator |
+| T-GWY-0055 | Grounding exact match passes | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0055_grounding_exact_match |
+| T-GWY-0056 | Grounding normalized match passes | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0056_grounding_normalized_match |
+| T-GWY-0057 | SchemaVerifier rejects missing method | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0057_schema_verifier_missing_method |
+| T-GWY-0058 | RuleConformanceVerifier checks required fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0058_rule_conformance_missing |
+| T-GWY-0059 | RecomputationVerifier rejects UNKNOWN extracted fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0059_recomputation_unknown |
+| T-GWY-0060 | Dual extraction agreement yields ALLOW | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0060_dual_extraction_agreement |
+| T-GWY-0061 | ground_fields grounds multiple fields | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0061_ground_fields |
+| T-GWY-0062 | ProposeVerifyGate passes a valid proposal | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0062_gate_passes_valid |
+| T-GWY-0063 | Proposal is frozen | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0063_proposal_frozen |
+| T-GWY-0064 | VerificationResult is frozen | fast | extract/test_T_GWY_0051_to_0064.py | test_T_GWY_0064_verification_result_frozen |
+| T-GWY-0065 | Thresholds are met (exact match >= 95%) | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0065_exact_match_threshold |
+| T-GWY-0066 | Wrongly filled fields == 0 | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0066_wrongly_filled_zero |
+| T-GWY-0067 | Grounding precision >= 99% | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0067_grounding_precision |
+| T-GWY-0068 | Adversarial documents with no effect == 100% | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0068_injection_resistance |
+| T-GWY-0069 | A seeded regression fails the gate | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0069_regression_detected |
+| T-GWY-0070 | Baselines move only through the gate | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0070_baselines_protected |
+| T-GWY-0071 | SYNTHETIC evaluation sets exist | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0071_synthetic_sets_exist |
+| T-GWY-0072 | Arabic digit variants in eval sets | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0072_arabic_variants |
+| T-GWY-0073 | Persian digit variants in eval sets | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0073_persian_variants |
+| T-GWY-0074 | Adversarial injection set exists | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0074_adversarial_set |
+| T-GWY-0075 | Explanation faithfulness threshold met | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0075_explanation_faithfulness |
+| T-GWY-0076 | Eval sets have expected_fields | fast | gateway/test_T_GWY_0065_to_0076.py | test_T_GWY_0076_eval_sets_have_expected_fields |
+| T-GWY-0077 | A recorded trace contains tier, tokens and cost | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0077_trace_contains_attributes |
+| T-GWY-0078 | Mapped threat items have tests | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0078_mapped_items_have_tests |
+| T-GWY-0079 | Crash recovery during a call leaves exactly one call record | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0079_crash_recovery_one_record |
+| T-GWY-0080 | TraceAttributes is frozen | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0080_trace_attributes_frozen |
+| T-GWY-0081 | ATTACK_CATALOG includes model-gateway threats | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0081_attack_catalog_has_model_threats |
+| T-GWY-0082 | InMemoryTracer call_count is accurate | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0082_tracer_count |
+| T-GWY-0083 | Tracer records provider and model_id | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0083_trace_provider_model |
+| T-GWY-0084 | Tracer clear resets to zero | fast | gateway/test_T_GWY_0077_to_0084.py | test_T_GWY_0084_tracer_clear |
+| T-GWY-0085 | A call inside the profile succeeds and records its region | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0085_call_inside_profile_succeeds |
+| T-GWY-0086 | A call outside the profile is refused with REGION_POLICY and no provider is contacted | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0086_call_outside_profile_refused |
+| T-GWY-0087 | A missing profile allows only the local adapter | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0087_missing_profile_local_only |
+| T-GWY-0088 | A missing declared region fails closed | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0088_missing_region_fails_closed |
+| T-GWY-0089 | The policy decision is identical for the same inputs | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0089_policy_deterministic |
+| T-GWY-0090 | RegionProfile is frozen | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0090_region_profile_frozen |
+| T-GWY-0091 | check_region allows allowed regions | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0091_check_region_allows |
+| T-GWY-0092 | check_region rejects disallowed regions | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0092_check_region_rejects |
+| T-GWY-0093 | check_region fails closed on empty region | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0093_check_region_empty |
+| T-GWY-0094 | DEFAULT_PROFILE is local-only | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0094_default_profile_local |
+| T-GWY-0095 | REGION_POLICY_REASON is defined | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0095_region_policy_reason |
+| T-GWY-0096 | RegionPolicyChecker with custom profile | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0096_custom_profile |
 | T-KRN-0001 | Regeneration is byte-identical | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0001_regeneration_byte_identical |
 | T-KRN-0002 | A hand edit of a generated file fails the gate | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0002_hand_edit_fails_gate |
 | T-KRN-0003 | Every entity has tenant_id and schema_version | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version |

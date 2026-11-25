@@ -1,0 +1,13 @@
+{
+  "label": "SYNTHETIC",
+  "id": "eval-arabic-document-ar",
+  "document_type": "customs_declaration",
+  "language": "ar",
+  "document_text": "إقرار جمركي\nرقم الإقرار: ١٢٣٤\nالمستورد: شركة التجارة العالمية\nالبلد الأصلي: الإمارات\nالقيمة الإجمالية: ٥٠٠٠ درهم",
+  "expected_fields": {
+    "declaration_number": "1234",
+    "importer": "شركة التجارة العالمية",
+    "country_of_origin": "الإمارات",
+    "total_value": "5000"
+  }
+}
