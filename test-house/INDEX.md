@@ -368,6 +368,18 @@
 | T-ORC-0012 | The case budget is split among roles | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0012_budget_split_among_roles |
 | T-ORC-0013 | State transitions follow the case state machine | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0013_state_transitions |
 | T-ORC-0014 | A budget exhaustion moves the case to BLOCKED via run() | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0014_budget_exhaustion_blocks |
+| T-ORC-0015 | A valid input message is accepted | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0015_valid_input_accepted |
+| T-ORC-0016 | An invalid message missing a required field is rejected | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0016_missing_required_rejected |
+| T-ORC-0017 | An unknown field in a message is rejected | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0017_unknown_field_rejected |
+| T-ORC-0018 | A valid output message is accepted and recorded | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0018_valid_output_accepted |
+| T-ORC-0019 | An output not matching the port type is refused | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0019_invalid_output_refused |
+| T-ORC-0020 | A command in an explanation field has no effect | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0020_command_in_explanation_no_effect |
+| T-ORC-0021 | A command in a non-explanation field is rejected | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0021_command_in_value_rejected |
+| T-ORC-0022 | A worker failure never yields ALLOW | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0022_failure_never_allow |
+| T-ORC-0023 | Compliance failure ends in ABSTAIN | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0023_compliance_failure_abstain |
+| T-ORC-0024 | Risk failure ends in ESCALATE | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0024_risk_failure_escalate |
+| T-ORC-0025 | An unknown role raises RuntimeError_ | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0025_unknown_role_rejected |
+| T-ORC-0026 | Every role in the closed list has a contract | fast | orchestration/test_T_ORC_0015_to_0026.py | test_T_ORC_0026_all_roles_have_contracts |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
