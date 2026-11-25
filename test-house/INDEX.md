@@ -354,6 +354,20 @@
 | T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
 | T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
 | T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
+| T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
+| T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
+| T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |
+| T-ORC-0004 | An edge to a non-existent step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0004_edge_to_missing_step_rejected |
+| T-ORC-0005 | A transition outside the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0005_transition_outside_dag_rejected |
+| T-ORC-0006 | A role cannot exceed its budget share | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0006_role_exceeds_budget |
+| T-ORC-0007 | A timeout moves a case to BLOCKED and never approves | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0007_timeout_moves_to_blocked |
+| T-ORC-0008 | Repeated delivery of one step executes once | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0008_idempotent_execution |
+| T-ORC-0009 | The DAG configuration hash is deterministic | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0009_config_hash_deterministic |
+| T-ORC-0010 | The Manager records every step | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0010_steps_recorded |
+| T-ORC-0011 | The Manager chooses the deterministic path | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0011_deterministic_path |
+| T-ORC-0012 | The case budget is split among roles | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0012_budget_split_among_roles |
+| T-ORC-0013 | State transitions follow the case state machine | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0013_state_transitions |
+| T-ORC-0014 | A budget exhaustion moves the case to BLOCKED via run() | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0014_budget_exhaustion_blocks |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
