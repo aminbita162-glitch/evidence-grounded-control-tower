@@ -420,6 +420,18 @@
 | T-ORC-0064 | Monitor suite runs all monitors and returns first violation | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0064_suite_returns_first_violation |
 | T-ORC-0065 | A clean case does not trigger any monitor | fast | containment/test_T_ORC_0051_to_0065.py | test_T_ORC_0065_clean_case_no_violation |
 | T-ORC-0066 | Short fuzz of messages finds no crash | fast | containment/test_T_ORC_0066_fuzz.py | test_T_ORC_0066_fuzz_no_crash |
+| T-ORC-0067 | Approval of a changed proposal is invalid | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0067_changed_proposal_invalid |
+| T-ORC-0068 | A valid approval is accepted | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0068_valid_approval_accepted |
+| T-ORC-0069 | A rejection requires written justification | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0069_rejection_requires_justification |
+| T-ORC-0070 | An override is a separate record | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0070_override_is_separate_record |
+| T-ORC-0071 | An override by the same reviewer twice is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0071_override_same_reviewer_refused |
+| T-ORC-0072 | An override without a second reviewer is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0072_override_no_second_reviewer_refused |
+| T-ORC-0073 | The Decision record is unchanged after an override | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0073_decision_unchanged_after_override |
+| T-ORC-0074 | The second concurrent approval receives a conflict | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0074_concurrent_approval_conflict |
+| T-ORC-0075 | A reviewer role is required | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0075_reviewer_role_required |
+| T-ORC-0076 | Approvals expire with the case state | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0076_approval_expires_with_state |
+| T-ORC-0077 | A rejection is recorded | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0077_rejection_recorded |
+| T-ORC-0078 | An override without justification is refused | fast | orchestration/test_T_ORC_0067_to_0078.py | test_T_ORC_0078_override_without_justification_refused |
 | T-PHASE-0001 | Missing DONE line fails exit check | fast | gate/test_phase.py | test_missing_done_line_fails |
 | T-PHASE-0002 | Task commit without DONE line fails | fast | gate/test_phase.py | test_task_commit_without_done_fails |
 | T-PHASE-0003 | Squash merge fails merge proof check | fast | gate/test_phase.py | test_squash_merge_fails |
