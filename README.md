@@ -67,7 +67,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P06 | Rule Engine | ✓ Nov 2026 |
 | P07 | Orchestration and containment | ✓ Nov 2026 |
 | P08 | Model Gateway and Extract stage | ✓ November 2026 |
-| P09 | Synthetic data and bench | ☐ |
+| P09 | Synthetic data and bench | ✓ November 2026 |
 | P10 | API foundation, observability and Budget Governor | ☐ |
 | P11 | Security and tenancy completion | ☐ |
 | P12 | Packaging and operations | ☐ |
