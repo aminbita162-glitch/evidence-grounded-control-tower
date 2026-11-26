@@ -1012,3 +1012,19 @@
 | T-SEC-0066 | K-threshold default 5 | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0066_k_threshold_default_5 |
 | T-SEC-0067 | External source rejected | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0067_external_source_rejected |
 | T-SEC-0068 | List tenant scoped | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0068_list_tenant_scoped |
+| T-SEC-0069 | API foreign principal denied | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0069_api_foreign_principal_denied |
+| T-SEC-0070 | API forged tenant body | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0070_api_forged_tenant_body |
+| T-SEC-0071 | Repo foreign tenant read | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0071_repo_foreign_tenant_read |
+| T-SEC-0072 | Repo forged tenant path | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0072_repo_forged_tenant_path |
+| T-SEC-0073 | Cache tenant isolation | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0073_cache_tenant_isolation |
+| T-SEC-0074 | Cache key collision | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0074_cache_key_collision |
+| T-SEC-0075 | Ledger foreign decrypt | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0075_ledger_foreign_decrypt |
+| T-SEC-0076 | Export tenant scoped | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0076_export_tenant_scoped |
+| T-SEC-0077 | Log no tenant reveal | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0077_log_no_tenant_reveal |
+| T-SEC-0078 | Timing oracle | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0078_timing_oracle |
+| T-SEC-0079 | Error text oracle | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0079_error_text_oracle |
+| T-SEC-0080 | Zero leaks all surfaces | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0080_zero_leaks_all_surfaces |
+| T-SEC-0081 | Seeded uncovered surface fails | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0081_seeded_uncovered_surface_fails |
+| T-SEC-0082 | Policy as application role | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0082_policy_as_application_role |
+| T-SEC-0083 | Frozen tenant blocks | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0083_frozen_tenant_blocks |
+| T-SEC-0084 | Tenant config isolation | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0084_tenant_config_isolation |
