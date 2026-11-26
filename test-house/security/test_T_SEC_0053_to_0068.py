@@ -210,7 +210,9 @@ def test_T_SEC_0058_aggregate_above_threshold() -> None:
         )
     result = mem.aggregate("tenant-a")
     assert result["label"] == "DERIVED"
-    assert result["sample_size"] >= K_THRESHOLD
+    sample = result["sample_size"]
+    assert isinstance(sample, int)
+    assert sample >= K_THRESHOLD
 
 
 # ---------------------------------------------------------------------------

@@ -457,7 +457,7 @@ def test_T_SEC_0082_policy_as_application_role() -> None:
     owning capability: leakage
     """
     policy = DefaultRolePolicy()
-    platform = Principal(principal_id="p1", role="platform")  # type: ignore[arg-type]
+    platform = Principal(principal_id="p1", role="platform")
     assert policy.can_access(platform, "/api/v1/cases", is_tenant_scoped=True) is False
 
 

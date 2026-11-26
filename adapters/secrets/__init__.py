@@ -20,7 +20,7 @@ __all__ = [
     "SecretError",
 ]
 
-_SECRET_PREFIX = "CTC_SECRET_"  # noqa: S105 — prefix string, not a secret
+_SECRET_PREFIX = "CTC_SECRET_"  # nosec B105 — prefix string, not a secret  # noqa: S105
 
 
 class SecretError(Exception):
