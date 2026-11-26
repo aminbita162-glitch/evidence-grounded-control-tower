@@ -9,6 +9,18 @@
 | T-BASELINE-0005 | check_baseline_decrease flags a lowered value | fast | gate/test_baseline.py | test_check_baseline_decrease_flags_and_clears |
 | T-BASELINE-0006 | baselines.json validates against its schema | fast | gate/test_baseline.py | test_baselines_schema_valid_and_invalid |
 | T-BASELINE-0007 | A missing measured component reports a decrease | fast | gate/test_baseline.py | test_check_baseline_decrease_missing_component |
+| T-BCH-0001 | Same seed gives byte-identical output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0001_same_seed_byte_identical |
+| T-BCH-0002 | Different seed gives different output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0002_different_seed_different_output |
+| T-BCH-0003 | Every record carries the SYNTHETIC label | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0003_every_record_labelled |
+| T-BCH-0004 | Every record carries the seed | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0004_every_record_carries_seed |
+| T-BCH-0005 | Every record carries the factory version | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0005_every_record_carries_factory_version |
+| T-BCH-0006 | No deny-list name appears in output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0006_no_denylist_in_output |
+| T-BCH-0007 | Arabic-Indic digits present in Arabic documents | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0007_arabic_indic_digits |
+| T-BCH-0008 | Persian digits present in Persian documents | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0008_persian_digits |
+| T-BCH-0009 | Factory is deterministic on regenerate | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0009_deterministic_regenerate |
+| T-BCH-0010 | Tariff rows have HS codes | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0010_tariff_rows_have_hs_codes |
+| T-BCH-0011 | Tenant feeds have entries | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0011_tenant_feeds_have_entries |
+| T-BCH-0012 | Labels gate passes on factory output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0012_labels_gate_factory_output |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
