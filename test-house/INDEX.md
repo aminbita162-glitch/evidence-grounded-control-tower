@@ -996,3 +996,19 @@
 | T-SEC-0050 | No profile no external provider | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0050_no_profile_no_external |
 | T-SEC-0051 | Freeze event on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0051_freeze_event_on_chain |
 | T-SEC-0052 | Overlay addition on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0052_overlay_addition_on_chain |
+| T-SEC-0053 | No write outside write path | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0053_no_write_outside_write_path |
+| T-SEC-0054 | Model never writes memory | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0054_model_never_writes |
+| T-SEC-0055 | Kernel write succeeds | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0055_kernel_write_succeeds |
+| T-SEC-0056 | M3 never ALLOW | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0056_m3_never_allow |
+| T-SEC-0057 | K-threshold enforced | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0057_k_threshold_enforced |
+| T-SEC-0058 | Aggregate above threshold | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0058_aggregate_above_threshold |
+| T-SEC-0059 | Expired entries tombstoned | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0059_expired_entries_tombstoned |
+| T-SEC-0060 | Unexpired not tombstoned | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0060_unexpired_not_tombstoned |
+| T-SEC-0061 | Quarantined excluded from reads | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0061_quarantined_excluded |
+| T-SEC-0062 | Poisoning rejected | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0062_poisoning_rejected |
+| T-SEC-0063 | M3 ALLOW raises | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0063_m3_allow_raises |
+| T-SEC-0064 | Entry has required fields | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0064_entry_has_required_fields |
+| T-SEC-0065 | Tombstone fields | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0065_tombstone_fields |
+| T-SEC-0066 | K-threshold default 5 | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0066_k_threshold_default_5 |
+| T-SEC-0067 | External source rejected | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0067_external_source_rejected |
+| T-SEC-0068 | List tenant scoped | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0068_list_tenant_scoped |
