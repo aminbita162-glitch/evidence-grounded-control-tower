@@ -63,6 +63,12 @@
 | T-BCH-0052 | Report is valid JSON | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0052_report_valid_json |
 | T-BCH-0053 | Matrix includes risks and controls | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0053_matrix_has_risks_controls |
 | T-BCH-0054 | No broken links in the real repo | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0054_no_broken_links_real |
+| T-BCH-0055 | Sets reproduce for a fixed seed | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0055_sets_reproduce |
+| T-BCH-0056 | Calibration set has known score distribution | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0056_calibration_score_distribution |
+| T-BCH-0057 | Test set has known score distribution | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0057_test_score_distribution |
+| T-BCH-0058 | Exchangeability holds by construction | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0058_exchangeability |
+| T-BCH-0059 | Artifact IDs are stable | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0059_artifact_ids_stable |
+| T-BCH-0060 | Coverage statements carry the SYNTHETIC label | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0060_synthetic_label |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
