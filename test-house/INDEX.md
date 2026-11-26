@@ -986,3 +986,13 @@
 | T-SEC-0040 | List keys returns names only | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0040_list_keys_no_values |
 | T-SEC-0041 | Ceremony verify keys | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0041_ceremony_verify_keys |
 | T-SEC-0042 | Drill result name | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0042_drill_result_name |
+| T-SEC-0043 | Config changes on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0043_config_changes_on_chain |
+| T-SEC-0044 | Overlay cannot remove deployment | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0044_overlay_cannot_remove_deployment |
+| T-SEC-0045 | Frozen tenant rejects commands | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0045_frozen_tenant_rejects |
+| T-SEC-0046 | Unfrozen tenant accepts commands | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0046_unfrozen_tenant_accepts |
+| T-SEC-0047 | Widening without platform refused | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0047_widening_without_platform_refused |
+| T-SEC-0048 | Widening with platform succeeds | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0048_widening_with_platform_succeeds |
+| T-SEC-0049 | Profile change on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0049_profile_change_on_chain |
+| T-SEC-0050 | No profile no external provider | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0050_no_profile_no_external |
+| T-SEC-0051 | Freeze event on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0051_freeze_event_on_chain |
+| T-SEC-0052 | Overlay addition on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0052_overlay_addition_on_chain |
