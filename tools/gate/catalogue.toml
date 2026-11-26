@@ -315,11 +315,11 @@ clean_fixture = "fixtures/chaos_clean"
 
 [gate.leakage]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.leakage"
 timeout = 300
 activates_in = "P11"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/leakage_violation"
+clean_fixture = "fixtures/leakage_clean"
 
 [gate.restore]
 cadence = "P"

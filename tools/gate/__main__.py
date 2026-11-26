@@ -473,6 +473,10 @@ def main() -> int:
             from tools.gate.gates.chaos import main as chaos_main
 
             return chaos_main()
+        if command == "leakage":
+            from tools.gate.gates.leakage import main as leakage_main
+
+            return leakage_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)

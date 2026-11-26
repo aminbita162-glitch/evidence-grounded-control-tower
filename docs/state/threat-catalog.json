@@ -94,6 +94,46 @@
       "id": "ATK-019",
       "name": "tool authority escalation",
       "category": "escalation"
+    },
+    {
+      "id": "ATK-020",
+      "name": "poisoned reference data",
+      "category": "poisoning"
+    },
+    {
+      "id": "ATK-021",
+      "name": "memory poisoning",
+      "category": "poisoning"
+    },
+    {
+      "id": "ATK-022",
+      "name": "hostile files decompression bombs",
+      "category": "hostile_files"
+    },
+    {
+      "id": "ATK-023",
+      "name": "supply chain compromise",
+      "category": "supply_chain"
+    },
+    {
+      "id": "ATK-024",
+      "name": "secret exposure",
+      "category": "secret"
+    },
+    {
+      "id": "ATK-025",
+      "name": "export backup log leakage",
+      "category": "leakage"
+    },
+    {
+      "id": "ATK-026",
+      "name": "shared model context response cache",
+      "category": "cache"
+    },
+    {
+      "id": "ATK-027",
+      "name": "precedent memory below k-threshold",
+      "category": "threshold"
     }
   ]
 }

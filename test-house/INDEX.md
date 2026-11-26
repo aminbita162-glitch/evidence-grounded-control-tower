@@ -944,3 +944,95 @@
 | T-RUL-0098 | pack check prints the label ceiling | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0098_check_prints_ceiling |
 | T-RUL-0099 | pack provenance includes source ids | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0099_provenance_includes_sources |
 | T-RUL-0100 | pack diff with version change exits 0 | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0100_diff_with_version_change |
+| T-SEC-0001 | Token never stored in clear | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0001_token_never_stored_in_clear |
+| T-SEC-0002 | Expired token fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0002_expired_token_fails |
+| T-SEC-0003 | Revoked token fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0003_revoked_token_fails |
+| T-SEC-0004 | Forged tenant in body ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0004_forged_tenant_body_ignored |
+| T-SEC-0005 | Forged tenant in header ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0005_forged_tenant_header_ignored |
+| T-SEC-0006 | Forged tenant in path ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0006_forged_tenant_path_ignored |
+| T-SEC-0007 | Forged tenant in claims ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0007_forged_tenant_claims_ignored |
+| T-SEC-0008 | Platform role has no tenant | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0008_platform_role_no_tenant |
+| T-SEC-0009 | Platform denied tenant-scoped routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0009_platform_denied_tenant_routes |
+| T-SEC-0010 | Platform reaches deployment routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0010_platform_reaches_deployment_routes |
+| T-SEC-0011 | Viewer accesses tenant routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0011_viewer_can_access |
+| T-SEC-0012 | Operator accesses tenant routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0012_operator_can_access |
+| T-SEC-0013 | Reviewer can approve | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0013_reviewer_can_approve |
+| T-SEC-0014 | Administrator can operate | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0014_administrator_can_operate |
+| T-SEC-0015 | Session cookie signed | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0015_session_cookie_signed |
+| T-SEC-0016 | Tampered cookie fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0016_tampered_cookie_fails |
+| T-SEC-0017 | Ciphertext differs per tenant | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0017_ciphertext_differs_per_tenant |
+| T-SEC-0018 | Cross-tenant decrypt fails | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0018_cross_tenant_decrypt_fails |
+| T-SEC-0019 | Encrypt-decrypt round-trip | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0019_encrypt_decrypt_roundtrip |
+| T-SEC-0020 | Erased payloads unrecoverable | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0020_erased_payloads_unrecoverable |
+| T-SEC-0021 | Erasure recorded as event | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0021_erasure_recorded |
+| T-SEC-0022 | Rotation keeps old records | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0022_rotation_keeps_old_records |
+| T-SEC-0023 | Rotation default 90 days | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0023_rotation_default_90_days |
+| T-SEC-0024 | Break-glass creates key | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0024_break_glass_creates_key |
+| T-SEC-0025 | Break-glass disabled raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0025_break_glass_disabled_raises |
+| T-SEC-0026 | Wrong key size raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0026_wrong_key_size_raises |
+| T-SEC-0027 | Decrypt wrong key size raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0027_decrypt_wrong_key_size_raises |
+| T-SEC-0028 | Erased payload marked | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0028_erased_payload_marked |
+| T-SEC-0029 | Is erased after erasure | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0029_is_erased_after_erasure |
+| T-SEC-0030 | Encrypt without key raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0030_encrypt_without_key_raises |
+| T-SEC-0031 | Ceremony generates keys | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0031_ceremony_generates_keys |
+| T-SEC-0032 | Keys are 32 bytes | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0032_ceremony_keys_are_32_bytes |
+| T-SEC-0033 | Erasure drill passes | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0033_erasure_drill_passes |
+| T-SEC-0034 | Rotation drill passes | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0034_rotation_drill_passes |
+| T-SEC-0035 | Env store reads secret | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0035_env_store_reads_secret |
+| T-SEC-0036 | Missing secret raises | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0036_missing_secret_raises |
+| T-SEC-0037 | File store reads secret | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0037_file_store_reads_secret |
+| T-SEC-0038 | Has returns False for missing | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0038_store_has_returns_false |
+| T-SEC-0039 | Has returns True for present | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0039_store_has_returns_true |
+| T-SEC-0040 | List keys returns names only | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0040_list_keys_no_values |
+| T-SEC-0041 | Ceremony verify keys | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0041_ceremony_verify_keys |
+| T-SEC-0042 | Drill result name | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0042_drill_result_name |
+| T-SEC-0043 | Config changes on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0043_config_changes_on_chain |
+| T-SEC-0044 | Overlay cannot remove deployment | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0044_overlay_cannot_remove_deployment |
+| T-SEC-0045 | Frozen tenant rejects commands | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0045_frozen_tenant_rejects |
+| T-SEC-0046 | Unfrozen tenant accepts commands | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0046_unfrozen_tenant_accepts |
+| T-SEC-0047 | Widening without platform refused | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0047_widening_without_platform_refused |
+| T-SEC-0048 | Widening with platform succeeds | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0048_widening_with_platform_succeeds |
+| T-SEC-0049 | Profile change on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0049_profile_change_on_chain |
+| T-SEC-0050 | No profile no external provider | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0050_no_profile_no_external |
+| T-SEC-0051 | Freeze event on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0051_freeze_event_on_chain |
+| T-SEC-0052 | Overlay addition on chain | fast | security/test_T_SEC_0043_to_0052.py | test_T_SEC_0052_overlay_addition_on_chain |
+| T-SEC-0053 | No write outside write path | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0053_no_write_outside_write_path |
+| T-SEC-0054 | Model never writes memory | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0054_model_never_writes |
+| T-SEC-0055 | Kernel write succeeds | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0055_kernel_write_succeeds |
+| T-SEC-0056 | M3 never ALLOW | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0056_m3_never_allow |
+| T-SEC-0057 | K-threshold enforced | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0057_k_threshold_enforced |
+| T-SEC-0058 | Aggregate above threshold | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0058_aggregate_above_threshold |
+| T-SEC-0059 | Expired entries tombstoned | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0059_expired_entries_tombstoned |
+| T-SEC-0060 | Unexpired not tombstoned | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0060_unexpired_not_tombstoned |
+| T-SEC-0061 | Quarantined excluded from reads | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0061_quarantined_excluded |
+| T-SEC-0062 | Poisoning rejected | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0062_poisoning_rejected |
+| T-SEC-0063 | M3 ALLOW raises | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0063_m3_allow_raises |
+| T-SEC-0064 | Entry has required fields | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0064_entry_has_required_fields |
+| T-SEC-0065 | Tombstone fields | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0065_tombstone_fields |
+| T-SEC-0066 | K-threshold default 5 | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0066_k_threshold_default_5 |
+| T-SEC-0067 | External source rejected | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0067_external_source_rejected |
+| T-SEC-0068 | List tenant scoped | fast | security/test_T_SEC_0053_to_0068.py | test_T_SEC_0068_list_tenant_scoped |
+| T-SEC-0069 | API foreign principal denied | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0069_api_foreign_principal_denied |
+| T-SEC-0070 | API forged tenant body | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0070_api_forged_tenant_body |
+| T-SEC-0071 | Repo foreign tenant read | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0071_repo_foreign_tenant_read |
+| T-SEC-0072 | Repo forged tenant path | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0072_repo_forged_tenant_path |
+| T-SEC-0073 | Cache tenant isolation | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0073_cache_tenant_isolation |
+| T-SEC-0074 | Cache key collision | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0074_cache_key_collision |
+| T-SEC-0075 | Ledger foreign decrypt | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0075_ledger_foreign_decrypt |
+| T-SEC-0076 | Export tenant scoped | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0076_export_tenant_scoped |
+| T-SEC-0077 | Log no tenant reveal | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0077_log_no_tenant_reveal |
+| T-SEC-0078 | Timing oracle | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0078_timing_oracle |
+| T-SEC-0079 | Error text oracle | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0079_error_text_oracle |
+| T-SEC-0080 | Zero leaks all surfaces | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0080_zero_leaks_all_surfaces |
+| T-SEC-0081 | Seeded uncovered surface fails | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0081_seeded_uncovered_surface_fails |
+| T-SEC-0082 | Policy as application role | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0082_policy_as_application_role |
+| T-SEC-0083 | Frozen tenant blocks | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0083_frozen_tenant_blocks |
+| T-SEC-0084 | Tenant config isolation | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0084_tenant_config_isolation |
+| T-SEC-0085 | No unmapped except deferred | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0085_no_unmapped_except_deferred |
+| T-SEC-0086 | Seeded unmapped fails | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0086_seeded_unmapped_fails |
+| T-SEC-0087 | Supply chain mapped to gates | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0087_supply_chain_mapped |
+| T-SEC-0088 | Hostile files deferred to P14 | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0088_hostile_files_deferred |
+| T-SEC-0089 | Deferred items name a phase | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0089_deferred_items_name_phase |
+| T-SEC-0090 | Catalog JSON matches Python | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0090_catalog_json_matches |
+| T-SEC-0091 | All new items covered | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0091_all_new_items_covered |
+| T-SEC-0092 | Deferred items non-empty | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0092_deferred_items_nonempty |
