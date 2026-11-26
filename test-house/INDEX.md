@@ -51,6 +51,18 @@
 | T-BCH-0040 | Two-tenant scenario has two tenants | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0040_two_tenants_present |
 | T-BCH-0041 | Output identical across two runs with same seed | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0041_identical_output_same_seed |
 | T-BCH-0042 | Tenant decisions are non-ALLOW | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0042_tenant_decisions_non_allow |
+| T-BCH-0043 | Matrix builds without error | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0043_matrix_builds |
+| T-BCH-0044 | Matrix includes test IDs | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0044_matrix_has_tests |
+| T-BCH-0045 | Matrix includes scenario IDs | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0045_matrix_has_scenarios |
+| T-BCH-0046 | A scenario without a test fails when seeded | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0046_scenario_without_test_broken |
+| T-BCH-0047 | A scenario referencing an unknown test fails when seeded | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0047_test_without_scenario_broken |
+| T-BCH-0048 | A risk without a control fails when seeded | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0048_risk_without_control_broken |
+| T-BCH-0049 | A control without a test is advisory | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0049_control_without_test_advisory |
+| T-BCH-0050 | Matrix is reproducible | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0050_matrix_reproducible |
+| T-BCH-0051 | gate run trace exits 0 | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0051_gate_trace_exits_0 |
+| T-BCH-0052 | Report is valid JSON | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0052_report_valid_json |
+| T-BCH-0053 | Matrix includes risks and controls | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0053_matrix_has_risks_controls |
+| T-BCH-0054 | No broken links in the real repo | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0054_no_broken_links_real |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |

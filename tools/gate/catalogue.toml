@@ -299,11 +299,11 @@ clean_fixture = "fixtures/e2e_clean"
 
 [gate.trace]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.trace"
 timeout = 120
 activates_in = "P09"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "fixtures/trace_violation"
+clean_fixture = "fixtures/trace_clean"
 
 [gate.chaos]
 cadence = "P"
