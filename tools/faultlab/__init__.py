@@ -44,6 +44,34 @@ ORCHESTRATOR_KILL_POINTS = [
     "during_human_gate",
 ]
 
+#: P10 fault-injection scenarios (Part 3 §3.16, P10-T09).
+P10_FAULT_SCENARIOS: list[dict[str, str]] = [
+    {
+        "name": "storage_unavailable",
+        "expected_behavior": "ABSTAIN",
+        "kill_point": "before_commit",
+        "description": "Storage unavailable — no partial write",
+    },
+    {
+        "name": "model_unavailable",
+        "expected_behavior": "ABSTAIN",
+        "kill_point": "before_commit",
+        "description": "Model unavailable — extraction-dependent cases BLOCKED",
+    },
+    {
+        "name": "policy_engine_unavailable",
+        "expected_behavior": "ABSTAIN",
+        "kill_point": "before_commit",
+        "description": "Policy engine unavailable — capability reports ABSTAIN",
+    },
+    {
+        "name": "slow_dependencies",
+        "expected_behavior": "ABSTAIN",
+        "kill_point": "after_commit",
+        "description": "Slow dependencies — timeout moves to BLOCKED",
+    },
+]
+
 
 @dataclass
 class KillPoint:

@@ -115,6 +115,18 @@ THREAT_MATRIX: dict[str, list[str]] = {
         "T-GWY-0081",
         "T-GWY-0082",
     ],
+    #: P10 fault injection and threat mappings (P10-T09).
+    "existence_oracle": [
+        "T-API-0012",
+        "T-API-0013",
+        "T-API-0068",
+    ],
+    "forged_tenant_identifier": [
+        "T-API-0069",
+    ],
+    "search_or_aggregate_endpoint": [
+        "T-API-0070",
+    ],
 }
 
 
