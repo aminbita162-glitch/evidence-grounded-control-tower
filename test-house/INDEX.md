@@ -31,6 +31,18 @@
 | T-BCH-0020 | Runner exception produces a failed entry | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0020_runner_exception |
 | T-BCH-0021 | All scenarios from the scenario directory pass | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0021_all_scenarios_pass |
 | T-BCH-0022 | Scenario without test_id has empty test_id | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0022_no_test_id |
+| T-BCH-0023 | Skeleton runs end-to-end without raising | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0023_skeleton_runs_e2e |
+| T-BCH-0024 | Passport hash is a valid SHA-256 | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0024_passport_hash_valid |
+| T-BCH-0025 | Same seed gives identical decision | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0025_same_seed_identical_decision |
+| T-BCH-0026 | Passport replays to an equal hash | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0026_passport_replays_equal |
+| T-BCH-0027 | Bundle verifies with the independent verifier | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0027_bundle_verifies |
+| T-BCH-0028 | Structural verification passes | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0028_structural_verification |
+| T-BCH-0029 | Decision is a valid DecisionValue | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0029_decision_valid |
+| T-BCH-0030 | Stage failure produces a non-ALLOW decision | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0030_stage_failure_non_allow |
+| T-BCH-0031 | Records cover all expected pipeline stages | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0031_records_cover_stages |
+| T-BCH-0032 | Bundle hash is a valid SHA-256 | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0032_bundle_hash_valid |
+| T-BCH-0033 | Reason codes are non-empty for non-ALLOW decisions | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0033_reason_codes_nonempty |
+| T-BCH-0034 | Skeleton imports no capability internals | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0034_no_capability_internals |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |

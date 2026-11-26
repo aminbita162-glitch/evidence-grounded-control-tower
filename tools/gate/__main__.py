@@ -457,6 +457,10 @@ def main() -> int:
             from tools.gate.gates.eval import main as eval_main
 
             return eval_main()
+        if command == "e2e":
+            from tools.gate.gates.e2e import main as e2e_main
+
+            return e2e_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)
