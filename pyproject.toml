@@ -82,11 +82,11 @@ module = ["kernel.contracts._generated.*", "kernel.rules._generated.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*", "kernel.persistence.*"]
+module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*", "kernel.persistence.*", "kernel.budget.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["adapters.*", "api.*", "cli.*", "adapters.telemetry.*"]
+module = ["adapters.*", "api.*", "cli.*", "adapters.telemetry.*", "deploy.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
