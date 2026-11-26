@@ -1,0 +1,46 @@
+# P10 phase risk review — P10-RISK.
+#
+# P10 built the API foundation (application factory, problem details,
+# pagination, OpenAPI contract, uniform capability route, idempotency,
+# command-line interface, health endpoints), observability (OpenTelemetry
+# tracing, structured JSON logs, metrics), the canary case with
+# objectives and reconciliation, the Budget Governor, and fault injection
+# with threat mapping.  Two gates were activated/extended: contract
+# (extended) and chaos (activated).
+#
+# Risks and controls:
+#
+#   - Existence oracles through different responses (RSK-P-01, CTL-API-01):
+#     a foreign-id 404 and a missing-id 404 return the same status, body
+#     and timing class (T-API-0012, T-API-0013); the not_found_response
+#     function produces identical responses for both cases; the pagination
+#     module enforces size limits (T-API-0014).
+#
+#   - Duplicate effects from concurrent idempotent calls (RSK-P-02, CTL-API-02):
+#     the idempotency middleware stores the first response and returns it
+#     for repeated calls with the same key (T-API-0031, T-API-0033); a
+#     different request with the same key raises ConflictError (T-API-0034);
+#     a missing key is rejected (T-API-0040).
+#
+#   - Telemetry leakage through tenant labels (RSK-P-03, CTL-OBS-01):
+#     the MetricRegistry rejects tenant and tenant_id labels (T-OBS-0001,
+#     T-OBS-0002); the JSON log formatter redacts forbidden keys
+#     (T-OBS-0006); the correlation id is a log field, not a metric label
+#     (T-OBS-0004, T-OBS-0005).
+#
+#   - Budget bypass through silent truncation (RSK-P-04, CTL-OBS-02):
+#     the Budget Governor raises BudgetBreach on every limit exceeded
+#     (T-OBS-0023 to T-OBS-0026); the extraction meter is separate from
+#     the other meter (T-OBS-0027, T-OBS-0028); exhaustion leaves earlier
+#     documents intact (T-OBS-0029); breach events are recorded (T-OBS-0032).
+#
+#   - Test principal reaching production (RSK-P-05, CTL-API-03):
+#     the AppPorts class carries use_test_principal (default True); the
+#     production configuration check refuses it (exit condition 9); the
+#     test principal is excluded from the production configuration by a
+#     startup check.
+#
+# Phase: P10
+# Class: L
+# Capabilities: none
+# Gates activated: contract (extended), chaos (activated)
