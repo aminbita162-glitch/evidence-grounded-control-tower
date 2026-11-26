@@ -33,6 +33,11 @@ def _openapi() -> dict[str, object]:
     return app.openapi()
 
 
+def _paths(spec: dict[str, object]) -> dict[str, dict[str, dict[str, object]]]:
+    """Return the paths dict from an OpenAPI spec."""
+    return cast("dict[str, dict[str, dict[str, object]]]", spec.get("paths", {}))
+
+
 # ---------------------------------------------------------------------------
 # T-API-0015 — OpenAPI document exists and is valid
 # ---------------------------------------------------------------------------
@@ -78,7 +83,9 @@ def test_T_API_0016_invoke_route_in_contract() -> None:
     capability: api-foundation
     """
     spec = _openapi()
-    paths = cast("dict[str, dict[str, object]]", spec["paths"])
+    paths: dict[str, dict[str, object]] = cast(
+        "dict[str, dict[str, object]]", spec.get("paths", {})
+    )
     path_key = "/api/v1/capabilities/{capability_id}/invoke"
     assert path_key in paths
     assert "post" in paths[path_key]
@@ -104,7 +111,9 @@ def test_T_API_0017_status_route_in_contract() -> None:
     capability: api-foundation
     """
     spec = _openapi()
-    paths = cast("dict[str, dict[str, object]]", spec["paths"])
+    paths: dict[str, dict[str, object]] = cast(
+        "dict[str, dict[str, object]]", spec.get("paths", {})
+    )
     path_key = "/api/v1/capabilities/{capability_id}/status"
     assert path_key in paths
     assert "get" in paths[path_key]
@@ -130,7 +139,9 @@ def test_T_API_0018_result_route_in_contract() -> None:
     capability: api-foundation
     """
     spec = _openapi()
-    paths = cast("dict[str, dict[str, object]]", spec["paths"])
+    paths: dict[str, dict[str, object]] = cast(
+        "dict[str, dict[str, object]]", spec.get("paths", {})
+    )
     path_key = "/api/v1/capabilities/{capability_id}/result"
     assert path_key in paths
     assert "get" in paths[path_key]
@@ -156,7 +167,9 @@ def test_T_API_0019_evidence_route_in_contract() -> None:
     capability: api-foundation
     """
     spec = _openapi()
-    paths = cast("dict[str, dict[str, object]]", spec["paths"])
+    paths: dict[str, dict[str, object]] = cast(
+        "dict[str, dict[str, object]]", spec.get("paths", {})
+    )
     path_key = "/api/v1/capabilities/{capability_id}/evidence"
     assert path_key in paths
     assert "get" in paths[path_key]
@@ -288,7 +301,7 @@ def test_T_API_0024_schema_driven_no_server_error() -> None:
     """
     c = _client()
     spec = _openapi()
-    paths = spec.get("paths", {})
+    paths = _paths(spec)
     error_count = 0
     for path, methods in paths.items():
         if not isinstance(methods, dict):
@@ -333,21 +346,23 @@ def test_T_API_0025_seeded_breaking_change_reported() -> None:
 
     # Simulate a spec with a missing operation (breaking change)
     spec = _openapi()
-    paths = cast("dict[str, dict[str, object]]", dict(spec["paths"]))
+    paths: dict[str, dict[str, object]] = dict(
+        cast("dict[str, dict[str, object]]", spec.get("paths", {}))
+    )
     del paths["/api/v1/capabilities/{capability_id}/invoke"]
     # check_openapi_operations checks against the real app, not this mock.
     # Instead verify the function reports missing when we mock it.
     import tools.gate.gates.contract as contract_mod
 
     original = contract_mod._get_openapi_spec
-    contract_mod._get_openapi_spec = lambda root: {  # type: ignore[assignment]
+    contract_mod._get_openapi_spec = lambda root: {
         "openapi": "3.1.0",
         "paths": paths,
     }
     try:
         ok, messages = check_openapi_operations(_REPO_ROOT)
     finally:
-        contract_mod._get_openapi_spec = original  # type: ignore[assignment]
+        contract_mod._get_openapi_spec = original
     assert not ok
     assert any("invoke" in m for m in messages)
 
@@ -420,7 +435,7 @@ def test_T_API_0028_every_operation_has_operation_id() -> None:
     capability: api-foundation
     """
     spec = _openapi()
-    paths = spec.get("paths", {})
+    paths = _paths(spec)
     for path, methods in paths.items():
         for method, op in methods.items():
             if method.lower() in ("get", "post", "put", "delete", "patch"):
@@ -448,7 +463,7 @@ def test_T_API_0029_every_operation_has_summary() -> None:
     capability: api-foundation
     """
     spec = _openapi()
-    paths = spec.get("paths", {})
+    paths = _paths(spec)
     for path, methods in paths.items():
         for method, op in methods.items():
             if method.lower() in ("get", "post", "put", "delete", "patch"):

@@ -314,7 +314,7 @@ def test_T_OBS_0011_gauge_sets_value() -> None:
     reg = MetricRegistry()
     reg.gauge("queue_depth", 0.75)
     # Verify it was stored without error
-    assert any("queue_depth" in k for k in reg._gauges)  # type: ignore[attr-defined]  # noqa: SLF001
+    assert any("queue_depth" in k for k in reg._gauges)  # noqa: SLF001
 
 
 # ---------------------------------------------------------------------------

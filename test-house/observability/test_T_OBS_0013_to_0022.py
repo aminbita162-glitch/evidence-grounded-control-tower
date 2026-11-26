@@ -74,14 +74,14 @@ def test_T_OBS_0014_canary_fails_fault() -> None:
 
     original = canary_mod.run_skeleton
 
-    def _broken(_seed: int = 42) -> None:
+    def _broken(_seed: int = 42) -> object:
         raise RuntimeError("seeded fault")
 
     canary_mod.run_skeleton = _broken  # type: ignore[assignment]
     try:
         result = run_canary()
     finally:
-        canary_mod.run_skeleton = original  # type: ignore[assignment]
+        canary_mod.run_skeleton = original
     assert result.passed is False
     assert "seeded fault" in result.error
 

@@ -48,7 +48,7 @@ def test_T_API_0053_readiness_fails_db_down() -> None:
     import api.health as health_mod
 
     original = health_mod._check_storage
-    health_mod._check_storage = lambda: (False, "database unreachable")  # type: ignore[assignment]
+    health_mod._check_storage = lambda: (False, "database unreachable")
     try:
         c = _client()
         resp = c.get(f"{API_PREFIX}/ready")
@@ -57,7 +57,7 @@ def test_T_API_0053_readiness_fails_db_down() -> None:
         assert body["ready"] is False
         assert body["checks"]["storage"] != "ok"
     finally:
-        health_mod._check_storage = original  # type: ignore[assignment]
+        health_mod._check_storage = original
 
 
 # ---------------------------------------------------------------------------

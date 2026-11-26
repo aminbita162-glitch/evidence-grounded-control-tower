@@ -67,7 +67,7 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 strict = true
 disallow_any_explicit = true
 python_version = "3.14"
-exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/", "kernel/rules/_generated/"]
+exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/", "kernel/rules/_generated/", "schemas/api/"]
 
 [[tool.mypy.overrides]]
 module = ["yaml", "jcs", "rfc8785", "alembic", "asyncpg"]

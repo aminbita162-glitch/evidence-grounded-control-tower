@@ -22,6 +22,7 @@ __all__ = [
     "run_canary",
     "reconcile",
     "evaluate_objectives",
+    "run_skeleton",
     "OBJECTIVES",
     "ERROR_BUDGETS",
     "CANARY_INTERVAL_SECONDS",
