@@ -246,6 +246,8 @@ def check_scope(
                     "kernel/contracts/_generated/",
                     "test-house/gate/",
                     "test-house/kernel/",
+                    "test-house/ledger/",
+                    ".github/",
                 )
             )
             or path == "docs/dependencies.json"
