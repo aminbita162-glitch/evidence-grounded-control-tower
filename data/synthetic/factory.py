@@ -259,7 +259,7 @@ class SyntheticFactory:
         """Initialize the factory with a seed."""
         self.seed: int = seed
         self.version: str = FACTORY_VERSION
-        self._rnd: random.Random = random.Random(seed)
+        self._rnd: random.Random = random.Random(seed)  # nosec B311 — synthetic data, not crypto
 
     def _doc_id(self) -> str:
         """Generate a synthetic document id."""

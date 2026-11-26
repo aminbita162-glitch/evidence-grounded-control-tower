@@ -93,7 +93,7 @@ def test_T_BCH_0003_every_record_labelled() -> None:
     """
     batch = generate(42)
     for cat in ("documents", "facts", "tariff_rows", "tenant_feeds"):
-        for rec in batch[cat]:
+        for rec in batch[cat]:  # type: ignore[attr-defined]
             assert rec.label == SYNTHETIC_LABEL, f"{cat} record missing label"
 
 
@@ -118,7 +118,7 @@ def test_T_BCH_0004_every_record_carries_seed() -> None:
     """
     batch = generate(42)
     for cat in ("documents", "facts", "tariff_rows", "tenant_feeds"):
-        for rec in batch[cat]:
+        for rec in batch[cat]:  # type: ignore[attr-defined]
             assert rec.seed == 42, f"{cat} record missing seed"
 
 
@@ -143,7 +143,7 @@ def test_T_BCH_0005_every_record_carries_factory_version() -> None:
     """
     batch = generate(42)
     for cat in ("documents", "facts", "tariff_rows", "tenant_feeds"):
-        for rec in batch[cat]:
+        for rec in batch[cat]:  # type: ignore[attr-defined]
             assert rec.factory_version == FACTORY_VERSION
 
 
@@ -169,7 +169,7 @@ def test_T_BCH_0006_no_denylist_in_output() -> None:
     """
     batch = generate(42)
     for cat in ("documents", "facts", "tariff_rows", "tenant_feeds"):
-        for rec in batch[cat]:
+        for rec in batch[cat]:  # type: ignore[attr-defined]
             blob = json.dumps(to_canonical(rec), ensure_ascii=False)
             for denied in DENYLIST:
                 assert denied not in blob, f"deny-list entry '{denied}' found in {cat}"
@@ -272,7 +272,7 @@ def test_T_BCH_0010_tariff_rows_have_hs_codes() -> None:
     capability: none
     """
     batch = generate(42)
-    for row in batch["tariff_rows"]:
+    for row in batch["tariff_rows"]:  # type: ignore[attr-defined]
         assert row.hs_code, "tariff row missing HS code"
         assert "." in row.hs_code
 
@@ -297,7 +297,7 @@ def test_T_BCH_0011_tenant_feeds_have_entries() -> None:
     capability: none
     """
     batch = generate(42)
-    for feed in batch["tenant_feeds"]:
+    for feed in batch["tenant_feeds"]:  # type: ignore[attr-defined]
         assert feed.entries, "tenant feed has no entries"
         assert feed.tenant_id, "tenant feed missing tenant_id"
 
@@ -324,5 +324,5 @@ def test_T_BCH_0012_labels_gate_factory_output() -> None:
     """
     batch = generate(42)
     for cat in ("documents", "facts", "tariff_rows", "tenant_feeds"):
-        for rec in batch[cat]:
+        for rec in batch[cat]:  # type: ignore[attr-defined]
             assert rec.label == "SYNTHETIC"
