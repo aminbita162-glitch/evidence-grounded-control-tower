@@ -960,3 +960,17 @@
 | T-SEC-0014 | Administrator can operate | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0014_administrator_can_operate |
 | T-SEC-0015 | Session cookie signed | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0015_session_cookie_signed |
 | T-SEC-0016 | Tampered cookie fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0016_tampered_cookie_fails |
+| T-SEC-0017 | Ciphertext differs per tenant | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0017_ciphertext_differs_per_tenant |
+| T-SEC-0018 | Cross-tenant decrypt fails | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0018_cross_tenant_decrypt_fails |
+| T-SEC-0019 | Encrypt-decrypt round-trip | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0019_encrypt_decrypt_roundtrip |
+| T-SEC-0020 | Erased payloads unrecoverable | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0020_erased_payloads_unrecoverable |
+| T-SEC-0021 | Erasure recorded as event | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0021_erasure_recorded |
+| T-SEC-0022 | Rotation keeps old records | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0022_rotation_keeps_old_records |
+| T-SEC-0023 | Rotation default 90 days | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0023_rotation_default_90_days |
+| T-SEC-0024 | Break-glass creates key | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0024_break_glass_creates_key |
+| T-SEC-0025 | Break-glass disabled raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0025_break_glass_disabled_raises |
+| T-SEC-0026 | Wrong key size raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0026_wrong_key_size_raises |
+| T-SEC-0027 | Decrypt wrong key size raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0027_decrypt_wrong_key_size_raises |
+| T-SEC-0028 | Erased payload marked | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0028_erased_payload_marked |
+| T-SEC-0029 | Is erased after erasure | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0029_is_erased_after_erasure |
+| T-SEC-0030 | Encrypt without key raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0030_encrypt_without_key_raises |
