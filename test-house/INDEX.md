@@ -75,6 +75,14 @@
 | T-BCH-0064 | Baselines carry over and may only improve | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0064_baselines_carry_over |
 | T-BCH-0065 | Eval set is SYNTHETIC-labeled | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0065_synthetic_label |
 | T-BCH-0066 | Recorded set is deterministic for the same seed | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0066_recorded_deterministic |
+| T-BCH-0067 | Packet is reproducible | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0067_packet_reproducible |
+| T-BCH-0068 | Packet contains no code | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0068_packet_no_code |
+| T-BCH-0069 | Changed scenario changes hash → CHANGED_SINCE_REVIEW | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0069_changed_scenario_changes_status |
+| T-BCH-0070 | A capability without a line is UNREVIEWED | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0070_unreviewed |
+| T-BCH-0071 | A line with the current hash gives REVIEWED | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0071_reviewed |
+| T-BCH-0072 | A malformed line or unknown kind fails | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0072_malformed_line_fails |
+| T-BCH-0073 | A malformed hash fails | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0073_malformed_hash_fails |
+| T-BCH-0074 | Status file equals the generated one | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0074_status_file_roundtrip |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
