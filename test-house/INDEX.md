@@ -2,6 +2,78 @@
 
 | id | title | level | file | function |
 |---|---|---|---|---|
+| T-API-0001 | MISSING_FACT error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0001_missing_fact_problem |
+| T-API-0002 | UNVERIFIED_FACT error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0002_unverified_fact_problem |
+| T-API-0003 | WEAK_LABEL error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0003_weak_label_problem |
+| T-API-0004 | RULE_FAILURE error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0004_rule_failure_problem |
+| T-API-0005 | VERSION_CONFLICT error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0005_version_conflict_problem |
+| T-API-0006 | IDEMPOTENCY_CONFLICT error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0006_idempotency_conflict_problem |
+| T-API-0007 | UNKNOWN_TAG error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0007_unknown_tag_problem |
+| T-API-0008 | INVALID_CONFIG error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0008_invalid_config_problem |
+| T-API-0009 | REGION_POLICY error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0009_region_policy_problem |
+| T-API-0010 | BUDGET_EXCEEDED error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0010_budget_exceeded_problem |
+| T-API-0011 | QUARANTINED error code maps to problem response | fast | api/test_T_API_0001_to_0014.py | test_T_API_0011_quarantined_problem |
+| T-API-0012 | Foreign id and missing id indistinguishable by status and body | fast | api/test_T_API_0001_to_0014.py | test_T_API_0012_foreign_and_missing_indistinguishable |
+| T-API-0013 | Foreign id and missing id indistinguishable by timing class | fast | api/test_T_API_0001_to_0014.py | test_T_API_0013_foreign_and_missing_timing_class |
+| T-API-0014 | Size limits are enforced | fast | api/test_T_API_0001_to_0014.py | test_T_API_0014_size_limits_enforced |
+| T-API-0015 | OpenAPI document exists and is valid | fast | api/test_T_API_0015_to_0030.py | test_T_API_0015_openapi_exists |
+| T-API-0016 | invoke route appears in the contract | fast | api/test_T_API_0015_to_0030.py | test_T_API_0016_invoke_route_in_contract |
+| T-API-0017 | status route appears in the contract | fast | api/test_T_API_0015_to_0030.py | test_T_API_0017_status_route_in_contract |
+| T-API-0018 | result route appears in the contract | fast | api/test_T_API_0015_to_0030.py | test_T_API_0018_result_route_in_contract |
+| T-API-0019 | evidence route appears in the contract | fast | api/test_T_API_0015_to_0030.py | test_T_API_0019_evidence_route_in_contract |
+| T-API-0020 | invoke returns a valid response | fast | api/test_T_API_0015_to_0030.py | test_T_API_0020_invoke_returns_valid_response |
+| T-API-0021 | status returns a valid response | fast | api/test_T_API_0015_to_0030.py | test_T_API_0021_status_returns_valid_response |
+| T-API-0022 | result returns a valid response | fast | api/test_T_API_0015_to_0030.py | test_T_API_0022_result_returns_valid_response |
+| T-API-0023 | evidence returns a valid response | fast | api/test_T_API_0015_to_0030.py | test_T_API_0023_evidence_returns_valid_response |
+| T-API-0024 | schema-driven test finds no server error on generated inputs | slow | api/test_T_API_0015_to_0030.py | test_T_API_0024_schema_driven_no_server_error |
+| T-API-0025 | a seeded breaking change is reported | fast | api/test_T_API_0015_to_0030.py | test_T_API_0025_seeded_breaking_change_reported |
+| T-API-0026 | documentation is served | fast | api/test_T_API_0015_to_0030.py | test_T_API_0026_documentation_served |
+| T-API-0027 | OpenAPI version is 3.x | fast | api/test_T_API_0015_to_0030.py | test_T_API_0027_openapi_version_3x |
+| T-API-0028 | every operation has an operation_id | fast | api/test_T_API_0015_to_0030.py | test_T_API_0028_every_operation_has_operation_id |
+| T-API-0029 | every operation has a summary | fast | api/test_T_API_0015_to_0030.py | test_T_API_0029_every_operation_has_summary |
+| T-API-0030 | contract gate verifies operations | fast | api/test_T_API_0015_to_0030.py | test_T_API_0030_contract_gate_verifies_operations |
+| T-API-0031 | a repeated call returns the original result | fast | api/test_T_API_0031_to_0042.py | test_T_API_0031_repeated_call_returns_original |
+| T-API-0032 | different key produces different result | fast | api/test_T_API_0031_to_0042.py | test_T_API_0032_different_key_different_result |
+| T-API-0033 | concurrent identical calls produce one effect | fast | api/test_T_API_0031_to_0042.py | test_T_API_0033_concurrent_identical_one_effect |
+| T-API-0034 | stale-version writes return the conflict code | fast | api/test_T_API_0031_to_0042.py | test_T_API_0034_stale_version_conflict_code |
+| T-API-0035 | case creation is idempotent | fast | api/test_T_API_0031_to_0042.py | test_T_API_0035_case_creation_idempotent |
+| T-API-0036 | document ingest is idempotent | fast | api/test_T_API_0031_to_0042.py | test_T_API_0036_document_ingest_idempotent |
+| T-API-0037 | first approval wins | fast | api/test_T_API_0031_to_0042.py | test_T_API_0037_first_approval_wins |
+| T-API-0038 | second approval with same key gets conflict | fast | api/test_T_API_0031_to_0042.py | test_T_API_0038_second_approval_conflict |
+| T-API-0039 | idempotency record is stored | fast | api/test_T_API_0031_to_0042.py | test_T_API_0039_idempotency_record_stored |
+| T-API-0040 | missing idempotency key on mutating call is rejected | fast | api/test_T_API_0031_to_0042.py | test_T_API_0040_missing_key_rejected |
+| T-API-0041 | idempotency middleware preserves response body | fast | api/test_T_API_0031_to_0042.py | test_T_API_0041_preserves_response_body |
+| T-API-0042 | version conflict on stale version | fast | api/test_T_API_0031_to_0042.py | test_T_API_0042_version_conflict_stale |
+| T-API-0043 | ingest command exits 0 | fast | api/test_T_API_0043_to_0052.py | test_T_API_0043_ingest_exits_ok |
+| T-API-0044 | evaluate command exits 0 | fast | api/test_T_API_0043_to_0052.py | test_T_API_0044_evaluate_exits_ok |
+| T-API-0045 | replay command exits 0 | fast | api/test_T_API_0043_to_0052.py | test_T_API_0045_replay_exits_ok |
+| T-API-0046 | verify-ledger works with no server | fast | api/test_T_API_0043_to_0052.py | test_T_API_0046_verify_ledger_no_server |
+| T-API-0047 | prove works with no server | fast | api/test_T_API_0043_to_0052.py | test_T_API_0047_prove_no_server |
+| T-API-0048 | export command exits 0 | fast | api/test_T_API_0043_to_0052.py | test_T_API_0048_export_exits_ok |
+| T-API-0049 | skeleton runs through the command line | fast | api/test_T_API_0043_to_0052.py | test_T_API_0049_skeleton_cli |
+| T-API-0050 | autonomy pause is role-gated and ledgered | fast | api/test_T_API_0043_to_0052.py | test_T_API_0050_autonomy_pause |
+| T-API-0051 | autonomy freeze requires --confirm flag | fast | api/test_T_API_0043_to_0052.py | test_T_API_0051_freeze_requires_confirm |
+| T-API-0052 | autonomy lift exits 0 | fast | api/test_T_API_0043_to_0052.py | test_T_API_0052_autonomy_lift |
+| T-API-0053 | readiness fails when the database is down | fast | api/test_T_API_0053_to_0060.py | test_T_API_0053_readiness_fails_db_down |
+| T-API-0054 | readiness passes when all dependencies are up | fast | api/test_T_API_0053_to_0060.py | test_T_API_0054_readiness_passes_all_up |
+| T-API-0055 | shutdown mid-request loses no committed work | fast | api/test_T_API_0053_to_0060.py | test_T_API_0055_shutdown_no_lost_work |
+| T-API-0056 | build-info shows the configuration hash | fast | api/test_T_API_0053_to_0060.py | test_T_API_0056_build_info_config_hash |
+| T-API-0057 | health endpoint returns 200 | fast | api/test_T_API_0053_to_0060.py | test_T_API_0057_health_returns_200 |
+| T-API-0058 | readiness checks storage | fast | api/test_T_API_0053_to_0060.py | test_T_API_0058_readiness_checks_storage |
+| T-API-0059 | readiness checks policy engine | fast | api/test_T_API_0053_to_0060.py | test_T_API_0059_readiness_checks_policy_engine |
+| T-API-0060 | readiness checks ledger signer | fast | api/test_T_API_0053_to_0060.py | test_T_API_0060_readiness_checks_ledger_signer |
+| T-API-0061 | storage unavailable fault ends in ABSTAIN | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0061_storage_unavailable_abstain |
+| T-API-0062 | model unavailable fault ends in ABSTAIN | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0062_model_unavailable_abstain |
+| T-API-0063 | policy engine unavailable fault ends in ABSTAIN | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0063_policy_engine_unavailable_abstain |
+| T-API-0064 | slow dependencies fault ends in ABSTAIN | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0064_slow_dependencies_abstain |
+| T-API-0065 | storage fault produces no partial write | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0065_storage_no_partial_write |
+| T-API-0066 | model fault produces no partial write | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0066_model_no_partial_write |
+| T-API-0067 | policy engine fault produces no partial write | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0067_policy_no_partial_write |
+| T-API-0068 | existence oracle mapped to test | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0068_existence_oracle_mapped |
+| T-API-0069 | forged tenant identifier mapped to test | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0069_forged_tenant_mapped |
+| T-API-0070 | search or aggregate endpoint mapped to test | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0070_search_aggregate_mapped |
+| T-API-0071 | gate run chaos exits 0 | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0071_gate_run_chaos_exits_0 |
+| T-API-0072 | gate run contract exits 0 | fast | api/chaos/test_T_API_0061_to_0072.py | test_T_API_0072_gate_run_contract_exits_0 |
 | T-BASELINE-0001 | Empty baselines are seeded with the measured floor | fast | gate/test_baseline.py | test_update_baselines_seeds_empty |
 | T-BASELINE-0002 | A higher measured value ratchets the floor up | fast | gate/test_baseline.py | test_update_baselines_ratchets_up |
 | T-BASELINE-0003 | A lowered measured value is rejected and the floor is kept | fast | gate/test_baseline.py | test_update_baselines_rejects_decrease |
@@ -524,6 +596,38 @@
 | T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
 | T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
 | T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
+| T-OBS-0001 | a metric with a tenant label is rejected | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0001_tenant_label_rejected |
+| T-OBS-0002 | a metric with a tenant_id label is rejected | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0002_tenant_id_label_rejected |
+| T-OBS-0003 | a metric without tenant labels is accepted | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0003_metric_without_tenant_ok |
+| T-OBS-0004 | JSON log includes correlation id | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0004_log_includes_correlation_id |
+| T-OBS-0005 | JSON log includes tenant id | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0005_log_includes_tenant_id |
+| T-OBS-0006 | seeded personal data never reaches logs | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0006_no_personal_data_in_logs |
+| T-OBS-0007 | model call yields a span with stated attributes | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0007_model_call_span_attributes |
+| T-OBS-0008 | model call span has a unique span_id | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0008_span_id_unique |
+| T-OBS-0009 | JSON log format is valid JSON | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0009_log_valid_json |
+| T-OBS-0010 | metric counter accumulates | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0010_counter_accumulates |
+| T-OBS-0011 | gauge sets value | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0011_gauge_sets_value |
+| T-OBS-0012 | correlation id is settable | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0012_correlation_id_settable |
+| T-OBS-0013 | canary passes on a healthy stack | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0013_canary_passes_healthy |
+| T-OBS-0014 | canary fails on a seeded fault | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0014_canary_fails_fault |
+| T-OBS-0015 | a deleted span is reported as a gap | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0015_deleted_span_gap |
+| T-OBS-0016 | no gap when traces match ledger | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0016_no_gap_when_match |
+| T-OBS-0017 | objectives parse correctly | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0017_objectives_parse |
+| T-OBS-0018 | error budgets parse correctly | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0018_error_budgets_parse |
+| T-OBS-0019 | evaluate_objectives with passing results | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0019_objectives_passing |
+| T-OBS-0020 | evaluate_objectives with a failing result | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0020_objectives_failing |
+| T-OBS-0021 | canary interval is 5 minutes (300 seconds) | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0021_canary_interval_5min |
+| T-OBS-0022 | canary result carries SYNTHETIC label | fast | observability/test_T_OBS_0013_to_0022.py | test_T_OBS_0022_canary_label_synthetic |
+| T-OBS-0023 | max_model_calls limit enforced at boundary | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0023_model_calls_limit |
+| T-OBS-0024 | max_tokens limit enforced | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0024_tokens_limit |
+| T-OBS-0025 | max_tool_calls limit enforced | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0025_tool_calls_limit |
+| T-OBS-0026 | max_workflow_steps limit enforced | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0026_workflow_steps_limit |
+| T-OBS-0027 | extraction usage does not reduce meter other | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0027_extraction_does_not_reduce_other |
+| T-OBS-0028 | other meter does not reduce extraction | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0028_other_does_not_reduce_extraction |
+| T-OBS-0029 | extraction exhaustion leaves earlier documents intact | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0029_extraction_exhaustion_intact |
+| T-OBS-0030 | per-document call allowance enforced | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0030_per_document_allowance |
+| T-OBS-0031 | usage events reconcile with the ledger | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0031_usage_events_reconcile |
+| T-OBS-0032 | breach event is recorded | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0032_breach_event_recorded |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |

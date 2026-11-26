@@ -10,8 +10,8 @@ Spec: Part 3 §3.14; P10-T08.
 
 from __future__ import annotations
 
-import time
 from dataclasses import dataclass, field
+from time import perf_counter
 from typing import Any
 
 from kernel.config import CaseBudgetConfig
@@ -107,11 +107,11 @@ class BudgetState:
     wall_time_seconds: float = 0.0
     tool_calls: int = 0
     workflow_steps: int = 0
-    _start_time: float = field(default_factory=time.perf_counter)
+    _start_time: float = field(default_factory=perf_counter)
 
     def refresh_wall_time(self) -> None:
         """Update the wall time from the clock."""
-        self.wall_time_seconds = time.perf_counter() - self._start_time
+        self.wall_time_seconds = perf_counter() - self._start_time
 
 
 class BudgetGovernor:
