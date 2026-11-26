@@ -90,4 +90,7 @@ def _register_routes(app: FastAPI, ports: AppPorts) -> None:
 
     register_capability_routes(app)
     register_command_routes(app)
-    # T05 will add health endpoints.
+
+    from api.health import register_health_routes
+
+    register_health_routes(app)
