@@ -974,3 +974,15 @@
 | T-SEC-0028 | Erased payload marked | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0028_erased_payload_marked |
 | T-SEC-0029 | Is erased after erasure | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0029_is_erased_after_erasure |
 | T-SEC-0030 | Encrypt without key raises | fast | security/test_T_SEC_0017_to_0030.py | test_T_SEC_0030_encrypt_without_key_raises |
+| T-SEC-0031 | Ceremony generates keys | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0031_ceremony_generates_keys |
+| T-SEC-0032 | Keys are 32 bytes | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0032_ceremony_keys_are_32_bytes |
+| T-SEC-0033 | Erasure drill passes | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0033_erasure_drill_passes |
+| T-SEC-0034 | Rotation drill passes | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0034_rotation_drill_passes |
+| T-SEC-0035 | Env store reads secret | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0035_env_store_reads_secret |
+| T-SEC-0036 | Missing secret raises | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0036_missing_secret_raises |
+| T-SEC-0037 | File store reads secret | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0037_file_store_reads_secret |
+| T-SEC-0038 | Has returns False for missing | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0038_store_has_returns_false |
+| T-SEC-0039 | Has returns True for present | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0039_store_has_returns_true |
+| T-SEC-0040 | List keys returns names only | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0040_list_keys_no_values |
+| T-SEC-0041 | Ceremony verify keys | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0041_ceremony_verify_keys |
+| T-SEC-0042 | Drill result name | fast | security/test_T_SEC_0031_to_0042.py | test_T_SEC_0042_drill_result_name |
