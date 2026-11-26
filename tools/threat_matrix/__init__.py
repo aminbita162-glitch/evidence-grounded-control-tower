@@ -1,10 +1,11 @@
-"""Threat-to-test matrix tool (P04-T08).
+"""Threat-to-test matrix tool (P04-T08, P11-T07).
 
 Reads the attack catalog of Part 3 §3.24 and the threat list of Part 3 §3.15,
 assigns every item an identifier, and reads the threat ids named in test
-headers.  Prints items without a test.
+headers.  Prints items without a test.  Items deliberately deferred to a
+named later phase are listed with their target phase.
 
-Spec: Part 3 §3.15, §3.24; Part 4 §4.5; P04-T08.
+Spec: Part 3 §3.15, §3.24; Part 4 §4.5; P04-T08; P11-T07.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ __all__ = [
     "ThreatMatrix",
     "ATTACK_CATALOG",
     "THREAT_MATRIX",
+    "DEFERRED_ITEMS",
 ]
 
 ATTACK_CATALOG: list[dict[str, str]] = [
@@ -44,7 +46,20 @@ ATTACK_CATALOG: list[dict[str, str]] = [
     {"id": "ATK-017", "name": "prompt injection through documents", "category": "injection"},
     {"id": "ATK-018", "name": "data exfiltration through model output", "category": "exfiltration"},
     {"id": "ATK-019", "name": "tool authority escalation", "category": "escalation"},
+    {"id": "ATK-020", "name": "poisoned reference data", "category": "poisoning"},
+    {"id": "ATK-021", "name": "memory poisoning", "category": "poisoning"},
+    {"id": "ATK-022", "name": "hostile files decompression bombs", "category": "hostile_files"},
+    {"id": "ATK-023", "name": "supply chain compromise", "category": "supply_chain"},
+    {"id": "ATK-024", "name": "secret exposure", "category": "secret"},
+    {"id": "ATK-025", "name": "export backup log leakage", "category": "leakage"},
+    {"id": "ATK-026", "name": "shared model context response cache", "category": "cache"},
+    {"id": "ATK-027", "name": "precedent memory below k-threshold", "category": "threshold"},
 ]
+
+#: Items deliberately deferred to a named later phase.
+DEFERRED_ITEMS: dict[str, str] = {
+    "ATK-022": "P14",
+}
 
 #: P05 threat-to-test mappings for the evidence ledger.
 THREAT_MATRIX: dict[str, list[str]] = {
@@ -127,6 +142,28 @@ THREAT_MATRIX: dict[str, list[str]] = {
     "search_or_aggregate_endpoint": [
         "T-API-0070",
     ],
+    #: P11 security and tenancy mappings (P11-T07).
+    "poisoned_reference_data": [
+        "T-SEC-0062",
+    ],
+    "memory_poisoning": [
+        "T-SEC-0062",
+    ],
+    "supply_chain_compromise": [
+        "T-SEC-0036",
+    ],
+    "secret_exposure": [
+        "T-SEC-0036",
+    ],
+    "export_backup_log_leakage": [
+        "T-SEC-0076",
+    ],
+    "shared_model_cache": [
+        "T-SEC-0074",
+    ],
+    "precedent_below_k_threshold": [
+        "T-SEC-0057",
+    ],
 }
 
 
@@ -150,6 +187,7 @@ class ThreatMatrix:
     """Threat-to-test matrix.
 
     Maps attack catalog items to test IDs.  Items without a test are listed.
+    Items deferred to a later phase are listed with their target phase.
     """
 
     def __init__(self, catalog: list[dict[str, str]] | None = None) -> None:
@@ -180,6 +218,28 @@ class ThreatMatrix:
     def items_without_test(self) -> list[ThreatItem]:
         """Catalog items that have no test mapping."""
         return [item for item in self.items if not item.has_test]
+
+    @property
+    def deferred_items(self) -> list[tuple[str, str, str]]:
+        """Items deferred to a later phase.
+
+        Returns:
+            A list of (threat_id, name, target_phase) tuples.
+        """
+        return [
+            (entry["id"], entry["name"], DEFERRED_ITEMS[entry["id"]])
+            for entry in self._catalog
+            if entry["id"] in DEFERRED_ITEMS
+        ]
+
+    @property
+    def unmapped_without_deferral(self) -> list[ThreatItem]:
+        """Items without a test and without a deferral.
+
+        Returns:
+            A list of ThreatItem instances.
+        """
+        return [item for item in self.items_without_test if item.threat_id not in DEFERRED_ITEMS]
 
     @property
     def coverage(self) -> dict[str, bool]:

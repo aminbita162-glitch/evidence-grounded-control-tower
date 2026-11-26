@@ -1028,3 +1028,11 @@
 | T-SEC-0082 | Policy as application role | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0082_policy_as_application_role |
 | T-SEC-0083 | Frozen tenant blocks | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0083_frozen_tenant_blocks |
 | T-SEC-0084 | Tenant config isolation | fast | leakage/test_T_SEC_0069_to_0084.py | test_T_SEC_0084_tenant_config_isolation |
+| T-SEC-0085 | No unmapped except deferred | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0085_no_unmapped_except_deferred |
+| T-SEC-0086 | Seeded unmapped fails | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0086_seeded_unmapped_fails |
+| T-SEC-0087 | Supply chain mapped to gates | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0087_supply_chain_mapped |
+| T-SEC-0088 | Hostile files deferred to P14 | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0088_hostile_files_deferred |
+| T-SEC-0089 | Deferred items name a phase | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0089_deferred_items_name_phase |
+| T-SEC-0090 | Catalog JSON matches Python | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0090_catalog_json_matches |
+| T-SEC-0091 | All new items covered | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0091_all_new_items_covered |
+| T-SEC-0092 | Deferred items non-empty | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0092_deferred_items_nonempty |
