@@ -944,3 +944,19 @@
 | T-RUL-0098 | pack check prints the label ceiling | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0098_check_prints_ceiling |
 | T-RUL-0099 | pack provenance includes source ids | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0099_provenance_includes_sources |
 | T-RUL-0100 | pack diff with version change exits 0 | fast | packkit/test_T_RUL_0081_to_0100.py | test_T_RUL_0100_diff_with_version_change |
+| T-SEC-0001 | Token never stored in clear | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0001_token_never_stored_in_clear |
+| T-SEC-0002 | Expired token fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0002_expired_token_fails |
+| T-SEC-0003 | Revoked token fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0003_revoked_token_fails |
+| T-SEC-0004 | Forged tenant in body ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0004_forged_tenant_body_ignored |
+| T-SEC-0005 | Forged tenant in header ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0005_forged_tenant_header_ignored |
+| T-SEC-0006 | Forged tenant in path ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0006_forged_tenant_path_ignored |
+| T-SEC-0007 | Forged tenant in claims ignored | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0007_forged_tenant_claims_ignored |
+| T-SEC-0008 | Platform role has no tenant | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0008_platform_role_no_tenant |
+| T-SEC-0009 | Platform denied tenant-scoped routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0009_platform_denied_tenant_routes |
+| T-SEC-0010 | Platform reaches deployment routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0010_platform_reaches_deployment_routes |
+| T-SEC-0011 | Viewer accesses tenant routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0011_viewer_can_access |
+| T-SEC-0012 | Operator accesses tenant routes | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0012_operator_can_access |
+| T-SEC-0013 | Reviewer can approve | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0013_reviewer_can_approve |
+| T-SEC-0014 | Administrator can operate | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0014_administrator_can_operate |
+| T-SEC-0015 | Session cookie signed | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0015_session_cookie_signed |
+| T-SEC-0016 | Tampered cookie fails | fast | security/test_T_SEC_0001_to_0016.py | test_T_SEC_0016_tampered_cookie_fails |
