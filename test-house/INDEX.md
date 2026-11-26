@@ -9,6 +9,80 @@
 | T-BASELINE-0005 | check_baseline_decrease flags a lowered value | fast | gate/test_baseline.py | test_check_baseline_decrease_flags_and_clears |
 | T-BASELINE-0006 | baselines.json validates against its schema | fast | gate/test_baseline.py | test_baselines_schema_valid_and_invalid |
 | T-BASELINE-0007 | A missing measured component reports a decrease | fast | gate/test_baseline.py | test_check_baseline_decrease_missing_component |
+| T-BCH-0001 | Same seed gives byte-identical output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0001_same_seed_byte_identical |
+| T-BCH-0002 | Different seed gives different output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0002_different_seed_different_output |
+| T-BCH-0003 | Every record carries the SYNTHETIC label | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0003_every_record_labelled |
+| T-BCH-0004 | Every record carries the seed | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0004_every_record_carries_seed |
+| T-BCH-0005 | Every record carries the factory version | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0005_every_record_carries_factory_version |
+| T-BCH-0006 | No deny-list name appears in output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0006_no_denylist_in_output |
+| T-BCH-0007 | Arabic-Indic digits present in Arabic documents | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0007_arabic_indic_digits |
+| T-BCH-0008 | Persian digits present in Persian documents | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0008_persian_digits |
+| T-BCH-0009 | Factory is deterministic on regenerate | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0009_deterministic_regenerate |
+| T-BCH-0010 | Tariff rows have HS codes | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0010_tariff_rows_have_hs_codes |
+| T-BCH-0011 | Tenant feeds have entries | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0011_tenant_feeds_have_entries |
+| T-BCH-0012 | Labels gate passes on factory output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0012_labels_gate_factory_output |
+| T-BCH-0013 | Bench runner is deterministic | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0013_bench_deterministic |
+| T-BCH-0014 | Unmet expectation fails with the scenario id | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0014_unmet_expectation_fails |
+| T-BCH-0015 | Met expectation passes | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0015_met_expectation_passes |
+| T-BCH-0016 | Scenario loading from JSON | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0016_scenario_loading |
+| T-BCH-0017 | Invalid scenario kind is rejected | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0017_invalid_kind_rejected |
+| T-BCH-0018 | Missing required fields are rejected | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0018_missing_fields_rejected |
+| T-BCH-0019 | Bench report counts are correct | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0019_report_counts |
+| T-BCH-0020 | Runner exception produces a failed entry | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0020_runner_exception |
+| T-BCH-0021 | All scenarios from the scenario directory pass | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0021_all_scenarios_pass |
+| T-BCH-0022 | Scenario without test_id has empty test_id | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0022_no_test_id |
+| T-BCH-0023 | Skeleton runs end-to-end without raising | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0023_skeleton_runs_e2e |
+| T-BCH-0024 | Passport hash is a valid SHA-256 | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0024_passport_hash_valid |
+| T-BCH-0025 | Same seed gives identical decision | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0025_same_seed_identical_decision |
+| T-BCH-0026 | Passport replays to an equal hash | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0026_passport_replays_equal |
+| T-BCH-0027 | Bundle verifies with the independent verifier | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0027_bundle_verifies |
+| T-BCH-0028 | Structural verification passes | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0028_structural_verification |
+| T-BCH-0029 | Decision is a valid DecisionValue | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0029_decision_valid |
+| T-BCH-0030 | Stage failure produces a non-ALLOW decision | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0030_stage_failure_non_allow |
+| T-BCH-0031 | Records cover all expected pipeline stages | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0031_records_cover_stages |
+| T-BCH-0032 | Bundle hash is a valid SHA-256 | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0032_bundle_hash_valid |
+| T-BCH-0033 | Reason codes are non-empty for non-ALLOW decisions | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0033_reason_codes_nonempty |
+| T-BCH-0034 | Skeleton imports no capability internals | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0034_no_capability_internals |
+| T-BCH-0035 | Harness starts cleanly | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0035_harness_starts |
+| T-BCH-0036 | Harness stops cleanly | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0036_harness_stops |
+| T-BCH-0037 | Harness raises when not started | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0037_harness_not_started_raises |
+| T-BCH-0038 | Two-tenant scenario runs | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0038_two_tenant_runs |
+| T-BCH-0039 | Two-tenant scenario finds zero cross-tenant reads | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0039_zero_cross_tenant_reads |
+| T-BCH-0040 | Two-tenant scenario has two tenants | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0040_two_tenants_present |
+| T-BCH-0041 | Output identical across two runs with same seed | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0041_identical_output_same_seed |
+| T-BCH-0042 | Tenant decisions are non-ALLOW | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0042_tenant_decisions_non_allow |
+| T-BCH-0043 | Matrix builds without error | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0043_matrix_builds |
+| T-BCH-0044 | Matrix includes test IDs | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0044_matrix_has_tests |
+| T-BCH-0045 | Matrix includes scenario IDs | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0045_matrix_has_scenarios |
+| T-BCH-0046 | A scenario without a test fails when seeded | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0046_scenario_without_test_broken |
+| T-BCH-0047 | A scenario referencing an unknown test fails when seeded | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0047_test_without_scenario_broken |
+| T-BCH-0048 | A risk without a control fails when seeded | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0048_risk_without_control_broken |
+| T-BCH-0049 | A control without a test is advisory | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0049_control_without_test_advisory |
+| T-BCH-0050 | Matrix is reproducible | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0050_matrix_reproducible |
+| T-BCH-0051 | gate run trace exits 0 | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0051_gate_trace_exits_0 |
+| T-BCH-0052 | Report is valid JSON | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0052_report_valid_json |
+| T-BCH-0053 | Matrix includes risks and controls | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0053_matrix_has_risks_controls |
+| T-BCH-0054 | No broken links in the real repo | fast | e2e/test_T_BCH_0043_to_0054.py | test_T_BCH_0054_no_broken_links_real |
+| T-BCH-0055 | Sets reproduce for a fixed seed | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0055_sets_reproduce |
+| T-BCH-0056 | Calibration set has known score distribution | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0056_calibration_score_distribution |
+| T-BCH-0057 | Test set has known score distribution | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0057_test_score_distribution |
+| T-BCH-0058 | Exchangeability holds by construction | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0058_exchangeability |
+| T-BCH-0059 | Artifact IDs are stable | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0059_artifact_ids_stable |
+| T-BCH-0060 | Coverage statements carry the SYNTHETIC label | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0060_synthetic_label |
+| T-BCH-0061 | Eval thresholds hold on the larger set | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0061_thresholds_hold_larger_set |
+| T-BCH-0062 | Refreshed recording is a recorded event | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0062_recording_is_recorded_event |
+| T-BCH-0063 | Factory output replaces small fixtures | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0063_factory_output_replaces_fixtures |
+| T-BCH-0064 | Baselines carry over and may only improve | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0064_baselines_carry_over |
+| T-BCH-0065 | Eval set is SYNTHETIC-labeled | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0065_synthetic_label |
+| T-BCH-0066 | Recorded set is deterministic for the same seed | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0066_recorded_deterministic |
+| T-BCH-0067 | Packet is reproducible | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0067_packet_reproducible |
+| T-BCH-0068 | Packet contains no code | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0068_packet_no_code |
+| T-BCH-0069 | Changed scenario changes hash → CHANGED_SINCE_REVIEW | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0069_changed_scenario_changes_status |
+| T-BCH-0070 | A capability without a line is UNREVIEWED | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0070_unreviewed |
+| T-BCH-0071 | A line with the current hash gives REVIEWED | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0071_reviewed |
+| T-BCH-0072 | A malformed line or unknown kind fails | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0072_malformed_line_fails |
+| T-BCH-0073 | A malformed hash fails | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0073_malformed_hash_fails |
+| T-BCH-0074 | Status file equals the generated one | fast | review/test_T_BCH_0067_to_0074.py | test_T_BCH_0074_status_file_roundtrip |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |

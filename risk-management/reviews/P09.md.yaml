@@ -1,0 +1,54 @@
+# P09 phase risk review — P09-RISK.
+#
+# P09 built the seeded synthetic data factory, the scenario bench, the
+# walking skeleton, the demo harness, the traceability matrix tool, the
+# conformal calibration fixtures, the evaluation set replacement, and the
+# scenario review packets and status.  Two gates were activated: e2e and
+# trace.
+#
+# Risks and controls:
+#
+#   - Synthetic data passing as real (RSK-DL-03, CTL-SYN-01):
+#     every synthetic record carries the SYNTHETIC label with the seed
+#     and factory version (Part 3 §3.12); the factory is never mixed into
+#     reference data; the labels gate passes on factory output; calibration
+#     sets carry the SYNTHETIC label (Part 3 §3.13); eval sets carry the
+#     SYNTHETIC label; tests T-BCH-0003 to T-BCH-0006 verify the label is
+#     present and no real identifier appears; the skeleton, demo harness
+#     and two-tenant scenario all operate on SYNTHETIC data only.
+#
+#   - Skeleton drift (RSK-J-02, CTL-SKL-01):
+#     the walking skeleton uses kernel contracts only — it imports no
+#     capability internals (T-BCH-0034); the Passport replays to an equal
+#     hash (T-BCH-0026); the bundle verifies with the independent verifier
+#     (T-BCH-0027); structural verification passes (T-BCH-0028); a stage
+#     failure produces a non-ALLOW decision (T-BCH-0030); the e2e gate
+#     runs the full skeleton suite on every phase.
+#
+#   - Broken traceability (RSK-J-03, CTL-TRC-01):
+#     the traceability matrix tool chains test → scenario → control →
+#     risk from test headers, scenario files and risk registers; it
+#     reports every broken link; the trace gate exits 0 only when no
+#     broken links are found (T-BCH-0051, T-BCH-0054); the matrix is
+#     reproducible (T-BCH-0050); a scenario without a test, a risk
+#     without a control and an unknown test reference each fail when
+#     seeded (T-BCH-0046, T-BCH-0048, T-BCH-0047).
+#
+#   - Scenario gaps (RSK-J-04, CTL-SCN-01):
+#     the scenario format requires a test_id; the bench runner reports
+#     scenarios without test IDs (T-BCH-0022); the trace tool flags a
+#     scenario with an empty test_id (T-BCH-0046); the review status
+#     detects CHANGED_SINCE_REVIEW when a scenario changes (T-BCH-0069).
+#
+#   - Scenarios and code that share one origin (RSK-J-05, CTL-ORC-01):
+#     the skeleton, demo harness and two-tenant scenario all derive their
+#     data from the same seeded factory; the same seed gives the same
+#     decision and reason codes (T-BCH-0025, T-BCH-0041); the calibration
+#     sets are reproducible (T-BCH-0055); the eval recording is
+#     deterministic (T-BCH-0066); the review packet is reproducible
+#     (T-BCH-0067).
+#
+# Phase: P09
+# Class: L
+# Capabilities: none
+# Gates activated: e2e, trace
