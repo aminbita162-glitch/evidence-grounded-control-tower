@@ -215,29 +215,31 @@ async def _test_update_rejected(db: EphemeralDB) -> None:
     conn = await asyncpg.connect(db.application_dsn)
     try:
         # Insert a case and a record via the application role.
-        await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
-        await conn.execute(
-            'INSERT INTO "case" (id, tenant_id, schema_version, state) '
-            "VALUES ('case-upd', 'tenant-a', 1, 'CREATED')"
-        )
-        await conn.execute(
-            'INSERT INTO "evidence_record" '
-            "(id, tenant_id, schema_version, actor_id, actor_kind, alg, "
-            "case_id, payload_hash, prev_hash, record_hash, record_id, "
-            "seq, stage, type) "
-            "VALUES ('er-1', 'tenant-a', 1, 'ROLE-MANAGER', 'ROLE', 'sha256', "
-            "'case-upd', 'ph1', '0000', 'rh1', 'er-1', 1, 'Intake', 'test')"
-        )
+        async with conn.transaction():
+            await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
+            await conn.execute(
+                'INSERT INTO "case" (id, tenant_id, schema_version, state) '
+                "VALUES ('case-upd', 'tenant-a', 1, 'CREATED')"
+            )
+            await conn.execute(
+                'INSERT INTO "evidence_record" '
+                "(id, tenant_id, schema_version, actor_id, actor_kind, alg, "
+                "case_id, payload_hash, prev_hash, record_hash, record_id, "
+                "seq, stage, type) "
+                "VALUES ('er-1', 'tenant-a', 1, 'ROLE-MANAGER', 'ROLE', 'sha256', "
+                "'case-upd', 'ph1', '0000', 'rh1', 'er-1', 1, 'Intake', 'test')"
+            )
     finally:
         await conn.close()
     # Try to UPDATE — should be rejected by the append-only guard.
     conn2 = await asyncpg.connect(db.application_dsn)
     try:
         with pytest.raises(asyncpg.PostgresError):
-            await conn2.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
-            await conn2.execute(
-                "UPDATE \"evidence_record\" SET stage = 'Changed' WHERE id = 'er-1'"
-            )
+            async with conn2.transaction():
+                await conn2.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
+                await conn2.execute(
+                    "UPDATE \"evidence_record\" SET stage = 'Changed' WHERE id = 'er-1'"
+                )
     finally:
         await conn2.close()
 
@@ -267,26 +269,28 @@ def test_T_LED_0006_delete_rejected(migrated_db: EphemeralDB) -> None:
 async def _test_delete_rejected(db: EphemeralDB) -> None:
     conn = await asyncpg.connect(db.application_dsn)
     try:
-        await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
-        await conn.execute(
-            'INSERT INTO "case" (id, tenant_id, schema_version, state) '
-            "VALUES ('case-del', 'tenant-b', 1, 'CREATED')"
-        )
-        await conn.execute(
-            'INSERT INTO "evidence_record" '
-            "(id, tenant_id, schema_version, actor_id, actor_kind, alg, "
-            "case_id, payload_hash, prev_hash, record_hash, record_id, "
-            "seq, stage, type) "
-            "VALUES ('er-2', 'tenant-b', 1, 'ROLE-MANAGER', 'ROLE', 'sha256', "
-            "'case-del', 'ph2', '0000', 'rh2', 'er-2', 1, 'Intake', 'test')"
-        )
+        async with conn.transaction():
+            await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
+            await conn.execute(
+                'INSERT INTO "case" (id, tenant_id, schema_version, state) '
+                "VALUES ('case-del', 'tenant-b', 1, 'CREATED')"
+            )
+            await conn.execute(
+                'INSERT INTO "evidence_record" '
+                "(id, tenant_id, schema_version, actor_id, actor_kind, alg, "
+                "case_id, payload_hash, prev_hash, record_hash, record_id, "
+                "seq, stage, type) "
+                "VALUES ('er-2', 'tenant-b', 1, 'ROLE-MANAGER', 'ROLE', 'sha256', "
+                "'case-del', 'ph2', '0000', 'rh2', 'er-2', 1, 'Intake', 'test')"
+            )
     finally:
         await conn.close()
     conn2 = await asyncpg.connect(db.application_dsn)
     try:
         with pytest.raises(asyncpg.PostgresError):
-            await conn2.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
-            await conn2.execute("DELETE FROM \"evidence_record\" WHERE id = 'er-2'")
+            async with conn2.transaction():
+                await conn2.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
+                await conn2.execute("DELETE FROM \"evidence_record\" WHERE id = 'er-2'")
     finally:
         await conn2.close()
 
@@ -317,27 +321,29 @@ async def _test_tenant_isolation(db: EphemeralDB) -> None:
     # Insert as tenant-a.
     conn = await asyncpg.connect(db.application_dsn)
     try:
-        await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
-        await conn.execute(
-            'INSERT INTO "case" (id, tenant_id, schema_version, state) '
-            "VALUES ('case-iso', 'tenant-a', 1, 'CREATED')"
-        )
-        await conn.execute(
-            'INSERT INTO "evidence_record" '
-            "(id, tenant_id, schema_version, actor_id, actor_kind, alg, "
-            "case_id, payload_hash, prev_hash, record_hash, record_id, "
-            "seq, stage, type) "
-            "VALUES ('er-iso', 'tenant-a', 1, 'ROLE-MANAGER', 'ROLE', 'sha256', "
-            "'case-iso', 'ph3', '0000', 'rh3', 'er-iso', 1, 'Intake', 'test')"
-        )
+        async with conn.transaction():
+            await conn.execute("SET LOCAL ctc.tenant_id = 'tenant-a'")
+            await conn.execute(
+                'INSERT INTO "case" (id, tenant_id, schema_version, state) '
+                "VALUES ('case-iso', 'tenant-a', 1, 'CREATED')"
+            )
+            await conn.execute(
+                'INSERT INTO "evidence_record" '
+                "(id, tenant_id, schema_version, actor_id, actor_kind, alg, "
+                "case_id, payload_hash, prev_hash, record_hash, record_id, "
+                "seq, stage, type) "
+                "VALUES ('er-iso', 'tenant-a', 1, 'ROLE-MANAGER', 'ROLE', 'sha256', "
+                "'case-iso', 'ph3', '0000', 'rh3', 'er-iso', 1, 'Intake', 'test')"
+            )
     finally:
         await conn.close()
     # Query as tenant-b.
     conn2 = await asyncpg.connect(db.application_dsn)
     try:
-        await conn2.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
-        rows = await conn2.fetch('SELECT * FROM "evidence_record"')
-        assert len(rows) == 0
+        async with conn2.transaction():
+            await conn2.execute("SET LOCAL ctc.tenant_id = 'tenant-b'")
+            rows = await conn2.fetch('SELECT * FROM "evidence_record"')
+            assert len(rows) == 0
     finally:
         await conn2.close()
 

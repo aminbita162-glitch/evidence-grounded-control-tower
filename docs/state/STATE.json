@@ -3,8 +3,8 @@
   "capability_status_map": {},
   "directive_hash": "c07cef90e548e63bb2010e977eb97d73ab5f5e1a6baa0db039637978094b7b75",
   "label_counts": {},
-  "last_completed_phase": "P09",
+  "last_completed_phase": "P10",
   "open_stop_items": [],
   "previous_merge_hash": "fa95c20898e89bcd2c087f6c109537a9b936de81",
-  "state_hash": "8418fd422924577c8d8a5d47f66bcb695db4d9da09c8e4356583ae25d574e8d3"
+  "state_hash": "94af61a9f96279f3d89319fc1938246db74fafb3b3aad6de2418a616eec9181d"
 }

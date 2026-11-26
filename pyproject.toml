@@ -13,6 +13,10 @@ dependencies = [
     "alembic==1.20.1",
     "asyncpg==0.32.0",
     "cryptography==50.0.2",
+    "httpx==0.28.1",
+    "opentelemetry-sdk==1.45.2",
+    "fastapi==0.162.2",
+    "uvicorn==0.54.0",
 ]
 
 [project.optional-dependencies]
@@ -31,6 +35,7 @@ dev = [
     "mutmut==3.8.1",
     "import-linter==2.16",
     "pynacl==1.6.2",
+    "schemathesis==4.33.1",
 ]
 
 [build-system]
@@ -62,7 +67,7 @@ select = ["E", "F", "W", "I", "S", "UP", "B", "A", "C4", "PIE", "SIM"]
 strict = true
 disallow_any_explicit = true
 python_version = "3.14"
-exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/", "kernel/rules/_generated/"]
+exclude = ["tools/gate/fixtures/", "\\.venv/", "build/", "tools/threat-matrix/", "kernel/rules/_generated/", "schemas/api/"]
 
 [[tool.mypy.overrides]]
 module = ["yaml", "jcs", "rfc8785", "alembic", "asyncpg"]
@@ -77,15 +82,15 @@ module = ["kernel.contracts._generated.*", "kernel.rules._generated.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*", "kernel.persistence.*"]
+module = ["kernel.canonical.*", "kernel.hashing.*", "kernel.types.*", "kernel.ports.*", "kernel.casestate.*", "kernel.decision.*", "kernel.facts.*", "kernel.errors.*", "kernel.config.*", "kernel.persistence.*", "kernel.budget.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["adapters.*"]
+module = ["adapters.*", "api.*", "cli.*", "adapters.telemetry.*", "deploy.*"]
 disallow_any_explicit = false
 
 [[tool.mypy.overrides]]
-module = ["tools.migrate.*", "tools.faultlab.*", "tools.threat_matrix.*"]
+module = ["tools.migrate.*", "tools.faultlab.*", "tools.threat_matrix.*", "tools.canary.*"]
 disallow_any_explicit = false
 
 [tool.importlinter]
