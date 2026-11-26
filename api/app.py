@@ -82,10 +82,12 @@ def create_app(ports: AppPorts | None = None) -> FastAPI:
 def _register_routes(app: FastAPI, ports: AppPorts) -> None:
     """Register all API routes on the app.
 
-    Later tasks add the uniform capability route (T02), idempotency
-    middleware (T03), and health endpoints (T05).  This hook lets each
-    task extend the app without modifying the factory.
+    Later tasks add idempotency middleware (T03) and health endpoints (T05).
+    This hook lets each task extend the app without modifying the factory.
     """
-    # T02 will add the uniform capability route.
+    from api.routes.capability import register_capability_routes
+    from api.routes.commands import register_command_routes
+
+    register_capability_routes(app)
+    register_command_routes(app)
     # T05 will add health endpoints.
-    # For T01 the app exposes only the OpenAPI document and problem handlers.
