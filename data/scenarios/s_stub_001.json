@@ -1,0 +1,10 @@
+{
+  "id": "S-STUB-001",
+  "kind": "normal",
+  "inputs": [{"type": "document", "text": "SYNTHETIC invoice"}],
+  "expected_outcome": "ALLOW",
+  "basis": "PR-09",
+  "requirement_ids": ["PR-09"],
+  "capability_ids": [],
+  "test_id": "T-BCH-0021"
+}

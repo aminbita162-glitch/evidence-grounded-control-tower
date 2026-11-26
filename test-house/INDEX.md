@@ -21,6 +21,16 @@
 | T-BCH-0010 | Tariff rows have HS codes | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0010_tariff_rows_have_hs_codes |
 | T-BCH-0011 | Tenant feeds have entries | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0011_tenant_feeds_have_entries |
 | T-BCH-0012 | Labels gate passes on factory output | fast | synthetic/test_T_BCH_0001_to_0012.py | test_T_BCH_0012_labels_gate_factory_output |
+| T-BCH-0013 | Bench runner is deterministic | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0013_bench_deterministic |
+| T-BCH-0014 | Unmet expectation fails with the scenario id | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0014_unmet_expectation_fails |
+| T-BCH-0015 | Met expectation passes | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0015_met_expectation_passes |
+| T-BCH-0016 | Scenario loading from JSON | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0016_scenario_loading |
+| T-BCH-0017 | Invalid scenario kind is rejected | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0017_invalid_kind_rejected |
+| T-BCH-0018 | Missing required fields are rejected | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0018_missing_fields_rejected |
+| T-BCH-0019 | Bench report counts are correct | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0019_report_counts |
+| T-BCH-0020 | Runner exception produces a failed entry | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0020_runner_exception |
+| T-BCH-0021 | All scenarios from the scenario directory pass | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0021_all_scenarios_pass |
+| T-BCH-0022 | Scenario without test_id has empty test_id | fast | synthetic/test_T_BCH_0013_to_0022.py | test_T_BCH_0022_no_test_id |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
