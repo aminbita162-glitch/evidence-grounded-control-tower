@@ -69,6 +69,12 @@
 | T-BCH-0058 | Exchangeability holds by construction | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0058_exchangeability |
 | T-BCH-0059 | Artifact IDs are stable | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0059_artifact_ids_stable |
 | T-BCH-0060 | Coverage statements carry the SYNTHETIC label | fast | synthetic/test_T_BCH_0055_to_0060.py | test_T_BCH_0060_synthetic_label |
+| T-BCH-0061 | Eval thresholds hold on the larger set | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0061_thresholds_hold_larger_set |
+| T-BCH-0062 | Refreshed recording is a recorded event | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0062_recording_is_recorded_event |
+| T-BCH-0063 | Factory output replaces small fixtures | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0063_factory_output_replaces_fixtures |
+| T-BCH-0064 | Baselines carry over and may only improve | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0064_baselines_carry_over |
+| T-BCH-0065 | Eval set is SYNTHETIC-labeled | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0065_synthetic_label |
+| T-BCH-0066 | Recorded set is deterministic for the same seed | fast | e2e/test_T_BCH_0061_to_0066.py | test_T_BCH_0066_recorded_deterministic |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
