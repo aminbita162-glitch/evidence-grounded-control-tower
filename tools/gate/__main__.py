@@ -465,6 +465,10 @@ def main() -> int:
             from tools.gate.gates.trace import main as trace_main
 
             return trace_main()
+        if command == "contract":
+            from tools.gate.gates.contract import main as contract_main
+
+            return contract_main()
 
         catalogue = load_catalogue(_resolve_catalogue())
         current_phase = read_current_phase(state_path)

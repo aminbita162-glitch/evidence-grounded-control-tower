@@ -1,0 +1,1 @@
+"""API schema subpackage — OpenAPI-specific schemas (P10-T02)."""
