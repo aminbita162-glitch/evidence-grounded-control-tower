@@ -43,6 +43,14 @@
 | T-BCH-0032 | Bundle hash is a valid SHA-256 | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0032_bundle_hash_valid |
 | T-BCH-0033 | Reason codes are non-empty for non-ALLOW decisions | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0033_reason_codes_nonempty |
 | T-BCH-0034 | Skeleton imports no capability internals | fast | e2e/test_T_BCH_0023_to_0034.py | test_T_BCH_0034_no_capability_internals |
+| T-BCH-0035 | Harness starts cleanly | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0035_harness_starts |
+| T-BCH-0036 | Harness stops cleanly | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0036_harness_stops |
+| T-BCH-0037 | Harness raises when not started | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0037_harness_not_started_raises |
+| T-BCH-0038 | Two-tenant scenario runs | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0038_two_tenant_runs |
+| T-BCH-0039 | Two-tenant scenario finds zero cross-tenant reads | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0039_zero_cross_tenant_reads |
+| T-BCH-0040 | Two-tenant scenario has two tenants | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0040_two_tenants_present |
+| T-BCH-0041 | Output identical across two runs with same seed | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0041_identical_output_same_seed |
+| T-BCH-0042 | Tenant decisions are non-ALLOW | fast | e2e/test_T_BCH_0035_to_0042.py | test_T_BCH_0042_tenant_decisions_non_allow |
 | T-CI-0001 | CI workflows use only gate and build steps with actions pinned by hash | fast | gate/test_ci.py | test_ci_workflows_structure |
 | T-DATA-0001 | Label strength order is a total preorder with stated tie | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0001_label_order |
 | T-DATA-0002 | SIMULATED_RULE and SYNTHETIC are tied in strength | fast | data/test_T_DATA_0001_to_0006.py | test_T_DATA_0002_simulated_rule_synthetic_tied |
