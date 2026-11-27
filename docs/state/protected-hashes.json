@@ -148,7 +148,7 @@
   "tools/gate/gates/integration.py": "d9bfc0eef09d7caa8e30b175af316943448ca961ca2984cf2e3672f463dda18c",
   "tools/gate/gates/labels.py": "761477bb20665e74715b5bbafad57a23280ee43446f1c08a0e94c611709a0f95",
   "tools/gate/gates/leakage.py": "c66c7a1d8044d2e6236cfb4174aad53a2dbffe6c18968034f4e961e09128a462",
-  "tools/gate/gates/license.py": "65689e3d4f6222a8ed463b890472dfb2fcf3efdb3a1834ae63a854ef443c8a89",
+  "tools/gate/gates/license.py": "a2d67c230489cce678a9fc3ba965675577b1dbf10e6f7fd79d7ad415cd24e95a",
   "tools/gate/gates/metamorphic.py": "444f58ce1f78bc131ebb981b4fe20aa96c208c64081785be68c4928625990549",
   "tools/gate/gates/migration.py": "371ecbbb22b5300e72aae83c43c937d94405110e83c94ff9bbf33dfee59fa38e",
   "tools/gate/gates/mutation.py": "222d3cec5149ce1beabe19c183a79afe2b296601e1c9026a9272bed4408efc94",

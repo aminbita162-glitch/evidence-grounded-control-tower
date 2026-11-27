@@ -672,6 +672,20 @@
 | T-LIB-0074 | Lapse when the pack, artifact or labelled set changes | fast | lib/test_conformal.py | test_T_LIB_0074 |
 | T-LIB-0075 | Require recorded independent approval before using tenant validation | fast | lib/test_conformal.py | test_T_LIB_0075 |
 | T-LIB-0076 | Lapse after the configured revalidation interval | fast | lib/test_conformal.py | test_T_LIB_0076 |
+| T-LIB-0077 | Reject a seeded incorrect solver assignment | fast | lib/test_solve.py | test_T_LIB_0077 |
+| T-LIB-0078 | Find and independently verify a CP-SAT optimum | fast | lib/test_solve.py | test_T_LIB_0078 |
+| T-LIB-0079 | Check satisfiability with the Z3 encoding | fast | lib/test_solve.py | test_T_LIB_0079 |
+| T-LIB-0080 | Attach an unsatisfiable core to CP-SAT infeasibility | fast | lib/test_solve.py | test_T_LIB_0080 |
+| T-LIB-0081 | Record Z3 infeasibility independently | fast | lib/test_solve.py | test_T_LIB_0081 |
+| T-LIB-0082 | Confirm stability across fixed thread counts | fast | lib/test_solve.py | test_T_LIB_0082 |
+| T-LIB-0083 | Reject seeded instability between worker counts | fast | lib/test_solve.py | test_T_LIB_0083 |
+| T-LIB-0084 | Record CP-SAT timeout as abstention | fast | lib/test_solve.py | test_T_LIB_0084 |
+| T-LIB-0085 | Record exhausted Z3 time budget as abstention | fast | lib/test_solve.py | test_T_LIB_0085 |
+| T-LIB-0086 | Reject domain and completeness errors independently | fast | lib/test_solve.py | test_T_LIB_0086 |
+| T-LIB-0087 | Match mathematical enumeration for an encoded objective | fast | lib/test_solve.py | test_T_LIB_0087 |
+| T-LIB-0088 | Require known variables before encoding | fast | lib/test_solve.py | test_T_LIB_0088 |
+| T-LIB-0089 | Preserve the exact numeric model in the result scope | fast | lib/test_solve.py | test_T_LIB_0089 |
+| T-LIB-0090 | Avoid infeasibility claims lacking independent evidence | fast | lib/test_solve.py | test_T_LIB_0090 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |

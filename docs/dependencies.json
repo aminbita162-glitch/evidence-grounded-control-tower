@@ -162,5 +162,23 @@
       "class": "RUNTIME",
       "basis": "C"
     }
+  ],
+  "p13": [
+    {
+      "name": "ortools",
+      "version": "9.15.6755",
+      "license": "Apache-2.0",
+      "purpose": "CP-SAT optimization harness",
+      "class": "RUNTIME",
+      "basis": "F"
+    },
+    {
+      "name": "z3-solver",
+      "version": "5.3.3.0",
+      "license": "MIT",
+      "purpose": "constraint consistency checks and unsatisfiable cores",
+      "class": "RUNTIME",
+      "basis": "F"
+    }
   ]
 }
