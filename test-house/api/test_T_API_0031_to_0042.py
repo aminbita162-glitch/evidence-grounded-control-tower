@@ -12,22 +12,17 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
+from test_T_API_0015_to_0030 import _client
 
-from api.app import API_PREFIX, AppPorts, create_app
+from api.app import API_PREFIX
 from api.idempotency import (
     ConflictError,
     IdempotencyMiddleware,
     InMemoryIdempotencyStore,
 )
+from kernel.auth.roles import ROLE_REVIEWER
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
-
-
-def _client() -> TestClient:
-    """Return a TestClient for the factory app."""
-    app = create_app(AppPorts())
-    return TestClient(app)
 
 
 # ---------------------------------------------------------------------------
@@ -233,7 +228,7 @@ def test_T_API_0037_first_approval_wins() -> None:
     risk: approval not processed
     capability: api-foundation
     """
-    c = _client()
+    c = _client(ROLE_REVIEWER)
     body = {
         "case_id": "SYN-CASE-001",
         "proposal_hash": "abc123",
@@ -265,7 +260,7 @@ def test_T_API_0038_second_approval_conflict() -> None:
     risk: duplicate approval overwrites the first
     capability: api-foundation
     """
-    c = _client()
+    c = _client(ROLE_REVIEWER)
     body1 = {
         "case_id": "SYN-CASE-001",
         "proposal_hash": "abc123",

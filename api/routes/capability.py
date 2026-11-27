@@ -19,9 +19,11 @@ from __future__ import annotations
 import time
 from typing import Any
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi import Path as PathParam
 from pydantic import BaseModel, Field
+
+from api.authentication import operator_principal, tenant_principal
 
 __all__ = [
     "InvokeRequest",
@@ -90,7 +92,9 @@ def create_capability_router() -> APIRouter:
     Returns:
         An :class:`APIRouter` with the four capability operations.
     """
-    router = APIRouter(prefix=_API_PREFIX, tags=["capabilities"])
+    router = APIRouter(
+        prefix=_API_PREFIX, tags=["capabilities"], dependencies=[Depends(tenant_principal)]
+    )
 
     _cap_desc = "The capability identifier."
     _cap_path = PathParam(..., description=_cap_desc, examples=["F01", "K01"])
@@ -100,6 +104,7 @@ def create_capability_router() -> APIRouter:
         response_model=CapabilityResponse,
         summary="Invoke a capability",
         operation_id="invoke_capability",
+        dependencies=[Depends(operator_principal)],
     )
     async def invoke_capability(
         capability_id: str = _cap_path,

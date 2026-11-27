@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/security/token_record.json",
+  "title": "Stored API token record",
+  "type": "object",
+  "properties": {
+    "principal_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "enum": [
+        "viewer",
+        "operator",
+        "reviewer",
+        "administrator",
+        "platform"
+      ]
+    },
+    "tenant_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "token_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "revoked": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "const": ""
+        }
+      ]
+    }
+  },
+  "required": [
+    "principal_id",
+    "role",
+    "tenant_id",
+    "token_hash",
+    "expires_at",
+    "revoked",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "role": {
+        "const": "platform"
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "tenant_id": {
+        "type": "null"
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "tenant_id": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

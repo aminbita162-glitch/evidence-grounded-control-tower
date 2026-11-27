@@ -9,17 +9,20 @@ Spec: Part 3 §3.4, §3.9; P10-T03.
 
 from __future__ import annotations
 
-from typing import Any
+from hashlib import sha256
+from typing import Annotated, Any
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 
 from api.app import API_PREFIX
+from api.authentication import operator_principal, reviewer_principal
 from api.idempotency import (
     ConflictError,
     IdempotencyMiddleware,
     InMemoryIdempotencyStore,
 )
+from kernel.auth.roles import Principal
 
 __all__ = [
     "CaseCreateRequest",
@@ -30,9 +33,6 @@ __all__ = [
     "create_command_router",
     "register_command_routes",
 ]
-
-_store = InMemoryIdempotencyStore()
-_middleware = IdempotencyMiddleware(store=_store)
 
 
 class CaseCreateRequest(BaseModel):
@@ -81,6 +81,7 @@ class ApprovalResponse(BaseModel):
 def create_command_router() -> APIRouter:
     """Create the command router for cases, documents and approvals."""
     router = APIRouter(prefix=API_PREFIX, tags=["commands"])
+    store = InMemoryIdempotencyStore()
 
     @router.post(
         "/cases",
@@ -88,21 +89,26 @@ def create_command_router() -> APIRouter:
         summary="Create a case",
         operation_id="create_case",
     )
-    async def create_case(request: CaseCreateRequest) -> CaseResponse:
+    async def create_case(
+        request: CaseCreateRequest, principal: Annotated[Principal, Depends(operator_principal)]
+    ) -> CaseResponse:
         """Create a new case with idempotency."""
+        tenant = principal.tenant_id or ""
+        key = _command_key("case", request.idempotency_key)
+        case_digest = sha256(repr((tenant, key)).encode()).hexdigest()
 
         def _handler(body: dict[str, Any]) -> dict[str, Any]:
             return {
-                "case_id": f"SYN-CASE-{hash(body.get('idempotency_key', '')) & 0xFFFFFFFF:08x}",
-                "tenant_id": body.get("tenant_id", "SYN-TEN-0001"),
+                "case_id": f"SYN-CASE-{case_digest[:32]}",
+                "tenant_id": tenant,
                 "state": "CREATED",
                 "label": body.get("label", "SYNTHETIC"),
             }
 
         try:
-            result = _middleware.execute(
-                request.idempotency_key,
-                request.model_dump(),
+            result = IdempotencyMiddleware(store, tenant).execute(
+                key,
+                request.model_dump(exclude={"tenant_id"}),
                 _handler,
             )
         except ConflictError:
@@ -115,20 +121,24 @@ def create_command_router() -> APIRouter:
         summary="Ingest a document",
         operation_id="ingest_document",
     )
-    async def ingest_document(request: DocumentIngestRequest) -> CaseResponse:
+    async def ingest_document(
+        request: DocumentIngestRequest,
+        principal: Annotated[Principal, Depends(operator_principal)],
+    ) -> CaseResponse:
         """Ingest a document into a case with idempotency."""
+        tenant = principal.tenant_id or ""
 
         def _handler(body: dict[str, Any]) -> dict[str, Any]:
             return {
                 "case_id": body.get("case_id", ""),
-                "tenant_id": "SYN-TEN-0001",
+                "tenant_id": tenant,
                 "state": "INGESTED",
                 "label": "SYNTHETIC",
             }
 
         try:
-            result = _middleware.execute(
-                request.idempotency_key,
+            result = IdempotencyMiddleware(store, tenant).execute(
+                _command_key("document", request.idempotency_key),
                 request.model_dump(),
                 _handler,
             )
@@ -142,21 +152,23 @@ def create_command_router() -> APIRouter:
         summary="Approve a proposal",
         operation_id="approve_proposal",
     )
-    async def approve_proposal(request: ApprovalRequest) -> ApprovalResponse:
+    async def approve_proposal(
+        request: ApprovalRequest, principal: Annotated[Principal, Depends(reviewer_principal)]
+    ) -> ApprovalResponse:
         """Approve a proposal with idempotency.  The first approval wins."""
 
         def _handler(body: dict[str, Any]) -> dict[str, Any]:
             return {
                 "outcome": "APPROVE",
                 "case_id": body.get("case_id", ""),
-                "reviewer_id": body.get("reviewer_id", ""),
+                "reviewer_id": principal.principal_id,
                 "conflict": False,
             }
 
         try:
-            result = _middleware.execute(
-                request.idempotency_key,
-                request.model_dump(),
+            result = IdempotencyMiddleware(store, principal.tenant_id or "").execute(
+                _command_key("approval", request.idempotency_key),
+                {**request.model_dump(), "reviewer_id": principal.principal_id},
                 _handler,
             )
             return ApprovalResponse(**result)
@@ -164,11 +176,17 @@ def create_command_router() -> APIRouter:
             return ApprovalResponse(
                 outcome="CONFLICT",
                 case_id=request.case_id,
-                reviewer_id=request.reviewer_id,
+                reviewer_id=principal.principal_id,
                 conflict=True,
             )
 
     return router
+
+
+def _command_key(operation: str, key: str) -> str:
+    if not key:
+        return key
+    return f"{operation}:{key}"
 
 
 def register_command_routes(app: Any) -> None:

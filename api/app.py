@@ -13,6 +13,9 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
+from kernel.auth.sessions import SessionSigner
+from kernel.auth.tokens import TokenService
+
 __all__ = [
     "API_VERSION",
     "API_PREFIX",
@@ -25,40 +28,41 @@ API_PREFIX = f"/api/{API_VERSION}"
 
 
 class AppPorts:
-    """Injected ports for the application factory.
-
-    A test principal provider is used in this phase; the production
-    configuration check refuses it (P10 exit condition 9).
-    """
+    """Injected ports for the application factory."""
 
     def __init__(
         self,
         *,
-        use_test_principal: bool = True,
+        tokens: TokenService | None = None,
+        session_signer: SessionSigner | None = None,
         storage: object | None = None,
     ) -> None:
         """Store injected ports.
 
         Args:
-            use_test_principal: Whether the test principal is active
-                (excluded from production by a startup check).
+            tokens: Verifier for opaque API credentials.
+            session_signer: Verifier for signed session cookies.
             storage: An optional storage port.
         """
-        self.use_test_principal = use_test_principal
+        self.tokens = tokens
+        self.session_signer = session_signer
         self.storage = storage
 
 
-def create_app(ports: AppPorts | None = None) -> FastAPI:
+def create_app(ports: AppPorts | None = None, *, production: bool = False) -> FastAPI:
     """Create a FastAPI application with injected ports.
 
     Args:
-        ports: Injected ports (defaults to a test-principal configuration).
+        ports: Injected ports. Tenant routes require a verified credential.
+        production: Require a configured token verifier at startup.
 
     Returns:
         A configured :class:`FastAPI` instance.
     """
     if ports is None:
         ports = AppPorts()
+    if production and ports.tokens is None:
+        raise ValueError("AUTH_PROVIDER_REQUIRED")
 
     app = FastAPI(
         title="Customs & Transit Control Tower",
@@ -74,12 +78,12 @@ def create_app(ports: AppPorts | None = None) -> FastAPI:
     register_problem_handlers(app)
 
     # Register routes (added by later tasks: T02 capability, T05 health).
-    _register_routes(app, ports)
+    _register_routes(app)
 
     return app
 
 
-def _register_routes(app: FastAPI, ports: AppPorts) -> None:
+def _register_routes(app: FastAPI) -> None:
     """Register all API routes on the app.
 
     Later tasks add idempotency middleware (T03) and health endpoints (T05).
