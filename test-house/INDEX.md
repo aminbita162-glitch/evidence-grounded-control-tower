@@ -658,6 +658,20 @@
 | T-LIB-0060 | Replay identical batch keys and reject replacements | fast | lib/test_feeds.py | test_T_LIB_0060 |
 | T-LIB-0061 | Reject malformed envelopes and mismatched sources | fast | lib/test_feeds.py | test_T_LIB_0061 |
 | T-LIB-0062 | Validate the serialized envelope against the frozen contract | fast | lib/test_feeds.py | test_T_LIB_0062 |
+| T-LIB-0063 | Meet the coverage bound over seeded class-conditional trials | fast | lib/test_conformal.py | test_T_LIB_0063 |
+| T-LIB-0064 | Replay Phase 09 calibration fixtures deterministically | fast | lib/test_conformal.py | test_T_LIB_0064 |
+| T-LIB-0065 | Use distinct class thresholds and include boundary scores | fast | lib/test_conformal.py | test_T_LIB_0065 |
+| T-LIB-0066 | State only the marginal exchangeability guarantee | fast | lib/test_conformal.py | test_T_LIB_0066 |
+| T-LIB-0067 | Abstain for empty and oversized sets | fast | lib/test_conformal.py | test_T_LIB_0067 |
+| T-LIB-0068 | Disable automatic use after a confirmed coverage drop | fast | lib/test_conformal.py | test_T_LIB_0068 |
+| T-LIB-0069 | Record synthetic coverage without disabling automatic use | fast | lib/test_conformal.py | test_T_LIB_0069 |
+| T-LIB-0070 | Flag extended not-measurable status for revalidation | fast | lib/test_conformal.py | test_T_LIB_0070 |
+| T-LIB-0071 | Pass validation on confirmed outcomes meeting the configured bound | fast | lib/test_conformal.py | test_T_LIB_0071 |
+| T-LIB-0072 | Fail validation on inadequate confirmed coverage | fast | lib/test_conformal.py | test_T_LIB_0072 |
+| T-LIB-0073 | Fail excessive singleton error despite adequate overall coverage | fast | lib/test_conformal.py | test_T_LIB_0073 |
+| T-LIB-0074 | Lapse when the pack, artifact or labelled set changes | fast | lib/test_conformal.py | test_T_LIB_0074 |
+| T-LIB-0075 | Require recorded independent approval before using tenant validation | fast | lib/test_conformal.py | test_T_LIB_0075 |
+| T-LIB-0076 | Lapse after the configured revalidation interval | fast | lib/test_conformal.py | test_T_LIB_0076 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |
