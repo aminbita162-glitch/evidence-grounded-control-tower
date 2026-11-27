@@ -626,6 +626,18 @@
 | T-LIB-0028 | Break allocation ties by key | fast | lib/test_money.py | test_T_LIB_0028 |
 | T-LIB-0029 | Reject implicit rounding of working amounts | fast | lib/test_money.py | test_T_LIB_0029 |
 | T-LIB-0030 | Compare at currency minor units with explicit tolerance | fast | lib/test_money.py | test_T_LIB_0030 |
+| T-LIB-0031 | Replay a money sum | fast | lib/test_calctrace.py | test_T_LIB_0031 |
+| T-LIB-0032 | Replay a quantity difference | fast | lib/test_calctrace.py | test_T_LIB_0032 |
+| T-LIB-0033 | Replay nested arithmetic | fast | lib/test_calctrace.py | test_T_LIB_0033 |
+| T-LIB-0034 | Preserve the weaker label through nesting | fast | lib/test_calctrace.py | test_T_LIB_0034 |
+| T-LIB-0035 | Use context-specific quantization | fast | lib/test_calctrace.py | test_T_LIB_0035 |
+| T-LIB-0036 | Reject a modified recorded output | fast | lib/test_calctrace.py | test_T_LIB_0036 |
+| T-LIB-0037 | Produce stable hashes for identical trees | fast | lib/test_calctrace.py | test_T_LIB_0037 |
+| T-LIB-0038 | Commit operand and rule provenance to the hash | fast | lib/test_calctrace.py | test_T_LIB_0038 |
+| T-LIB-0039 | Use recorded context instead of ambient context | fast | lib/test_calctrace.py | test_T_LIB_0039 |
+| T-LIB-0040 | Keep existing Decision data when adding unique trace references | fast | lib/test_calctrace.py | test_T_LIB_0040 |
+| T-LIB-0041 | Reject incompatible units on addition | fast | lib/test_calctrace.py | test_T_LIB_0041 |
+| T-LIB-0042 | Keep exact division and reject unrecorded rounding | fast | lib/test_calctrace.py | test_T_LIB_0042 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |

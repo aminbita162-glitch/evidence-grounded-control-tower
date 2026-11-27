@@ -25,6 +25,7 @@ class Decision(BaseModel):
     schema_version: int
     tenant_id: str
     value: Literal["ALLOW", "ABSTAIN", "HOLD", "ESCALATE"]
+    calculation_trace_hashes: list[str] | None = None
     evaluation_commitment: str | None = None
     fact_refs: list[str] | None = None
     pack_versions: list[str] | None = None
