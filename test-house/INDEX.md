@@ -638,6 +638,14 @@
 | T-OPS-0008 | Select locked dependencies for the target runtime | fast | ops/test_T_OPS_0001_to_0010.py | test_runtime_export_selects_target_and_exact_versions |
 | T-OPS-0009 | Check inventory against the frozen export | fast | ops/test_T_OPS_0001_to_0010.py | test_sbom_contains_exact_locked_package_version |
 | T-OPS-0010 | Fail when a locked Python distribution is missing | fast | ops/test_T_OPS_0001_to_0010.py | test_sbom_rejects_wrong_versions_and_ecosystems |
+| T-OPS-0011 | Validate the deployment contract | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0011 |
+| T-OPS-0012 | Fail startup on a missing secret | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0012 |
+| T-OPS-0013 | Isolate staging from production | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0013 |
+| T-OPS-0014 | Detect drift in either Blueprint | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0014 |
+| T-OPS-0015 | Stamp the Passport with public configuration | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0015 |
+| T-OPS-0016 | Use the configuration hash recorded in the export | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0016 |
+| T-OPS-0017 | Replay a legacy Passport | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0017 |
+| T-OPS-0018 | Isolate checkpoint signing and preserve the last root | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0018 |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |

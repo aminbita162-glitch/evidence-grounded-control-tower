@@ -9,14 +9,19 @@ Spec: Part 3 §3.5; Part 4 §4.4; P05-T05.
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+import hashlib
+import json
+import re
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
-from kernel.ledger.records import LedgerRecord
+from kernel.ledger.bundle import export_bundle
+from kernel.ledger.records import LedgerRecord, compute_payload_hash
 
 __all__ = [
     "CaseExport",
     "ReplayResult",
+    "compute_passport_hash",
     "replay",
 ]
 
@@ -53,6 +58,79 @@ class ReplayResult:
     mismatches: list[str]
 
 
+def compute_passport_hash(
+    *,
+    case_id: str,
+    tenant_id: str,
+    decision: str,
+    reason_codes: Sequence[str],
+    record_count: int,
+    bundle_hash: str,
+    evaluation_time: str,
+    configuration_hash: str | None = None,
+) -> str:
+    """Hash the walking skeleton's Passport using its recorded inputs."""
+    passport: dict[str, object] = {
+        "case_id": case_id,
+        "tenant_id": tenant_id,
+        "decision": decision,
+        "reason_codes": sorted(reason_codes),
+        "record_count": record_count,
+        "bundle_hash": bundle_hash,
+        "label": "SYNTHETIC",
+        "evaluation_time": evaluation_time,
+    }
+    if configuration_hash is not None:
+        if re.fullmatch(r"[0-9a-f]{64}", configuration_hash) is None:
+            raise ValueError("invalid Passport configuration hash")
+        passport["configuration_hash"] = configuration_hash
+    canonical = json.dumps(passport, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _replay_passport(
+    export: CaseExport,
+    position: int,
+    payload: object,
+    decision_payload: object,
+) -> str | None:
+    if not isinstance(payload, dict) or not isinstance(decision_payload, dict):
+        return "missing Passport replay inputs"
+    record = export.records[position]
+    decision = decision_payload.get("decision")
+    reason_codes = decision_payload.get("reason_codes")
+    if (
+        record.case_id is None
+        or not isinstance(decision, str)
+        or not isinstance(reason_codes, list)
+        or not all(isinstance(code, str) for code in reason_codes)
+    ):
+        return "invalid Passport replay inputs"
+    configuration_hash = payload.get("configuration_hash")
+    if "configuration_hash" in payload and not isinstance(configuration_hash, str):
+        return "invalid Passport configuration hash"
+
+    bundle = export_bundle(export.records[:position], record.tenant_id, record.case_id)
+    if payload.get("bundle_hash") != bundle.manifest.bundle_hash:
+        return "Passport bundle hash mismatch"
+    try:
+        passport_hash = compute_passport_hash(
+            case_id=record.case_id,
+            tenant_id=record.tenant_id,
+            decision=decision,
+            reason_codes=reason_codes,
+            record_count=position,
+            bundle_hash=bundle.manifest.bundle_hash,
+            evaluation_time=export.evaluation_time,
+            configuration_hash=configuration_hash,
+        )
+    except ValueError:
+        return "invalid Passport configuration hash"
+    if payload.get("passport_hash") != passport_hash:
+        return "Passport hash mismatch"
+    return None
+
+
 def replay(export: CaseExport) -> ReplayResult:
     """Replay a case from its export.
 
@@ -63,17 +141,34 @@ def replay(export: CaseExport) -> ReplayResult:
     The replay port needs no network — it uses only the recorded data.
     """
     mismatches: list[str] = []
+    decision_payload: object = None
 
-    # Replay each record: recompute its hash and verify it matches.
-    for record in export.records:
-        # Check that the record's payload hash is consistent.
+    for position, record in enumerate(export.records):
         payload = export.payloads.get(record.record_id)
-        if payload is not None and record.salt_id is None and isinstance(payload, dict):
-            from kernel.ledger.records import compute_payload_hash
-
-            expected_ph = compute_payload_hash(payload)
-            if record.payload_hash != expected_ph:
-                mismatches.append(f"payload hash mismatch at record {record.seq}")
+        if (
+            record.salt_id is None
+            and isinstance(payload, dict)
+            and record.payload_hash != compute_payload_hash(payload)
+        ):
+            mismatches.append(f"payload hash mismatch at record {record.seq}")
+        if record.stage == "Decision" and record.record_type == "decision":
+            decision_payload = payload
+        if (
+            record.stage == "Passport"
+            and record.record_type == "passport"
+            and isinstance(payload, dict)
+            and (
+                "configuration_hash" in payload
+                or (
+                    isinstance(decision_payload, dict)
+                    and "passport_hash" in payload
+                    and "bundle_hash" in payload
+                )
+            )
+        ):
+            mismatch = _replay_passport(export, position, payload, decision_payload)
+            if mismatch is not None:
+                mismatches.append(f"{mismatch} at record {record.seq}")
 
     # Check that the evaluation time and pack versions are present.
     if not export.evaluation_time:

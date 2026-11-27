@@ -19,12 +19,14 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field
 
 from data.synthetic import SyntheticDocument, SyntheticFactory
+from kernel.config import DEFAULTS
 from kernel.decision import EligibilityResult, FactEntry, evaluate_allow
 from kernel.extract import ExtractRequest, ExtractResult, ExtractStage
 from kernel.humangate import HumanGate
 from kernel.ledger.bundle import export_bundle, verify_bundle
 from kernel.ledger.chain import InMemoryCaseChain
 from kernel.ledger.records import Actor, LedgerRecord
+from kernel.ledger.replay import CaseExport, compute_passport_hash, replay
 from kernel.ledger.verify import verify_structural
 from kernel.rules.interpreter import FactSet, RuleResult, interpret
 from kernel.types.decision import DecisionValue
@@ -122,6 +124,7 @@ class SkeletonResult:
         structural_ok: Whether the kernel verifier passed.
         bundle_ok: Whether the independent verifier passed.
         replay_ok: Whether the replay reproduces the same passport hash.
+        configuration_hash: The public configuration digest recorded on the Passport.
     """
 
     case_id: str = ""
@@ -134,29 +137,7 @@ class SkeletonResult:
     structural_ok: bool = False
     bundle_ok: bool = False
     replay_ok: bool = False
-
-
-def _build_passport(
-    case_id: str,
-    tenant_id: str,
-    decision: str,
-    reason_codes: list[str],
-    records: list[LedgerRecord],
-    bundle_hash: str,
-) -> str:
-    """Build a canonical Passport JSON and return its SHA-256 hash."""
-    passport: dict[str, object] = {
-        "case_id": case_id,
-        "tenant_id": tenant_id,
-        "decision": decision,
-        "reason_codes": sorted(reason_codes),
-        "record_count": len(records),
-        "bundle_hash": bundle_hash,
-        "label": "SYNTHETIC",
-        "evaluation_time": _EVAL_TIME,
-    }
-    canonical = json.dumps(passport, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    configuration_hash: str = ""
 
 
 class WalkingSkeleton:
@@ -169,10 +150,14 @@ class WalkingSkeleton:
 
     Args:
         seed: The synthetic data factory seed.
+        configuration_hash: The validated deployment configuration digest, when supplied.
     """
 
-    def __init__(self, seed: int = 42) -> None:
+    def __init__(self, seed: int = 42, *, configuration_hash: str | None = None) -> None:
         self.seed: int = seed
+        self.configuration_hash = (
+            DEFAULTS.config_hash() if configuration_hash is None else configuration_hash
+        )
         self.tenant_id: str = "SYN-TEN-0001"
         self.case_id: str = "SYN-CASE-0001"
         self._factory: SyntheticFactory = SyntheticFactory(seed)
@@ -261,14 +246,15 @@ class WalkingSkeleton:
             calibration_basis=None,
         )
         decision_str: str = DecisionValue(eligibility.value).name
-        await chain.append(
+        decision_payload = {
+            "decision": decision_str,
+            "reason_codes": eligibility.reason_codes,
+        }
+        decision_record = await chain.append(
             stage="Decision",
             actor=_ACTOR,
             record_type="decision",
-            payload={
-                "decision": decision_str,
-                "reason_codes": eligibility.reason_codes,
-            },
+            payload=decision_payload,
         )
 
         # 6. Evidence — already appending to the chain above.
@@ -299,33 +285,40 @@ class WalkingSkeleton:
         # 8. Passport — build from the case chain.
         records: list[LedgerRecord] = await chain.list()
         bundle = export_bundle(records, self.tenant_id, self.case_id)
-        passport_hash = _build_passport(
-            self.case_id,
-            self.tenant_id,
-            decision_str,
-            eligibility.reason_codes,
-            records,
-            bundle.manifest.bundle_hash,
+        passport_hash = compute_passport_hash(
+            case_id=self.case_id,
+            tenant_id=self.tenant_id,
+            decision=decision_str,
+            reason_codes=eligibility.reason_codes,
+            record_count=len(records),
+            bundle_hash=bundle.manifest.bundle_hash,
+            evaluation_time=_EVAL_TIME,
+            configuration_hash=self.configuration_hash,
         )
-        await chain.append(
+        passport_payload = {
+            "passport_hash": passport_hash,
+            "bundle_hash": bundle.manifest.bundle_hash,
+            "configuration_hash": self.configuration_hash,
+        }
+        passport_record = await chain.append(
             stage="Passport",
             actor=_ACTOR,
             record_type="passport",
-            payload={
-                "passport_hash": passport_hash,
-                "bundle_hash": bundle.manifest.bundle_hash,
-            },
+            payload=passport_payload,
         )
 
-        # 9. Replay — re-export the same bundle and verify passport equality.
-        replay_bundle = export_bundle(records, self.tenant_id, self.case_id)
-        replay_passport = _build_passport(
-            self.case_id,
-            self.tenant_id,
-            decision_str,
-            eligibility.reason_codes,
-            records,
-            replay_bundle.manifest.bundle_hash,
+        # 9. Replay — reconstruct the Passport from the recorded case export.
+        replay_result = replay(
+            CaseExport(
+                records=[*records, passport_record],
+                payloads={
+                    decision_record.record_id: decision_payload,
+                    passport_record.record_id: passport_payload,
+                },
+                evaluation_time=_EVAL_TIME,
+                pack_versions={str(rule["id"]): str(rule["version"]) for rule in _FIXTURE_PACK},
+                model_outputs={},
+            )
         )
 
         # 10. Verify — both verifiers.
@@ -342,17 +335,19 @@ class WalkingSkeleton:
             records=records,
             structural_ok=structural.ok,
             bundle_ok=bundle_ok,
-            replay_ok=replay_passport == passport_hash,
+            replay_ok=replay_result.ok,
+            configuration_hash=self.configuration_hash,
         )
 
 
-def run_skeleton(seed: int = 42) -> SkeletonResult:
+def run_skeleton(seed: int = 42, *, configuration_hash: str | None = None) -> SkeletonResult:
     """Run the walking skeleton synchronously and return the result.
 
     Args:
         seed: The synthetic data factory seed.
+        configuration_hash: The validated deployment configuration digest, when supplied.
 
     Returns:
         A :class:`SkeletonResult`.
     """
-    return asyncio.run(WalkingSkeleton(seed).run())
+    return asyncio.run(WalkingSkeleton(seed, configuration_hash=configuration_hash).run())
