@@ -17,6 +17,7 @@ These instructions override nothing in Part 1; they reinforce it. Part 1 remains
 
 <<<DIRECTIVE>>>
 BUILD DIRECTIVE — v1.1-split1-enhanced.4
+Phase 13 scope revision authorizes the solver pins and license normalization, API registration wiring, and synthetic benchmark evidence.
 Revision v1.1-split1-enhanced.4 records decision D14 for Phase 12 case-export Passport replay.
 Revision v1.1-split1-enhanced.3 records decision D6 for the Phase 12 forward Passport migration and preserves the original table migration byte for byte.
 Revision v1.1-split1-enhanced.2 records decision D3 for the Phase 12 Passport contract and image and restore gates.
@@ -4812,15 +4813,15 @@ PHASE 13 — CAPABILITY SUPPORT LIBRARY
 
 3. Entry conditions beyond Part 1 §8: P12 gates exit 0; the calibration fixtures of P09 and the Gateway of P08 exist; the solver packages are in the dependency list. Evidence: the commands.
 
-4. Scope fence. May create: `kernel/lib/money/`, `kernel/lib/calctrace/`, `kernel/lib/unblock/`, `kernel/lib/feeds/`, `kernel/lib/conformal/`, `kernel/lib/solve/` (CP-SAT harness, Z3 harness, independent verifier scaffold), `kernel/lib/lexi/`, `kernel/lib/crosscheck/`, `schemas/lib/`, the generator layout for capabilities in `tools/capgen/` (standard layout of Part 3 §3.31, used by all capability phases), `test-house/lib/`, `docs/ledger/P13.md`, risk-management records. No capability logic is written. Everything else is forbidden.
-Scope paths: kernel/lib/**, schemas/**, tools/capgen/**, tools/trace/**, tools/threat-matrix/**, tools/gate/gates/**, tools/gate/catalogue.toml, contracts.lock, data/synthetic/calibration/**, test-house/lib/**, docs/ledger/P13.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
+4. Scope fence. May create: `kernel/lib/money/`, `kernel/lib/calctrace/`, `kernel/lib/unblock/`, `kernel/lib/feeds/`, `kernel/lib/conformal/`, `kernel/lib/solve/` (CP-SAT harness, Z3 harness, independent verifier scaffold), `kernel/lib/lexi/`, `kernel/lib/crosscheck/`, `schemas/lib/`, the generator layout for capabilities in `tools/capgen/` (standard layout of Part 3 §3.31, used by all capability phases), `test-house/lib/`, `docs/ledger/P13.md`, risk-management records. May also update the existing API registration seam and dependency records and add measured synthetic solver evidence under `docs/perf/`. No capability logic is written. Everything outside the scope paths is forbidden.
+Scope paths: kernel/lib/**, schemas/**, tools/capgen/**, tools/trace/**, tools/threat-matrix/**, tools/gate/gates/**, tools/gate/catalogue.toml, contracts.lock, data/synthetic/calibration/**, test-house/lib/**, api/app.py, api/routes/capability.py, pyproject.toml, uv.lock, docs/dependencies.json, docs/perf/**, docs/ledger/P13.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
 
 5. Context Pack: `<<<P3-S3>>>` `<<<P3-S7>>>` `<<<P3-S8>>>` `<<<P3-S13>>>` `<<<P3-S21>>>` `<<<P3-S31>>>` `<<<P4-S4>>>` `<<<P4-S5>>>` `<<<D06-S3>>>` `<<<P6-S3>>>` `<<<P6-S6>>>` `<<<P6-S10>>>` `<<<P6-S12>>>` `<<<P5-E0>>>` `<<<P5-S1>>>` `<<<P8-DEPS>>>`.
 
 6. Tasks.
 
 P13-T01 Capability generator (standard layout)
-- Files: `tools/capgen/`.
+- Files: `tools/capgen/`, `tools/gate/gates/arch.py`, `api/app.py`, `api/routes/capability.py`, `contracts.lock`.
 - Steps: generate the identical capability layout (manifest, schemas, rules, fixtures, golden tests, evaluation cases, view stub, documentation stub, registration entry) from a definition file; the architecture test fails a capability that deviates, and the `arch` gate fails when the graph of `depends` over the capability registry (the capability headers of Part 5) or the graph of `depends_on` over the phases (`tools/gate/phases.toml`) contains a cycle, naming the cycle; the registration entry plugs into the uniform route of P10 and the skeleton of P09.
 - Accept: tests T-LIB-0001 to T-LIB-0010: regeneration is byte-identical; a deviating layout fails; a generated stub capability runs through the uniform route and the skeleton. Tests T-LIB-0109 to T-LIB-0112: a seeded cycle of two capabilities fails and names both; a seeded cycle through three phases fails; the real registry and the real phase table have no cycle; an F06 input that names a tenant-scope capability fails the registry check.
 
@@ -4850,7 +4851,7 @@ P13-T06 Conformal core
 - Accept: tests T-LIB-0063 to T-LIB-0076: empirical coverage over at least 1,000 seeded trials meets the bound; outputs are deterministic for fixed seeds; the monitor disables use on a seeded drop; the guarantee text states marginal coverage only; validation passes on a seeded labelled set that meets the criterion and fails on one that does not, including a set whose one-member subset error is too high while the overall coverage is fine; the class lapses on a changed pack version; no library function sets VALIDATED_TENANT without the recorded activation.
 
 P13-T07 Solver harness and independent verifier scaffold
-- Files: `kernel/lib/solve/`.
+- Files: `kernel/lib/solve/`, `pyproject.toml`, `uv.lock`, `docs/dependencies.json`, `tools/gate/gates/license.py`, `docs/perf/`.
 - Steps: CP-SAT and Z3 harnesses with fixed seeds and thread counts, time limits, and a model-encoding interface; every solution is re-checked by an independent verifier (a separate plain-code checker of the constraints, not the solver) and an infeasibility claim is accompanied by a Z3 or recorded reason; solver results are labelled as holding relative to the encoded model.
 - Accept: tests T-LIB-0077 to T-LIB-0090: a seeded wrong solution is caught by the verifier; results are stable across thread counts for fixed seeds or the instability is reported and the model rejected; time limit expiry yields a recorded ABSTAIN.
 
