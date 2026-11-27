@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Repository bootstrap: governance files, gate runner and catalogue, phase machinery.
 - P02-T05: data and labels gates; generator for docs/dependencies.json; gate fixtures; tests T-DATA-0025 to T-DATA-0030.
+- P13: shared capability templates, exact money and calculation traces, unblock requirements, tenant feed validation, conformal calibration, verified integer solving, stable plan selection and grounded model cross-checking.
