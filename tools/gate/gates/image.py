@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import errno
 import hashlib
 import io
 import json
@@ -11,6 +12,7 @@ import subprocess
 import sys
 import tarfile
 import urllib.request
+from contextlib import suppress
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -156,10 +158,16 @@ def verify_sbom(sbom: object, locked: set[tuple[str, str]]) -> None:
         raise ImageGateError(f"locked runtime dependencies missing from SBOM: {sorted(missing)}")
 
 
-def _run(cwd: Path, *command: str) -> str:
+def _run(cwd: Path, *command: str, timeout: int = 300) -> str:
     environment = {**os.environ, "SYFT_CHECK_FOR_APP_UPDATE": "false"}
     result = subprocess.run(
-        command, cwd=cwd, env=environment, capture_output=True, text=True, timeout=300, check=False
+        command,
+        cwd=cwd,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=timeout,
+        check=False,
     )
     if result.returncode != 0:
         diagnostic = (result.stderr or result.stdout).strip().splitlines()[-1:]
@@ -220,21 +228,51 @@ def _load_baseline(root: Path) -> object:
     return json.loads(contents)
 
 
-def _scan(root: Path, trivy: Path, logs: Path, cache: Path, tag: str) -> None:
-    _run(
-        root,
-        str(trivy),
-        "image",
-        "--cache-dir",
-        str(cache),
-        "--download-db-only",
-        "--skip-version-check",
-        "--db-repository",
-        _DATABASE,
-    )
-    with (cache / "db" / "trivy.db").open("rb") as database:
-        if hashlib.file_digest(database, "sha256").hexdigest() != _DATABASE_FILE_DIGEST:
+def _verified_database(root: Path, trivy: Path) -> Path:
+    """Reuse the pinned vulnerability database and verify its bytes before each scan."""
+    # Keep the scanner database outside the checkout and its secret scan.
+    cache_home = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache")
+    downloads = (cache_home / "control-tower" / "image-gate").resolve()
+    downloads.mkdir(parents=True, exist_ok=True)
+    database = downloads / _DATABASE_FILE_DIGEST
+    if not database.exists():
+        with TemporaryDirectory(prefix="trivy-db-", dir=downloads) as temporary:
+            _run(
+                root,
+                str(trivy),
+                "image",
+                "--cache-dir",
+                temporary,
+                "--download-db-only",
+                "--skip-version-check",
+                "--db-repository",
+                _DATABASE,
+                timeout=900,
+            )
+            verified = Path(temporary) / "db"
+            _check_database_digest(verified)
+            # Publish the complete directory at once. Another completed download may win.
+            try:
+                verified.rename(database)
+            except OSError as exc:
+                if exc.errno not in {errno.EEXIST, errno.ENOTEMPTY}:
+                    raise
+            else:
+                return database
+    _check_database_digest(database)
+    return database
+
+
+def _check_database_digest(database: Path) -> None:
+    with (database / "trivy.db").open("rb") as stream:
+        if hashlib.file_digest(stream, "sha256").hexdigest() != _DATABASE_FILE_DIGEST:
             raise ImageGateError("Trivy database file digest mismatch")
+
+
+def _scan(root: Path, trivy: Path, logs: Path, cache: Path, tag: str) -> None:
+    database = _verified_database(root, trivy)
+    cache.mkdir()
+    (cache / "db").symlink_to(database, target_is_directory=True)
     report = logs / "trivy-image.json"
     _run(
         root,
@@ -333,7 +371,18 @@ def _verify_image(root: Path, tools: Path) -> None:
     _config_check(root, trivy, logs)
     commit = _run(root, "git", "rev-parse", "HEAD").strip()
     tag = f"control-tower-gate:{commit}"
-    _run(root, "docker", "build", "--platform", _PLATFORM, "--provenance=false", "--tag", tag, ".")
+    _run(
+        root,
+        "docker",
+        "build",
+        "--platform",
+        _PLATFORM,
+        "--provenance=false",
+        "--tag",
+        tag,
+        ".",
+        timeout=600,
+    )
     runtime = _verify_runtime(root, tag)
     _scan(root, trivy, logs, tools / "trivy-cache", tag)
     sbom = logs / "image.cdx.json"
@@ -357,8 +406,21 @@ def main() -> int:
         cwd = Path.cwd().resolve()
         fixture_root = os.environ.get("GATE_ROOT")
         if cwd == _ROOT:
+            failure = cwd / ".gate-logs" / "image" / "failure.txt"
+            failure.unlink(missing_ok=True)
             with TemporaryDirectory(prefix="control-tower-image-") as temporary:
-                _verify_image(cwd, Path(temporary))
+                try:
+                    _verify_image(cwd, Path(temporary))
+                except (
+                    ImageGateError,
+                    OSError,
+                    KeyError,
+                    ValueError,
+                    subprocess.SubprocessError,
+                ) as exc:
+                    with suppress(OSError):
+                        failure.write_text(f"image: {exc}\n", encoding="utf-8")
+                    raise
         elif fixture_root and Path(fixture_root).resolve() == cwd:
             check_findings(_load(cwd / "scan.json"), _load_baseline(_ROOT))
         else:

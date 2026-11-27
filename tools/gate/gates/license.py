@@ -125,6 +125,7 @@ _ALIASES: dict[str, str] = {
     "Apache License, Version 2.0": "Apache-2.0",
     "Apache Software License": "Apache-2.0",
     "BSD 3-Clause License": "BSD-3-Clause",
+    "3-Clause BSD License": "BSD-3-Clause",
     "BSD 2-Clause License": "BSD-2-Clause",
     "ISC License": "ISC",
     "ISC License (ISCL)": "ISC",

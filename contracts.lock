@@ -27,7 +27,7 @@
     },
     {
       "path": "schemas/decision.json",
-      "hash": "45d20f0fe17687aad2a4dc11515e19c962b67d639b184344fd5d347a67d345ba",
+      "hash": "aef359a5ad5ab519fc7725b3a7c25f58f41c7975ec4b9440d3e6cecfb148a494",
       "type": "schema"
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "path": "schemas/passport.json",
-      "hash": "3de95db13221daa0b5af324e8f784cf50439fafeecda5a770cff1c7c4001f9ec",
+      "hash": "1979796b21c57cf28112ba0529dac58cefef5085bca1e8e37fb4f1ea048dc736",
       "type": "schema"
     },
     {
@@ -133,6 +133,16 @@
     {
       "path": "schemas/security/key_record.json",
       "hash": "b334dc14d317bf1c07147559eb4f1e423fd4beee06c3d88465c185f6b5bad1c9",
+      "type": "schema"
+    },
+    {
+      "path": "tools/capgen/layout.json",
+      "hash": "82a60e84c6fec89580e584f6becc8490320d7c301b7074bddeb5f843963eafc6",
+      "type": "layout"
+    },
+    {
+      "path": "schemas/lib/feed_envelope.json",
+      "hash": "46ea000267c4f403c619bf6002a64df8dad1e896d34d65a9b7ef10e1ade1fbc0",
       "type": "schema"
     }
   ]

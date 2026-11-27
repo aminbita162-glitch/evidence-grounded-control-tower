@@ -27,6 +27,7 @@ from pathlib import Path
 
 __all__ = [
     "generate_sql_tables",
+    "generate_support_library_migration",
     "generate_passport_configuration_migration",
     "regenerate_sql",
 ]
@@ -46,6 +47,15 @@ _SKIP: set[str] = {
 
 _PASSPORT_CONFIGURATION_COLUMN = "configuration_hash"
 _PASSPORT_CONFIGURATION_MIGRATION = "0008_passport_configuration_hash.sql"
+
+_DECISION_TRACE_COLUMN = "calculation_trace_hashes"
+_PASSPORT_OPEN_ITEMS_COLUMN = "open_items"
+_SUPPORT_LIBRARY_MIGRATION = "0009_support_library_references.sql"
+_FORWARD_COLUMNS = {
+    ("passport", _PASSPORT_CONFIGURATION_COLUMN),
+    ("passport", _PASSPORT_OPEN_ITEMS_COLUMN),
+    ("decision", _DECISION_TRACE_COLUMN),
+}
 
 _HEADER = (
     "-- 0002_tables.sql — entity tables generated from schemas (P04-T02)\n"
@@ -145,8 +155,8 @@ def generate_sql_tables(schemas_dir: Path) -> str:
                 continue
             if id_field and name == id_field:
                 continue
-            # Passport configuration hashes are stored by the forward migration.
-            if schema_file.stem == "passport" and name == _PASSPORT_CONFIGURATION_COLUMN:
+            # Columns introduced after 0002 belong to their forward migrations.
+            if (schema_file.stem, name) in _FORWARD_COLUMNS:
                 continue
             sql_type = _json_type_to_sql(prop)
             if prop.get("type") == "string" and "enum" in prop:
@@ -203,6 +213,33 @@ def generate_passport_configuration_migration(schemas_dir: Path) -> str:
     )
 
 
+def generate_support_library_migration(schemas_dir: Path) -> str:
+    """Generate the additive migration for Phase 13 Decision and Passport fields."""
+    statements = ["-- P13: Add optional calculation trace references and Passport open items."]
+    for entity, column, item_type in (
+        ("decision", _DECISION_TRACE_COLUMN, {"$ref": "common.json#/definitions/hash_hex"}),
+        ("passport", _PASSPORT_OPEN_ITEMS_COLUMN, {"type": "object"}),
+    ):
+        schema = json.loads((schemas_dir / f"{entity}.json").read_text(encoding="utf-8"))
+        definition = schema["properties"][column]
+        if (
+            column in schema["required"]
+            or definition.get("type") != "array"
+            or any(
+                definition.get("items", {}).get(key) != value for key, value in item_type.items()
+            )
+        ):
+            raise ValueError(f"{entity}.{column} must be an optional array with the expected items")
+        sql_type = _json_type_to_sql(definition)
+        statements.extend(
+            (
+                f'ALTER TABLE "{entity}"',
+                f"    ADD COLUMN IF NOT EXISTS {column} {sql_type} DEFAULT NULL;",
+            )
+        )
+    return "\n".join(statements) + "\n"
+
+
 def regenerate_sql() -> int:
     """Verify the original table migration and regenerate the forward migration."""
     root = Path(__file__).resolve().parents[2]
@@ -212,7 +249,12 @@ def regenerate_sql() -> int:
     if generate_sql_tables(schemas_dir).encode("utf-8") != original.read_bytes():
         print(f"immutable migration differs from generation: {original.relative_to(root)}")
         return 1
-    forward = migrations_dir / _PASSPORT_CONFIGURATION_MIGRATION
-    forward.write_bytes(generate_passport_configuration_migration(schemas_dir).encode("utf-8"))
-    print(f"generated: {forward.relative_to(root)}")
+    migrations = {
+        _PASSPORT_CONFIGURATION_MIGRATION: generate_passport_configuration_migration(schemas_dir),
+        _SUPPORT_LIBRARY_MIGRATION: generate_support_library_migration(schemas_dir),
+    }
+    for name, sql in migrations.items():
+        forward = migrations_dir / name
+        forward.write_bytes(sql.encode("utf-8"))
+        print(f"generated: {forward.relative_to(root)}")
     return 0

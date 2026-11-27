@@ -17,17 +17,20 @@ Spec: Part 3 §3.17; P10-T02.
 from __future__ import annotations
 
 import time
-from typing import Any
+from collections.abc import Awaitable, Callable, Mapping
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends
 from fastapi import Path as PathParam
 from pydantic import BaseModel, Field
 
 from api.authentication import operator_principal, tenant_principal
+from kernel.auth.roles import Principal
 
 __all__ = [
     "InvokeRequest",
     "CapabilityResponse",
+    "CapabilityInvocation",
     "StatusResponse",
     "ResultResponse",
     "EvidenceResponse",
@@ -54,6 +57,9 @@ class CapabilityResponse(BaseModel):
     case_id: str = Field(default="", description="The case identifier, if assigned.")
     status: str = Field(default="PENDING", description="The invocation status.")
     label: str = Field(default="SYNTHETIC", description="The data label.")
+
+
+type CapabilityInvocation = Callable[[Principal, InvokeRequest], Awaitable[CapabilityResponse]]
 
 
 class StatusResponse(BaseModel):
@@ -86,7 +92,9 @@ class EvidenceResponse(BaseModel):
     bundle_hash: str = Field(default="", description="The evidence bundle hash.")
 
 
-def create_capability_router() -> APIRouter:
+def create_capability_router(
+    registrations: Mapping[str, CapabilityInvocation] | None = None,
+) -> APIRouter:
     """Create the uniform capability router.
 
     Returns:
@@ -96,6 +104,7 @@ def create_capability_router() -> APIRouter:
         prefix=_API_PREFIX, tags=["capabilities"], dependencies=[Depends(tenant_principal)]
     )
 
+    handlers = dict(registrations or {})
     _cap_desc = "The capability identifier."
     _cap_path = PathParam(..., description=_cap_desc, examples=["F01", "K01"])
 
@@ -104,17 +113,15 @@ def create_capability_router() -> APIRouter:
         response_model=CapabilityResponse,
         summary="Invoke a capability",
         operation_id="invoke_capability",
-        dependencies=[Depends(operator_principal)],
     )
     async def invoke_capability(
+        principal: Annotated[Principal, Depends(operator_principal)],
         capability_id: str = _cap_path,
         request: InvokeRequest | None = None,
     ) -> CapabilityResponse:
-        """Invoke a capability by its registration entry.
-
-        This is a stub bound to later services (P13+); it returns a
-        pending response with the SYNTHETIC label.
-        """
+        """Invoke a capability by its registration entry."""
+        if capability_id in handlers:
+            return await handlers[capability_id](principal, request or InvokeRequest())
         return CapabilityResponse(
             capability_id=capability_id,
             case_id="",
@@ -171,11 +178,13 @@ def create_capability_router() -> APIRouter:
     return router
 
 
-def register_capability_routes(app: Any) -> None:
+def register_capability_routes(
+    app: Any, registrations: Mapping[str, CapabilityInvocation] | None = None
+) -> None:
     """Register the uniform capability routes on a FastAPI app."""
 
     from fastapi import FastAPI
 
     if not isinstance(app, FastAPI):
         return
-    app.include_router(create_capability_router())
+    app.include_router(create_capability_router(registrations))

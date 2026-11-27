@@ -55,6 +55,13 @@
     },
     "configuration_hash": {
       "$ref": "common.json#/definitions/hash_hex"
+    },
+    "calculation_trace_hashes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.json#/definitions/hash_hex"
+      }
     }
   },
   "required": [

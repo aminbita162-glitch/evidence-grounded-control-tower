@@ -605,3 +605,33 @@ sources:
     v_item: none
     dep_purpose: "architecture contracts"
     dep_class: DEV
+
+  - source_id: SRC-DEP-ORTOOLS
+    publisher: Google
+    reference: "ortools 9.15.6755 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Apache-2.0 (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "CP-SAT optimization harness"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-Z3-SOLVER
+    publisher: Z3 project
+    reference: "z3-solver 5.3.3.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: UNVERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "constraint consistency checks and unsatisfiable cores"
+    dep_class: RUNTIME

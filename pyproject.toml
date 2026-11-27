@@ -17,6 +17,8 @@ dependencies = [
     "opentelemetry-sdk==1.45.2",
     "fastapi==0.162.2",
     "uvicorn==0.54.0",
+    "ortools==9.15.6755",
+    "z3-solver==5.3.3.0",
 ]
 
 [project.optional-dependencies]

@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/lib/feed_envelope.json",
+  "title": "Tenant Feed Envelope",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "label": {
+      "enum": [
+        "DERIVED",
+        "SECONDARY",
+        "SYNTHETIC",
+        "ASSUMPTION",
+        "UNVERIFIED"
+      ]
+    },
+    "feed_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "(?:Z|[+]00:00)$"
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "(?:Z|[+]00:00)$"
+    },
+    "effective_until": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "(?:Z|[+]00:00)$"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "origin": {
+      "const": "TENANT_SUPPLIED"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "source_id",
+    "label",
+    "feed_type",
+    "schema_version",
+    "batch_id",
+    "as_of",
+    "effective_from",
+    "effective_until",
+    "record_count",
+    "content_hash",
+    "origin"
+  ],
+  "additionalProperties": false
+}

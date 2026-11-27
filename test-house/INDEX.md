@@ -596,6 +596,118 @@
 | T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
 | T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
 | T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
+| T-LIB-0001 | Regenerate identical bytes | fast | lib/test_capgen.py | test_T_LIB_0001 |
+| T-LIB-0002 | Require a conforming layout | fast | lib/test_capgen.py | test_T_LIB_0002 |
+| T-LIB-0003 | Reject an incomplete layout | fast | lib/test_capgen.py | test_T_LIB_0003 |
+| T-LIB-0004 | Reject unknown definition keys | fast | lib/test_capgen.py | test_T_LIB_0004 |
+| T-LIB-0005 | Require declared calibration artifacts | fast | lib/test_capgen.py | test_T_LIB_0005 |
+| T-LIB-0006 | Prevent accidental replacement of edited files | fast | lib/test_capgen.py | test_T_LIB_0006 |
+| T-LIB-0007 | Dispatch a generated registration through the skeleton | fast | lib/test_capgen.py | test_T_LIB_0007 |
+| T-LIB-0008 | Keep unregistered invocation compatible | fast | lib/test_capgen.py | test_T_LIB_0008 |
+| T-LIB-0009 | Keep generated registration behind tenant authentication | fast | lib/test_capgen.py | test_T_LIB_0009 |
+| T-LIB-0010 | Give generated views a stable anchor | fast | lib/test_capgen.py | test_T_LIB_0010 |
+| T-LIB-0011 | Round half even | fast | lib/test_money.py | test_T_LIB_0011 |
+| T-LIB-0012 | Round half up | fast | lib/test_money.py | test_T_LIB_0012 |
+| T-LIB-0013 | Round half down | fast | lib/test_money.py | test_T_LIB_0013 |
+| T-LIB-0014 | Round toward positive infinity | fast | lib/test_money.py | test_T_LIB_0014 |
+| T-LIB-0015 | Round toward negative infinity | fast | lib/test_money.py | test_T_LIB_0015 |
+| T-LIB-0016 | Round away from zero | fast | lib/test_money.py | test_T_LIB_0016 |
+| T-LIB-0017 | Round toward zero | fast | lib/test_money.py | test_T_LIB_0017 |
+| T-LIB-0018 | Round away from zero when the retained digit is zero or five | fast | lib/test_money.py | test_T_LIB_0018 |
+| T-LIB-0019 | Add exact amounts associatively | fast | lib/test_money.py | test_T_LIB_0019 |
+| T-LIB-0020 | Conserve total units across allocations | fast | lib/test_money.py | test_T_LIB_0020 |
+| T-LIB-0021 | Reject mixed currencies without conversion | fast | lib/test_money.py | test_T_LIB_0021 |
+| T-LIB-0022 | Retain the recorded conversion rate and weakest label | fast | lib/test_money.py | test_T_LIB_0022 |
+| T-LIB-0023 | Require the rate direction to match | fast | lib/test_money.py | test_T_LIB_0023 |
+| T-LIB-0024 | Reject currencies absent from the pack | fast | lib/test_money.py | test_T_LIB_0024 |
+| T-LIB-0025 | Keep exact amounts until the declared rounding point | fast | lib/test_money.py | test_T_LIB_0025 |
+| T-LIB-0026 | Label fallback presentation rounding as an assumption | fast | lib/test_money.py | test_T_LIB_0026 |
+| T-LIB-0027 | Compare roundings against a rational oracle | fast | lib/test_money.py | test_T_LIB_0027 |
+| T-LIB-0028 | Break allocation ties by key | fast | lib/test_money.py | test_T_LIB_0028 |
+| T-LIB-0029 | Reject implicit rounding of working amounts | fast | lib/test_money.py | test_T_LIB_0029 |
+| T-LIB-0030 | Compare at currency minor units with explicit tolerance | fast | lib/test_money.py | test_T_LIB_0030 |
+| T-LIB-0031 | Replay a money sum | fast | lib/test_calctrace.py | test_T_LIB_0031 |
+| T-LIB-0032 | Replay a quantity difference | fast | lib/test_calctrace.py | test_T_LIB_0032 |
+| T-LIB-0033 | Replay nested arithmetic | fast | lib/test_calctrace.py | test_T_LIB_0033 |
+| T-LIB-0034 | Preserve the weaker label through nesting | fast | lib/test_calctrace.py | test_T_LIB_0034 |
+| T-LIB-0035 | Use context-specific quantization | fast | lib/test_calctrace.py | test_T_LIB_0035 |
+| T-LIB-0036 | Reject a modified recorded output | fast | lib/test_calctrace.py | test_T_LIB_0036 |
+| T-LIB-0037 | Produce stable hashes for identical trees | fast | lib/test_calctrace.py | test_T_LIB_0037 |
+| T-LIB-0038 | Commit operand and rule provenance to the hash | fast | lib/test_calctrace.py | test_T_LIB_0038 |
+| T-LIB-0039 | Use recorded context instead of ambient context | fast | lib/test_calctrace.py | test_T_LIB_0039 |
+| T-LIB-0040 | Keep existing Decision data when adding unique trace references | fast | lib/test_calctrace.py | test_T_LIB_0040 |
+| T-LIB-0041 | Reject incompatible units on addition | fast | lib/test_calctrace.py | test_T_LIB_0041 |
+| T-LIB-0042 | Keep exact division and reject unrecorded rounding | fast | lib/test_calctrace.py | test_T_LIB_0042 |
+| T-LIB-0043 | Map a hold code to the missing fact | fast | lib/test_unblock.py | test_T_LIB_0043 |
+| T-LIB-0044 | Map abstention to missing pack evidence | fast | lib/test_unblock.py | test_T_LIB_0044 |
+| T-LIB-0045 | Map escalation to unresolved verification | fast | lib/test_unblock.py | test_T_LIB_0045 |
+| T-LIB-0046 | Choose the smallest shared alternative across reasons | fast | lib/test_unblock.py | test_T_LIB_0046 |
+| T-LIB-0047 | Deduplicate repeated reasons and shared requirements | fast | lib/test_unblock.py | test_T_LIB_0047 |
+| T-LIB-0048 | Reevaluate to allow after fixture requirements are resolved | fast | lib/test_unblock.py | test_T_LIB_0048 |
+| T-LIB-0049 | Return stable output for reason order permutations | fast | lib/test_unblock.py | test_T_LIB_0049 |
+| T-LIB-0050 | Serialize items in the Passport contract | fast | lib/test_unblock.py | test_T_LIB_0050 |
+| T-LIB-0051 | Require a closed reason mapping | fast | lib/test_unblock.py | test_T_LIB_0051 |
+| T-LIB-0052 | Remove already resolved inputs from the smallest list | fast | lib/test_unblock.py | test_T_LIB_0052 |
+| T-LIB-0053 | Accept a current feed with registered provenance | fast | lib/test_feeds.py | test_T_LIB_0053 |
+| T-LIB-0054 | Allow only the case tenant to see its feed | fast | lib/test_feeds.py | test_T_LIB_0054 |
+| T-LIB-0055 | Reject a batch labelled official by assertion | fast | lib/test_feeds.py | test_T_LIB_0055 |
+| T-LIB-0056 | Reject a stale or future feed | fast | lib/test_feeds.py | test_T_LIB_0056 |
+| T-LIB-0057 | Reject at the exclusive effective period endpoint | fast | lib/test_feeds.py | test_T_LIB_0057 |
+| T-LIB-0058 | Reject the whole batch if one record fails schema validation | fast | lib/test_feeds.py | test_T_LIB_0058 |
+| T-LIB-0059 | Reject content that fails its recorded hash | fast | lib/test_feeds.py | test_T_LIB_0059 |
+| T-LIB-0060 | Replay identical batch keys and reject replacements | fast | lib/test_feeds.py | test_T_LIB_0060 |
+| T-LIB-0061 | Reject malformed envelopes and mismatched sources | fast | lib/test_feeds.py | test_T_LIB_0061 |
+| T-LIB-0062 | Validate the serialized envelope against the frozen contract | fast | lib/test_feeds.py | test_T_LIB_0062 |
+| T-LIB-0063 | Meet the coverage bound over seeded class-conditional trials | fast | lib/test_conformal.py | test_T_LIB_0063 |
+| T-LIB-0064 | Replay Phase 09 calibration fixtures deterministically | fast | lib/test_conformal.py | test_T_LIB_0064 |
+| T-LIB-0065 | Use distinct class thresholds and include boundary scores | fast | lib/test_conformal.py | test_T_LIB_0065 |
+| T-LIB-0066 | State only the marginal exchangeability guarantee | fast | lib/test_conformal.py | test_T_LIB_0066 |
+| T-LIB-0067 | Abstain for empty and oversized sets | fast | lib/test_conformal.py | test_T_LIB_0067 |
+| T-LIB-0068 | Disable automatic use after a confirmed coverage drop | fast | lib/test_conformal.py | test_T_LIB_0068 |
+| T-LIB-0069 | Record synthetic coverage without disabling automatic use | fast | lib/test_conformal.py | test_T_LIB_0069 |
+| T-LIB-0070 | Flag extended not-measurable status for revalidation | fast | lib/test_conformal.py | test_T_LIB_0070 |
+| T-LIB-0071 | Pass validation on confirmed outcomes meeting the configured bound | fast | lib/test_conformal.py | test_T_LIB_0071 |
+| T-LIB-0072 | Fail validation on inadequate confirmed coverage | fast | lib/test_conformal.py | test_T_LIB_0072 |
+| T-LIB-0073 | Fail excessive singleton error despite adequate overall coverage | fast | lib/test_conformal.py | test_T_LIB_0073 |
+| T-LIB-0074 | Lapse when the pack, artifact or labelled set changes | fast | lib/test_conformal.py | test_T_LIB_0074 |
+| T-LIB-0075 | Require recorded independent approval before using tenant validation | fast | lib/test_conformal.py | test_T_LIB_0075 |
+| T-LIB-0076 | Lapse after the configured revalidation interval | fast | lib/test_conformal.py | test_T_LIB_0076 |
+| T-LIB-0077 | Reject a seeded incorrect solver assignment | fast | lib/test_solve.py | test_T_LIB_0077 |
+| T-LIB-0078 | Find and independently verify a CP-SAT optimum | fast | lib/test_solve.py | test_T_LIB_0078 |
+| T-LIB-0079 | Check satisfiability with the Z3 encoding | fast | lib/test_solve.py | test_T_LIB_0079 |
+| T-LIB-0080 | Attach an unsatisfiable core to CP-SAT infeasibility | fast | lib/test_solve.py | test_T_LIB_0080 |
+| T-LIB-0081 | Record Z3 infeasibility independently | fast | lib/test_solve.py | test_T_LIB_0081 |
+| T-LIB-0082 | Confirm stability across fixed thread counts | fast | lib/test_solve.py | test_T_LIB_0082 |
+| T-LIB-0083 | Reject seeded instability between worker counts | fast | lib/test_solve.py | test_T_LIB_0083 |
+| T-LIB-0084 | Record CP-SAT timeout as abstention | fast | lib/test_solve.py | test_T_LIB_0084 |
+| T-LIB-0085 | Record exhausted Z3 time budget as abstention | fast | lib/test_solve.py | test_T_LIB_0085 |
+| T-LIB-0086 | Reject domain and completeness errors independently | fast | lib/test_solve.py | test_T_LIB_0086 |
+| T-LIB-0087 | Match mathematical enumeration for an encoded objective | fast | lib/test_solve.py | test_T_LIB_0087 |
+| T-LIB-0088 | Require known variables before encoding | fast | lib/test_solve.py | test_T_LIB_0088 |
+| T-LIB-0089 | Preserve the exact numeric model in the result scope | fast | lib/test_solve.py | test_T_LIB_0089 |
+| T-LIB-0090 | Avoid infeasibility claims lacking independent evidence | fast | lib/test_solve.py | test_T_LIB_0090 |
+| T-LIB-0091 | Choose the same plan across every input permutation | fast | lib/test_stability_crosscheck.py | test_T_LIB_0091 |
+| T-LIB-0092 | Prioritize the first objective above later costs or keys | fast | lib/test_stability_crosscheck.py | test_T_LIB_0092 |
+| T-LIB-0093 | Compare later objective fields before stable keys | fast | lib/test_stability_crosscheck.py | test_T_LIB_0093 |
+| T-LIB-0094 | Reject duplicate explicit plan keys | fast | lib/test_stability_crosscheck.py | test_T_LIB_0094 |
+| T-LIB-0095 | Return an empty choice for an empty feasible set | fast | lib/test_stability_crosscheck.py | test_T_LIB_0095 |
+| T-LIB-0096 | Hold on grounded disagreement and record both citations | fast | lib/test_stability_crosscheck.py | test_T_LIB_0096 |
+| T-LIB-0097 | Record both independent model identifiers on agreement | fast | lib/test_stability_crosscheck.py | test_T_LIB_0097 |
+| T-LIB-0098 | Hold if the cited span does not support the value | fast | lib/test_stability_crosscheck.py | test_T_LIB_0098 |
+| T-LIB-0099 | Hold if the independent extraction is unavailable | fast | lib/test_stability_crosscheck.py | test_T_LIB_0099 |
+| T-LIB-0100 | Prevent one model from counting as two independent calls | fast | lib/test_stability_crosscheck.py | test_T_LIB_0100 |
+| T-LIB-0101 | Compare monetary rounding with integer arithmetic | fast | lib/differential/test_shared_modules.py | test_T_LIB_0101 |
+| T-LIB-0102 | Replay a nested calculation against a known amount | fast | lib/differential/test_shared_modules.py | test_T_LIB_0102 |
+| T-LIB-0103 | Compare unblock requirements with exhaustive subset search | fast | lib/differential/test_shared_modules.py | test_T_LIB_0103 |
+| T-LIB-0104 | Validate a feed using canonical bytes from an independent producer | fast | lib/differential/test_shared_modules.py | test_T_LIB_0104 |
+| T-LIB-0105 | Verify conformal thresholds using a known order statistic | fast | lib/differential/test_shared_modules.py | test_T_LIB_0105 |
+| T-LIB-0106 | Compare the CP-SAT optimum with exhaustive search | fast | lib/differential/test_shared_modules.py | test_T_LIB_0106 |
+| T-LIB-0107 | Check plan stability against a known tie-break answer | fast | lib/differential/test_shared_modules.py | test_T_LIB_0107 |
+| T-LIB-0108 | Check the known result of independently cited disagreement | fast | lib/differential/test_shared_modules.py | test_T_LIB_0108 |
+| T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
+| T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
+| T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |
+| T-LIB-0112 | Reject tenant-scope Passport inputs | fast | lib/test_capgen.py | test_T_LIB_0112 |
 | T-OBS-0001 | a metric with a tenant label is rejected | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0001_tenant_label_rejected |
 | T-OBS-0002 | a metric with a tenant_id label is rejected | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0002_tenant_id_label_rejected |
 | T-OBS-0003 | a metric without tenant labels is accepted | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0003_metric_without_tenant_ok |

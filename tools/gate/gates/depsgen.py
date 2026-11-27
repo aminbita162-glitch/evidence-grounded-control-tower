@@ -100,6 +100,13 @@ _P03_SOURCE_IDS: frozenset[str] = frozenset(
 )
 
 
+_PHASES_BY_SOURCE = {
+    **dict.fromkeys(_P03_SOURCE_IDS, "p03"),
+    "SRC-DEP-ORTOOLS": "p13",
+    "SRC-DEP-Z3-SOLVER": "p13",
+}
+
+
 def _repo_root() -> Path:
     """Resolve the repository root, respecting GATE_ROOT if set."""
     gate_root = os.environ.get("GATE_ROOT")
@@ -115,7 +122,7 @@ def generate_dependencies(root: Path) -> dict[str, list[dict[str, str]]]:
         root: Repository root path.
 
     Returns:
-        A dict ``{"p00": [...], "p03": [...]}`` matching the docs/dependencies.json format.
+        Dependency records grouped by phase, matching docs/dependencies.json.
 
     Raises:
         DepsGenError: If the registry is invalid or a DEPENDENCY entry cannot be parsed.
@@ -129,8 +136,7 @@ def generate_dependencies(root: Path) -> dict[str, list[dict[str, str]]]:
     # Sort by source_id for deterministic output.
     deps.sort(key=lambda e: e.source_id)
 
-    p00_entries: list[dict[str, str]] = []
-    p03_entries: list[dict[str, str]] = []
+    phases: dict[str, list[dict[str, str]]] = {"p00": [], "p03": []}
     for entry in deps:
         name, version = _parse_reference(entry.reference, entry.source_id)
         license_str, basis = _parse_license_summary(entry.license_summary, entry.source_id)
@@ -146,12 +152,10 @@ def generate_dependencies(root: Path) -> dict[str, list[dict[str, str]]]:
             "class": entry.dep_class,
             "basis": basis,
         }
-        if entry.source_id in _P03_SOURCE_IDS:
-            p03_entries.append(record)
-        else:
-            p00_entries.append(record)
+        phase = _PHASES_BY_SOURCE.get(entry.source_id, "p00")
+        phases.setdefault(phase, []).append(record)
 
-    return {"p00": p00_entries, "p03": p03_entries}
+    return phases
 
 
 def main() -> int:

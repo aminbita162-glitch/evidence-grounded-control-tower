@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "files": [
+    "README.md",
+    "eval/cases.json",
+    "fixtures/case.json",
+    "golden/expected.json",
+    "golden/test_case.py",
+    "manifest.json",
+    "registration.py",
+    "rules/rules.json",
+    "schemas/input.json",
+    "schemas/output.json",
+    "view.html"
+  ]
+}

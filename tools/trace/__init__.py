@@ -19,10 +19,13 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 import yaml
+
+from tools.gate.gates.index import scan_directory
+from tools.trace.shared import REQUIREMENTS, CatalogueEntry, read_catalogue
 
 __all__ = [
     "BrokenLink",
@@ -77,6 +80,10 @@ class TraceMatrix:
     risks: dict[str, list[str]] = field(default_factory=dict)
     controls: set[str] = field(default_factory=set)
     broken: list[BrokenLink] = field(default_factory=list)
+    shared_catalogue: tuple[CatalogueEntry, ...] = ()
+    module_paths: set[str] = field(default_factory=set)
+    module_proofs: set[tuple[str, str]] = field(default_factory=set)
+    check_shared: bool = False
 
 
 def _scan_test_ids(test_house: Path) -> set[str]:
@@ -153,6 +160,24 @@ def build_matrix(repo_root: Path) -> TraceMatrix:
     matrix.tests = _scan_test_ids(repo_root / "test-house")
     matrix.scenarios = _scan_scenarios(repo_root / "data" / "scenarios")
     matrix.risks, matrix.controls = _scan_risks(repo_root / "risk-management" / "registers")
+    directive = repo_root / "directive.txt"
+    if directive.is_file():
+        matrix.shared_catalogue = read_catalogue(directive.read_text(encoding="utf-8"))
+    matrix.check_shared = (repo_root / "docs/ledger/P13.md").is_file()
+    if matrix.check_shared:
+        matrix.module_paths = {
+            requirement.module
+            for requirement in REQUIREMENTS
+            if (repo_root / "kernel/lib" / requirement.module / "__init__.py").is_file()
+        }
+        differential = repo_root / "test-house/lib/differential"
+        if differential.is_dir():
+            entries = scan_directory(differential)
+            matrix.module_proofs = {
+                (entry.fields["id"], entry.fields["requirement"])
+                for entry in entries
+                if {"id", "requirement"} <= entry.fields.keys()
+            }
     matrix.broken = check_matrix(matrix)
     return matrix
 
@@ -208,6 +233,27 @@ def check_matrix(matrix: TraceMatrix) -> list[BrokenLink]:
                 )
             )
 
+    if matrix.check_shared:
+        broken.extend(_shared_links(matrix))
+    return broken
+
+
+def _shared_links(matrix: TraceMatrix) -> list[BrokenLink]:
+    from_table = {entry.name for entry in matrix.shared_catalogue if entry.phase == "P13"}
+    from_requirements = {requirement.catalogue for requirement in REQUIREMENTS}
+    broken = [
+        BrokenLink("unmapped_shared_row", name, "shared-module catalogue and requirements differ")
+        for name in sorted(from_table ^ from_requirements)
+    ]
+    for requirement in REQUIREMENTS:
+        if requirement.module not in matrix.module_paths:
+            broken.append(
+                BrokenLink("missing_shared_module", requirement.requirement, requirement.module)
+            )
+        if (requirement.test_id, requirement.requirement) not in matrix.module_proofs:
+            broken.append(
+                BrokenLink("missing_shared_proof", requirement.requirement, requirement.test_id)
+            )
     return broken
 
 
@@ -235,6 +281,10 @@ def generate_report(matrix: TraceMatrix) -> str:
         ],
         "broken_count": len(matrix.broken),
     }
+    if matrix.shared_catalogue:
+        report["shared_catalogue"] = [asdict(row) for row in matrix.shared_catalogue]
+    if matrix.check_shared:
+        report["module_requirements"] = [asdict(requirement) for requirement in REQUIREMENTS]
     return json.dumps(report, sort_keys=True, indent=2, separators=(",", ": "))
 
 
