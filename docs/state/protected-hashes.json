@@ -126,7 +126,7 @@
   "tools/gate/fixtures/types_clean.py": "927010eead13a59cbbf20ea401c35062dc046ce2af7313dd4ff368f872a1a1d7",
   "tools/gate/fixtures/types_violation.py": "9cd9aaa196511f573c928331fbcb3af9bc928185fee9e959e9e764586ec870d8",
   "tools/gate/gates/__init__.py": "21b8c733fe6c2911c22595fe4ce94c5c8145e6ac3ccc68bc26f89e581e93fc5b",
-  "tools/gate/gates/arch.py": "032b7dc4f15ff26cd856fe63f3909372d195c939c3687f0c1add46a95e2eeed0",
+  "tools/gate/gates/arch.py": "3c66fe0ba228aea06a9a093aa46f794a50c3b2e4c256c41cda4d4028b71a5905",
   "tools/gate/gates/chain.py": "27b9b47d9e25497540b827ac1970c4ab179fdfa7f1abe2dbd31577e5a6b57c1f",
   "tools/gate/gates/chaos.py": "99da4e9fe18ab0c2169c836c549aa81bf28e6197cfb35c39ebaf64777ce0f526",
   "tools/gate/gates/containment.py": "4783385a72f6be5b2adad19762a0118f644d5718bcfe9bad036a4956b2f2ce2c",

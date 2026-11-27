@@ -606,6 +606,26 @@
 | T-LIB-0008 | Keep unregistered invocation compatible | fast | lib/test_capgen.py | test_T_LIB_0008 |
 | T-LIB-0009 | Keep generated registration behind tenant authentication | fast | lib/test_capgen.py | test_T_LIB_0009 |
 | T-LIB-0010 | Give generated views a stable anchor | fast | lib/test_capgen.py | test_T_LIB_0010 |
+| T-LIB-0011 | Round half even | fast | lib/test_money.py | test_T_LIB_0011 |
+| T-LIB-0012 | Round half up | fast | lib/test_money.py | test_T_LIB_0012 |
+| T-LIB-0013 | Round half down | fast | lib/test_money.py | test_T_LIB_0013 |
+| T-LIB-0014 | Round toward positive infinity | fast | lib/test_money.py | test_T_LIB_0014 |
+| T-LIB-0015 | Round toward negative infinity | fast | lib/test_money.py | test_T_LIB_0015 |
+| T-LIB-0016 | Round away from zero | fast | lib/test_money.py | test_T_LIB_0016 |
+| T-LIB-0017 | Round toward zero | fast | lib/test_money.py | test_T_LIB_0017 |
+| T-LIB-0018 | Round away from zero when the retained digit is zero or five | fast | lib/test_money.py | test_T_LIB_0018 |
+| T-LIB-0019 | Add exact amounts associatively | fast | lib/test_money.py | test_T_LIB_0019 |
+| T-LIB-0020 | Conserve total units across allocations | fast | lib/test_money.py | test_T_LIB_0020 |
+| T-LIB-0021 | Reject mixed currencies without conversion | fast | lib/test_money.py | test_T_LIB_0021 |
+| T-LIB-0022 | Retain the recorded conversion rate and weakest label | fast | lib/test_money.py | test_T_LIB_0022 |
+| T-LIB-0023 | Require the rate direction to match | fast | lib/test_money.py | test_T_LIB_0023 |
+| T-LIB-0024 | Reject currencies absent from the pack | fast | lib/test_money.py | test_T_LIB_0024 |
+| T-LIB-0025 | Keep exact amounts until the declared rounding point | fast | lib/test_money.py | test_T_LIB_0025 |
+| T-LIB-0026 | Label fallback presentation rounding as an assumption | fast | lib/test_money.py | test_T_LIB_0026 |
+| T-LIB-0027 | Compare roundings against a rational oracle | fast | lib/test_money.py | test_T_LIB_0027 |
+| T-LIB-0028 | Break allocation ties by key | fast | lib/test_money.py | test_T_LIB_0028 |
+| T-LIB-0029 | Reject implicit rounding of working amounts | fast | lib/test_money.py | test_T_LIB_0029 |
+| T-LIB-0030 | Compare at currency minor units with explicit tolerance | fast | lib/test_money.py | test_T_LIB_0030 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |

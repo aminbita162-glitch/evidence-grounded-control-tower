@@ -7,6 +7,7 @@ Part 3 §3.9 in kernel/, schemas/, or fixtures.
 
 from __future__ import annotations
 
+import ast
 import os
 import re
 import sys
@@ -35,6 +36,17 @@ def _gate_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
+def _money_float_errors(kernel: Path, path: Path, content: str) -> list[str]:
+    if not path.is_relative_to(kernel / "lib" / "money"):
+        return []
+    return [
+        f"{path.name}:{node.lineno}: floating point in money arithmetic"
+        for node in ast.walk(ast.parse(content, filename=str(path)))
+        if (isinstance(node, ast.Constant) and type(node.value) is float)
+        or (isinstance(node, ast.Name) and node.id == "float")
+    ]
+
+
 def main() -> int:
     """Entry point: scan kernel/ for forbidden patterns."""
     root = _gate_root()
@@ -45,6 +57,7 @@ def main() -> int:
     violations: list[str] = []
     for py_file in kernel_dir.rglob("*.py"):
         content = py_file.read_text()
+        violations.extend(_money_float_errors(kernel_dir, py_file, content))
         for pattern, desc in FORBIDDEN_PATTERNS:
             if re.search(pattern, content):
                 violations.append(f"{py_file.name}: {desc}")
