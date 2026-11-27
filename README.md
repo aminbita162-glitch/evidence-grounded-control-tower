@@ -64,8 +64,8 @@ A person decides before any irreversible action. The system does not take an irr
 | P03 | Kernel contracts | ✓ November 2026 |
 | P04 | Persistence and tenancy baseline | ✓ November 2026 |
 | P05 | Evidence Ledger | ✓ November 2026 |
-| P06 | Rule Engine | ✓ Nov 2026 |
-| P07 | Orchestration and containment | ✓ Nov 2026 |
+| P06 | Rule Engine | ✓ November 2026 |
+| P07 | Orchestration and containment | ✓ November 2026 |
 | P08 | Model Gateway and Extract stage | ✓ November 2026 |
 | P09 | Synthetic data and bench | ✓ November 2026 |
 | P10 | API foundation, observability and Budget Governor | ✓ November 2026 |
