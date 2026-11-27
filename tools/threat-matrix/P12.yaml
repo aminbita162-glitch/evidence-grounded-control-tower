@@ -1,0 +1,12 @@
+phase: P12
+mappings:
+  export_backup_log_leakage:
+    export: [T-OPS-0026, T-OPS-0031]
+    backup: [T-OPS-0030, T-OPS-0032, T-OPS-0034]
+    log: [T-OPS-0012, T-OPS-0052]
+  supply_chain_compromise:
+    image: [T-OPS-0002, T-OPS-0005, T-OPS-0020, T-OPS-0021, T-OPS-0043]
+kill_points:
+  during_backup: T-OPS-0034
+  during_restore: T-OPS-0049
+  during_migration: T-OPS-0050

@@ -674,6 +674,12 @@
 | T-OPS-0044 | Link promotions and rollbacks | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0044 |
 | T-OPS-0045 | Prevent stale concurrent release decisions | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0045 |
 | T-OPS-0046 | Reject changed deployment payloads | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0046 |
+| T-OPS-0047 | Map operations threats to indexed tests | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0047 |
+| T-OPS-0048 | Register all declared operations kill points | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0048 |
+| T-OPS-0049 | Kill a restore target and recover on retry | slow | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0049 |
+| T-OPS-0050 | Keep the application stopped on migration failure | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0050 |
+| T-OPS-0051 | Confine supply-chain evidence to pinned inputs | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0051 |
+| T-OPS-0052 | Keep invalid settings out of error messages | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0052 |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |
