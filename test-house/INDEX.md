@@ -646,6 +646,16 @@
 | T-OPS-0016 | Use the configuration hash recorded in the export | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0016 |
 | T-OPS-0017 | Replay a legacy Passport | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0017 |
 | T-OPS-0018 | Isolate checkpoint signing and preserve the last root | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0018 |
+| T-OPS-0019 | Bundle all required services | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0019 |
+| T-OPS-0020 | Pin the confirmed database image | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0020 |
+| T-OPS-0021 | Pin the policy executable | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0021 |
+| T-OPS-0022 | Isolate migration privileges | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0022 |
+| T-OPS-0023 | Limit access to local services | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0023 |
+| T-OPS-0024 | Share an exact application image | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0024 |
+| T-OPS-0025 | Verify a synthetic case export | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0025 |
+| T-OPS-0026 | Reject a corrupt Merkle root | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0026 |
+| T-OPS-0027 | Require application-side verification | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0027 |
+| T-OPS-0028 | Require a nonempty case bundle | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0028 |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |
