@@ -666,6 +666,14 @@
 | T-OPS-0036 | Reject changed restored ledger records | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0036 |
 | T-OPS-0037 | Record measured recovery objectives | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0037 |
 | T-OPS-0038 | Reject recovery beyond either objective | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0038 |
+| T-OPS-0039 | Promote a healthy candidate | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0039 |
+| T-OPS-0040 | Roll back a failing canary | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0040 |
+| T-OPS-0041 | Roll back an exhausted error budget | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0041 |
+| T-OPS-0042 | Require a healthy rollback candidate | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0042 |
+| T-OPS-0043 | Reject mutable image references | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0043 |
+| T-OPS-0044 | Link promotions and rollbacks | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0044 |
+| T-OPS-0045 | Prevent stale concurrent release decisions | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0045 |
+| T-OPS-0046 | Reject changed deployment payloads | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0046 |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |
