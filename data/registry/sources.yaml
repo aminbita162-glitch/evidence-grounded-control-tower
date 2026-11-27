@@ -233,6 +233,19 @@ sources:
     max_age_months: 12
     v_item: "V-04"
 
+  - source_id: SRC-ISO-6346-CHECK-DIGIT
+    publisher: International Organization for Standardization
+    reference: "ISO 6346:2026, edition 5 (https://www.iso.org/standard/6346)"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "ISO copyright; reference only. Reproduction and redistribution require permission."
+    redistributable: "no"
+    kind: STANDARD
+    use_class: MEASURE
+    status: VERIFIED
+    max_age_months: 12
+    v_item: "V-10"
+
   - source_id: SRC-UN-LOCODE
     publisher: United Nations Economic Commission for Europe
     reference: "UN/LOCODE code list; publisher page and terms not verified"

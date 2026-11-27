@@ -5,6 +5,15 @@
 # Schema: schemas/license-manifest.json
 # Spec: Part 3 §3.12, P02-T03, P02-T04.
 manifests:
+  - source_id: SRC-ISO-6346-CHECK-DIGIT
+    terms: "ISO copyright policy (https://www.iso.org/copyright.html)"
+    attribution_text: "International Organization for Standardization, ISO 6346:2026, edition 5"
+    permitted_uses: >-
+      V-10 part a owner closure covers the container identification check-digit procedure.
+      Cite the standard identifier and edition and independently implement the check.
+      Store no ISO text, tables or illustrations.
+    redistribution_permission: "no"
+
   - source_id: SRC-OFAC-SDN
     terms: "not read; UNVERIFIED"
     attribution_text: "not read; UNVERIFIED"
