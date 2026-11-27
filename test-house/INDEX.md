@@ -656,6 +656,16 @@
 | T-OPS-0026 | Reject a corrupt Merkle root | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0026 |
 | T-OPS-0027 | Require application-side verification | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0027 |
 | T-OPS-0028 | Require a nonempty case bundle | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0028 |
+| T-OPS-0029 | Publish a verified regional backup | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0029 |
+| T-OPS-0030 | Detect a corrupted archive | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0030 |
+| T-OPS-0031 | Reject out-of-region inventory | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0031 |
+| T-OPS-0032 | Reject an unapproved restore region | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0032 |
+| T-OPS-0033 | Retain independent backup snapshots | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0033 |
+| T-OPS-0034 | Reject a failed backup before publish | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0034 |
+| T-OPS-0035 | Verify restored ledger chains independently | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0035 |
+| T-OPS-0036 | Reject changed restored ledger records | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0036 |
+| T-OPS-0037 | Record measured recovery objectives | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0037 |
+| T-OPS-0038 | Reject recovery beyond either objective | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0038 |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |
