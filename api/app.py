@@ -11,10 +11,16 @@ Spec: Part 3 §3.17, §3.24; P10-T01.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
+from typing import TYPE_CHECKING
+
 from fastapi import FastAPI
 
 from kernel.auth.sessions import SessionSigner
 from kernel.auth.tokens import TokenService
+
+if TYPE_CHECKING:
+    from api.routes.capability import CapabilityInvocation
 
 __all__ = [
     "API_VERSION",
@@ -36,6 +42,7 @@ class AppPorts:
         tokens: TokenService | None = None,
         session_signer: SessionSigner | None = None,
         storage: object | None = None,
+        capabilities: Mapping[str, CapabilityInvocation] | None = None,
     ) -> None:
         """Store injected ports.
 
@@ -43,10 +50,12 @@ class AppPorts:
             tokens: Verifier for opaque API credentials.
             session_signer: Verifier for signed session cookies.
             storage: An optional storage port.
+            capabilities: Optional capability handlers keyed by registration ID.
         """
         self.tokens = tokens
         self.session_signer = session_signer
         self.storage = storage
+        self.capabilities = dict(capabilities or {})
 
 
 def create_app(ports: AppPorts | None = None, *, production: bool = False) -> FastAPI:
@@ -78,12 +87,12 @@ def create_app(ports: AppPorts | None = None, *, production: bool = False) -> Fa
     register_problem_handlers(app)
 
     # Register routes (added by later tasks: T02 capability, T05 health).
-    _register_routes(app)
+    _register_routes(app, ports)
 
     return app
 
 
-def _register_routes(app: FastAPI) -> None:
+def _register_routes(app: FastAPI, ports: AppPorts) -> None:
     """Register all API routes on the app.
 
     Later tasks add idempotency middleware (T03) and health endpoints (T05).
@@ -92,7 +101,7 @@ def _register_routes(app: FastAPI) -> None:
     from api.routes.capability import register_capability_routes
     from api.routes.commands import register_command_routes
 
-    register_capability_routes(app)
+    register_capability_routes(app, ports.capabilities)
     register_command_routes(app)
 
     from api.health import register_health_routes

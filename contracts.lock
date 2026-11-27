@@ -134,6 +134,11 @@
       "path": "schemas/security/key_record.json",
       "hash": "b334dc14d317bf1c07147559eb4f1e423fd4beee06c3d88465c185f6b5bad1c9",
       "type": "schema"
+    },
+    {
+      "path": "tools/capgen/layout.json",
+      "hash": "82a60e84c6fec89580e584f6becc8490320d7c301b7074bddeb5f843963eafc6",
+      "type": "layout"
     }
   ]
 }

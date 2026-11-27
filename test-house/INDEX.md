@@ -596,6 +596,20 @@
 | T-LED-0084 | Signature misuse threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0084_threat_signature_misuse |
 | T-LED-0085 | Verifier divergence threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0085_threat_verifier_divergence |
 | T-LED-0086 | Salt loss threat items have tests | fast | ledger/test_T_LED_0059_to_0086.py | test_T_LED_0086_threat_salt_loss |
+| T-LIB-0001 | Regenerate identical bytes | fast | lib/test_capgen.py | test_T_LIB_0001 |
+| T-LIB-0002 | Require a conforming layout | fast | lib/test_capgen.py | test_T_LIB_0002 |
+| T-LIB-0003 | Reject an incomplete layout | fast | lib/test_capgen.py | test_T_LIB_0003 |
+| T-LIB-0004 | Reject unknown definition keys | fast | lib/test_capgen.py | test_T_LIB_0004 |
+| T-LIB-0005 | Require declared calibration artifacts | fast | lib/test_capgen.py | test_T_LIB_0005 |
+| T-LIB-0006 | Prevent accidental replacement of edited files | fast | lib/test_capgen.py | test_T_LIB_0006 |
+| T-LIB-0007 | Dispatch a generated registration through the skeleton | fast | lib/test_capgen.py | test_T_LIB_0007 |
+| T-LIB-0008 | Keep unregistered invocation compatible | fast | lib/test_capgen.py | test_T_LIB_0008 |
+| T-LIB-0009 | Keep generated registration behind tenant authentication | fast | lib/test_capgen.py | test_T_LIB_0009 |
+| T-LIB-0010 | Give generated views a stable anchor | fast | lib/test_capgen.py | test_T_LIB_0010 |
+| T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
+| T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
+| T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |
+| T-LIB-0112 | Reject tenant-scope Passport inputs | fast | lib/test_capgen.py | test_T_LIB_0112 |
 | T-OBS-0001 | a metric with a tenant label is rejected | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0001_tenant_label_rejected |
 | T-OBS-0002 | a metric with a tenant_id label is rejected | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0002_tenant_id_label_rejected |
 | T-OBS-0003 | a metric without tenant labels is accepted | fast | observability/test_T_OBS_0001_to_0012.py | test_T_OBS_0003_metric_without_tenant_ok |
