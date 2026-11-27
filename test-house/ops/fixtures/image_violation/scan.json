@@ -1,0 +1,21 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {"Version": "0.76.2"},
+  "ArtifactType": "container_image",
+  "Results": [
+    {
+      "Class": "os-pkgs",
+      "Type": "debian",
+      "Vulnerabilities": [
+        {
+          "PkgID": "synthetic-package@1.0",
+          "PkgName": "synthetic-package",
+          "InstalledVersion": "1.0",
+          "VulnerabilityID": "SYNTHETIC-IMAGE-001",
+          "Severity": "HIGH"
+        }
+      ]
+    },
+    {"Class": "lang-pkgs", "Type": "python-pkg"}
+  ]
+}

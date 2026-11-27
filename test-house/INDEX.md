@@ -628,6 +628,16 @@
 | T-OBS-0030 | per-document call allowance enforced | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0030_per_document_allowance |
 | T-OBS-0031 | usage events reconcile with the ledger | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0031_usage_events_reconcile |
 | T-OBS-0032 | breach event is recorded | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0032_breach_event_recorded |
+| T-OPS-0001 | Declare non-root runtime and a health check | fast | ops/test_T_OPS_0001_to_0010.py | test_runtime_dockerfile_uses_nonroot_and_health_check |
+| T-OPS-0002 | Pin each image stage | fast | ops/test_T_OPS_0001_to_0010.py | test_dockerfile_pins_build_bases |
+| T-OPS-0003 | Accept a clean scanner result | fast | ops/test_T_OPS_0001_to_0010.py | test_clean_scan_passes |
+| T-OPS-0004 | Accept one exact approved finding | fast | ops/test_T_OPS_0001_to_0010.py | test_exact_approved_finding_passes |
+| T-OPS-0005 | Reject a finding outside D5 | fast | ops/test_T_OPS_0001_to_0010.py | test_unapproved_vulnerability_fails |
+| T-OPS-0006 | Reject an incomplete scan | fast | ops/test_T_OPS_0001_to_0010.py | test_omitted_package_inventory_fails |
+| T-OPS-0007 | Bind findings to the pinned vulnerability database | fast | ops/test_T_OPS_0001_to_0010.py | test_different_database_metadata_fails |
+| T-OPS-0008 | Select locked dependencies for the target runtime | fast | ops/test_T_OPS_0001_to_0010.py | test_runtime_export_selects_target_and_exact_versions |
+| T-OPS-0009 | Check inventory against the frozen export | fast | ops/test_T_OPS_0001_to_0010.py | test_sbom_contains_exact_locked_package_version |
+| T-OPS-0010 | Fail when a locked Python distribution is missing | fast | ops/test_T_OPS_0001_to_0010.py | test_sbom_rejects_wrong_versions_and_ecosystems |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |

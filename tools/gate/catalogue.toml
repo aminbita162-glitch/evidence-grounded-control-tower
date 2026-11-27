@@ -331,11 +331,11 @@ clean_fixture = ""
 
 [gate.image]
 cadence = "P"
-command = "echo NOT_ACTIVE"
-timeout = 120
+command = "python -m tools.gate.gates.image"
+timeout = 600
 activates_in = "P12"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "../../test-house/ops/fixtures/image_violation"
+clean_fixture = "../../test-house/ops/fixtures/image_clean"
 
 [gate.a11y]
 cadence = "P"
