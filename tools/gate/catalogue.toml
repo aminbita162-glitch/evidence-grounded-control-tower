@@ -323,19 +323,19 @@ clean_fixture = "fixtures/leakage_clean"
 
 [gate.restore]
 cadence = "P"
-command = "echo NOT_ACTIVE"
+command = "python -m tools.gate.gates.restore"
 timeout = 300
 activates_in = "P12"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "../../test-house/ops/fixtures/restore_violation"
+clean_fixture = "../../test-house/ops/fixtures/restore_clean"
 
 [gate.image]
 cadence = "P"
-command = "echo NOT_ACTIVE"
-timeout = 120
+command = "python -m tools.gate.gates.image"
+timeout = 600
 activates_in = "P12"
-violation_fixture = ""
-clean_fixture = ""
+violation_fixture = "../../test-house/ops/fixtures/image_violation"
+clean_fixture = "../../test-house/ops/fixtures/image_clean"
 
 [gate.a11y]
 cadence = "P"

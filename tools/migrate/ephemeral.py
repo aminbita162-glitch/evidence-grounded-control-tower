@@ -156,7 +156,7 @@ class EphemeralDB:
 
 
 def _wait_for_ready(db: EphemeralDB, timeout: float = 30.0) -> None:
-    """Wait until PostgreSQL accepts connections."""
+    """Wait for the final TCP listener, which is absent during bootstrap."""
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         result = subprocess.run(  # nosec
@@ -165,6 +165,8 @@ def _wait_for_ready(db: EphemeralDB, timeout: float = 30.0) -> None:
                 "exec",
                 db.container_id,
                 "pg_isready",
+                "-h",
+                "127.0.0.1",
                 "-U",
                 RoleNames.SUPERUSER,
                 "-d",

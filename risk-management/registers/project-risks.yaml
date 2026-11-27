@@ -214,7 +214,7 @@ records:
     residual_likelihood: 1
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROJ-09]
+    controls: [CTL-PROJ-09, CTL-OPS-04]
     owner_area: core
     accountable: OWNER
     status: open
@@ -238,7 +238,7 @@ records:
     residual_likelihood: 1
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROJ-10]
+    controls: [CTL-PROJ-10, CTL-OPS-02, CTL-OPS-05]
     owner_area: core
     accountable: OWNER
     status: open

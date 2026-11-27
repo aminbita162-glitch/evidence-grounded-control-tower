@@ -20,6 +20,9 @@
     "signature": {
       "$ref": "common.json#/definitions/hash_hex"
     },
+    "configuration_hash": {
+      "$ref": "common.json#/definitions/hash_hex"
+    },
     "checkpoints": {
       "type": "array",
       "items": {

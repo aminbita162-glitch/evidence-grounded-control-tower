@@ -628,6 +628,58 @@
 | T-OBS-0030 | per-document call allowance enforced | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0030_per_document_allowance |
 | T-OBS-0031 | usage events reconcile with the ledger | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0031_usage_events_reconcile |
 | T-OBS-0032 | breach event is recorded | fast | observability/test_T_OBS_0023_to_0032.py | test_T_OBS_0032_breach_event_recorded |
+| T-OPS-0001 | Declare non-root runtime and a health check | fast | ops/test_T_OPS_0001_to_0010.py | test_runtime_dockerfile_uses_nonroot_and_health_check |
+| T-OPS-0002 | Pin each image stage | fast | ops/test_T_OPS_0001_to_0010.py | test_dockerfile_pins_build_bases |
+| T-OPS-0003 | Accept a clean scanner result | fast | ops/test_T_OPS_0001_to_0010.py | test_clean_scan_passes |
+| T-OPS-0004 | Accept one exact approved finding | fast | ops/test_T_OPS_0001_to_0010.py | test_exact_approved_finding_passes |
+| T-OPS-0005 | Reject a finding outside D5 | fast | ops/test_T_OPS_0001_to_0010.py | test_unapproved_vulnerability_fails |
+| T-OPS-0006 | Reject an incomplete scan | fast | ops/test_T_OPS_0001_to_0010.py | test_omitted_package_inventory_fails |
+| T-OPS-0007 | Bind findings to the pinned vulnerability database | fast | ops/test_T_OPS_0001_to_0010.py | test_different_database_metadata_fails |
+| T-OPS-0008 | Select locked dependencies for the target runtime | fast | ops/test_T_OPS_0001_to_0010.py | test_runtime_export_selects_target_and_exact_versions |
+| T-OPS-0009 | Check inventory against the frozen export | fast | ops/test_T_OPS_0001_to_0010.py | test_sbom_contains_exact_locked_package_version |
+| T-OPS-0010 | Fail when a locked Python distribution is missing | fast | ops/test_T_OPS_0001_to_0010.py | test_sbom_rejects_wrong_versions_and_ecosystems |
+| T-OPS-0011 | Validate the deployment contract | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0011 |
+| T-OPS-0012 | Fail startup on a missing secret | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0012 |
+| T-OPS-0013 | Isolate staging from production | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0013 |
+| T-OPS-0014 | Detect drift in either Blueprint | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0014 |
+| T-OPS-0015 | Stamp the Passport with public configuration | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0015 |
+| T-OPS-0016 | Use the configuration hash recorded in the export | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0016 |
+| T-OPS-0017 | Replay a legacy Passport | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0017 |
+| T-OPS-0018 | Isolate checkpoint signing and preserve the last root | fast | ops/test_T_OPS_0011_to_0018.py | test_T_OPS_0018 |
+| T-OPS-0019 | Bundle all required services | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0019 |
+| T-OPS-0020 | Pin the confirmed database image | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0020 |
+| T-OPS-0021 | Pin the policy executable | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0021 |
+| T-OPS-0022 | Isolate migration privileges | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0022 |
+| T-OPS-0023 | Limit access to local services | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0023 |
+| T-OPS-0024 | Share an exact application image | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0024 |
+| T-OPS-0025 | Verify a synthetic case export | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0025 |
+| T-OPS-0026 | Reject a corrupt Merkle root | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0026 |
+| T-OPS-0027 | Require application-side verification | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0027 |
+| T-OPS-0028 | Require a nonempty case bundle | fast | ops/test_T_OPS_0019_to_0028.py | test_T_OPS_0028 |
+| T-OPS-0029 | Publish a verified regional backup | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0029 |
+| T-OPS-0030 | Detect a corrupted archive | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0030 |
+| T-OPS-0031 | Reject out-of-region inventory | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0031 |
+| T-OPS-0032 | Reject an unapproved restore region | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0032 |
+| T-OPS-0033 | Retain independent backup snapshots | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0033 |
+| T-OPS-0034 | Reject a failed backup before publish | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0034 |
+| T-OPS-0035 | Verify restored ledger chains independently | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0035 |
+| T-OPS-0036 | Reject changed restored ledger records | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0036 |
+| T-OPS-0037 | Record measured recovery objectives | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0037 |
+| T-OPS-0038 | Reject recovery beyond either objective | fast | ops/test_T_OPS_0029_to_0038.py | test_T_OPS_0038 |
+| T-OPS-0039 | Promote a healthy candidate | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0039 |
+| T-OPS-0040 | Roll back a failing canary | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0040 |
+| T-OPS-0041 | Roll back an exhausted error budget | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0041 |
+| T-OPS-0042 | Require a healthy rollback candidate | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0042 |
+| T-OPS-0043 | Reject mutable image references | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0043 |
+| T-OPS-0044 | Link promotions and rollbacks | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0044 |
+| T-OPS-0045 | Prevent stale concurrent release decisions | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0045 |
+| T-OPS-0046 | Reject changed deployment payloads | fast | ops/test_T_OPS_0039_to_0046.py | test_T_OPS_0046 |
+| T-OPS-0047 | Map operations threats to indexed tests | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0047 |
+| T-OPS-0048 | Register all declared operations kill points | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0048 |
+| T-OPS-0049 | Kill a restore target and recover on retry | slow | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0049 |
+| T-OPS-0050 | Keep the application stopped on migration failure | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0050 |
+| T-OPS-0051 | Confine supply-chain evidence to pinned inputs | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0051 |
+| T-OPS-0052 | Keep invalid settings out of error messages | fast | ops/test_T_OPS_0047_to_0052.py | test_T_OPS_0052 |
 | T-ORC-0001 | A valid workflow DAG loads and validates | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0001_valid_dag_loads |
 | T-ORC-0002 | A cycle in the DAG is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0002_cycle_rejected |
 | T-ORC-0003 | An unknown role in a step is rejected | fast | orchestration/test_T_ORC_0001_to_0014.py | test_T_ORC_0003_unknown_role_rejected |

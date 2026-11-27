@@ -27,6 +27,7 @@ from pathlib import Path
 
 __all__ = [
     "generate_sql_tables",
+    "generate_passport_configuration_migration",
     "regenerate_sql",
 ]
 
@@ -42,6 +43,9 @@ _SKIP: set[str] = {
     "model_call.json",
     "region_profile.json",
 }
+
+_PASSPORT_CONFIGURATION_COLUMN = "configuration_hash"
+_PASSPORT_CONFIGURATION_MIGRATION = "0008_passport_configuration_hash.sql"
 
 _HEADER = (
     "-- 0002_tables.sql — entity tables generated from schemas (P04-T02)\n"
@@ -141,6 +145,9 @@ def generate_sql_tables(schemas_dir: Path) -> str:
                 continue
             if id_field and name == id_field:
                 continue
+            # Passport configuration hashes are stored by the forward migration.
+            if schema_file.stem == "passport" and name == _PASSPORT_CONFIGURATION_COLUMN:
+                continue
             sql_type = _json_type_to_sql(prop)
             if prop.get("type") == "string" and "enum" in prop:
                 values = prop.get("enum", [])
@@ -177,13 +184,35 @@ def generate_sql_tables(schemas_dir: Path) -> str:
     return "\n".join(lines)
 
 
+def generate_passport_configuration_migration(schemas_dir: Path) -> str:
+    """Generate the additive migration for the optional Passport configuration hash."""
+    passport = json.loads((schemas_dir / "passport.json").read_text(encoding="utf-8"))
+    column = _PASSPORT_CONFIGURATION_COLUMN
+    definition = passport["properties"][column]
+    if (
+        column in passport["required"]
+        or definition.get("$ref") != "common.json#/definitions/hash_hex"
+    ):
+        msg = "Passport configuration_hash must be an optional SHA-256 hash"
+        raise ValueError(msg)
+    sql_type = _json_type_to_sql(definition)
+    return (
+        "-- P12-CHG: Add the deployment configuration hash to Passport storage.\n"
+        'ALTER TABLE "passport"\n'
+        f"    ADD COLUMN IF NOT EXISTS {column} {sql_type} DEFAULT NULL;\n"
+    )
+
+
 def regenerate_sql() -> int:
-    """Regenerate the SQL migration file and report the result."""
+    """Verify the original table migration and regenerate the forward migration."""
     root = Path(__file__).resolve().parents[2]
     schemas_dir = root / "schemas"
-    sql = generate_sql_tables(schemas_dir)
-    output_path = root / "adapters" / "postgres" / "migrations" / "0002_tables.sql"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(sql, encoding="utf-8")
-    print(f"generated: {output_path.relative_to(root)}")
+    migrations_dir = root / "adapters" / "postgres" / "migrations"
+    original = migrations_dir / "0002_tables.sql"
+    if generate_sql_tables(schemas_dir).encode("utf-8") != original.read_bytes():
+        print(f"immutable migration differs from generation: {original.relative_to(root)}")
+        return 1
+    forward = migrations_dir / _PASSPORT_CONFIGURATION_MIGRATION
+    forward.write_bytes(generate_passport_configuration_migration(schemas_dir).encode("utf-8"))
+    print(f"generated: {forward.relative_to(root)}")
     return 0

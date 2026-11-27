@@ -28,6 +28,6 @@ None.
 
 | status | count |
 |---|---|
-| PLANNED | 47 |
-| IMPLEMENTED | 0 |
-| VERIFIED | 6 |
+| PLANNED | 38 |
+| IMPLEMENTED | 12 |
+| VERIFIED | 11 |

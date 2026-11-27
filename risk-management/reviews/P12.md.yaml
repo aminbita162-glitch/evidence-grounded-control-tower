@@ -1,0 +1,10 @@
+records:
+  - id: REV-P12
+    phase: P12
+    risks_new_or_changed: [RSK-P-08, RSK-J-09, RSK-J-10, THR-SEC-10, THR-SEC-11]
+    controls_added: [CTL-OPS-01, CTL-OPS-02, CTL-OPS-03, CTL-OPS-04, CTL-OPS-05]
+    controls_verified: [CTL-OPS-01, CTL-OPS-02, CTL-OPS-03, CTL-OPS-04, CTL-OPS-05]
+    residual_risks_above_threshold: []
+    v_items_opened_or_closed: []
+    register_diff: risk-management/controls/catalogue.yaml and risk-management/registers/
+    review_date: "2026-11"

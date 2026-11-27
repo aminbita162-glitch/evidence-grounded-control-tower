@@ -1,0 +1,79 @@
+services:
+  database:
+    image: docker.io/library/postgres:18@sha256:eb63372c1e05c755f55fa30cbd07aecc443676fc6c0fa90b9002d01537841e1a
+    environment:
+      POSTGRES_DB: control_tower
+      POSTGRES_PASSWORD_FILE: /run/secrets/database_owner
+    secrets: [database_owner, database_application, database_migration]
+    volumes:
+      - database:/var/lib/postgresql
+      - ./roles.sql:/docker-entrypoint-initdb.d/roles.sql:ro
+    healthcheck:
+      test: [CMD, pg_isready, -h, 127.0.0.1, -U, postgres, -d, control_tower]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+    mem_limit: 512m
+  policy:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: policy.Dockerfile
+    read_only: true
+    mem_limit: 128m
+  migration:
+    image: ${CTC_APP_IMAGE:?Set CTC_APP_IMAGE}
+    command: [python, -m, deploy.env, migrate]
+    read_only: true
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      CTC_ENVIRONMENT: local
+      CTC_REGION: oregon
+      CTC_MIGRATION_DATABASE_URL_FILE: /run/secrets/migration_url
+    secrets: [migration_url]
+  application:
+    image: ${CTC_APP_IMAGE:?Set CTC_APP_IMAGE}
+    command:
+      - python
+      - -m
+      - uvicorn
+      - deploy.env.__main__:create_web
+      - --factory
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+      policy:
+        condition: service_healthy
+    environment:
+      CTC_ENVIRONMENT: local
+      CTC_REGION: oregon
+      CTC_DATABASE_URL_FILE: /run/secrets/application_url
+      CTC_SESSION_KEY_FILE: /run/secrets/session_key
+      CTC_API_TOKEN_RECORDS_FILE: /run/secrets/token_records
+    secrets: [application_url, session_key, token_records]
+    ports: ["127.0.0.1::8000"]
+    read_only: true
+    mem_limit: 512m
+volumes:
+  database:
+secrets:
+  database_owner:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/database_owner
+  database_application:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/database_application
+  database_migration:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/database_migration
+  application_url:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/application_url
+  migration_url:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/migration_url
+  session_key:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/session_key
+  token_records:
+    file: ${CTC_SECRET_DIR:?Set CTC_SECRET_DIR}/token_records
