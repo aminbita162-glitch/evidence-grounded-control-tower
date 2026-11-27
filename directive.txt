@@ -16,7 +16,8 @@ These instructions override nothing in Part 1; they reinforce it. Part 1 remains
 <<<END-AGENT-INSTRUCTIONS>>>
 
 <<<DIRECTIVE>>>
-BUILD DIRECTIVE — v1.1-split1-enhanced.3
+BUILD DIRECTIVE — v1.1-split1-enhanced.4
+Revision v1.1-split1-enhanced.4 records decision D14 for Phase 12 case-export Passport replay.
 Revision v1.1-split1-enhanced.3 records decision D6 for the Phase 12 forward Passport migration and preserves the original table migration byte for byte.
 Revision v1.1-split1-enhanced.2 records decision D3 for the Phase 12 Passport contract and image and restore gates.
 Revision v1.1-split1-enhanced.1 adds Phase 11 prerequisite maintenance before Phase 12.
@@ -4739,7 +4740,7 @@ PHASE 12 — PACKAGING AND OPERATIONS
 3. Entry conditions beyond Part 1 §8: P11 gates exit 0; `gate list` shows `restore` and `image` as NOT_ACTIVE with `activates_in` P12; the container tooling of Part 4 §4.2 is available. Evidence: the commands.
 
 4. Scope fence. May create: `Dockerfile` and `deploy/` (hosting blueprint, container bundle with application, database and policy engine, environment and secret file contracts, staging and production separation), `tools/ops/` (backup, restore drill, exit drill, drift check, release canary and rollback scripts), `docs/runbook/` (generated skeletons only; the documentation phase completes them), `test-house/ops/`, `docs/ledger/P12.md`, risk-management records. May create `adapters/postgres/migrations/0008_passport_configuration_hash.sql` through P12-CHG. May change the Passport schema, generated contract, producer and registry through P12-CHG and P12-T02, the SQL generator and persistence test through P12-CHG, and the protected image and restore gate paths named in P12-T01 and P12-T04. Deployment itself happens only in a phase that says so; this phase deploys nothing. Everything else is forbidden.
-Scope paths: Dockerfile, .dockerignore, deploy/**, tools/ops/**, tools/gate/gates/**, tools/gate/catalogue.toml, tools/threat-matrix/**, test-house/ops/**, docs/runbook/**, docs/ledger/P12.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, contracts.lock, CHANGELOG.md, README.md, tools/faultlab/**, api/app.py, api/authentication.py, api/routes/capability.py, api/routes/commands.py, schemas/security/key_record.json, schemas/security/session_payload.json, schemas/security/token_record.json, test-house/api/test_T_API_0015_to_0030.py, test-house/api/test_T_API_0031_to_0042.py, test-house/api/test_T_API_0053_to_0060.py, test-house/leakage/test_T_SEC_0069_to_0084.py, schemas/passport.json, kernel/contracts/_generated/passport.py, kernel/skeleton/__init__.py, tools/schemagen/sqlgen.py, test-house/persistence/test_T_DB_0009_to_0018.py, adapters/postgres/migrations/0008_passport_configuration_hash.sql
+Scope paths: kernel/ledger/replay.py, Dockerfile, .dockerignore, deploy/**, tools/ops/**, tools/gate/gates/**, tools/gate/catalogue.toml, tools/threat-matrix/**, test-house/ops/**, docs/runbook/**, docs/ledger/P12.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, contracts.lock, CHANGELOG.md, README.md, tools/faultlab/**, api/app.py, api/authentication.py, api/routes/capability.py, api/routes/commands.py, schemas/security/key_record.json, schemas/security/session_payload.json, schemas/security/token_record.json, test-house/api/test_T_API_0015_to_0030.py, test-house/api/test_T_API_0031_to_0042.py, test-house/api/test_T_API_0053_to_0060.py, test-house/leakage/test_T_SEC_0069_to_0084.py, schemas/passport.json, kernel/contracts/_generated/passport.py, kernel/skeleton/__init__.py, tools/schemagen/sqlgen.py, test-house/persistence/test_T_DB_0009_to_0018.py, adapters/postgres/migrations/0008_passport_configuration_hash.sql
 
 5. Context Pack: `<<<P3-S27>>>` `<<<P3-S32>>>` `<<<P3-S20>>>` `<<<P4-S7>>>` `<<<P4-S12>>>` `<<<P4-S14>>>` `<<<D32-S2.4>>>` `<<<D32-S2.5>>>` `<<<D32-S3>>>` `<<<P6-S11>>>` `<<<P6-S12>>>`.
 
@@ -4761,7 +4762,7 @@ P12-CHG Passport deployment configuration hash
 - Accept: `gate run contract` and `gate run generated-files` exit 0. The walking skeleton, replay and persistence tests pass. Applying the forward migration preserves existing Passport rows and supports the optional hash on new rows. Record the change and consumer results in the phase report.
 
 P12-T02 Deployment configuration
-- Files: `deploy/blueprint/`, `deploy/env/`, `kernel/skeleton/__init__.py`, `test-house/ops/test_T_OPS_0011_to_0018.py`.
+- Files: `deploy/blueprint/`, `deploy/env/`, `kernel/skeleton/__init__.py`, `kernel/ledger/replay.py`, `test-house/ops/test_T_OPS_0011_to_0018.py`.
 - Passport checks: every new Passport includes the SHA-256 of the validated deployment configuration, with secret values excluded. Replay uses the recorded configuration hash. Previously issued Passports remain valid.
 - Steps: the hosting blueprint for the web service and the managed database; separate staging and production definitions; migrations run under the separate role as a pre-deploy step; the witness as a separate service with its own secret entry; configuration through environment and secret files only; the configuration hash is stamped on every Passport; platform limits are read from the V-27 verification and recorded.
 - Accept: tests T-OPS-0011 to T-OPS-0018: configuration validates against the typed contract; a missing secret fails start with a clear code; staging and production differ only in declared values; a drift check compares the blueprint with a rendered expectation.
