@@ -16,7 +16,8 @@ These instructions override nothing in Part 1; they reinforce it. Part 1 remains
 <<<END-AGENT-INSTRUCTIONS>>>
 
 <<<DIRECTIVE>>>
-BUILD DIRECTIVE — v1.1-split1-enhanced.1
+BUILD DIRECTIVE — v1.1-split1-enhanced.2
+Revision v1.1-split1-enhanced.2 records decision D3 for the Phase 12 Passport contract and image and restore gates.
 Revision v1.1-split1-enhanced.1 adds Phase 11 prerequisite maintenance before Phase 12.
 Status: Active Development. Split version 1: Phases P01 to P16. Phase P00 complete and excluded. Nothing removed from original content. Engineering enhancements from initial assessment added.
 Parts 1 to 8 follow. Phase blocks from P01 to P16 follow. Part 1 outranks every other part.
@@ -4736,8 +4737,8 @@ PHASE 12 — PACKAGING AND OPERATIONS
 
 3. Entry conditions beyond Part 1 §8: P11 gates exit 0; `gate list` shows `restore` and `image` as NOT_ACTIVE with `activates_in` P12; the container tooling of Part 4 §4.2 is available. Evidence: the commands.
 
-4. Scope fence. May create: `Dockerfile` and `deploy/` (hosting blueprint, container bundle with application, database and policy engine, environment and secret file contracts, staging and production separation), `tools/ops/` (backup, restore drill, exit drill, drift check, release canary and rollback scripts), `docs/runbook/` (generated skeletons only; the documentation phase completes them), `test-house/ops/`, `docs/ledger/P12.md`, risk-management records. Deployment itself happens only in a phase that says so; this phase deploys nothing. Everything else is forbidden.
-Scope paths: Dockerfile, .dockerignore, deploy/**, tools/ops/**, tools/gate/gates/**, tools/gate/catalogue.toml, tools/threat-matrix/**, test-house/ops/**, docs/runbook/**, docs/ledger/P12.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, contracts.lock, CHANGELOG.md, README.md, tools/faultlab/**, api/app.py, api/authentication.py, api/routes/capability.py, api/routes/commands.py, schemas/security/key_record.json, schemas/security/session_payload.json, schemas/security/token_record.json, test-house/api/test_T_API_0015_to_0030.py, test-house/api/test_T_API_0031_to_0042.py, test-house/api/test_T_API_0053_to_0060.py, test-house/leakage/test_T_SEC_0069_to_0084.py
+4. Scope fence. May create: `Dockerfile` and `deploy/` (hosting blueprint, container bundle with application, database and policy engine, environment and secret file contracts, staging and production separation), `tools/ops/` (backup, restore drill, exit drill, drift check, release canary and rollback scripts), `docs/runbook/` (generated skeletons only; the documentation phase completes them), `test-house/ops/`, `docs/ledger/P12.md`, risk-management records. May change the Passport schema, generated contract, producer and registry through P12-CHG and P12-T02, and the protected image and restore gate paths named in P12-T01 and P12-T04. Deployment itself happens only in a phase that says so; this phase deploys nothing. Everything else is forbidden.
+Scope paths: Dockerfile, .dockerignore, deploy/**, tools/ops/**, tools/gate/gates/**, tools/gate/catalogue.toml, tools/threat-matrix/**, test-house/ops/**, docs/runbook/**, docs/ledger/P12.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, contracts.lock, CHANGELOG.md, README.md, tools/faultlab/**, api/app.py, api/authentication.py, api/routes/capability.py, api/routes/commands.py, schemas/security/key_record.json, schemas/security/session_payload.json, schemas/security/token_record.json, test-house/api/test_T_API_0015_to_0030.py, test-house/api/test_T_API_0031_to_0042.py, test-house/api/test_T_API_0053_to_0060.py, test-house/leakage/test_T_SEC_0069_to_0084.py, schemas/passport.json, kernel/contracts/_generated/passport.py, kernel/skeleton/__init__.py
 
 5. Context Pack: `<<<P3-S27>>>` `<<<P3-S32>>>` `<<<P3-S20>>>` `<<<P4-S7>>>` `<<<P4-S12>>>` `<<<P4-S14>>>` `<<<D32-S2.4>>>` `<<<D32-S2.5>>>` `<<<D32-S3>>>` `<<<P6-S11>>>` `<<<P6-S12>>>`.
 
@@ -4749,12 +4750,18 @@ P12-MAINT Prerequisite maintenance for Phase 11
 - Accept: The scope gate passes on the maintenance diff. The phase gate, API, security and leakage tests, risk validator and directive cross-check pass. The Phase 11 report, risk review, contract entries and production credential wiring are present on main and main CI is green before Phase 12 entry.
 
 P12-T01 Hardened image
-- Files: `Dockerfile`, `.dockerignore`.
+- Files: `Dockerfile`, `.dockerignore`, `tools/gate/catalogue.toml`, `tools/gate/gates/image.py`, `test-house/ops/test_T_OPS_0001_to_0010.py`. Update `docs/state/protected-hashes.json` through `gate protect --update`.
 - Steps: multi-stage build from the lock file only, base image pinned by digest, minimal base, non-root user, read-only filesystem where the platform allows, no secrets in layers, health check, resource limits, tags by commit identifier, never a floating tag. Activate `image` (Dockerfile lint, image scan, SBOM).
 - Accept: tests T-OPS-0001 to T-OPS-0010: the image runs as non-root; the scan and Dockerfile lint pass with no finding outside the owner-approved baseline file; the SBOM is generated and lists every locked dependency; two builds of the same commit give the same image content hash where the toolchain allows (otherwise the difference is listed and labelled).
 
+P12-CHG Passport deployment configuration hash
+- Files: `schemas/passport.json`, `kernel/contracts/_generated/passport.py`, `contracts.lock`.
+- Steps: ADDITIVE. Add the optional SHA-256 field `configuration_hash` to support identifying the deployed configuration while preserving validation of previously issued Passports. Regenerate the Passport contract with the schema generator and update the registry. The walking skeleton and replay are current producers and consumers. The deployment configuration and producer wiring are part of P12-T02.
+- Accept: `gate run contract` and `gate run generated-files` exit 0. The walking skeleton and replay tests pass. Record the change and consumer results in the phase report.
+
 P12-T02 Deployment configuration
-- Files: `deploy/blueprint/`, `deploy/env/`.
+- Files: `deploy/blueprint/`, `deploy/env/`, `kernel/skeleton/__init__.py`, `test-house/ops/test_T_OPS_0011_to_0018.py`.
+- Passport checks: every new Passport includes the SHA-256 of the validated deployment configuration, with secret values excluded. Replay uses the recorded configuration hash. Previously issued Passports remain valid.
 - Steps: the hosting blueprint for the web service and the managed database; separate staging and production definitions; migrations run under the separate role as a pre-deploy step; the witness as a separate service with its own secret entry; configuration through environment and secret files only; the configuration hash is stamped on every Passport; platform limits are read from the V-27 verification and recorded.
 - Accept: tests T-OPS-0011 to T-OPS-0018: configuration validates against the typed contract; a missing secret fails start with a clear code; staging and production differ only in declared values; a drift check compares the blueprint with a rendered expectation.
 
@@ -4764,7 +4771,7 @@ P12-T03 Deployment kit and exit drill
 - Accept: tests T-OPS-0019 to T-OPS-0028: the bundle starts from nothing, serves the canary case and verifies a bundle; the same API, tenant model and gates apply; the measured time is written to the report.
 
 P12-T04 Backup and restore drill
-- Files: `tools/ops/backup.py`, `restore_drill.py`.
+- Files: `tools/ops/backup.py`, `tools/ops/restore_drill.py`, `tools/gate/catalogue.toml`, `tools/gate/gates/restore.py`, `test-house/ops/test_T_OPS_0029_to_0038.py`. Update `docs/state/protected-hashes.json` through `gate protect --update`.
 - Steps: backup at the hosting platform's capability level (recorded after V-27); the restore drill restores into an ephemeral database inside the tenant's storage regions and fails if a backup or export artifact is found outside them, runs ledger verification with both verifiers and reports measured recovery point and recovery time against the objectives (15 and 60 minutes, parameters of D-32 section 3). Activate `restore`.
 - Accept: tests T-OPS-0029 to T-OPS-0038: a restored database verifies; a seeded corruption of a backup is detected; the drill is repeatable and its measurements are recorded; `gate run restore` exit 0.
 
