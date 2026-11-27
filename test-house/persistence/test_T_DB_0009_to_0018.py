@@ -13,19 +13,21 @@ Spec: Part 3 §3.3, §3.24; Part 4 §4.4; P04-T02.
 from __future__ import annotations
 
 import asyncio
+from dataclasses import replace
 from pathlib import Path
 
 import asyncpg
 import pytest
 
-from tools.migrate.ephemeral import EphemeralDB
+from tools.migrate.ephemeral import EphemeralDB, RoleNames
 from tools.migrate.lint.tenant_id import check_tenant_id
 from tools.migrate.migrate import apply_migrations
-from tools.schemagen.sqlgen import generate_sql_tables
+from tools.schemagen.sqlgen import generate_passport_configuration_migration, generate_sql_tables
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _SCHEMAS_DIR = _REPO_ROOT / "schemas"
 _MIGRATIONS_DIR = _REPO_ROOT / "adapters" / "postgres" / "migrations"
+_PASSPORT_CONFIGURATION_MIGRATION = "0008_passport_configuration_hash.sql"
 
 _ENTITY_TABLES = [
     "approval",
@@ -52,7 +54,7 @@ _ENTITY_TABLES = [
 
 
 @pytest.mark.slow
-def test_T_DB_0009_every_entity_has_table(ephemeral_db: EphemeralDB) -> None:
+def test_T_DB_0009_every_entity_has_table(ephemeral_db: EphemeralDB, tmp_path: Path) -> None:
     """T-DB-0009: every persisted entity has a table.
 
     id: T-DB-0009
@@ -61,19 +63,62 @@ def test_T_DB_0009_every_entity_has_table(ephemeral_db: EphemeralDB) -> None:
     level: slow
     requirement: P04-T02; Part 3 §3.3
     input: ephemeral PostgreSQL with migrations applied
-    expected: all 15 entity tables exist in the database
+    expected: all 15 entity tables exist and the Passport upgrade preserves existing rows
     risk: an entity without a table cannot be persisted
     owning capability: persistence
     """
 
+    for migration in _MIGRATIONS_DIR.glob("*.sql"):
+        if migration.name < _PASSPORT_CONFIGURATION_MIGRATION:
+            (tmp_path / migration.name).write_bytes(migration.read_bytes())
+
     async def _check() -> None:
-        await apply_migrations(ephemeral_db.migration_dsn, _MIGRATIONS_DIR)
-        conn = await asyncpg.connect(ephemeral_db.superuser_dsn)
+        # The shared persistence fixture already applies every migration to its database.
+        upgrade_db = replace(ephemeral_db, database="passport_upgrade")
+        setup = await asyncpg.connect(ephemeral_db.superuser_dsn)
         try:
+            await setup.execute(
+                f"CREATE DATABASE passport_upgrade OWNER {RoleNames.MIGRATION_OWNER}"
+            )
+        finally:
+            await setup.close()
+
+        await apply_migrations(upgrade_db.migration_dsn, tmp_path)
+        conn = await asyncpg.connect(upgrade_db.superuser_dsn)
+        try:
+            legacy_signature = "a" * 64
+            await conn.execute(
+                'INSERT INTO "passport" (id, tenant_id, schema_version, signature) '
+                "VALUES ($1, $2, 1, $3)",
+                "legacy-passport",
+                "tenant-a",
+                legacy_signature,
+            )
+            applied = await apply_migrations(upgrade_db.migration_dsn, _MIGRATIONS_DIR)
+            assert _PASSPORT_CONFIGURATION_MIGRATION in applied
+
             rows = await conn.fetch("SELECT tablename FROM pg_tables WHERE schemaname = 'public'")
             tables = {row["tablename"] for row in rows}
             for entity in _ENTITY_TABLES:
                 assert entity in tables, f"table '{entity}' not found in database"
+
+            legacy = await conn.fetchrow(
+                'SELECT signature, configuration_hash FROM "passport" WHERE id = $1',
+                "legacy-passport",
+            )
+            assert legacy is not None
+            assert legacy["signature"] == legacy_signature
+            assert legacy["configuration_hash"] is None
+
+            configuration_hash = "b" * 64
+            new_hash = await conn.fetchval(
+                'INSERT INTO "passport" (id, tenant_id, schema_version, configuration_hash) '
+                "VALUES ($1, $2, 1, $3) RETURNING configuration_hash",
+                "new-passport",
+                "tenant-a",
+                configuration_hash,
+            )
+            assert new_hash == configuration_hash
         finally:
             await conn.close()
 
@@ -334,10 +379,12 @@ def test_T_DB_0018_generator_deterministic() -> None:
     level: fast
     requirement: P04-T02; Part 3 §3.21
     input: schemas/ directory
-    expected: output matches the committed migration file byte-identical
+    expected: both generated migrations match the committed bytes
     risk: non-deterministic generation breaks reproducibility
     owning capability: persistence
     """
-    generated = generate_sql_tables(_SCHEMAS_DIR)
-    committed = (_MIGRATIONS_DIR / "0002_tables.sql").read_text(encoding="utf-8")
-    assert generated == committed, "generated SQL does not match committed migration file"
+    original = generate_sql_tables(_SCHEMAS_DIR).encode("utf-8")
+    assert original == (_MIGRATIONS_DIR / "0002_tables.sql").read_bytes()
+
+    forward = generate_passport_configuration_migration(_SCHEMAS_DIR).encode("utf-8")
+    assert forward == (_MIGRATIONS_DIR / _PASSPORT_CONFIGURATION_MIGRATION).read_bytes()

@@ -22,3 +22,4 @@ class Passport(BaseModel):
     signature: str
     tenant_id: str
     checkpoints: list[str] | None = None
+    configuration_hash: str | None = None
