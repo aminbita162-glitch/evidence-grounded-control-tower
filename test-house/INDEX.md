@@ -648,6 +648,16 @@
 | T-LIB-0050 | Serialize items in the Passport contract | fast | lib/test_unblock.py | test_T_LIB_0050 |
 | T-LIB-0051 | Require a closed reason mapping | fast | lib/test_unblock.py | test_T_LIB_0051 |
 | T-LIB-0052 | Remove already resolved inputs from the smallest list | fast | lib/test_unblock.py | test_T_LIB_0052 |
+| T-LIB-0053 | Accept a current feed with registered provenance | fast | lib/test_feeds.py | test_T_LIB_0053 |
+| T-LIB-0054 | Allow only the case tenant to see its feed | fast | lib/test_feeds.py | test_T_LIB_0054 |
+| T-LIB-0055 | Reject a batch labelled official by assertion | fast | lib/test_feeds.py | test_T_LIB_0055 |
+| T-LIB-0056 | Reject a stale or future feed | fast | lib/test_feeds.py | test_T_LIB_0056 |
+| T-LIB-0057 | Reject at the exclusive effective period endpoint | fast | lib/test_feeds.py | test_T_LIB_0057 |
+| T-LIB-0058 | Reject the whole batch if one record fails schema validation | fast | lib/test_feeds.py | test_T_LIB_0058 |
+| T-LIB-0059 | Reject content that fails its recorded hash | fast | lib/test_feeds.py | test_T_LIB_0059 |
+| T-LIB-0060 | Replay identical batch keys and reject replacements | fast | lib/test_feeds.py | test_T_LIB_0060 |
+| T-LIB-0061 | Reject malformed envelopes and mismatched sources | fast | lib/test_feeds.py | test_T_LIB_0061 |
+| T-LIB-0062 | Validate the serialized envelope against the frozen contract | fast | lib/test_feeds.py | test_T_LIB_0062 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |

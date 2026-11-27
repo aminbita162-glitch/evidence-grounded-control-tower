@@ -139,6 +139,11 @@
       "path": "tools/capgen/layout.json",
       "hash": "82a60e84c6fec89580e584f6becc8490320d7c301b7074bddeb5f843963eafc6",
       "type": "layout"
+    },
+    {
+      "path": "schemas/lib/feed_envelope.json",
+      "hash": "46ea000267c4f403c619bf6002a64df8dad1e896d34d65a9b7ef10e1ade1fbc0",
+      "type": "schema"
     }
   ]
 }
