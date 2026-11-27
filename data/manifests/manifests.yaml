@@ -256,3 +256,15 @@ manifests:
     attribution_text: "none required"
     permitted_uses: "unrestricted under BSD-2-Clause"
     redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-ORTOOLS
+    terms: "Apache-2.0 (basis F)"
+    attribution_text: "Preserve the package copyright and license notices on distribution."
+    permitted_uses: "Library use under Apache-2.0"
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-Z3-SOLVER
+    terms: "MIT (basis F)"
+    attribution_text: "Preserve the package copyright and license notices on distribution."
+    permitted_uses: "Library use under MIT"
+    redistribution_permission: "yes"

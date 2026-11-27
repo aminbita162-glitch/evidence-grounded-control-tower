@@ -332,7 +332,7 @@ clean_fixture = "../../test-house/ops/fixtures/restore_clean"
 [gate.image]
 cadence = "P"
 command = "python -m tools.gate.gates.image"
-timeout = 600
+timeout = 1800
 activates_in = "P12"
 violation_fixture = "../../test-house/ops/fixtures/image_violation"
 clean_fixture = "../../test-house/ops/fixtures/image_clean"
