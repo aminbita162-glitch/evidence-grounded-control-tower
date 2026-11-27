@@ -572,3 +572,58 @@ records:
     target_phase: P02
     verifying_test_ids: [T-DATA-0030]
     source: P7-RISK section 8, V-16
+
+  - id: CTL-OPS-01
+    title: Verify regional recovery
+    type: corrective
+    mechanism: >-
+      Verified backups restore to a permitted region and both ledger checks must pass.
+    implementing_path: tools/ops/restore_drill.py
+    lifecycle_status: VERIFIED
+    target_phase: P12
+    verifying_test_ids: [T-OPS-0030, T-OPS-0035, T-OPS-0038, T-OPS-0049]
+    source: P12-RISK
+
+  - id: CTL-OPS-02
+    title: Control reproducible build inputs
+    type: preventive
+    mechanism: >-
+      Both build stages use a digest-pinned base and the runtime inventory is checked against the dependency lock.
+    implementing_path: tools/gate/gates/image.py
+    lifecycle_status: VERIFIED
+    target_phase: P12
+    verifying_test_ids: [T-OPS-0002, T-OPS-0008, T-OPS-0010]
+    source: P12-RISK
+
+  - id: CTL-OPS-03
+    title: Keep secrets outside the image
+    type: preventive
+    mechanism: >-
+      The image gate scans image contents and the deployment reads secrets at runtime.
+    implementing_path: tools/gate/gates/image.py
+    lifecycle_status: VERIFIED
+    target_phase: P12
+    verifying_test_ids: [T-OPS-0007, T-OPS-0012, T-OPS-0052]
+    source: P12-RISK
+
+  - id: CTL-OPS-04
+    title: Verify portability on the second-host bundle
+    type: corrective
+    mechanism: >-
+      The exit drill verifies the local API, isolation, policy and the synthetic case export.
+    implementing_path: tools/ops/exit_drill.py
+    lifecycle_status: VERIFIED
+    target_phase: P12
+    verifying_test_ids: [T-OPS-0019, T-OPS-0020, T-OPS-0025, T-OPS-0026]
+    source: P12-RISK
+
+  - id: CTL-OPS-05
+    title: Prove and record rollback
+    type: corrective
+    mechanism: >-
+      The local release enforces the error budget and records verified rollback on its deployment chain.
+    implementing_path: tools/ops/canary_release.py
+    lifecycle_status: VERIFIED
+    target_phase: P12
+    verifying_test_ids: [T-OPS-0040, T-OPS-0041, T-OPS-0042, T-OPS-0044]
+    source: P12-RISK

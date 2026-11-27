@@ -106,7 +106,7 @@ records:
       A dependency is compromised through its supply chain. Trust boundary:
       deployment secrets (platform only).
     trust_boundary: deployment secrets
-    controls: [CTL-PROJ-04]
+    controls: [CTL-PROJ-04, CTL-OPS-02]
     source: Part 3 section 3.15
 
   - id: THR-SEC-11
@@ -116,7 +116,7 @@ records:
       Secrets are exposed in logs, history, image layers or error messages.
       Trust boundary: deployment secrets (platform only).
     trust_boundary: deployment secrets
-    controls: [CTL-PROJ-02]
+    controls: [CTL-PROJ-02, CTL-OPS-03]
     source: Part 3 section 3.15
 
   - id: THR-M-01

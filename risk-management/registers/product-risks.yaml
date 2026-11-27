@@ -215,7 +215,7 @@ records:
     residual_likelihood: 1
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROD-08]
+    controls: [CTL-PROD-08, CTL-OPS-01]
     owner_area: core
     accountable: OWNER
     status: open
