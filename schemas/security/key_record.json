@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schemas/security/key_record.json",
+  "title": "Key lifecycle event",
+  "type": "object",
+  "properties": {
+    "key_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event": {
+      "enum": [
+        "created",
+        "rotated",
+        "erased",
+        "break_glass"
+      ]
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "prev_key_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    }
+  },
+  "required": [
+    "key_id",
+    "tenant_id",
+    "event",
+    "recorded_at",
+    "prev_key_id"
+  ],
+  "additionalProperties": false
+}

@@ -61,7 +61,7 @@ records:
       - CTL-RUL-14 (IMPLEMENTED, combination is order independent; T-RUL-0055)
       - CTL-RUL-15 (IMPLEMENTED, ALLOW blocked with SECONDARY-or-weaker datum; T-RUL-0056)
       - CTL-RUL-16 (IMPLEMENTED, unresolved conflicts yield ESCALATE; T-RUL-0058)
-      - CTL-RUL-17 (IMPLEMENTED, metamorphic relations: reorder, rename, add, shift; T-RUL-0063 to T-RUL-0072)
+      - "CTL-RUL-17 (IMPLEMENTED, metamorphic relations: reorder, rename, add, shift; T-RUL-0063 to T-RUL-0072)"
       - CTL-RUL-18 (IMPLEMENTED, performance budget 200 facts p95 200ms; T-RUL-0072)
       - CTL-RUL-19 (IMPLEMENTED, determinism under locale, timezone, threads, cwd; T-RUL-0073 to T-RUL-0080)
       - CTL-RUL-20 (IMPLEMENTED, packkit commands do not raise labels or verify sources; T-RUL-0091, T-RUL-0092)

@@ -73,8 +73,9 @@ records:
     type: preventive
     mechanism: >-
       Row-level security and leakage gate (P04, P11); canary audit (P29).
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P04
+    verifying_test_ids: [T-SEC-0069, T-SEC-0071, T-SEC-0082]
     source: P7-RISK section 11
 
   - id: CTL-PROD-08
@@ -157,9 +158,43 @@ records:
     mechanism: >-
       Signer isolation and rotation (P05, P11); key rotation drill (P28);
       SEC-17 to SEC-19.
-    lifecycle_status: PLANNED
+    lifecycle_status: IMPLEMENTED
     target_phase: P05
+    verifying_test_ids: [T-SEC-0022, T-SEC-0034]
     source: P7-RISK section 11
+
+  - id: CTL-SEC-01
+    title: Credential verification and role boundaries
+    type: preventive
+    mechanism: >-
+      Use opaque credentials with hash-only storage, expiry and revocation.
+      Bind caller identity, tenant and allowed operations to verified credentials.
+    lifecycle_status: IMPLEMENTED
+    target_phase: P11
+    verifying_test_ids: [T-SEC-0001, T-SEC-0002, T-SEC-0003, T-SEC-0069, T-SEC-0070]
+    source: P11-T01 and P11-T06
+
+  - id: CTL-SEC-02
+    title: Governed memory writes
+    type: preventive
+    mechanism: >-
+      Restrict writes to the governed path and reject writes sourced directly
+      from model outputs or untrusted inputs.
+    lifecycle_status: IMPLEMENTED
+    target_phase: P11
+    verifying_test_ids: [T-SEC-0053, T-SEC-0054, T-SEC-0062]
+    source: P11-T05
+
+  - id: CTL-SEC-03
+    title: Tenant key erasure drill
+    type: detective
+    mechanism: >-
+      Verify that erasing a tenant data key makes the tenant payload
+      unreadable and records the erasure on the ledger.
+    lifecycle_status: IMPLEMENTED
+    target_phase: P11
+    verifying_test_ids: [T-SEC-0020, T-SEC-0021, T-SEC-0033]
+    source: P11-T02 and P11-T03
 
   - id: CTL-PROD-17
     title: Freshness check for reference data

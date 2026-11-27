@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+from test_T_API_0015_to_0030 import _client as _authenticated_client
 
 from api.app import API_PREFIX, AppPorts, create_app
 from kernel.config import CaseBudgetConfig
@@ -105,8 +106,7 @@ def test_T_API_0055_shutdown_no_lost_work() -> None:
     risk: graceful shutdown drops in-flight responses
     capability: api-foundation
     """
-    app = create_app(AppPorts())
-    with TestClient(app) as c:
+    with _authenticated_client() as c:
         resp = c.get(f"{API_PREFIX}/capabilities/F01/status")
         assert resp.status_code == 200
         result = resp.json()

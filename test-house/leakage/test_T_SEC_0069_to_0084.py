@@ -12,18 +12,23 @@ Spec: Part 3 §3.24; Part 4 §4.5; P11-T06.
 
 from __future__ import annotations
 
+import asyncio
 import time
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
 
+from api.app import API_PREFIX, AppPorts, create_app
 from kernel.auth.roles import (
     ROLE_OPERATOR,
+    ROLE_PLATFORM,
     ROLE_VIEWER,
     DefaultRolePolicy,
     Principal,
     derive_tenant_from_credential,
 )
+from kernel.auth.tokens import InMemoryTokenStore, TokenService
 from kernel.crypto.envelope import EnvelopeError, EnvelopeService, InMemoryEnvelopeStore
 from kernel.memory.tiers import InMemoryStore, MemoryEntry
 from kernel.tenancy import TenantConfig, TenantFreeze, TenantFreezeError
@@ -51,6 +56,22 @@ def test_T_SEC_0069_api_foreign_principal_denied() -> None:
     principal_b = Principal(principal_id="user-b", role=ROLE_VIEWER, tenant_id="tenant-b")
     result = derive_tenant_from_credential(principal_b, body_tenant="tenant-a")
     assert result == "tenant-b"
+    with pytest.raises(ValueError, match="AUTH_PROVIDER_REQUIRED"):
+        create_app(production=True)
+
+    store = InMemoryTokenStore()
+    tokens = TokenService(store)
+    platform_token, record = tokens.create_token(
+        principal_id="platform", role=ROLE_PLATFORM, expires_at="9999-01-01T00:00:00Z"
+    )
+    asyncio.run(store.store(record))
+    with TestClient(create_app(AppPorts(tokens=tokens), production=True)) as client:
+        assert client.get(f"{API_PREFIX}/capabilities/F01/status").status_code == 401
+        response = client.get(
+            f"{API_PREFIX}/capabilities/F01/status",
+            headers={"Authorization": f"Bearer {platform_token}"},
+        )
+        assert response.status_code == 403
 
 
 # ---------------------------------------------------------------------------
@@ -75,6 +96,35 @@ def test_T_SEC_0070_api_forged_tenant_body() -> None:
     principal = Principal(principal_id="user-a", role=ROLE_VIEWER, tenant_id="tenant-a")
     result = derive_tenant_from_credential(principal, body_tenant="tenant-b")
     assert result == "tenant-a"
+    store = InMemoryTokenStore()
+    tokens = TokenService(store)
+    first, first_record = tokens.create_token(
+        principal_id="user-a",
+        role=ROLE_OPERATOR,
+        tenant_id="tenant-a",
+        expires_at="9999-01-01T00:00:00Z",
+    )
+    second, second_record = tokens.create_token(
+        principal_id="user-b",
+        role=ROLE_OPERATOR,
+        tenant_id="tenant-b",
+        expires_at="9999-01-01T00:00:00Z",
+    )
+    asyncio.run(store.store(first_record))
+    asyncio.run(store.store(second_record))
+    body = {"tenant_id": "forged", "idempotency_key": "shared"}
+    with TestClient(create_app(AppPorts(tokens=tokens), production=True)) as client:
+        responses = [
+            client.post(
+                f"{API_PREFIX}/cases",
+                json=body,
+                headers={"Authorization": f"Bearer {token}", "X-Tenant-ID": "forged"},
+            )
+            for token in (first, second)
+        ]
+    assert [response.status_code for response in responses] == [200, 200]
+    assert [response.json()["tenant_id"] for response in responses] == ["tenant-a", "tenant-b"]
+    assert responses[0].json()["case_id"] != responses[1].json()["case_id"]
 
 
 # ---------------------------------------------------------------------------

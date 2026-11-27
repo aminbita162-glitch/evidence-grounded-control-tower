@@ -119,6 +119,21 @@
       "path": "schemas/tenant.json",
       "hash": "6820fdf19b0063f94fa7d4f46658a398ff33d9dfacea85af57f9972f6a33d6a8",
       "type": "schema"
+    },
+    {
+      "path": "schemas/security/token_record.json",
+      "hash": "70fa2d35c38ee7f53e433f45b3c98710880395985a29874d0db672b55c842e48",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/security/session_payload.json",
+      "hash": "24bb5df6296dbdcee0bdcac7c0452c0578ab1840cb932ae93d3a1602ba7b15e1",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/security/key_record.json",
+      "hash": "b334dc14d317bf1c07147559eb4f1e423fd4beee06c3d88465c185f6b5bad1c9",
+      "type": "schema"
     }
   ]
 }

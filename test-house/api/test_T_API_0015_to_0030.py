@@ -10,6 +10,8 @@ Spec: Part 3 §3.17; P10-T02.
 
 from __future__ import annotations
 
+import asyncio
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import cast
 
@@ -17,14 +19,28 @@ import pytest
 from fastapi.testclient import TestClient
 
 from api.app import API_PREFIX, AppPorts, create_app
+from kernel.auth.roles import ROLE_OPERATOR, RoleType
+from kernel.auth.tokens import InMemoryTokenStore, TokenService
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
-def _client() -> TestClient:
-    """Return a TestClient for the factory app."""
-    app = create_app(AppPorts())
-    return TestClient(app)
+def _client(role: RoleType = ROLE_OPERATOR) -> TestClient:
+    """Return a factory client with an opaque, tenant-scoped credential."""
+    store = InMemoryTokenStore()
+    tokens = TokenService(store)
+    expires = (datetime.now(UTC) + timedelta(hours=1)).isoformat(timespec="seconds")
+    token, record = tokens.create_token(
+        principal_id="SYN-REVIEWER-001" if role == "reviewer" else "SYN-OPERATOR-001",
+        role=role,
+        tenant_id="SYN-TEN-0001",
+        expires_at=expires.replace("+00:00", "Z"),
+    )
+    asyncio.run(store.store(record))
+    return TestClient(
+        create_app(AppPorts(tokens=tokens), production=True),
+        headers={"Authorization": f"Bearer {token}"},
+    )
 
 
 def _openapi() -> dict[str, object]:
