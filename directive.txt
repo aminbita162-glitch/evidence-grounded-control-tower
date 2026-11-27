@@ -16,7 +16,8 @@ These instructions override nothing in Part 1; they reinforce it. Part 1 remains
 <<<END-AGENT-INSTRUCTIONS>>>
 
 <<<DIRECTIVE>>>
-BUILD DIRECTIVE — v1.1-split1-enhanced
+BUILD DIRECTIVE — v1.1-split1-enhanced.1
+Revision v1.1-split1-enhanced.1 adds Phase 11 prerequisite maintenance before Phase 12.
 Status: Active Development. Split version 1: Phases P01 to P16. Phase P00 complete and excluded. Nothing removed from original content. Engineering enhancements from initial assessment added.
 Parts 1 to 8 follow. Phase blocks from P01 to P16 follow. Part 1 outranks every other part.
 Status: Active Development. Split version 1: Phases P01 to P16. Phase P00 complete and excluded. Nothing removed from original content.
@@ -4736,11 +4737,16 @@ PHASE 12 — PACKAGING AND OPERATIONS
 3. Entry conditions beyond Part 1 §8: P11 gates exit 0; `gate list` shows `restore` and `image` as NOT_ACTIVE with `activates_in` P12; the container tooling of Part 4 §4.2 is available. Evidence: the commands.
 
 4. Scope fence. May create: `Dockerfile` and `deploy/` (hosting blueprint, container bundle with application, database and policy engine, environment and secret file contracts, staging and production separation), `tools/ops/` (backup, restore drill, exit drill, drift check, release canary and rollback scripts), `docs/runbook/` (generated skeletons only; the documentation phase completes them), `test-house/ops/`, `docs/ledger/P12.md`, risk-management records. Deployment itself happens only in a phase that says so; this phase deploys nothing. Everything else is forbidden.
-Scope paths: Dockerfile, .dockerignore, deploy/**, tools/ops/**, tools/gate/gates/**, tools/gate/catalogue.toml, tools/threat-matrix/**, test-house/ops/**, docs/runbook/**, docs/ledger/P12.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, contracts.lock, CHANGELOG.md, README.md, tools/faultlab/**
+Scope paths: Dockerfile, .dockerignore, deploy/**, tools/ops/**, tools/gate/gates/**, tools/gate/catalogue.toml, tools/threat-matrix/**, test-house/ops/**, docs/runbook/**, docs/ledger/P12.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, contracts.lock, CHANGELOG.md, README.md, tools/faultlab/**, api/app.py, api/authentication.py, api/routes/capability.py, api/routes/commands.py, schemas/security/key_record.json, schemas/security/session_payload.json, schemas/security/token_record.json, test-house/api/test_T_API_0015_to_0030.py, test-house/api/test_T_API_0031_to_0042.py, test-house/api/test_T_API_0053_to_0060.py, test-house/leakage/test_T_SEC_0069_to_0084.py
 
 5. Context Pack: `<<<P3-S27>>>` `<<<P3-S32>>>` `<<<P3-S20>>>` `<<<P4-S7>>>` `<<<P4-S12>>>` `<<<P4-S14>>>` `<<<D32-S2.4>>>` `<<<D32-S2.5>>>` `<<<D32-S3>>>` `<<<P6-S11>>>` `<<<P6-S12>>>`.
 
 6. Tasks.
+
+P12-MAINT Prerequisite maintenance for Phase 11
+- Files: `api/app.py`, `api/authentication.py`, `api/routes/capability.py`, `api/routes/commands.py`, `contracts.lock`, `docs/phase-reports/P11.md`, `risk-management/controls/catalogue.yaml`, `risk-management/registers/product-risks.yaml`, `risk-management/registers/threats.yaml`, `risk-management/reviews/P06.md.yaml`, `risk-management/reviews/P11.md`, `risk-management/reviews/P11.md.yaml`, `schemas/security/key_record.json`, `schemas/security/session_payload.json`, `schemas/security/token_record.json`, `test-house/api/test_T_API_0015_to_0030.py`, `test-house/api/test_T_API_0031_to_0042.py`, `test-house/api/test_T_API_0053_to_0060.py`, `test-house/leakage/test_T_SEC_0069_to_0084.py`.
+- Steps: Before Phase 12 entry, land these Phase 11 repairs in a separate maintenance pull request. For this prerequisite only, the existing repair diff is the permitted entry state. Keep the Phase 11 ledger and the completed-phase state unchanged by the maintenance commit. The owner merges after the required checks pass and updates the recorded previous merge hash through the state module.
+- Accept: The scope gate passes on the maintenance diff. The phase gate, API, security and leakage tests, risk validator and directive cross-check pass. The Phase 11 report, risk review, contract entries and production credential wiring are present on main and main CI is green before Phase 12 entry.
 
 P12-T01 Hardened image
 - Files: `Dockerfile`, `.dockerignore`.
