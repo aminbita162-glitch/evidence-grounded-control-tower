@@ -638,6 +638,16 @@
 | T-LIB-0040 | Keep existing Decision data when adding unique trace references | fast | lib/test_calctrace.py | test_T_LIB_0040 |
 | T-LIB-0041 | Reject incompatible units on addition | fast | lib/test_calctrace.py | test_T_LIB_0041 |
 | T-LIB-0042 | Keep exact division and reject unrecorded rounding | fast | lib/test_calctrace.py | test_T_LIB_0042 |
+| T-LIB-0043 | Map a hold code to the missing fact | fast | lib/test_unblock.py | test_T_LIB_0043 |
+| T-LIB-0044 | Map abstention to missing pack evidence | fast | lib/test_unblock.py | test_T_LIB_0044 |
+| T-LIB-0045 | Map escalation to unresolved verification | fast | lib/test_unblock.py | test_T_LIB_0045 |
+| T-LIB-0046 | Choose the smallest shared alternative across reasons | fast | lib/test_unblock.py | test_T_LIB_0046 |
+| T-LIB-0047 | Deduplicate repeated reasons and shared requirements | fast | lib/test_unblock.py | test_T_LIB_0047 |
+| T-LIB-0048 | Reevaluate to allow after fixture requirements are resolved | fast | lib/test_unblock.py | test_T_LIB_0048 |
+| T-LIB-0049 | Return stable output for reason order permutations | fast | lib/test_unblock.py | test_T_LIB_0049 |
+| T-LIB-0050 | Serialize items in the Passport contract | fast | lib/test_unblock.py | test_T_LIB_0050 |
+| T-LIB-0051 | Require a closed reason mapping | fast | lib/test_unblock.py | test_T_LIB_0051 |
+| T-LIB-0052 | Remove already resolved inputs from the smallest list | fast | lib/test_unblock.py | test_T_LIB_0052 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |

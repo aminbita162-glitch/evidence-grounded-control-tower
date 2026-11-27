@@ -23,3 +23,4 @@ class Passport(BaseModel):
     tenant_id: str
     checkpoints: list[str] | None = None
     configuration_hash: str | None = None
+    open_items: list[dict[str, object]] | None = None
