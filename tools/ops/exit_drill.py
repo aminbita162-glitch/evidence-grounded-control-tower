@@ -130,7 +130,19 @@ def run_exit_drill(image: str | None = None) -> dict[str, object]:
     if image is None:
         commit = run_command(["git", "rev-parse", "HEAD"])
         image = f"control-tower-exit:{commit}"
-        run_command(["docker", "build", "--provenance=false", "--tag", image, "."], timeout=300)
+        run_command(
+            [
+                "docker",
+                "build",
+                "--platform",
+                "linux/amd64",
+                "--provenance=false",
+                "--tag",
+                image,
+                ".",
+            ],
+            timeout=300,
+        )
     project = f"ctc-exit-{secrets.token_hex(5)}"
     compose = ["docker", "compose", "--project-name", project, "--file", str(_BUNDLE)]
     with TemporaryDirectory(prefix="control-tower-exit-") as temporary:
