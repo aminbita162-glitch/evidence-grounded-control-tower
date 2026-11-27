@@ -120,9 +120,11 @@ records:
     title: Solver harness and independent checker
     type: detective
     mechanism: >-
-      Solver harness and independent checker (P13); plan scenarios (P21, P22).
-    lifecycle_status: PLANNED
+      Independently check returned assignments and confirm infeasibility using Z3.
+    implementing_path: kernel/lib/solve/checker.py
+    lifecycle_status: VERIFIED
     target_phase: P13
+    verifying_test_ids: [T-LIB-0077, T-LIB-0080, T-LIB-0106]
     source: P7-RISK section 11
 
   - id: CTL-PROD-13
@@ -627,3 +629,63 @@ records:
     target_phase: P12
     verifying_test_ids: [T-OPS-0040, T-OPS-0041, T-OPS-0042, T-OPS-0044]
     source: P12-RISK
+
+  - id: CTL-LIB-01
+    title: Check monetary rounding against recorded rules
+    type: preventive
+    mechanism: Apply the selected rounding mode only at the configured calculation point.
+    implementing_path: kernel/lib/money/__init__.py
+    lifecycle_status: VERIFIED
+    target_phase: P13
+    verifying_test_ids: [T-LIB-0011, T-LIB-0101]
+    source: P13-RISK
+
+  - id: CTL-LIB-02
+    title: Preserve the weakest calculation label
+    type: preventive
+    mechanism: Replay the trace from labelled inputs and propagate the weakest input label.
+    implementing_path: kernel/lib/calctrace/__init__.py
+    lifecycle_status: VERIFIED
+    target_phase: P13
+    verifying_test_ids: [T-LIB-0102]
+    source: P13-RISK
+
+  - id: CTL-LIB-03
+    title: Monitor conformal coverage and validation
+    type: detective
+    mechanism: Check validation bounds and disable automatic use after a measured coverage drop.
+    implementing_path: kernel/lib/conformal/validation.py
+    lifecycle_status: VERIFIED
+    target_phase: P13
+    verifying_test_ids: [T-LIB-0068, T-LIB-0073, T-LIB-0105]
+    source: P13-RISK
+
+  - id: CTL-LIB-04
+    title: Verify tenant feed provenance and content
+    type: preventive
+    mechanism: Verify tenant scope, source, label, freshness and the exact ordered payload digest.
+    implementing_path: kernel/lib/feeds/__init__.py
+    lifecycle_status: VERIFIED
+    target_phase: P13
+    verifying_test_ids: [T-LIB-0054, T-LIB-0055, T-LIB-0104]
+    source: P13-RISK
+
+  - id: CTL-LIB-05
+    title: Select stable plans and detect worker disagreement
+    type: preventive
+    mechanism: Select tied plans by explicit keys and reject solver results that vary by worker count.
+    implementing_path: kernel/lib/lexi/__init__.py
+    lifecycle_status: VERIFIED
+    target_phase: P13
+    verifying_test_ids: [T-LIB-0083, T-LIB-0091, T-LIB-0107]
+    source: P13-RISK
+
+  - id: CTL-LIB-06
+    title: Hold when independent grounded extractions disagree
+    type: preventive
+    mechanism: Compare values against both cited spans and retain both model records.
+    implementing_path: kernel/lib/crosscheck/__init__.py
+    lifecycle_status: VERIFIED
+    target_phase: P13
+    verifying_test_ids: [T-LIB-0096, T-LIB-0098, T-LIB-0108]
+    source: P13-RISK
