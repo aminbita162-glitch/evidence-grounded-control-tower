@@ -686,6 +686,16 @@
 | T-LIB-0088 | Require known variables before encoding | fast | lib/test_solve.py | test_T_LIB_0088 |
 | T-LIB-0089 | Preserve the exact numeric model in the result scope | fast | lib/test_solve.py | test_T_LIB_0089 |
 | T-LIB-0090 | Avoid infeasibility claims lacking independent evidence | fast | lib/test_solve.py | test_T_LIB_0090 |
+| T-LIB-0091 | Choose the same plan across every input permutation | fast | lib/test_stability_crosscheck.py | test_T_LIB_0091 |
+| T-LIB-0092 | Prioritize the first objective above later costs or keys | fast | lib/test_stability_crosscheck.py | test_T_LIB_0092 |
+| T-LIB-0093 | Compare later objective fields before stable keys | fast | lib/test_stability_crosscheck.py | test_T_LIB_0093 |
+| T-LIB-0094 | Reject duplicate explicit plan keys | fast | lib/test_stability_crosscheck.py | test_T_LIB_0094 |
+| T-LIB-0095 | Return an empty choice for an empty feasible set | fast | lib/test_stability_crosscheck.py | test_T_LIB_0095 |
+| T-LIB-0096 | Hold on grounded disagreement and record both citations | fast | lib/test_stability_crosscheck.py | test_T_LIB_0096 |
+| T-LIB-0097 | Record both independent model identifiers on agreement | fast | lib/test_stability_crosscheck.py | test_T_LIB_0097 |
+| T-LIB-0098 | Hold if the cited span does not support the value | fast | lib/test_stability_crosscheck.py | test_T_LIB_0098 |
+| T-LIB-0099 | Hold if the independent extraction is unavailable | fast | lib/test_stability_crosscheck.py | test_T_LIB_0099 |
+| T-LIB-0100 | Prevent one model from counting as two independent calls | fast | lib/test_stability_crosscheck.py | test_T_LIB_0100 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |
