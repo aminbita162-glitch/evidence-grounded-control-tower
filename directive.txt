@@ -4815,7 +4815,7 @@ PHASE 13 — CAPABILITY SUPPORT LIBRARY
 4. Scope fence. May create: `kernel/lib/money/`, `kernel/lib/calctrace/`, `kernel/lib/unblock/`, `kernel/lib/feeds/`, `kernel/lib/conformal/`, `kernel/lib/solve/` (CP-SAT harness, Z3 harness, independent verifier scaffold), `kernel/lib/lexi/`, `kernel/lib/crosscheck/`, `schemas/lib/`, the generator layout for capabilities in `tools/capgen/` (standard layout of Part 3 §3.31, used by all capability phases), `test-house/lib/`, `docs/ledger/P13.md`, risk-management records. No capability logic is written. Everything else is forbidden.
 Scope paths: kernel/lib/**, schemas/**, tools/capgen/**, tools/trace/**, tools/threat-matrix/**, tools/gate/gates/**, tools/gate/catalogue.toml, contracts.lock, data/synthetic/calibration/**, test-house/lib/**, docs/ledger/P13.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
 
-5. Context Pack: `<<<P3-S3>>>` `<<<P3-S7>>>` `<<<P3-S8>>>` `<<<P3-S13>>>` `<<<P3-S21>>>` `<<<P3-S31>>>` `<<<P4-S4>>>` `<<<P4-S5>>>` `<<<D06-S3>>>` `<<<P6-S3>>>` `<<<P6-S6>>>` `<<<P6-S10>>>` `<<<P6-S12>>>` `<<<P5-E0>>>`.
+5. Context Pack: `<<<P3-S3>>>` `<<<P3-S7>>>` `<<<P3-S8>>>` `<<<P3-S13>>>` `<<<P3-S21>>>` `<<<P3-S31>>>` `<<<P4-S4>>>` `<<<P4-S5>>>` `<<<D06-S3>>>` `<<<P6-S3>>>` `<<<P6-S6>>>` `<<<P6-S10>>>` `<<<P6-S12>>>` `<<<P5-E0>>>` `<<<P5-S1>>>` `<<<P8-DEPS>>>`.
 
 6. Tasks.
 
