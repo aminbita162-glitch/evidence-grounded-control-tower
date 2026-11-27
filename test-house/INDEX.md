@@ -696,6 +696,14 @@
 | T-LIB-0098 | Hold if the cited span does not support the value | fast | lib/test_stability_crosscheck.py | test_T_LIB_0098 |
 | T-LIB-0099 | Hold if the independent extraction is unavailable | fast | lib/test_stability_crosscheck.py | test_T_LIB_0099 |
 | T-LIB-0100 | Prevent one model from counting as two independent calls | fast | lib/test_stability_crosscheck.py | test_T_LIB_0100 |
+| T-LIB-0101 | Compare monetary rounding with integer arithmetic | fast | lib/differential/test_shared_modules.py | test_T_LIB_0101 |
+| T-LIB-0102 | Replay a nested calculation against a known amount | fast | lib/differential/test_shared_modules.py | test_T_LIB_0102 |
+| T-LIB-0103 | Compare unblock requirements with exhaustive subset search | fast | lib/differential/test_shared_modules.py | test_T_LIB_0103 |
+| T-LIB-0104 | Validate a feed using canonical bytes from an independent producer | fast | lib/differential/test_shared_modules.py | test_T_LIB_0104 |
+| T-LIB-0105 | Verify conformal thresholds using a known order statistic | fast | lib/differential/test_shared_modules.py | test_T_LIB_0105 |
+| T-LIB-0106 | Compare the CP-SAT optimum with exhaustive search | fast | lib/differential/test_shared_modules.py | test_T_LIB_0106 |
+| T-LIB-0107 | Check plan stability against a known tie-break answer | fast | lib/differential/test_shared_modules.py | test_T_LIB_0107 |
+| T-LIB-0108 | Check the known result of independently cited disagreement | fast | lib/differential/test_shared_modules.py | test_T_LIB_0108 |
 | T-LIB-0109 | Name both capabilities in a cycle | fast | lib/test_capgen.py | test_T_LIB_0109 |
 | T-LIB-0110 | Name all phases in a cycle | fast | lib/test_capgen.py | test_T_LIB_0110 |
 | T-LIB-0111 | Check the real dependency registries | fast | lib/test_capgen.py | test_T_LIB_0111 |

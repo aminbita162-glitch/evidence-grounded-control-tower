@@ -39,13 +39,15 @@ def main() -> int:
     venv_python = root / ".venv" / "bin" / "python"
     if not venv_python.exists():
         venv_python = Path(sys.executable)
+    suites = ["test-house/rules/differential/", "test-house/rules/determinism/"]
+    if (root / "docs/ledger/P13.md").is_file():
+        suites.append("test-house/lib/differential/")
     result = subprocess.run(  # nosec B603
         [
             str(venv_python),
             "-m",
             "pytest",
-            "test-house/rules/differential/",
-            "test-house/rules/determinism/",
+            *suites,
             "-m",
             "fast",
             "-q",
