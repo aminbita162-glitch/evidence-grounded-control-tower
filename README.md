@@ -71,7 +71,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P10 | API foundation, observability and Budget Governor | ✓ November 2026 |
 | P11 | Security and tenancy completion | ✓ November 2026 |
 | P12 | Packaging and operations | ✓ November 2026 |
-| P13 | Capability support library | ☐ |
+| P13 | Capability support library | ✓ November 2026 |
 | P14 | Intake | ☐ |
 | P15 | Valuation and classification | ☐ |
 | P16 | Clock, freight cost and charge control | ☐ |
