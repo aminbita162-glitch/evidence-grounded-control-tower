@@ -344,6 +344,41 @@
 | T-F02-0507 | No duty or rewording advice | fast | f02/test_classification.py | test_no_duty_or_rewording_advice |
 | T-F02-0511 | Calibration hash appears in evidence | fast | f02/test_classification.py | test_T_F02_0511_calibration_hash_appears_in_evidence |
 | T-F02-0512 | Case reports supported languages | fast | f02/test_classification.py | test_T_F02_0512_case_reports_supported_languages |
+| T-F03-0201 | Optimized clock matches day simulation | fast | f03/test_clock.py | test_T_F03_0201_optimized_matches_day_simulation |
+| T-F03-0202 | Later clock end is monotonic | fast | f03/test_clock.py | test_T_F03_0202_later_end_is_monotonic |
+| T-F03-0203 | A verified suspension cannot increase charge | fast | f03/test_clock.py | test_T_F03_0203_verified_suspension_is_monotonic |
+| T-F03-0204 | Adjacent periods preserve the accrued amount | fast | f03/test_clock.py | test_T_F03_0204_period_partition_is_additive |
+| T-F03-0205 | Zero before expiry | fast | f03/test_clock.py | test_T_F03_0205_zero_before_expiry |
+| T-F03-0206 | Zero at expiry | fast | f03/test_clock.py | test_T_F03_0206_zero_at_expiry |
+| T-F03-0207 | First tier amount | fast | f03/test_clock.py | test_T_F03_0207_first_tier_amount |
+| T-F03-0208 | Tier edge amount | fast | f03/test_clock.py | test_T_F03_0208_tier_edge_amount |
+| T-F03-0209 | Second tier amount | fast | f03/test_clock.py | test_T_F03_0209_second_tier_amount |
+| T-F03-0210 | Last tier amount | fast | f03/test_clock.py | test_T_F03_0210_last_tier_amount |
+| T-F03-0211 | Leap day | fast | f03/test_clock.py | test_T_F03_0211_leap_day |
+| T-F03-0212 | Working holiday | fast | f03/test_clock.py | test_T_F03_0212_working_holiday |
+| T-F03-0213 | Working weekend | fast | f03/test_clock.py | test_T_F03_0213_working_weekend |
+| T-F03-0214 | Working restart | fast | f03/test_clock.py | test_T_F03_0214_working_restart |
+| T-F03-0215 | Exclude first day | fast | f03/test_clock.py | test_T_F03_0215_exclude_first_day |
+| T-F03-0216 | Cutoff boundary | fast | f03/test_clock.py | test_T_F03_0216_cutoff_boundary |
+| T-F03-0217 | Complete partial | fast | f03/test_clock.py | test_T_F03_0217_complete_partial |
+| T-F03-0218 | Prorated partial | fast | f03/test_clock.py | test_T_F03_0218_prorated_partial |
+| T-F03-0219 | Spring forward | fast | f03/test_clock.py | test_T_F03_0219_spring_forward |
+| T-F03-0220 | Fall back | fast | f03/test_clock.py | test_T_F03_0220_fall_back |
+| T-F03-0221 | Exact boundary | fast | f03/test_clock.py | test_T_F03_0221_exact_boundary |
+| T-F03-0222 | Before boundary | fast | f03/test_clock.py | test_T_F03_0222_before_boundary |
+| T-F03-0223 | Zero free days | fast | f03/test_clock.py | test_T_F03_0223_zero_free_days |
+| T-F03-0224 | Unverified window | fast | f03/test_clock.py | test_T_F03_0224_unverified_window |
+| T-F03-0225 | Overlapping windows | fast | f03/test_clock.py | test_T_F03_0225_overlapping_windows |
+| T-F03-0226 | After free window | fast | f03/test_clock.py | test_T_F03_0226_after_free_window |
+| T-F03-0227 | Full free suspension | fast | f03/test_clock.py | test_T_F03_0227_full_free_suspension |
+| T-F03-0228 | Fixed offset shift | fast | f03/test_clock.py | test_T_F03_0228_fixed_offset_shift |
+| T-F03-0229 | Validity start | fast | f03/test_clock.py | test_T_F03_0229_validity_start |
+| T-F03-0230 | Validity end | fast | f03/test_clock.py | test_T_F03_0230_validity_end |
+| T-F03-0231 | Early stop | fast | f03/test_clock.py | test_T_F03_0231_early_stop |
+| T-F03-0232 | Period before expiry | fast | f03/test_clock.py | test_T_F03_0232_period_before_expiry |
+| T-F03-0233 | Period after end | fast | f03/test_clock.py | test_T_F03_0233_period_after_end |
+| T-F03-0234 | Apportioned tiers | fast | f03/test_clock.py | test_T_F03_0234_apportioned_tiers |
+| T-F03-0235 | Tariff day continuity | fast | f03/test_clock.py | test_T_F03_0235_tariff_day_continuity |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |
