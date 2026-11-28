@@ -935,6 +935,41 @@
 | T-L01-0510 | Unblock requirements | fast | l01/test_reports.py | test_T_L01_0510_unblock_requirements |
 | T-L01-0511 | No dispute draft | fast | l01/test_reports.py | test_T_L01_0511_no_dispute_draft |
 | T-L01-0512 | No withhold advice | fast | l01/test_reports.py | test_T_L01_0512_no_withhold_advice |
+| T-L02-0201 | Ad valorem duty scales with goods value | fast | l02/test_cost.py | test_T_L02_0201_ad_valorem_scales |
+| T-L02-0202 | Duty and tax match a rational oracle | fast | l02/test_cost.py | test_T_L02_0202_fraction_oracle |
+| T-L02-0203 | K05 and L02 produce an identical basis | fast | l02/test_cost.py | test_T_L02_0203_parallel_k05_and_l02_basis |
+| T-L02-0204 | Specific weight conversion | fast | l02/test_cost.py | test_T_L02_0204_specific_weight_conversion |
+| T-L02-0205 | Ad valorem exact | fast | l02/test_cost.py | test_T_L02_0205_ad_valorem_exact |
+| T-L02-0206 | Specific exact | fast | l02/test_cost.py | test_T_L02_0206_specific_exact |
+| T-L02-0207 | Compound exact | fast | l02/test_cost.py | test_T_L02_0207_compound_exact |
+| T-L02-0208 | Components sum to total | fast | l02/test_cost.py | test_T_L02_0208_components_sum_to_total |
+| T-L02-0209 | Range order | fast | l02/test_cost.py | test_T_L02_0209_range_order |
+| T-L02-0210 | Range origin weakens total | fast | l02/test_cost.py | test_T_L02_0210_range_origin_weakens_total |
+| T-L02-0211 | Required component missing | fast | l02/test_cost.py | test_T_L02_0211_required_component_missing |
+| T-L02-0212 | No implicit fx | fast | l02/test_cost.py | test_T_L02_0212_no_implicit_fx |
+| T-L02-0213 | Dated fx | fast | l02/test_cost.py | test_T_L02_0213_dated_fx |
+| T-L02-0214 | Unverified goods | fast | l02/test_cost.py | test_T_L02_0214_unverified_goods |
+| T-L02-0215 | Unknown declared code | fast | l02/test_cost.py | test_T_L02_0215_unknown_declared_code |
+| T-L02-0216 | Absent valuation rule | fast | l02/test_cost.py | test_T_L02_0216_absent_valuation_rule |
+| T-L02-0217 | Unsupported goods currency | fast | l02/test_cost.py | test_T_L02_0217_unsupported_goods_currency |
+| T-L02-0218 | Missing goods fx | fast | l02/test_cost.py | test_T_L02_0218_missing_goods_fx |
+| T-L02-0219 | Duty start inclusive | fast | l02/test_cost.py | test_T_L02_0219_duty_start_inclusive |
+| T-L02-0220 | Duty end exclusive | fast | l02/test_cost.py | test_T_L02_0220_duty_end_exclusive |
+| T-L02-0221 | Tax start inclusive | fast | l02/test_cost.py | test_T_L02_0221_tax_start_inclusive |
+| T-L02-0222 | Tax end exclusive | fast | l02/test_cost.py | test_T_L02_0222_tax_end_exclusive |
+| T-L02-0223 | Tax base value only | fast | l02/test_cost.py | test_T_L02_0223_tax_base_value_only |
+| T-L02-0224 | Tax base dependency | fast | l02/test_cost.py | test_T_L02_0224_tax_base_dependency |
+| T-L02-0225 | No units without verification | fast | l02/test_cost.py | test_T_L02_0225_no_units_without_verification |
+| T-L02-0226 | No specific without units | fast | l02/test_cost.py | test_T_L02_0226_no_specific_without_units |
+| T-L02-0227 | Unit cost per piece | fast | l02/test_cost.py | test_T_L02_0227_unit_cost_per_piece |
+| T-L02-0228 | Unit cost per kg | fast | l02/test_cost.py | test_T_L02_0228_unit_cost_per_kg |
+| T-L02-0229 | Unit cost per line | fast | l02/test_cost.py | test_T_L02_0229_unit_cost_per_line |
+| T-L02-0230 | Verified preference | fast | l02/test_cost.py | test_T_L02_0230_verified_preference |
+| T-L02-0231 | Unverified preference | fast | l02/test_cost.py | test_T_L02_0231_unverified_preference |
+| T-L02-0232 | Withdrawn preference | fast | l02/test_cost.py | test_T_L02_0232_withdrawn_preference |
+| T-L02-0233 | Weak preference | fast | l02/test_cost.py | test_T_L02_0233_weak_preference |
+| T-L02-0234 | Adjusted basis | fast | l02/test_cost.py | test_T_L02_0234_adjusted_basis |
+| T-L02-0235 | Zero goods value | fast | l02/test_cost.py | test_T_L02_0235_zero_goods_value |
 | T-LED-0001 | Sequence starts at 1 and increments by 1 | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0001_sequence_starts_at_1 |
 | T-LED-0002 | No gaps under concurrent appends | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0002_no_gaps_concurrent |
 | T-LED-0003 | Every field change alters the record hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0003_field_change_alters_hash |
