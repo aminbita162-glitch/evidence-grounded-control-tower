@@ -1,0 +1,6 @@
+{
+  "label": "SYNTHETIC",
+  "corpus": "data/scenarios/f01/cases.json",
+  "source_id": "SRC-F01-CONSISTENCY",
+  "scenario_count": 12
+}
