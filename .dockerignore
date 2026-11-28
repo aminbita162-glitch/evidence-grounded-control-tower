@@ -7,6 +7,11 @@
 !api/**
 !broker
 !broker/**
+!capabilities
+!capabilities/**
+capabilities/**/golden/**
+capabilities/**/eval/**
+capabilities/**/fixtures/**
 !cli
 !cli/**
 !data

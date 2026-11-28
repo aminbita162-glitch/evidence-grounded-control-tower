@@ -16,16 +16,25 @@ Spec: Part 3 §3.17; P10-T02.
 
 from __future__ import annotations
 
+import base64
+import binascii
 import time
 from collections.abc import Awaitable, Callable, Mapping
-from typing import Annotated, Any
+from dataclasses import asdict
+from typing import TYPE_CHECKING, Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from fastapi import Path as PathParam
 from pydantic import BaseModel, Field
 
-from api.authentication import operator_principal, tenant_principal
+from api.authentication import operator_principal, reviewer_principal, tenant_principal
+from api.problems import not_found_response
 from kernel.auth.roles import Principal
+from kernel.humangate import HumanGateError
+from kernel.skeleton.intake import SourceDocument
+
+if TYPE_CHECKING:
+    from capabilities.k14.workflow import IntakeEvaluation, IntakeWorkflow
 
 __all__ = [
     "InvokeRequest",
@@ -39,6 +48,9 @@ __all__ = [
 ]
 
 _API_PREFIX = "/api/v1"
+_INTAKE_IDS = {"K14", "F01", "K09"}
+_MAX_DOCUMENT_BYTES = 16 * 1024 * 1024
+_MAX_DOCUMENTS = 6
 
 
 class InvokeRequest(BaseModel):
@@ -81,6 +93,7 @@ class ResultResponse(BaseModel):
         default_factory=list, description="Reason codes for the decision."
     )
     label: str = Field(default="SYNTHETIC", description="The data label.")
+    report: dict[str, Any] | None = Field(default=None, description="Registered capability report.")
 
 
 class EvidenceResponse(BaseModel):
@@ -92,8 +105,92 @@ class EvidenceResponse(BaseModel):
     bundle_hash: str = Field(default="", description="The evidence bundle hash.")
 
 
+class RelationRequest(BaseModel):
+    case_id: str = Field(min_length=1, max_length=128)
+    other_case_id: str = Field(min_length=1, max_length=128)
+    document_id: str = Field(min_length=1, max_length=128)
+    other_document_id: str = Field(min_length=1, max_length=128)
+    relation: Literal["SUPERSEDES", "AMENDS", "SPLIT_OF", "SAME_CONSIGNMENT"]
+
+
+def _source_documents(raw: object) -> tuple[SourceDocument, ...]:
+    if not isinstance(raw, list) or not 1 <= len(raw) <= _MAX_DOCUMENTS:
+        raise HTTPException(status_code=422, detail="INTAKE_DOCUMENT_COUNT")
+    uploads = []
+    total = 0
+    for item in raw:
+        if not isinstance(item, dict):
+            raise HTTPException(status_code=422, detail="INTAKE_DOCUMENT_INVALID")
+        name, kind, encoded, group = (
+            item.get("filename"),
+            item.get("document_type"),
+            item.get("content_base64"),
+            item.get("parallel_group", ""),
+        )
+        if not isinstance(name, str) or not 1 <= len(name) <= 255 or not isinstance(kind, str):
+            raise HTTPException(status_code=422, detail="INTAKE_DOCUMENT_INVALID")
+        if kind not in {
+            "COMMERCIAL_INVOICE",
+            "PACKING_LIST",
+            "TRANSPORT_DOCUMENT",
+            "ORIGIN_CERTIFICATE",
+            "DELIVERY_ORDER",
+            "INSURANCE_CERTIFICATE",
+            "DECLARATION_DRAFT",
+        }:
+            raise HTTPException(status_code=422, detail="INTAKE_DOCUMENT_TYPE")
+        if not isinstance(encoded, str) or not isinstance(group, str) or len(group) > 64:
+            raise HTTPException(status_code=422, detail="INTAKE_DOCUMENT_INVALID")
+        if len(encoded) > 4 * ((_MAX_DOCUMENT_BYTES + 2) // 3):
+            raise HTTPException(status_code=413, detail="INTAKE_DOCUMENT_SIZE")
+        try:
+            payload = base64.b64decode(encoded, validate=True)
+        except (ValueError, binascii.Error) as exc:
+            raise HTTPException(status_code=422, detail="INTAKE_DOCUMENT_ENCODING") from exc
+        total += len(payload)
+        if total > _MAX_DOCUMENT_BYTES:
+            raise HTTPException(status_code=413, detail="INTAKE_DOCUMENT_SIZE")
+        uploads.append(SourceDocument(name, kind, payload, group))
+    return tuple(uploads)
+
+
+def intake_invocation(capability_id: str, workflow: IntakeWorkflow) -> CapabilityInvocation:
+    """Bind a document-backed capability to the uniform invoke route."""
+
+    async def invoke(principal: Principal, request: InvokeRequest) -> CapabilityResponse:
+        case = request.facts.get("case_id")
+        if not isinstance(case, str) or not 1 <= len(case) <= 128:
+            raise HTTPException(status_code=422, detail="INTAKE_CASE_ID")
+        documents = request.facts.get("documents")
+        if documents is not None:
+            uploads = _source_documents(documents)
+            try:
+                await workflow.ingest(principal, case, uploads, request.evaluation_time)
+            except PermissionError as exc:
+                raise HTTPException(status_code=404, detail="Resource not found") from exc
+        result = workflow.result(principal, case)
+        if result is None:
+            raise HTTPException(status_code=404, detail="Resource not found")
+        status, _ = result.outcome(capability_id)
+        return CapabilityResponse(
+            capability_id=capability_id, case_id=case, status=status, label=result.label
+        )
+
+    return invoke
+
+
+def _intake_report(result: IntakeEvaluation, capability: str) -> dict[str, Any]:
+    if capability == "F01":
+        return asdict(result.consistency)
+    if capability == "K09":
+        return asdict(result.shield)
+    return {"documents": [asdict(report) for report in result.extraction]}
+
+
 def create_capability_router(
     registrations: Mapping[str, CapabilityInvocation] | None = None,
+    *,
+    intake: IntakeWorkflow | None = None,
 ) -> APIRouter:
     """Create the uniform capability router.
 
@@ -135,8 +232,22 @@ def create_capability_router(
         summary="Get capability invocation status",
         operation_id="get_status",
     )
-    async def get_status(capability_id: str = _cap_path) -> StatusResponse:
+    async def get_status(
+        principal: Annotated[Principal, Depends(tenant_principal)],
+        capability_id: str = _cap_path,
+        case_id: Annotated[str | None, Query(max_length=128)] = None,
+    ) -> StatusResponse | Response:
         """Get the status of a capability invocation."""
+        if intake is not None and capability_id in _INTAKE_IDS and case_id is not None:
+            result = intake.result(principal, case_id)
+            if result is None:
+                return not_found_response()
+            return StatusResponse(
+                capability_id=capability_id,
+                case_id=case_id,
+                state=result.outcome(capability_id)[0],
+                updated=result.consistency.evaluation_time,
+            )
         return StatusResponse(
             capability_id=capability_id,
             case_id="",
@@ -150,8 +261,25 @@ def create_capability_router(
         summary="Get capability result",
         operation_id="get_result",
     )
-    async def get_result(capability_id: str = _cap_path) -> ResultResponse:
+    async def get_result(
+        principal: Annotated[Principal, Depends(tenant_principal)],
+        capability_id: str = _cap_path,
+        case_id: Annotated[str | None, Query(max_length=128)] = None,
+    ) -> ResultResponse | Response:
         """Get the result of a capability invocation."""
+        if intake is not None and capability_id in _INTAKE_IDS and case_id is not None:
+            result = intake.result(principal, case_id)
+            if result is None:
+                return not_found_response()
+            decision, codes = result.outcome(capability_id)
+            return ResultResponse(
+                capability_id=capability_id,
+                case_id=case_id,
+                decision=decision,
+                reason_codes=list(codes),
+                label=result.label,
+                report=_intake_report(result, capability_id),
+            )
         return ResultResponse(
             capability_id=capability_id,
             case_id="",
@@ -166,8 +294,19 @@ def create_capability_router(
         summary="Get capability evidence",
         operation_id="get_evidence",
     )
-    async def get_evidence(capability_id: str = _cap_path) -> EvidenceResponse:
+    async def get_evidence(
+        principal: Annotated[Principal, Depends(tenant_principal)],
+        capability_id: str = _cap_path,
+        case_id: Annotated[str | None, Query(max_length=128)] = None,
+    ) -> EvidenceResponse | Response:
         """Get the evidence records for a capability invocation."""
+        if intake is not None and capability_id in _INTAKE_IDS and case_id is not None:
+            result = intake.result(principal, case_id)
+            if result is None:
+                return not_found_response()
+            return EvidenceResponse(
+                capability_id=capability_id, case_id=case_id, records=result.evidence[capability_id]
+            )
         return EvidenceResponse(
             capability_id=capability_id,
             case_id="",
@@ -175,11 +314,39 @@ def create_capability_router(
             bundle_hash="",
         )
 
+    if intake is not None:
+        bound = intake
+
+        @router.post(
+            "/capabilities/K09/relations", status_code=204, operation_id="declare_document_relation"
+        )
+        async def declare_relation(
+            principal: Annotated[Principal, Depends(reviewer_principal)],
+            request: RelationRequest,
+        ) -> Response:
+            try:
+                await bound.declare_relation(
+                    principal,
+                    request.case_id,
+                    request.other_case_id,
+                    request.document_id,
+                    request.other_document_id,
+                    request.relation,
+                )
+            except PermissionError:
+                return not_found_response()
+            except HumanGateError as exc:
+                raise HTTPException(status_code=409, detail="RELATION_ALREADY_RECORDED") from exc
+            return Response(status_code=204)
+
     return router
 
 
 def register_capability_routes(
-    app: Any, registrations: Mapping[str, CapabilityInvocation] | None = None
+    app: Any,
+    registrations: Mapping[str, CapabilityInvocation] | None = None,
+    *,
+    intake: IntakeWorkflow | None = None,
 ) -> None:
     """Register the uniform capability routes on a FastAPI app."""
 
@@ -187,4 +354,4 @@ def register_capability_routes(
 
     if not isinstance(app, FastAPI):
         return
-    app.include_router(create_capability_router(registrations))
+    app.include_router(create_capability_router(registrations, intake=intake))

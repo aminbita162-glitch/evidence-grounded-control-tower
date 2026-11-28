@@ -1,6 +1,41 @@
 {
   "contracts": [
     {
+      "path": "adapters/model/gateway.py",
+      "hash": "3f243bce65136865556467cd9b3187bc23de1bd0f7ab241012eedb3f56bc116f",
+      "type": "interface"
+    },
+    {
+      "path": "capabilities/f01/schemas/input.json",
+      "hash": "4807d5c3cf1d11b68d7a1c5a5d4da76e55b44af2dc1856b14ed0bf9264b9c8ac",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/f01/schemas/output.json",
+      "hash": "b1602676c5409d7e0dd61bc3a8e9dafd1fa10920cc59fcc91afc0aade75c2e7a",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/k09/schemas/input.json",
+      "hash": "bb50d5e1cb25602c2adea53f7207bab025ffcaf9f8570da93a7a1f09461c0a8f",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/k09/schemas/output.json",
+      "hash": "f4d05b7f11508127968a38c97bcf440751b4fd80ca61aa81fcf1ae6f301338c5",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/k14/schemas/input.json",
+      "hash": "22dcda594d91b7f19b17559c588b781bac2720998a0f6b4238a50486d37c2a9e",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/k14/schemas/output.json",
+      "hash": "c2493a8554d2201b549dd3b5169c49a1e238c9bb05adc9905a700f8b8c882a1b",
+      "type": "schema"
+    },
+    {
       "path": "schemas/approval.json",
       "hash": "89903a1e3cb077fd944943213d518128527ee7335948dc8e85615d1537b9a478",
       "type": "schema"
@@ -61,6 +96,11 @@
       "type": "schema"
     },
     {
+      "path": "schemas/lib/feed_envelope.json",
+      "hash": "46ea000267c4f403c619bf6002a64df8dad1e896d34d65a9b7ef10e1ade1fbc0",
+      "type": "schema"
+    },
+    {
       "path": "schemas/license-manifest.json",
       "hash": "a2cd6a4a6d0c5669cc4cbbde946f4936e583b6169d0a77c9b1a5b880e4bc4cde",
       "type": "schema"
@@ -74,11 +114,6 @@
       "path": "schemas/model_call.json",
       "hash": "2172cd2b7e86b8292fe94b92e990e36db630a3be820cd52f35ee715165301098",
       "type": "schema"
-    },
-    {
-      "path": "adapters/model/gateway.py",
-      "hash": "3f243bce65136865556467cd9b3187bc23de1bd0f7ab241012eedb3f56bc116f",
-      "type": "interface"
     },
     {
       "path": "schemas/pack.json",
@@ -106,6 +141,21 @@
       "type": "schema"
     },
     {
+      "path": "schemas/security/key_record.json",
+      "hash": "b334dc14d317bf1c07147559eb4f1e423fd4beee06c3d88465c185f6b5bad1c9",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/security/session_payload.json",
+      "hash": "24bb5df6296dbdcee0bdcac7c0452c0578ab1840cb932ae93d3a1602ba7b15e1",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/security/token_record.json",
+      "hash": "70fa2d35c38ee7f53e433f45b3c98710880395985a29874d0db672b55c842e48",
+      "type": "schema"
+    },
+    {
       "path": "schemas/simulation.json",
       "hash": "73e4ac9451b10a5a8b7cde9622eeeb3b591b3c058558ec53d05498017e2f44d2",
       "type": "schema"
@@ -121,29 +171,9 @@
       "type": "schema"
     },
     {
-      "path": "schemas/security/token_record.json",
-      "hash": "70fa2d35c38ee7f53e433f45b3c98710880395985a29874d0db672b55c842e48",
-      "type": "schema"
-    },
-    {
-      "path": "schemas/security/session_payload.json",
-      "hash": "24bb5df6296dbdcee0bdcac7c0452c0578ab1840cb932ae93d3a1602ba7b15e1",
-      "type": "schema"
-    },
-    {
-      "path": "schemas/security/key_record.json",
-      "hash": "b334dc14d317bf1c07147559eb4f1e423fd4beee06c3d88465c185f6b5bad1c9",
-      "type": "schema"
-    },
-    {
       "path": "tools/capgen/layout.json",
       "hash": "82a60e84c6fec89580e584f6becc8490320d7c301b7074bddeb5f843963eafc6",
       "type": "layout"
-    },
-    {
-      "path": "schemas/lib/feed_envelope.json",
-      "hash": "46ea000267c4f403c619bf6002a64df8dad1e896d34d65a9b7ef10e1ade1fbc0",
-      "type": "schema"
     }
   ]
 }

@@ -74,7 +74,7 @@ SPEED_MARKERS: frozenset[str] = frozenset(
     {"pytest.mark.fast", "pytest.mark.slow", "pytest.mark.e2e"}
 )
 
-_ID_RE = re.compile(r"T-[A-Z]+-[A-Z0-9][A-Z0-9-]*$")
+_ID_RE = re.compile(r"T-(?:[A-Z]+|[FKL][0-9]{2})-[A-Z0-9][A-Z0-9-]*$")
 
 _FIELD_LINE_RE = re.compile(r"^([A-Za-z][A-Za-z ]*):\s*(.*)$")
 
