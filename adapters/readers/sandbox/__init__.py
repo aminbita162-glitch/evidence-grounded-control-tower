@@ -44,7 +44,14 @@ def run_worker(payload: bytes, arguments: tuple[str, ...], limits: ReaderLimits)
         tempfile.TemporaryDirectory(prefix="intake-") as work,
         tempfile.TemporaryFile(dir=work) as output,
     ):
-        env = {"HOME": work, "TMPDIR": work, "PATH": os.defpath, "LANG": "C.UTF-8"}
+        env = {
+            "HOME": work,
+            "TMPDIR": work,
+            "PATH": os.defpath,
+            "LANG": "C.UTF-8",
+            "OPENBLAS_NUM_THREADS": "1",
+            "OMP_NUM_THREADS": "1",
+        }
         with subprocess.Popen(  # nosec B603  # noqa: S603
             command,
             cwd=_ROOT,
