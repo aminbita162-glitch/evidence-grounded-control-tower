@@ -71,7 +71,12 @@
     "CTL-RISK-03",
     "CTL-SEC-01",
     "CTL-SEC-02",
-    "CTL-SEC-03"
+    "CTL-SEC-03",
+    "CTL-VAL-01",
+    "CTL-VAL-02",
+    "CTL-VAL-03",
+    "CTL-VAL-04",
+    "CTL-VAL-05"
   ],
   "module_requirements": [
     {
@@ -225,7 +230,9 @@
     ],
     "RSK-P-01": [
       "CTL-PROD-01",
-      "CTL-LIB-01"
+      "CTL-LIB-01",
+      "CTL-VAL-01",
+      "CTL-VAL-05"
     ],
     "RSK-P-02": [
       "CTL-PROD-02"
@@ -238,14 +245,17 @@
     ],
     "RSK-P-05": [
       "CTL-PROD-05",
-      "CTL-LIB-03"
+      "CTL-LIB-03",
+      "CTL-VAL-03",
+      "CTL-VAL-04"
     ],
     "RSK-P-06": [
       "CTL-PROD-06"
     ],
     "RSK-P-07": [
       "CTL-PROD-07",
-      "CTL-SEC-01"
+      "CTL-SEC-01",
+      "CTL-VAL-02"
     ],
     "RSK-P-08": [
       "CTL-PROD-08",
@@ -270,17 +280,21 @@
     ],
     "RSK-P-14": [
       "CTL-PROD-14",
-      "CTL-LIB-02"
+      "CTL-LIB-02",
+      "CTL-VAL-01"
     ],
     "RSK-P-15": [
-      "CTL-PROD-15"
+      "CTL-PROD-15",
+      "CTL-VAL-02"
     ],
     "RSK-P-16": [
       "CTL-PROD-16",
       "CTL-SEC-03"
     ],
     "RSK-P-17": [
-      "CTL-PROD-17"
+      "CTL-PROD-17",
+      "CTL-VAL-03",
+      "CTL-VAL-04"
     ],
     "THR-M-01": [
       "CTL-PROD-03"

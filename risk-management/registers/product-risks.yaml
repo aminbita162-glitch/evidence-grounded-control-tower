@@ -32,7 +32,7 @@ records:
     residual_likelihood: 2
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROD-01, CTL-LIB-01]
+    controls: [CTL-PROD-01, CTL-LIB-01, CTL-VAL-01, CTL-VAL-05]
     owner_area: core
     accountable: OWNER
     status: open
@@ -138,7 +138,7 @@ records:
     residual_likelihood: 2
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROD-05, CTL-LIB-03]
+    controls: [CTL-PROD-05, CTL-LIB-03, CTL-VAL-03, CTL-VAL-04]
     owner_area: core
     accountable: OWNER
     status: open
@@ -187,7 +187,7 @@ records:
     residual_likelihood: 1
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROD-07, CTL-SEC-01]
+    controls: [CTL-PROD-07, CTL-SEC-01, CTL-VAL-02]
     owner_area: core
     accountable: OWNER
     status: open
@@ -371,7 +371,7 @@ records:
     residual_likelihood: 1
     residual_severity: 3
     treatment: reduce
-    controls: [CTL-PROD-14, CTL-LIB-02]
+    controls: [CTL-PROD-14, CTL-LIB-02, CTL-VAL-01]
     owner_area: core
     accountable: OWNER
     status: open
@@ -398,7 +398,7 @@ records:
     residual_likelihood: 2
     residual_severity: 3
     treatment: reduce
-    controls: [CTL-PROD-15]
+    controls: [CTL-PROD-15, CTL-VAL-02]
     owner_area: core
     accountable: OWNER
     status: open
@@ -449,7 +449,7 @@ records:
     residual_likelihood: 2
     residual_severity: 4
     treatment: reduce
-    controls: [CTL-PROD-17]
+    controls: [CTL-PROD-17, CTL-VAL-03, CTL-VAL-04]
     owner_area: core
     accountable: OWNER
     status: open
