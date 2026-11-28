@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
-import random
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -43,18 +43,28 @@ def generate_pairs(
     if not chapters or set(texts) != set(lexicon) or count <= 0:
         raise ValueError("synthetic pairing requires a nonempty text and lexicon for every code")
     groups = tuple(chapters.values())
-    rng = random.Random(seed)
+
+    def draw(index: int, position: int) -> int:
+        digest = hashlib.sha256(f"{seed}:{index}:{position}".encode()).digest()
+        return int.from_bytes(digest[:8], "big")
+
     rows = []
     for index in range(count):
         group = groups[index % len(groups)]
-        code = rng.choice(group)
+        code = group[draw(index, 0) % len(group)]
         if (index // len(groups) + index) % 2:
-            words = rng.choice(lexicon[code]).split()
+            names = lexicon[code]
+            words = names[draw(index, 1) % len(names)].split()
             layer: Literal["commercial_name", "pack_text"] = "commercial_name"
         else:
             words = texts[code].split()
             layer = "pack_text"
-        rng.shuffle(words)
+        words = [
+            word
+            for _, word in sorted(
+                (draw(index, offset + 2), word) for offset, word in enumerate(words)
+            )
+        ]
         if shifted:
             words = words[:1] + ["miscellaneous", "assorted", "unspecified", "shipment"]
         rows.append(Description(code, " ".join(words), layer))

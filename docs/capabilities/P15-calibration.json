@@ -1,7 +1,7 @@
 {
   "F02": {
     "alpha": 0.1,
-    "artifact_id": "CAL-04e4185f5c30066f5e08d1a0888701aa351a95e98630cd04a82d09dc3da65a82",
+    "artifact_id": "CAL-80ad98d004caa1407f832311a57b38a079324ab71939984dafd2ba691860208a",
     "chapter_count": 4,
     "count": 500,
     "counts": [
@@ -22,7 +22,7 @@
         125
       ]
     ],
-    "digest": "04e4185f5c30066f5e08d1a0888701aa351a95e98630cd04a82d09dc3da65a82",
+    "digest": "80ad98d004caa1407f832311a57b38a079324ab71939984dafd2ba691860208a",
     "held_out": [
       {
         "chapter": "11",
@@ -54,25 +54,25 @@
     "shifted": [
       {
         "chapter": "11",
-        "covered": 13,
+        "covered": 12,
         "label": "SYNTHETIC",
         "total": 20
       },
       {
         "chapter": "12",
-        "covered": 16,
+        "covered": 15,
         "label": "SYNTHETIC",
         "total": 20
       },
       {
         "chapter": "13",
-        "covered": 13,
+        "covered": 14,
         "label": "SYNTHETIC",
         "total": 20
       },
       {
         "chapter": "14",
-        "covered": 14,
+        "covered": 12,
         "label": "SYNTHETIC",
         "total": 20
       }
