@@ -554,3 +554,202 @@ def test_T_K05_0512_untrusted_note_cannot_change_report() -> None:
     note = CanonicalFact("shipment.note", "price agreed with customs", ("source-note",))
     result, _ = JUDGE.run((*FACTS, note), AT, "SYNTHETIC")
     assert original == result
+
+
+@pytest.mark.fast
+def test_T_K05_0231_invalid_unit_factor_is_refused() -> None:
+    """
+    id: T-K05-0231
+    title: Invalid unit factor is refused
+    purpose: Invalid unit factor is refused
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from decimal import Decimal
+
+    from capabilities.k05.reference import Unit
+
+    with pytest.raises(ValueError, match="positive conversion factor"):
+        Unit("mass", Decimal(0))
+
+
+@pytest.mark.fast
+def test_T_K05_0232_invalid_reference_sample_abstains() -> None:
+    """
+    id: T-K05-0232
+    title: Invalid reference sample abstains
+    purpose: Invalid reference sample abstains
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from decimal import Decimal
+
+    group = PACK.groups[CODE]
+    altered = replace(group, values=(*group.values[:-1], Decimal(0)))
+    report = assess(reference=replace(PACK, groups={CODE: altered}))
+    assert report.reasons == (Reason.REFERENCE_INSUFFICIENT,)
+
+
+@pytest.mark.fast
+def test_T_K05_0233_calibration_rejects_insufficient_draws() -> None:
+    """
+    id: T-K05-0233
+    title: Calibration rejects insufficient draws
+    purpose: Calibration rejects insufficient draws
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from decimal import Decimal
+
+    from capabilities.k05 import calibrate_reference
+
+    with pytest.raises(ValueError, match="CALIBRATION_STALE"):
+        calibrate_reference(
+            (Decimal(1),) * 499,
+            (Decimal(1),),
+            (Decimal(2),),
+            pack_hash=PACK.version_hash,
+            source_id=PACK.source_id,
+        )
+
+
+@pytest.mark.fast
+def test_T_K05_0234_public_abstention_has_no_basis_or_calibration() -> None:
+    """
+    id: T-K05-0234
+    title: Public abstention has no basis or calibration
+    purpose: Public abstention has no basis or calibration
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from capabilities.k05.registration import register
+
+    result, _ = register(None, (), AT, "SYNTHETIC")
+    assert result.view("viewer")["calibration_basis"] is None
+    assert result.view("viewer")["basis"] is None
+
+
+@pytest.mark.fast
+def test_T_K05_0235_ambiguous_canonical_quantity_abstains() -> None:
+    """
+    id: T-K05-0235
+    title: Ambiguous canonical quantity abstains
+    purpose: Ambiguous canonical quantity abstains
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    changed = tuple(
+        replace(fact, value=("0.9", "1.1")) if fact.key.endswith(".quantity") else fact
+        for fact in FACTS
+    )
+    assert canonical_inputs(changed) is None
+
+
+@pytest.mark.fast
+def test_T_K05_0236_missing_adjustment_reference_abstains() -> None:
+    """
+    id: T-K05-0236
+    title: Missing adjustment reference abstains
+    purpose: Missing adjustment reference abstains
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from datetime import date
+    from decimal import Decimal
+
+    from capabilities.k05 import CONTEXT
+    from kernel.lib.money import Money
+    from kernel.lib.valuation import Adjustment, BasisUnavailable, valuation_basis
+
+    with pytest.raises(BasisUnavailable, match="ADJUSTMENT_MISSING"):
+        valuation_basis(
+            Money(Decimal(1), "AED"),
+            invoice_label="SYNTHETIC",
+            target_currency="AED",
+            declared_date=date.fromisoformat("2026-11-01"),
+            incoterm="FOB",
+            fx=FX,
+            rules=RULES,
+            adjustments={
+                "freight": Adjustment(Money(Decimal(1), "AED"), "", "SYNTHETIC"),
+                "insurance": Adjustment(Money(Decimal(1), "AED"), "ref", "SYNTHETIC"),
+            },
+            context=CONTEXT,
+        )
+
+
+@pytest.mark.fast
+def test_T_K05_0237_duplicate_rule_adjustment_rejected() -> None:
+    """
+    id: T-K05-0237
+    title: Duplicate rule adjustment rejected
+    purpose: Duplicate rule adjustment rejected
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from decimal import Decimal
+
+    from capabilities.k05 import CONTEXT
+    from kernel.lib.money import Money
+    from kernel.lib.valuation import valuation_basis
+
+    rules = {"CIF": replace(RULES["CIF"], required_adjustments=("freight", "freight"))}
+    with pytest.raises(ValueError, match="duplicate adjustment"):
+        valuation_basis(
+            Money(Decimal(1), "AED"),
+            invoice_label="SYNTHETIC",
+            target_currency="AED",
+            declared_date=AT.date(),
+            incoterm="CIF",
+            fx=FX,
+            rules=rules,
+            adjustments={},
+            context=CONTEXT,
+        )
+
+
+@pytest.mark.fast
+def test_T_K05_0238_unbound_valuation_rules_abstain() -> None:
+    """
+    id: T-K05-0238
+    title: Unbound valuation rules abstain
+    purpose: Unbound valuation rules abstain
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    from capabilities.k05.registration import register
+
+    report, _ = register(None, FACTS, AT, "SYNTHETIC")
+    assert report.reasons == (Reason.VALUATION_RULE_UNAVAILABLE,)

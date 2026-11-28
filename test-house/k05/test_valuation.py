@@ -429,3 +429,22 @@ def test_T_K05_0115_real_origin_requires_tenant_calibration() -> None:
     )
     assert report.outcome == DecisionValue.ESCALATE
     assert report.reasons == (Reason.UNVALIDATED,)
+
+
+@pytest.mark.fast
+def test_T_K05_0239_exact_upper_endpoint_is_inside() -> None:
+    """
+    id: T-K05-0239
+    title: Exact upper endpoint is inside
+    purpose: Exact upper endpoint is inside
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
+    artifact = replace(CAL, threshold=Decimal(0))
+    report = assess(cal=artifact)
+    assert report.outcome == DecisionValue.ALLOW
+    assert report.lines[0].log_bounds == (Decimal(0), Decimal(0))

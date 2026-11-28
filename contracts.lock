@@ -16,6 +16,26 @@
       "type": "schema"
     },
     {
+      "path": "capabilities/f02/schemas/input.json",
+      "hash": "99858abc88540fc0ce2d83b7dfe250082dca7e0f1ab049069e8b26b2443a6670",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/f02/schemas/output.json",
+      "hash": "20712c2a7b7a9280e40f2c4aaf3aafc11bc7d06fdf42b954517052d33d8c7f85",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/k05/schemas/input.json",
+      "hash": "577b9f193a101f3d5c04ae4a5b4849d4877723b7641ba453ac345245bf05083b",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/k05/schemas/output.json",
+      "hash": "126741d226d8d81a23a29e2a822d54d354693394416bdb12cec0694898052d0c",
+      "type": "schema"
+    },
+    {
       "path": "capabilities/k09/schemas/input.json",
       "hash": "bb50d5e1cb25602c2adea53f7207bab025ffcaf9f8570da93a7a1f09461c0a8f",
       "type": "schema"
@@ -33,6 +53,11 @@
     {
       "path": "capabilities/k14/schemas/output.json",
       "hash": "c2493a8554d2201b549dd3b5169c49a1e238c9bb05adc9905a700f8b8c882a1b",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/api/phase15-openapi.json",
+      "hash": "cf9f4060a5c4ed3e5cc50a3d054f16125210952a47a9ebe4fbd884ae4a0ef4bc",
       "type": "schema"
     },
     {

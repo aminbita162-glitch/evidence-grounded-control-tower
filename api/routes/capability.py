@@ -27,6 +27,7 @@ from typing import TYPE_CHECKING, Annotated, Any, Literal, Protocol
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, Response
 from fastapi import Path as PathParam
 from pydantic import BaseModel, Field
+from pydantic_core import to_jsonable_python
 
 from api.authentication import operator_principal, reviewer_principal, tenant_principal
 from api.problems import not_found_response
@@ -323,9 +324,9 @@ def create_capability_router(
             bundle_hash="",
         )
 
+    _add_case_evaluations(router, intake, valuation, classification)
     if intake is not None:
         bound = intake
-        _add_case_evaluations(router, bound, valuation, classification)
 
         @router.post(
             "/capabilities/K09/relations", status_code=204, operation_id="declare_document_relation"
@@ -361,7 +362,7 @@ class _JudgeReport(Protocol):
 
 def _add_case_evaluations(
     router: APIRouter,
-    intake: IntakeWorkflow,
+    intake: IntakeWorkflow | None,
     valuation: ValuationJudge | None,
     classification: ClassificationJudge | None,
 ) -> None:
@@ -372,7 +373,11 @@ def _add_case_evaluations(
     idempotency: dict[tuple[str, str, str, str], str] = {}
 
     def case_result(principal: Principal, case_id: str, capability_id: str) -> IntakeEvaluation:
-        result = intake.result(principal, case_id) if capability_id in {"K05", "F02"} else None
+        result = (
+            intake.result(principal, case_id)
+            if intake is not None and capability_id in {"K05", "F02"}
+            else None
+        )
         if result is None or principal.tenant_id is None:
             raise HTTPException(status_code=404, detail="Resource not found")
         return result
@@ -450,7 +455,7 @@ def _add_case_evaluations(
         return {
             "evaluation_id": evaluation_id,
             "status": report.outcome.name,
-            "report": report.view(principal.role),
+            "report": to_jsonable_python(report.view(principal.role)),
             "evidence": record,
         }
 

@@ -21,8 +21,13 @@ import sys
 from collections.abc import Sequence
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from kernel.skeleton import run_skeleton
+
+if TYPE_CHECKING:
+    from capabilities.k14.workflow import IntakeWorkflow
+    from kernel.skeleton.intake import SourceDocument
 
 __all__ = ["main", "build_parser"]
 
@@ -165,6 +170,63 @@ def _cmd_skeleton(args: argparse.Namespace) -> int:
     return EXIT_OK if result.structural_ok else EXIT_ERROR
 
 
+def _judgment_demo() -> tuple[IntakeWorkflow, tuple[SourceDocument, ...]]:
+    """Load a corroborated synthetic shipment into the normal document workflow."""
+    from adapters.model.gateway import Gateway
+    from capabilities import f01, k09
+    from capabilities.k14 import BilingualIntake, Field
+    from capabilities.k14.demo import FIELDS, FixtureProvider
+    from capabilities.k14.gateway import GatewayExtraction
+    from capabilities.k14.workflow import IntakeWorkflow
+    from kernel.intake import IntakeStage, ReadResult, TextSegment
+    from kernel.persistence.repositories.in_memory import InMemoryRepository
+    from kernel.skeleton.intake import SourceDocument
+
+    class SyntheticTextReader:
+        async def read(self, payload: bytes, media_type: str) -> ReadResult:
+            return ReadResult(media_type, (TextSegment(0, payload.decode("utf-8")),))
+
+    workflow = IntakeWorkflow(
+        IntakeStage(
+            SyntheticTextReader(), InMemoryRepository("documents"), InMemoryRepository("originals")
+        ),
+        BilingualIntake(GatewayExtraction(Gateway(FixtureProvider()))),
+        k09.FingerprintIndex(),
+        f01.Workflow(currency_precision=(("AED", 2),), allowed_labels=frozenset({"SYNTHETIC"})),
+        fields=(
+            *FIELDS,
+            Field("currency", "identifier"),
+            Field("incoterm", "identifier"),
+            Field("declared_date", "date"),
+            Field("invoice_total", "number"),
+            Field("declared_customs_value", "number"),
+            Field("line_items.1.description", "text"),
+            Field("line_items.1.declared_classification_code", "identifier"),
+            Field("line_items.1.quantity", "quantity"),
+            Field("line_items.1.line_amount", "number"),
+        ),
+        label="SYNTHETIC",
+    )
+    shared = (
+        b"declared_date: 2026-11-01\ncurrency: AED\nincoterm: CIF\ninvoice_total: 10\n"
+        b"declared_customs_value: 10\nline_items.1.description: wheat flour finely ground\n"
+        b"line_items.1.declared_classification_code: 1101\nline_items.1.quantity: 10 kg\n"
+        b"line_items.1.line_amount: 10\n"
+    )
+    return workflow, (
+        SourceDocument(
+            "invoice.txt",
+            "COMMERCIAL_INVOICE",
+            b"seller_name: Synthetic Trading\ninvoice_number: SYN-1\n" + shared,
+        ),
+        SourceDocument(
+            "packing.txt",
+            "PACKING_LIST",
+            b"issuer: Synthetic Trading\npacking_list_number: SYN-2\n" + shared,
+        ),
+    )
+
+
 def _cmd_capability(args: argparse.Namespace) -> int:
     """Run a registered capability against document bytes in a local case."""
     from adapters.readers.sandbox import MAX_INPUT
@@ -172,8 +234,12 @@ def _cmd_capability(args: argparse.Namespace) -> int:
     from kernel.auth.roles import Principal
     from kernel.skeleton.intake import SourceDocument
 
-    workflow = create_demo()
-    uploads = list(DOCUMENTS) if not args.document else []
+    if args.id in {"K05", "F02"} and not args.document:
+        workflow, fixtures = _judgment_demo()
+        uploads = list(fixtures)
+    else:
+        workflow = create_demo()
+        uploads = list(DOCUMENTS) if not args.document else []
     try:
         for kind, filename in args.document or []:
             path = Path(filename)
@@ -210,16 +276,26 @@ def _cmd_capability(args: argparse.Namespace) -> int:
         from pydantic_core import to_jsonable_python
 
         from capabilities.f02.registration import register as classify
+        from capabilities.f02.synthetic import create_judge as synthetic_classifier
         from capabilities.k05.registration import register as value
+        from capabilities.k05.synthetic import create_judge as synthetic_valuation
 
         timestamp = datetime.fromisoformat(result.consistency.evaluation_time)
         origin = result.label if not args.document else "DERIVED"
         if args.id == "K05":
-            valuation, evidence = value(None, result.consistency.canonical, timestamp, origin)
+            valuation, evidence = value(
+                None if args.document else synthetic_valuation(),
+                result.consistency.canonical,
+                timestamp,
+                origin,
+            )
             report = valuation.view(principal.role)
         else:
             classification, evidence = classify(
-                None, result.consistency.canonical, timestamp, origin
+                None if args.document else synthetic_classifier(),
+                result.consistency.canonical,
+                timestamp,
+                origin,
             )
             report = classification.view(principal.role)
         print(

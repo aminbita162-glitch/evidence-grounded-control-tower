@@ -351,3 +351,21 @@ def test_tariff_filter_requires_verified_applicability(status: str, exclude: boo
         candidates, (FactEntry("material", "polymer", status, "DERIVED"),)
     )
     assert (retained, applied) == ((candidates[1:], (rule,)) if exclude else (candidates, ()))
+
+
+@pytest.mark.fast
+def test_T_F02_0235_digit_only_tokens_are_removed_before_scoring() -> None:
+    """
+    id: T-F02-0235
+    title: Digit only tokens are removed before scoring
+    purpose: Digit only tokens are removed before scoring
+    level: fast
+    requirement: P15, Part 5 section 5.F02
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: F02
+    """
+    clean = tokenize("wheat flour finely ground", PACK)
+    added = tokenize("8517 wheat ٨٥١٧ flour ８５１７ finely ground", PACK)
+    assert added.terms == clean.terms

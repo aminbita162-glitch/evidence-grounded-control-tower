@@ -323,6 +323,7 @@
 | T-F02-0232 | Shift cannot increase allow share | fast | f02/test_classification.py | test_T_F02_0232_shift_cannot_increase_allow_share |
 | T-F02-0233 | Shift on old pack abstains | fast | f02/test_classification.py | test_T_F02_0233_shift_on_old_pack_abstains |
 | T-F02-0234 | Statistical claim label is enforced | fast | f02/test_classification.py | test_T_F02_0234_statistical_claim_label_is_enforced |
+| T-F02-0235 | Digit only tokens are removed before scoring | fast | f02/test_scoring.py | test_T_F02_0235_digit_only_tokens_are_removed_before_scoring |
 | T-F02-0301 | Adversarial description never creates allow | fast | f02/test_classification.py | test_adversarial_description_never_creates_allow |
 | T-F02-0317 | Copied headings and embedded codes are scorer inputs only | fast | f02/test_classification.py | test_copied_headings_and_embedded_codes_are_scorer_inputs_only |
 | T-F02-0401 | Replay commits to same output | fast | f02/test_classification.py | test_T_F02_0401_replay_commits_to_same_output |
@@ -542,6 +543,15 @@
 | T-K05-0225 | Unavailable inputs abstain | fast | k05/test_basis_and_reference.py | test_unavailable_inputs_abstain |
 | T-K05-0229 | Grams scale exactly | fast | k05/test_basis_and_reference.py | test_T_K05_0229_grams_scale_exactly |
 | T-K05-0230 | Currency and unit conversion compose | fast | k05/test_basis_and_reference.py | test_T_K05_0230_currency_and_unit_conversion_compose |
+| T-K05-0231 | Invalid unit factor is refused | fast | k05/test_interfaces.py | test_T_K05_0231_invalid_unit_factor_is_refused |
+| T-K05-0232 | Invalid reference sample abstains | fast | k05/test_interfaces.py | test_T_K05_0232_invalid_reference_sample_abstains |
+| T-K05-0233 | Calibration rejects insufficient draws | fast | k05/test_interfaces.py | test_T_K05_0233_calibration_rejects_insufficient_draws |
+| T-K05-0234 | Public abstention has no basis or calibration | fast | k05/test_interfaces.py | test_T_K05_0234_public_abstention_has_no_basis_or_calibration |
+| T-K05-0235 | Ambiguous canonical quantity abstains | fast | k05/test_interfaces.py | test_T_K05_0235_ambiguous_canonical_quantity_abstains |
+| T-K05-0236 | Missing adjustment reference abstains | fast | k05/test_interfaces.py | test_T_K05_0236_missing_adjustment_reference_abstains |
+| T-K05-0237 | Duplicate rule adjustment rejected | fast | k05/test_interfaces.py | test_T_K05_0237_duplicate_rule_adjustment_rejected |
+| T-K05-0238 | Unbound valuation rules abstain | fast | k05/test_interfaces.py | test_T_K05_0238_unbound_valuation_rules_abstain |
+| T-K05-0239 | Exact upper endpoint is inside | fast | k05/test_valuation.py | test_T_K05_0239_exact_upper_endpoint_is_inside |
 | T-K05-0301 | Rejects nonpositive and nonfinite values | fast | k05/test_interfaces.py | test_rejects_nonpositive_and_nonfinite_values |
 | T-K05-0308 | Rejects invalid quantities | fast | k05/test_interfaces.py | test_rejects_invalid_quantities |
 | T-K05-0313 | Rejects unknown or incompatible units | fast | k05/test_interfaces.py | test_rejects_unknown_or_incompatible_units |
@@ -1393,3 +1403,19 @@
 | T-SEC-0090 | Catalog JSON matches Python | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0090_catalog_json_matches |
 | T-SEC-0091 | All new items covered | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0091_all_new_items_covered |
 | T-SEC-0092 | Deferred items non-empty | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0092_deferred_items_nonempty |
+| T-VAL-0001 | Consensus feeds both judgments | fast | pairs/test_valuation_classification.py | test_T_VAL_0001_consensus_feeds_both_judgments |
+| T-VAL-0002 | Absent consensus causes both to abstain | fast | pairs/test_valuation_classification.py | test_T_VAL_0002_absent_consensus_causes_both_to_abstain |
+| T-VAL-0003 | Description change marks both stale and recomputes | fast | pairs/test_valuation_classification.py | test_T_VAL_0003_description_change_marks_both_stale_and_recomputes |
+| T-VAL-0004 | Secondary reference cannot allow | fast | pairs/test_valuation_classification.py | test_T_VAL_0004_secondary_reference_cannot_allow |
+| T-VAL-0005 | Secondary tariff cannot allow | fast | pairs/test_valuation_classification.py | test_T_VAL_0005_secondary_tariff_cannot_allow |
+| T-VAL-0006 | Secondary tariff contributes to skeleton decision | fast | pairs/test_valuation_classification.py | test_T_VAL_0006_secondary_tariff_contributes_to_skeleton_decision |
+| T-VAL-0007 | Secondary reference contributes to skeleton decision | fast | pairs/test_valuation_classification.py | test_T_VAL_0007_secondary_reference_contributes_to_skeleton_decision |
+| T-VAL-0008 | Both allow on synthetic consensus and replay | fast | pairs/test_valuation_classification.py | test_T_VAL_0008_both_allow_on_synthetic_consensus_and_replay |
+| T-VAL-0009 | Judgment records are in the case chain | fast | pairs/test_valuation_classification.py | test_T_VAL_0009_judgment_records_are_in_the_case_chain |
+| T-VAL-0010 | Agreed exact quantity reaches the judge | fast | pairs/test_valuation_classification.py | test_T_VAL_0010_agreed_exact_quantity_reaches_the_judge |
+| T-VAL-0011 | Missing description is not inferred | fast | pairs/test_valuation_classification.py | test_T_VAL_0011_missing_description_is_not_inferred |
+| T-VAL-0012 | Conflicting line codes are not canonical | fast | pairs/test_valuation_classification.py | test_T_VAL_0012_conflicting_line_codes_are_not_canonical |
+| T-VAL-0013 | Tenant boundary covers judgment evidence | fast | pairs/test_valuation_classification.py | test_T_VAL_0013_tenant_boundary_covers_judgment_evidence |
+| T-VAL-0014 | Repeated workflows commit to identical judgments | fast | pairs/test_valuation_classification.py | test_T_VAL_0014_repeated_workflows_commit_to_identical_judgments |
+| T-VAL-0015 | Two judgments meet the deterministic budget | fast | pairs/test_valuation_classification.py | test_T_VAL_0015_two_judgments_meet_the_deterministic_budget |
+| T-VAL-0016 | Cli evaluates the synthetic shipment | fast | pairs/test_valuation_classification.py | test_T_VAL_0016_cli_evaluates_the_synthetic_shipment |

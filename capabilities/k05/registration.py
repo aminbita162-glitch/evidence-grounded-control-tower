@@ -49,6 +49,14 @@ def canonical_inputs(facts: Sequence[CanonicalFact]) -> ValuationInputs | None:
             raise ValueError("canonical scalar required")
         return fact.value
 
+    def quantity_value(fact: CanonicalFact) -> Decimal:
+        if isinstance(fact.value, tuple) and len(fact.value) == 2:
+            low, high = map(Decimal, fact.value)
+            if low != high:
+                raise ValueError("canonical quantity is an interval")
+            return low
+        return Decimal(scalar(fact))
+
     def price(fact: CanonicalFact, default_currency: str) -> Money:
         return Money(Decimal(scalar(fact)), fact.unit or default_currency)
 
@@ -76,7 +84,7 @@ def canonical_inputs(facts: Sequence[CanonicalFact]) -> ValuationInputs | None:
                     line_id,
                     scalar(code),
                     price(amount, currency),
-                    Decimal(scalar(quantity)),
+                    quantity_value(quantity),
                     quantity.unit or "",
                     weakest_of(amount.label, weakest_of(quantity.label, code.label)),
                 )
