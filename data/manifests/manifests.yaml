@@ -277,3 +277,51 @@ manifests:
     attribution_text: "Preserve the package copyright and license notices on distribution."
     permitted_uses: "Library use under MIT"
     redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYPDF
+    terms: "BSD-3-Clause"
+    attribution_text: "pypdf contributors"
+    permitted_uses: "Unmodified use in the isolated document worker with notices retained."
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-PYTHON-DOCX
+    terms: "MIT"
+    attribution_text: "python-docx contributors"
+    permitted_uses: "Unmodified use in the isolated document worker with notices retained."
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-OPENPYXL
+    terms: "MIT"
+    attribution_text: "openpyxl contributors"
+    permitted_uses: "Unmodified use in the isolated document worker with notices retained."
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-LXML
+    terms: "BSD-3-Clause"
+    attribution_text: "lxml contributors"
+    permitted_uses: "Unmodified use in the isolated document worker with notices retained."
+    redistribution_permission: "yes"
+
+  - source_id: SRC-DEP-ET-XMLFILE
+    terms: "MIT"
+    attribution_text: "et-xmlfile contributors"
+    permitted_uses: "Unmodified use in the isolated document worker with notices retained."
+    redistribution_permission: "yes"
+
+  - source_id: SRC-K14-NORMALIZATION
+    terms: "Internal project use"
+    attribution_text: "Customs & Transit Control Tower"
+    permitted_uses: "Use in the corresponding versioned Intake pack."
+    redistribution_permission: "no"
+
+  - source_id: SRC-F01-CONSISTENCY
+    terms: "Internal project use"
+    attribution_text: "Customs & Transit Control Tower"
+    permitted_uses: "Use in the corresponding versioned Intake pack."
+    redistribution_permission: "no"
+
+  - source_id: SRC-K09-IDENTITY
+    terms: "Internal project use"
+    attribution_text: "Customs & Transit Control Tower"
+    permitted_uses: "Use in the corresponding versioned Intake pack."
+    redistribution_permission: "no"

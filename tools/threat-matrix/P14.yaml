@@ -1,0 +1,9 @@
+phase: P14
+mappings:
+  hostile_files:
+    id: ATK-022
+    tests: [T-INT-0021, T-INT-0022, T-INT-0023, T-INT-0024, T-INT-0062]
+  tenant_document_isolation:
+    tests: [T-INT-0001, T-INT-0044, T-K09-0002]
+  ungrounded_extraction:
+    tests: [T-K14-0301, T-K14-0102]
