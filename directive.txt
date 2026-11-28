@@ -4891,12 +4891,17 @@ PHASE 14 — INTAKE
 
 3. Entry conditions beyond Part 1 §8: P13 gates exit 0; `capgen`, the Gateway, the cross-check helper, the solver harness and the calibration fixtures exist; the skeleton is green; V-10 part a (the container check-digit procedure) is closed in the Source Registry, otherwise STOP. Evidence: the commands and the Source Registry entry.
 
-4. Scope fence. May create: `kernel/intake/` (Intake stage, Document Reader interface, type and language detection, minimal-PII handling), `adapters/readers/` (sandboxed readers), `kernel/lib/text/` (normalization functions), `capabilities/k14/`, `capabilities/f01/`, `capabilities/k09/` (each in the standard layout, including their packs), `data/scenarios/k14/`, `data/scenarios/f01/`, `data/scenarios/k09/`, `test-house/k14/`, `test-house/f01/`, `test-house/k09/`, `test-house/intake/`, `test-house/pairs/`, `kernel/skeleton/` (additions only), `docs/capabilities/` (generated), `docs/ledger/P14.md`, risk-management records, Source Registry and manifest entries under `data/`. Everything else is forbidden.
-Scope paths: kernel/intake/**, adapters/readers/**, kernel/lib/text/**, capabilities/k14/**, capabilities/f01/**, capabilities/k09/**, data/scenarios/k14/**, data/scenarios/f01/**, data/scenarios/k09/**, data/registry/**, data/manifests/**, kernel/skeleton/**, schemas/**, contracts.lock, tools/capgen/**, tools/trace/**, tools/threat-matrix/**, tools/gate/gates/**, tools/gate/catalogue.toml, test-house/k14/**, test-house/f01/**, test-house/k09/**, test-house/intake/**, test-house/pairs/**, docs/capabilities/**, docs/ledger/P14.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
+4. Scope fence. May create: `kernel/intake/` (Intake stage, Document Reader interface, type and language detection, minimal-PII handling), `adapters/readers/` (sandboxed readers), `kernel/lib/text/` (normalization functions), `capabilities/k14/`, `capabilities/f01/`, `capabilities/k09/` (each in the standard layout, including their packs), `data/scenarios/k14/`, `data/scenarios/f01/`, `data/scenarios/k09/`, `test-house/k14/`, `test-house/f01/`, `test-house/k09/`, `test-house/intake/`, `test-house/pairs/`, `kernel/skeleton/` (additions only), `docs/capabilities/` (generated), `docs/ledger/P14.md`, risk-management records, Source Registry and manifest entries under `data/`. May also update the existing API and CLI integration paths named below. Everything outside the scope paths is forbidden.
+Scope paths: directive.txt, api/app.py, api/routes/capability.py, cli/main.py, kernel/intake/**, adapters/readers/**, kernel/lib/text/**, capabilities/k14/**, capabilities/f01/**, capabilities/k09/**, data/scenarios/k14/**, data/scenarios/f01/**, data/scenarios/k09/**, data/registry/**, data/manifests/**, kernel/skeleton/**, schemas/**, contracts.lock, tools/capgen/**, tools/trace/**, tools/threat-matrix/**, tools/gate/gates/**, tools/gate/catalogue.toml, test-house/k14/**, test-house/f01/**, test-house/k09/**, test-house/intake/**, test-house/pairs/**, docs/capabilities/**, docs/ledger/P14.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
 
 5. Context Pack: `<<<P5-S1>>>` `<<<P5-F01>>>` `<<<P5-K09>>>` `<<<P5-K14>>>` `<<<P3-S2>>>` `<<<P3-S3>>>` `<<<P3-S7>>>` `<<<P3-S8>>>` `<<<P3-S12>>>` `<<<P3-S15>>>` `<<<P3-S24>>>` `<<<P3-S31>>>` `<<<P4-S4>>>` `<<<P4-S5>>>` `<<<D06-S3>>>` `<<<P6-S3>>>` `<<<P6-S10>>>` `<<<P6-S11>>>` `<<<P6-S19>>>` `<<<P2-S11>>>`.
 
 6. Tasks.
+
+Owner-approved scope revision (P14-MAINT)
+- Files: `directive.txt`.
+- Steps: authorize the three existing API and CLI integration paths in the Phase 14 scope fence.
+- Accept: the scope gate accepts the three exact paths for P14 and rejects other API and CLI paths outside the phase fence.
 
 P14-T01 Intake stage and Document Reader interface
 - Files: `kernel/intake/`, `adapters/readers/`.
@@ -4954,7 +4959,7 @@ P14-T11 K09 interfaces, evidence and tests
 - Accept: tests T-K09-0301 to T-K09-0330, T-K09-0401 to T-K09-0412, T-K09-0501 to T-K09-0512; the erasure test removes the fingerprint with its document; no output explains how to evade detection (CP7).
 
 P14-T12 Skeleton integration, pair tests and hardening
-- Files: `kernel/skeleton/` (additions), `test-house/pairs/`, `docs/capabilities/`.
+- Files: `kernel/skeleton/` (additions), `test-house/pairs/`, `docs/capabilities/`, `api/app.py`, `api/routes/capability.py`, `cli/main.py`.
 - Steps: the skeleton now starts from a real document set through Intake, K14 and F01 and passes K09; pair tests: K14 output feeds F01 across languages without a false contradiction, F01 canonical facts are absent when K14 flags a value, K09 reuse across two cases marks the earlier case STALE; run mutation-guided hardening (CP5) on the three capabilities; generate capability cards and the Definition of Done tables (CP4, CP8).
 - Accept: tests T-INT-0041 to T-INT-0060 (pairs and skeleton); `gate run mutation trace e2e` exit 0; every surviving mutant is killed or recorded as equivalent; the three capabilities tick in the status map.
 
