@@ -1,0 +1,9 @@
+{
+  "id": "document-normalization",
+  "version": "1.0.0",
+  "label": "DERIVED",
+  "source_id": "SRC-K14-NORMALIZATION",
+  "basis": "Bilingual Intake T4 and the compiled Arabic and English tables in kernel.lib.text",
+  "calendar": "gregorian",
+  "minimum_supported_letter_share": "0.60"
+}
