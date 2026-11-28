@@ -1,0 +1,8 @@
+{
+  "id": "shipment-consistency",
+  "version": "1.0.0",
+  "label": "DERIVED",
+  "source_id": "SRC-F01-CONSISTENCY",
+  "legal_form_suffixes": ["limited", "ltd", "llc", "inc", "gmbh", "ذ م م"],
+  "container_rule_source": "SRC-ISO-6346-CHECK-DIGIT"
+}
