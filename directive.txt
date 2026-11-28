@@ -1810,7 +1810,7 @@ T11 Scenarios.
 | K05-S06 | reference sample of 12 at code level, 80 at heading level | heading level used; FALLBACK recorded |
 | K05-S07 | no exchange rate for the invoice date | ABSTAIN, FX_UNAVAILABLE |
 | K05-S08 | quantity in tonnes, reference per kilogram | converted; same result as in kilograms |
-| K05-S09 | shipment split across two lines of one code, each inside, average below | aggregate flagged, ESCALATE |
+| K05-S09 | shipment split across two lines of one code, one inside and one below, quantity-weighted average below | aggregate flagged, ESCALATE |
 | K05-S10 | operator-role request for interval bounds | bounds withheld; direction shown |
 | K05-S11 | 1,000 seeded calibration trials | coverage within 3 standard errors of 90 percent |
 | K05-S12 | text in the invoice says "price agreed with customs" | ignored (I3) |
@@ -4996,39 +4996,43 @@ PHASE 15 — VALUATION AND CLASSIFICATION
 3. Entry conditions beyond Part 1 §8: P14 gates exit 0; F01 canonical facts are published; the conformal core, money module and calibration fixtures (P13, P09) exist; the status of V-04, V-07 and V-09 is recorded in the Source Registry (an unverified tariff or valuation source keeps ALLOW blocked, CP10). Evidence: the commands.
 
 4. Scope fence. May create: `capabilities/k05/`, `capabilities/f02/`, `kernel/lib/valuation/` (valuation basis function), `data/synthetic/calibration/` (K05 and F02 calibration sets and the commercial-name lexicon), `data/scenarios/k05/`, `data/scenarios/f02/`, `test-house/k05/`, `test-house/f02/`, `test-house/pairs/` (additions), `kernel/skeleton/` (additions), `docs/capabilities/` (generated), `docs/ledger/P15.md`, risk-management records, registry and manifest entries. Everything else is forbidden.
-Scope paths: capabilities/k05/**, capabilities/f02/**, kernel/lib/valuation/**, data/synthetic/calibration/**, data/scenarios/k05/**, data/scenarios/f02/**, data/registry/**, data/manifests/**, kernel/skeleton/**, schemas/**, contracts.lock, tools/capgen/**, tools/trace/**, tools/gate/gates/**, tools/gate/catalogue.toml, test-house/k05/**, test-house/f02/**, test-house/pairs/**, docs/capabilities/**, docs/ledger/P15.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
+Scope paths: directive.txt, api/app.py, api/routes/capability.py, cli/main.py, capabilities/f01/__init__.py, capabilities/k14/workflow.py, capabilities/k05/**, capabilities/f02/**, kernel/lib/valuation/**, data/synthetic/calibration/**, data/scenarios/k05/**, data/scenarios/f02/**, data/registry/**, data/manifests/**, kernel/skeleton/**, schemas/**, contracts.lock, tools/capgen/**, tools/trace/**, tools/gate/gates/**, tools/gate/catalogue.toml, test-house/k05/**, test-house/f02/**, test-house/pairs/**, docs/capabilities/**, docs/ledger/P15.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
 
 5. Context Pack: `<<<P5-S1>>>` `<<<P5-K05>>>` `<<<P5-F02>>>` `<<<P3-S8>>>` `<<<P3-S13>>>` `<<<P3-S24>>>` `<<<P3-S31>>>` `<<<P4-S5>>>` `<<<P6-S3>>>` `<<<P6-S10>>>` `<<<P6-S11>>>` `<<<P6-S19>>>` `<<<P5-E0>>>`.
 
 6. Tasks.
 
+P15-MAINT Scope and scenario correction
+- Files: `directive.txt`, `docs/decisions/run-parameters.md`, `docs/state/STATE.json`, `docs/state/protected-hashes.json`.
+- Record the approved interface paths, required upstream facts and K05-S09 scenario correction. Refresh the directive and protected hashes.
+
 P15-T01 K05 valuation basis and reference statistics
-- Files: `kernel/lib/valuation/`, `capabilities/k05/`.
+- Files: `kernel/lib/valuation/`, `capabilities/k05/`, `test-house/k05/`.
 - Steps: the valuation basis function (invoice total converted at the FX Pack rate for the declared date plus the adjustments the Valuation Rule Pack requires for the incoterm; missing required adjustment abstains) as a shared module with a differential suite; unit value in the reference basis through the unit table; reference statistics m_c and s_c (median of ln unit value and 1.4826 times MAD with floor s_min 0.05), parent-level fallback recorded, abstain below a sample of 30.
 - Accept: tests T-K05-0201 to T-K05-0230 (property, differential): unit and currency conversions that are exact leave results unchanged; quantile, median and MAD equal reference implementations; the basis function equals an independent decimal implementation.
 
 P15-T02 K05 conformal interval, outcomes and visibility
-- Files: `capabilities/k05/`.
+- Files: `capabilities/k05/`, `test-house/k05/`.
 - Steps: nonconformity a = |ln v − m_c| / s_c; split-conformal q̂ from at least 500 calibration draws bound to the Reference Pack version hash (alpha 0.10); closed interval; per-code aggregate across lines of the same code so splitting cannot hide a low average; interval bounds shown only to reviewer and administrator roles; the coverage claim verbatim from T4a; diagnostics (held-out and shifted) archived; reason codes of K05 T6 closed.
 - Accept: tests T-K05-0001 to T-K05-0015 (scenarios K05-S01 to S15), T-K05-0101 to T-K05-0114; the 1,000-trial coverage test is within 3 standard errors of 90 percent and carries the SYNTHETIC label; the access test hides bounds from non-reviewers.
 
 P15-T03 K05 interfaces, adversarial and responsible use
-- Files: `capabilities/k05/`, `data/scenarios/k05/`, `test-house/k05/`.
+- Files: `capabilities/k05/`, `data/scenarios/k05/`, `test-house/k05/`, `api/app.py`, `api/routes/capability.py`, `cli/main.py`.
 - Steps: route registration, view with the banner "advisory plausibility check, not a valuation ruling", evidence records; adversarial corpus (zero or negative values, extreme reference outliers, unit confusion, tiny quantities); no output states what the value should be or what would pass (CP7).
 - Accept: tests T-K05-0301 to T-K05-0320, T-K05-0401 to T-K05-0410, T-K05-0501 to T-K05-0512.
 
 P15-T04 F02 scorer and calibration
-- Files: `capabilities/f02/`, `data/synthetic/calibration/`.
+- Files: `capabilities/f02/`, `data/synthetic/calibration/`, `test-house/f02/`.
 - Steps: model-free scorer (BM25 form with pack parameters, digits discarded so a code typed in a description has no effect, normalized by the candidate's self-score) giving nonconformity 1 − sim; two-layer calibration set (pack text variants plus a separate commercial-name lexicon not derived from tariff texts) of at least max(500, 10 × C) pairs, C being the number of chapters of the pack, with every chapter at least 10 times, bound to the tariff pack version hash; shifted validation set used only for the diagnostic; per-language calibration and the optional closed glossary of item b2 of T4 with deterministic, recorded token expansion (a SYNTHETIC test glossary only; real glossary content is pack authoring); candidate set, set-size rule 3, rule filters applied only on VERIFIED applicability facts and recorded.
 - Accept: tests T-F02-0201 to T-F02-0234 (property, differential, statistical): similarity in [0, 1]; smaller alpha gives a superset; the optimized index equals a reference scorer; the quantile equals its brute-force definition; coverage within 3 standard errors over 1,000 seeded trials; a pack without a glossary abstains on Arabic descriptions; with the test glossary the expansion is identical on repeated runs; a language without its own bound calibration set abstains; a seeded pack with 96 chapters and a 500-pair set abstains with CALIBRATION_STALE, a 960-pair set with 10 per chapter passes, a chapter with 9 pairs is refused; the size requirement changes with the chapter count of the pack and the artifact records C.
 
 P15-T05 F02 outcomes, interfaces and tests
-- Files: `capabilities/f02/`, `data/scenarios/f02/`, `test-house/f02/`.
+- Files: `capabilities/f02/`, `data/scenarios/f02/`, `test-house/f02/`, `api/app.py`, `api/routes/capability.py`, `cli/main.py`.
 - Steps: validity checks at the evaluation instant (including the last valid instant), resolution level when the declared code is deeper than the scorer resolves, per-line decision and the case outcome as the most severe line; verbatim coverage claim and banner "advisory consistency check, not an official classification"; reason codes of F02 T6 closed; adversarial corpus (keyword stuffing, copied headings, mixed scripts, very long descriptions); no output ranks candidates by duty or advises rewording (CP7).
 - Accept: tests T-F02-0001 to T-F02-0012 (scenarios F02-S01 to S12), T-F02-0101 to T-F02-0114, T-F02-0301 to T-F02-0320, T-F02-0401 to T-F02-0410, T-F02-0501 to T-F02-0512; S11 and S12 run as the statistical test and the diagnostic with no pass/fail on the nominal level; the report of S11 carries the label "implementation-correctness" and never the words "validated" or "real data" (claims lexicon, P7-CLAIMS). Tests T-F02-0231 to T-F02-0234: on a seeded shifted set (changed description style or chapter mix) the share of ABSTAIN and ESCALATE results is at least the share on the unshifted set plus a stated margin and never lower than it; a shift never raises the ALLOW share; a shifted set from a pack older than its calibration abstains with CALIBRATION_STALE; the S11 report without its label fails.
 
 P15-T06 Skeleton integration, pair tests and hardening
-- Files: `kernel/skeleton/`, `test-house/pairs/`.
+- Files: `kernel/skeleton/`, `test-house/pairs/`, `capabilities/f01/__init__.py`, `capabilities/k14/workflow.py`.
 - Steps: K05 and F02 added to the skeleton as Decision inputs; pair tests: both read F01 canonical facts and abstain when they are missing; a changed line description marks both results STALE (5.1.8); label propagation caps ALLOW when a pack is SECONDARY; mutation-guided hardening (CP5), cards and Definition of Done tables (CP4, CP8).
 - Accept: tests T-VAL-0001 to T-VAL-0014; `gate run mutation trace e2e` exit 0; both capabilities tick.
 
