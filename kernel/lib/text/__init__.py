@@ -127,11 +127,8 @@ def parse_date(
         first, second, year = map(int, (numeric[1], numeric[3], numeric[4]))
         if first <= 12 and second <= 12 and locale_order not in {"DMY", "MDY"}:
             raise ValueError("AMBIGUOUS_DATE")
-        month, day = (
-            (first, second)
-            if first <= 12 and (second > 12 or locale_order == "MDY")
-            else (second, first)
-        )
+        month_first = locale_order == "MDY" or (locale_order is None and second > 12)
+        month, day = (first, second) if month_first else (second, first)
         return date(year, month, day).isoformat()
     named = re.fullmatch(r"([0-9]{1,2}) (.+) ([0-9]{4})", form)
     if named:

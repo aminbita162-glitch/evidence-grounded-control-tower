@@ -427,6 +427,8 @@ def test_T_INT_0012_date_format_boundaries() -> None:
     assert parse_date("03/04/2026", locale_order="DMY") == "2026-04-03"
     assert parse_date("03/04/2026", locale_order="MDY") == "2026-03-04"
     assert parse_date("02/27/2026") == "2026-02-27"
+    with pytest.raises(ValueError):
+        parse_date("02/27/2026", locale_order="DMY")
     assert parse_date("٢٧ شباط ٢٠٢٦") == "2026-02-27"
     for bad in ("٢٧ غيرمعروف ٢٠٢٦", "date pending"):
         with pytest.raises(ValueError, match="INVALID_DATE"):
