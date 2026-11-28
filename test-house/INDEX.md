@@ -300,6 +300,16 @@
 | T-F01-0204 | Order independent consensus and conflict | fast | f01/test_consistency.py | test_T_F01_0204_order_independent_consensus_and_conflict |
 | T-F01-0205 | Agreement comparators preserve precision and evidence boundaries | fast | f01/test_consistency.py | test_T_F01_0205_evidence_and_comparators |
 | T-F01-0206 | Invalid arithmetic operands fail closed | fast | f01/test_consistency.py | test_T_F01_0206_invalid_and_valid_arithmetic_operands |
+| T-F02-0201 | Similarity matches reference | fast | f02/test_scoring.py | test_T_F02_0201_similarity_matches_reference |
+| T-F02-0202 | Scorer optimized and differential | fast | f02/test_scoring.py | test_scorer_optimized_and_differential |
+| T-F02-0212 | Smaller alpha never shrinks candidates | fast | f02/test_scoring.py | test_smaller_alpha_never_shrinks_candidates |
+| T-F02-0215 | Quantile matches definition | fast | f02/test_scoring.py | test_T_F02_0215_quantile_matches_definition |
+| T-F02-0216 | Seeded conformal coverage implementation correctness | slow | f02/test_scoring.py | test_T_F02_0216_seeded_conformal_coverage_implementation_correctness |
+| T-F02-0217 | English only without glossary | fast | f02/test_scoring.py | test_T_F02_0217_english_only_without_glossary |
+| T-F02-0218 | Glossary expansion is stable and recorded | fast | f02/test_scoring.py | test_T_F02_0218_glossary_expansion_is_stable_and_recorded |
+| T-F02-0219 | Refuse a mismatched calibration language | fast | f02/test_scoring.py | test_T_F02_0219_refuse_a_mismatched_calibration_language |
+| T-F02-0220 | Pack derived minimum | fast | f02/test_scoring.py | test_pack_derived_minimum |
+| T-F02-0227 | Tariff filter requires verified applicability | fast | f02/test_scoring.py | test_tariff_filter_requires_verified_applicability |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |

@@ -1,0 +1,18 @@
+{
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-F02",
+  "languages": {
+    "en": {
+      "1101": ["bakers cake meal", "dough making ingredients"],
+      "1201": ["green edamame beans", "tofu press stock"],
+      "1301": ["stage effects gum", "botanical sealant powder"],
+      "1401": ["craft mat bundles", "weavers reed material"]
+    },
+    "ar": {
+      "1101": ["خبز كعك دقيق"],
+      "1201": ["أخضر فول نبات"],
+      "1301": ["صمغ مسحوق نبات"],
+      "1401": ["حصير حزم قصب"]
+    }
+  }
+}
