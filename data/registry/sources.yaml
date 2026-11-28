@@ -648,3 +648,117 @@ sources:
     v_item: none
     dep_purpose: "constraint consistency checks and unsatisfiable cores"
     dep_class: RUNTIME
+
+  - source_id: SRC-DEP-PYPDF
+    publisher: "pypdf project"
+    reference: "pypdf 7.0.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "BSD-3-Clause (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "PDF text extraction"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-PYTHON-DOCX
+    publisher: "python-docx project"
+    reference: "python-docx 1.2.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "DOCX text extraction"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-OPENPYXL
+    publisher: "openpyxl project"
+    reference: "openpyxl 3.1.5 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis F)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "XLSX text extraction"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-LXML
+    publisher: "lxml project"
+    reference: "lxml 6.2.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "BSD-3-Clause (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "XML parsing dependency for DOCX"
+    dep_class: RUNTIME
+
+  - source_id: SRC-DEP-ET-XMLFILE
+    publisher: "et-xmlfile project"
+    reference: "et-xmlfile 2.0.0 on PyPI"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "MIT (basis E)"
+    redistributable: "yes"
+    kind: DEPENDENCY
+    use_class: LIBRARY
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+    dep_purpose: "XML dependency for XLSX"
+    dep_class: RUNTIME
+
+  - source_id: SRC-K14-NORMALIZATION
+    publisher: "Customs & Transit Control Tower"
+    reference: "Bilingual Intake normalization compilation"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Project-owned compilation"
+    redistributable: "no"
+    kind: SOURCE
+    use_class: CATALOGUE
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+
+  - source_id: SRC-F01-CONSISTENCY
+    publisher: "Customs & Transit Control Tower"
+    reference: "Shipment Consistency Graph configuration compilation"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Project-owned compilation"
+    redistributable: "no"
+    kind: SOURCE
+    use_class: CATALOGUE
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none
+
+  - source_id: SRC-K09-IDENTITY
+    publisher: "Customs & Transit Control Tower"
+    reference: "Document Shield identity configuration compilation"
+    retrieved_month: "2026-11"
+    label: DERIVED
+    license_summary: "Project-owned compilation"
+    redistributable: "no"
+    kind: SOURCE
+    use_class: CATALOGUE
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none

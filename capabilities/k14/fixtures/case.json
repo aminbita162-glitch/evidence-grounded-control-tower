@@ -1,0 +1,6 @@
+{
+  "label": "SYNTHETIC",
+  "corpus": "data/scenarios/k14/cases.json",
+  "source_id": "SRC-K14-NORMALIZATION",
+  "scenario_count": 20
+}

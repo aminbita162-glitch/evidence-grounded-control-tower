@@ -38,7 +38,7 @@ __all__ = [
 ]
 
 #: Regex for test IDs in headers.
-_TEST_ID_RE = re.compile(r"T-[A-Z]+-[A-Z0-9][A-Z0-9-]*")
+_TEST_ID_RE = re.compile(r"T-(?:[A-Z]+|[FKL][0-9]{2})-[A-Z0-9][A-Z0-9-]*")
 
 #: Regex for header field lines in docstrings.
 _FIELD_RE = re.compile(r"^\s*(id|requirement|capability|risk)\s*:\s*(.+)$")
@@ -105,12 +105,16 @@ def _scan_scenarios(scenarios_dir: Path) -> dict[str, str]:
     mapping: dict[str, str] = {}
     if not scenarios_dir.exists():
         return mapping
-    for json_file in scenarios_dir.glob("*.json"):
+    files = [*scenarios_dir.glob("*.json"), *scenarios_dir.glob("*/cases.json")]
+    for json_file in sorted(files):
         data = json.loads(json_file.read_text(encoding="utf-8"))
-        sid = data.get("id", "")
-        tid = data.get("test_id", "")
-        if sid:
-            mapping[sid] = tid
+        records = data if isinstance(data, list) else [data]
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            sid = record.get("id", "")
+            if sid:
+                mapping[sid] = record.get("test_id", "")
     return mapping
 
 

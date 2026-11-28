@@ -1,0 +1,173 @@
+[
+  {
+    "id": "F01-S01",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "gross_weight",
+    "values": [
+      "1250",
+      "1250"
+    ],
+    "unit": "kg",
+    "outcome": "ALLOW",
+    "reason": "F01.OK.ALL_AGREE",
+    "canonical": true,
+    "test_id": "T-F01-0001"
+  },
+  {
+    "id": "F01-S02",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "consignee_name",
+    "values": [
+      "Synthetic A",
+      "Synthetic B"
+    ],
+    "outcome": "ESCALATE",
+    "reason": "F01.MISMATCH.PARTY",
+    "test_id": "T-F01-0002"
+  },
+  {
+    "id": "F01-S03",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "invoice_total",
+    "values": [
+      "12",
+      "50"
+    ],
+    "arithmetic": true,
+    "outcome": "HOLD",
+    "reason": "F01.ARITH.SUM_VALUE",
+    "test_id": "T-F01-0003"
+  },
+  {
+    "id": "F01-S04",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-ISO-6346-CHECK-DIGIT",
+    "field": "container_numbers",
+    "values": [
+      "MSCU 663987 1"
+    ],
+    "outcome": "HOLD",
+    "reason": "F01.ID.CHECK_DIGIT",
+    "test_id": "T-F01-0004"
+  },
+  {
+    "id": "F01-S05",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "gross_weight",
+    "values": [
+      "1250"
+    ],
+    "unit": "kg",
+    "must_have_documents": true,
+    "outcome": "ABSTAIN",
+    "reason": "F01.ABSTAIN.DOC_NOT_PRESENT",
+    "test_id": "T-F01-0005"
+  },
+  {
+    "id": "F01-S06",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "gross_weight",
+    "values": [
+      "1250",
+      "1250.4"
+    ],
+    "unit": "kg",
+    "outcome": "ALLOW",
+    "reason": "F01.OK.ALL_AGREE",
+    "canonical": true,
+    "test_id": "T-F01-0006"
+  },
+  {
+    "id": "F01-S07",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "gross_weight",
+    "values": [
+      "1250",
+      "1250"
+    ],
+    "originals": [
+      "١٢٥٠",
+      "1250"
+    ],
+    "unit": "kg",
+    "outcome": "ALLOW",
+    "reason": "F01.OK.ALL_AGREE",
+    "canonical": true,
+    "test_id": "T-F01-0007"
+  },
+  {
+    "id": "F01-S08",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "port_of_loading",
+    "values": [
+      "North",
+      "South"
+    ],
+    "same_document": true,
+    "outcome": "ESCALATE",
+    "reason": "F01.FACT.CONFLICTED",
+    "test_id": "T-F01-0008"
+  },
+  {
+    "id": "F01-S09",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "gross_weight",
+    "values": [
+      "1250",
+      "1255"
+    ],
+    "unit": "kg",
+    "untrusted_instruction": true,
+    "outcome": "ESCALATE",
+    "reason": "F01.MISMATCH.WEIGHT",
+    "test_id": "T-F01-0009"
+  },
+  {
+    "id": "F01-S10",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "seller_name",
+    "values": [
+      "Proposed Seller",
+      "Proposed Seller"
+    ],
+    "unverified": true,
+    "outcome": "ABSTAIN",
+    "reason": "F01.ABSTAIN.FACT_NOT_VERIFIED",
+    "test_id": "T-F01-0010"
+  },
+  {
+    "id": "F01-S11",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-F01-CONSISTENCY",
+    "field": "buyer_name",
+    "values": [
+      "Synthetic A",
+      "Synthetic А"
+    ],
+    "outcome": "ESCALATE",
+    "reason": "F01.MISMATCH.PARTY",
+    "test_id": "T-F01-0011"
+  },
+  {
+    "id": "F01-S12",
+    "label": "SYNTHETIC",
+    "source_id": "SRC-ISO-6346-CHECK-DIGIT",
+    "field": "container_numbers",
+    "values": [
+      "MSCU 663987 0"
+    ],
+    "rule_unavailable": true,
+    "outcome": "ABSTAIN",
+    "reason": "F01.ABSTAIN.RULE_UNAVAILABLE",
+    "test_id": "T-F01-0012"
+  }
+]

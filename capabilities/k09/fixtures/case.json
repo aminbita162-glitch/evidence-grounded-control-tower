@@ -1,0 +1,6 @@
+{
+  "label": "SYNTHETIC",
+  "corpus": "data/scenarios/k09/cases.json",
+  "source_id": "SRC-K09-IDENTITY",
+  "scenario_count": 17
+}

@@ -104,6 +104,11 @@ _PHASES_BY_SOURCE = {
     **dict.fromkeys(_P03_SOURCE_IDS, "p03"),
     "SRC-DEP-ORTOOLS": "p13",
     "SRC-DEP-Z3-SOLVER": "p13",
+    "SRC-DEP-PYPDF": "p14",
+    "SRC-DEP-PYTHON-DOCX": "p14",
+    "SRC-DEP-OPENPYXL": "p14",
+    "SRC-DEP-LXML": "p14",
+    "SRC-DEP-ET-XMLFILE": "p14",
 }
 
 

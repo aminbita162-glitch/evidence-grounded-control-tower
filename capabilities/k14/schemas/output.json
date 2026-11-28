@@ -1,0 +1,305 @@
+{
+  "$defs": {
+    "FactStatus": {
+      "enum": [
+        "VERIFIED",
+        "PROPOSED",
+        "UNKNOWN"
+      ],
+      "type": "string"
+    },
+    "FieldKind": {
+      "enum": [
+        "text",
+        "identifier",
+        "number",
+        "quantity",
+        "date",
+        "unit"
+      ],
+      "type": "string"
+    },
+    "GroundedFact": {
+      "properties": {
+        "flags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Flags",
+          "type": "array"
+        },
+        "kind": {
+          "$ref": "#/$defs/FieldKind"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "normalized": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized"
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin"
+        },
+        "original": {
+          "default": "",
+          "title": "Original",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "segment": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Segment"
+        },
+        "span": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Span"
+        },
+        "status": {
+          "$ref": "#/$defs/FactStatus",
+          "default": "UNKNOWN"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "title": "GroundedFact",
+      "type": "object"
+    },
+    "ModelEvidence": {
+      "properties": {
+        "model_id": {
+          "title": "Model Id",
+          "type": "string"
+        },
+        "prompt_hash": {
+          "title": "Prompt Hash",
+          "type": "string"
+        },
+        "response_hash": {
+          "title": "Response Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model_id",
+        "prompt_hash",
+        "response_hash"
+      ],
+      "title": "ModelEvidence",
+      "type": "object"
+    },
+    "NameLink": {
+      "properties": {
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "left": {
+          "title": "Left",
+          "type": "string"
+        },
+        "right": {
+          "title": "Right",
+          "type": "string"
+        },
+        "variants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Variants",
+          "type": "array"
+        }
+      },
+      "required": [
+        "field",
+        "left",
+        "right",
+        "variants"
+      ],
+      "title": "NameLink",
+      "type": "object"
+    },
+    "ScriptProfile": {
+      "properties": {
+        "arabic": {
+          "title": "Arabic",
+          "type": "integer"
+        },
+        "latin": {
+          "title": "Latin",
+          "type": "integer"
+        },
+        "other": {
+          "title": "Other",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "arabic",
+        "latin",
+        "other"
+      ],
+      "title": "ScriptProfile",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "calls": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ModelEvidence"
+      },
+      "title": "Calls",
+      "type": "array"
+    },
+    "document_hash": {
+      "title": "Document Hash",
+      "type": "string"
+    },
+    "document_id": {
+      "title": "Document Id",
+      "type": "string"
+    },
+    "facts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/GroundedFact"
+      },
+      "title": "Facts",
+      "type": "array"
+    },
+    "name_link_proposals": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/NameLink"
+      },
+      "title": "Name Link Proposals",
+      "type": "array"
+    },
+    "normalization_counts": {
+      "default": [],
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Normalization Counts",
+      "type": "array"
+    },
+    "pack_version": {
+      "default": "1.0.0",
+      "title": "Pack Version",
+      "type": "string"
+    },
+    "parallel_fields": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Parallel Fields",
+      "type": "array"
+    },
+    "profile": {
+      "$ref": "#/$defs/ScriptProfile"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_id",
+    "document_hash",
+    "profile",
+    "status",
+    "reason_codes"
+  ],
+  "title": "BilingualIntakeReport",
+  "type": "object"
+}

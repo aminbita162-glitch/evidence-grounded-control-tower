@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "Candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "calendar": {
+          "default": "gregorian",
+          "enum": [
+            "gregorian",
+            "hijri"
+          ],
+          "title": "Calendar",
+          "type": "string"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "segment": {
+          "title": "Segment",
+          "type": "integer"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "segment",
+        "start",
+        "end",
+        "quote",
+        "value"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "items": {
+    "$ref": "#/$defs/Candidate"
+  },
+  "type": "array"
+}

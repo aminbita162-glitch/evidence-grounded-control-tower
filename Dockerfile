@@ -13,6 +13,7 @@ COPY --from=dependencies /opt/runtime /opt/runtime
 COPY adapters/ ./adapters/
 COPY api/ ./api/
 COPY broker/ ./broker/
+COPY capabilities/ ./capabilities/
 COPY cli/ ./cli/
 COPY data/ ./data/
 COPY deploy/ ./deploy/

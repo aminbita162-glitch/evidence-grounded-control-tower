@@ -38,12 +38,15 @@ def main() -> int:
     venv_python = root / ".venv" / "bin" / "python"
     if not venv_python.exists():
         venv_python = Path(sys.executable)
+    test_paths = ["test-house/e2e/"]
+    if (root / "test-house/pairs").is_dir():
+        test_paths.append("test-house/pairs/")
     result = subprocess.run(  # nosec B603
         [
             str(venv_python),
             "-m",
             "pytest",
-            "test-house/e2e/",
+            *test_paths,
             "-m",
             "fast",
             "-q",

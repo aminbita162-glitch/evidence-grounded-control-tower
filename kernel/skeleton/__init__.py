@@ -15,10 +15,11 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 
 from data.synthetic import SyntheticDocument, SyntheticFactory
+from kernel.auth.roles import Principal
 from kernel.config import DEFAULTS
 from kernel.decision import EligibilityResult, FactEntry, evaluate_allow
 from kernel.extract import ExtractRequest, ExtractResult, ExtractStage
@@ -29,7 +30,8 @@ from kernel.ledger.records import Actor, LedgerRecord
 from kernel.ledger.replay import CaseExport, compute_passport_hash, replay
 from kernel.ledger.verify import verify_structural
 from kernel.rules.interpreter import FactSet, RuleResult, interpret
-from kernel.types.decision import DecisionValue
+from kernel.skeleton.intake import IntakePipelinePort, SourceDocument
+from kernel.types.decision import DecisionValue, combine_decisions
 
 __all__ = [
     "SkeletonResult",
@@ -162,65 +164,33 @@ class WalkingSkeleton:
         self.case_id: str = "SYN-CASE-0001"
         self._factory: SyntheticFactory = SyntheticFactory(seed)
 
-    async def run(self) -> SkeletonResult:
+    async def run(
+        self,
+        *,
+        intake: IntakePipelinePort | None = None,
+        uploads: Sequence[SourceDocument] = (),
+    ) -> SkeletonResult:
         """Run the full skeleton pipeline and return a :class:`SkeletonResult`."""
         chain = InMemoryCaseChain(self.tenant_id, self.case_id)
+        if intake is not None:
+            principal = Principal(
+                principal_id="SYN-OPERATOR", role="operator", tenant_id=self.tenant_id
+            )
+            intake_inputs = await intake.ingest(
+                principal, self.case_id, uploads, _EVAL_TIME, chain=chain
+            )
 
-        # 1. Intake — generate a synthetic document and store it.
-        doc = self._factory.generate_document("invoice", "en")
-        await chain.append(
-            stage="Intake",
-            actor=_ACTOR,
-            record_type="document",
-            payload={
-                "document_id": doc.document_id,
-                "doc_type": doc.doc_type,
-                "sha256": doc.sha256,
-                "label": doc.label,
-            },
-        )
+        else:
+            intake_inputs = None
 
-        # 2. Extract — stub model with recorded responses.
-        stub = StubExtractModel(doc)
-        stage = ExtractStage(stub)
-        request = ExtractRequest(
-            document_text=doc.text,
-            target_schema=STUB_SCHEMA,
-            document_id=doc.document_id,
-        )
-        extract_result: ExtractResult = await stage.extract(request)
-        await chain.append(
-            stage="Extract",
-            actor=_ACTOR,
-            record_type="extract_result",
-            payload={
-                "document_id": doc.document_id,
-                "fields": [f.name for f in extract_result.fields],
-                "schema_valid": extract_result.schema_valid,
-            },
-        )
-
-        # 3. Facts — convert extracted fields to verified facts.
-        fact_entries: list[FactEntry] = []
-        for f in extract_result.fields:
-            if f.status == "EXTRACTED":
-                fact_entries.append(
-                    FactEntry(
-                        key=f.name,
-                        value=f.value,
-                        status="VERIFIED",
-                        label="SYNTHETIC",
-                    )
-                )
-        await chain.append(
-            stage="Facts",
-            actor=_ACTOR,
-            record_type="facts",
-            payload={
-                "facts": [f.key for f in fact_entries],
-                "count": len(fact_entries),
-            },
-        )
+        if intake_inputs is None:
+            fact_entries = await self._fixture_facts(chain)
+            required_keys = ["consignee_name", "commodity"]
+            origin = "SYNTHETIC"
+        else:
+            fact_entries = list(intake_inputs.facts)
+            required_keys = list(intake_inputs.required_keys)
+            origin = intake_inputs.data_origin
 
         # 4. Rules — fixture pack.
         fact_set: FactSet = {f.key: (f.value, f.status, ()) for f in fact_entries}
@@ -240,11 +210,17 @@ class WalkingSkeleton:
         # 5. Decision — evaluate ALLOW eligibility.
         eligibility: EligibilityResult = evaluate_allow(
             fact_entries,
-            required_keys=["consignee_name", "commodity"],
+            required_keys=required_keys,
             rule_failures=rule_failures,
-            data_origin="SYNTHETIC",
+            data_origin=origin,
             calibration_basis=None,
         )
+        if intake_inputs is not None:
+            outcome, reasons = combine_decisions(
+                [eligibility.value, *(value for value, _ in intake_inputs.decisions)],
+                [eligibility.reason_codes, *(list(codes) for _, codes in intake_inputs.decisions)],
+            )
+            eligibility = EligibilityResult(outcome, reasons, eligibility.stamped_label)
         decision_str: str = DecisionValue(eligibility.value).name
         decision_payload = {
             "decision": decision_str,
@@ -338,6 +314,64 @@ class WalkingSkeleton:
             replay_ok=replay_result.ok,
             configuration_hash=self.configuration_hash,
         )
+
+    async def _fixture_facts(self, chain: InMemoryCaseChain) -> list[FactEntry]:
+        # 1. Intake — generate a synthetic document and store it.
+        doc = self._factory.generate_document("invoice", "en")
+        await chain.append(
+            stage="Intake",
+            actor=_ACTOR,
+            record_type="document",
+            payload={
+                "document_id": doc.document_id,
+                "doc_type": doc.doc_type,
+                "sha256": doc.sha256,
+                "label": doc.label,
+            },
+        )
+
+        # 2. Extract — stub model with recorded responses.
+        stub = StubExtractModel(doc)
+        stage = ExtractStage(stub)
+        request = ExtractRequest(
+            document_text=doc.text,
+            target_schema=STUB_SCHEMA,
+            document_id=doc.document_id,
+        )
+        extract_result: ExtractResult = await stage.extract(request)
+        await chain.append(
+            stage="Extract",
+            actor=_ACTOR,
+            record_type="extract_result",
+            payload={
+                "document_id": doc.document_id,
+                "fields": [f.name for f in extract_result.fields],
+                "schema_valid": extract_result.schema_valid,
+            },
+        )
+
+        # 3. Facts — convert extracted fields to verified facts.
+        fact_entries: list[FactEntry] = []
+        for f in extract_result.fields:
+            if f.status == "EXTRACTED":
+                fact_entries.append(
+                    FactEntry(
+                        key=f.name,
+                        value=f.value,
+                        status="VERIFIED",
+                        label="SYNTHETIC",
+                    )
+                )
+        await chain.append(
+            stage="Facts",
+            actor=_ACTOR,
+            record_type="facts",
+            payload={
+                "facts": [f.key for f in fact_entries],
+                "count": len(fact_entries),
+            },
+        )
+        return fact_entries
 
 
 def run_skeleton(seed: int = 42, *, configuration_hash: str | None = None) -> SkeletonResult:

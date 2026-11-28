@@ -190,7 +190,7 @@ def _extract_named_paths(directive_text: str, phase_id: str) -> set[str]:
             if in_tasks:
                 for qm in _QUOTED_RE.finditer(line):
                     path = qm.group(1).rstrip(".,;:!")
-                    if "/" in path or path.endswith((".py", ".toml", ".json", ".yaml")):
+                    if "/" in path or path.endswith((".py", ".toml", ".json", ".yaml", ".txt")):
                         named.add(path)
     return named
 

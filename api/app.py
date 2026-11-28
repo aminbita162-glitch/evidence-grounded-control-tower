@@ -21,6 +21,7 @@ from kernel.auth.tokens import TokenService
 
 if TYPE_CHECKING:
     from api.routes.capability import CapabilityInvocation
+    from capabilities.k14.workflow import IntakeWorkflow
 
 __all__ = [
     "API_VERSION",
@@ -43,6 +44,7 @@ class AppPorts:
         session_signer: SessionSigner | None = None,
         storage: object | None = None,
         capabilities: Mapping[str, CapabilityInvocation] | None = None,
+        intake: IntakeWorkflow | None = None,
     ) -> None:
         """Store injected ports.
 
@@ -56,6 +58,7 @@ class AppPorts:
         self.session_signer = session_signer
         self.storage = storage
         self.capabilities = dict(capabilities or {})
+        self.intake = intake
 
 
 def create_app(ports: AppPorts | None = None, *, production: bool = False) -> FastAPI:
@@ -101,7 +104,19 @@ def _register_routes(app: FastAPI, ports: AppPorts) -> None:
     from api.routes.capability import register_capability_routes
     from api.routes.commands import register_command_routes
 
-    register_capability_routes(app, ports.capabilities)
+    handlers = dict(ports.capabilities)
+    if ports.intake is not None:
+        from capabilities.f01.registration import register as register_f01
+        from capabilities.k09.registration import register as register_k09
+        from capabilities.k14.registration import register as register_k14
+
+        handlers = {
+            "K14": register_k14(ports.intake),
+            "F01": register_f01(ports.intake),
+            "K09": register_k09(ports.intake),
+            **handlers,
+        }
+    register_capability_routes(app, handlers, intake=ports.intake)
     register_command_routes(app)
 
     from api.health import register_health_routes

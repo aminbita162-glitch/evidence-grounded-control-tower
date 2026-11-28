@@ -163,6 +163,48 @@
       "basis": "C"
     }
   ],
+  "p14": [
+    {
+      "name": "et-xmlfile",
+      "version": "2.0.0",
+      "license": "MIT",
+      "purpose": "XML dependency for XLSX",
+      "class": "RUNTIME",
+      "basis": "E"
+    },
+    {
+      "name": "lxml",
+      "version": "6.2.0",
+      "license": "BSD-3-Clause",
+      "purpose": "XML parsing dependency for DOCX",
+      "class": "RUNTIME",
+      "basis": "E"
+    },
+    {
+      "name": "openpyxl",
+      "version": "3.1.5",
+      "license": "MIT",
+      "purpose": "XLSX text extraction",
+      "class": "RUNTIME",
+      "basis": "F"
+    },
+    {
+      "name": "pypdf",
+      "version": "7.0.0",
+      "license": "BSD-3-Clause",
+      "purpose": "PDF text extraction",
+      "class": "RUNTIME",
+      "basis": "E"
+    },
+    {
+      "name": "python-docx",
+      "version": "1.2.0",
+      "license": "MIT",
+      "purpose": "DOCX text extraction",
+      "class": "RUNTIME",
+      "basis": "F"
+    }
+  ],
   "p13": [
     {
       "name": "ortools",

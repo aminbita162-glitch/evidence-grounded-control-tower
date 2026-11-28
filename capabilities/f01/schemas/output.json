@@ -1,0 +1,334 @@
+{
+  "$defs": {
+    "CanonicalFact": {
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "default": "DERIVED",
+          "title": "Label",
+          "type": "string"
+        },
+        "source_fact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Fact Ids",
+          "type": "array"
+        },
+        "status": {
+          "default": "VERIFIED",
+          "title": "Status",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "source_fact_ids"
+      ],
+      "title": "CanonicalFact",
+      "type": "object"
+    },
+    "Edge": {
+      "properties": {
+        "facts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "rule": {
+          "title": "Rule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "rule",
+        "facts"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "Fact": {
+      "properties": {
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_type": {
+          "title": "Document Type",
+          "type": "string"
+        },
+        "fact_id": {
+          "title": "Fact Id",
+          "type": "string"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "label": {
+          "default": "SYNTHETIC",
+          "title": "Label",
+          "type": "string"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "original": {
+          "title": "Original",
+          "type": "string"
+        },
+        "scale": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scale"
+        },
+        "status": {
+          "default": "VERIFIED",
+          "title": "Status",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fact_id",
+        "document_id",
+        "document_type",
+        "field",
+        "value",
+        "original",
+        "locator"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "Finding": {
+      "properties": {
+        "core": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Core",
+          "type": "array"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "title": "Facts",
+          "type": "array"
+        },
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/Outcome"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "reason_code",
+        "outcome",
+        "facts",
+        "explanation"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Outcome": {
+      "enum": [
+        "ALLOW",
+        "ABSTAIN",
+        "HOLD",
+        "ESCALATE"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canonical": {
+      "items": {
+        "$ref": "#/$defs/CanonicalFact"
+      },
+      "title": "Canonical",
+      "type": "array"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checked",
+      "type": "array"
+    },
+    "configuration_hash": {
+      "title": "Configuration Hash",
+      "type": "string"
+    },
+    "counts": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Counts",
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "title": "Edges",
+      "type": "array"
+    },
+    "evaluation_time": {
+      "title": "Evaluation Time",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Nodes",
+      "type": "array"
+    },
+    "not_evaluable": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Not Evaluable",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/Outcome"
+    },
+    "pack_version": {
+      "default": "1.0.0",
+      "title": "Pack Version",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "case_id",
+    "evaluation_time",
+    "configuration_hash",
+    "nodes",
+    "edges",
+    "findings",
+    "checked",
+    "not_evaluable",
+    "canonical",
+    "outcome",
+    "reason_codes",
+    "counts"
+  ],
+  "title": "ConsistencyReport",
+  "type": "object"
+}
