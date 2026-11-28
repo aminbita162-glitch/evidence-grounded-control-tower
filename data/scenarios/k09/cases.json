@@ -1,0 +1,155 @@
+[
+  {
+    "id": "K09-S01",
+    "mode": "new",
+    "outcome": "ALLOW",
+    "reason": "K09.OK.NO_FINDING",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0001"
+  },
+  {
+    "id": "K09-S02",
+    "mode": "exact",
+    "outcome": "HOLD",
+    "reason": "K09.REUSE.EXACT_DOCUMENT",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0002"
+  },
+  {
+    "id": "K09-S03",
+    "mode": "resaved",
+    "outcome": "HOLD",
+    "reason": "K09.REUSE.EXACT_DOCUMENT",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0003"
+  },
+  {
+    "id": "K09-S04",
+    "mode": "identity",
+    "outcome": "ESCALATE",
+    "reason": "K09.CONFLICT.IDENTITY_KEY",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0004"
+  },
+  {
+    "id": "K09-S05",
+    "mode": "confusable",
+    "outcome": "ESCALATE",
+    "reason": "K09.CONFLICT.IDENTITY_KEY",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0005"
+  },
+  {
+    "id": "K09-S06",
+    "mode": "upper",
+    "outcome": "ESCALATE",
+    "reason": "K09.SIMILAR.NEAR_DUPLICATE",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0006"
+  },
+  {
+    "id": "K09-S07",
+    "mode": "lower",
+    "outcome": "ALLOW",
+    "reason": "K09.OK.NO_FINDING",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0007"
+  },
+  {
+    "id": "K09-S08",
+    "mode": "signal",
+    "outcome": "ESCALATE",
+    "reason": "K09.SIMILAR.CORROBORATED",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0008"
+  },
+  {
+    "id": "K09-S09",
+    "mode": "relation",
+    "outcome": "ALLOW",
+    "reason": "K09.OBS.RELATION_APPLIED",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0009"
+  },
+  {
+    "id": "K09-S10",
+    "mode": "same_case",
+    "outcome": "ALLOW",
+    "reason": "K09.OBS.SAME_CASE_DUPLICATE",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0010"
+  },
+  {
+    "id": "K09-S11",
+    "mode": "another_tenant",
+    "outcome": "ALLOW",
+    "reason": "K09.OK.NO_FINDING",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0011"
+  },
+  {
+    "id": "K09-S12",
+    "mode": "instruction",
+    "outcome": "HOLD",
+    "reason": "K09.REUSE.EXACT_DOCUMENT",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0012"
+  },
+  {
+    "id": "K09-S13",
+    "mode": "restricted",
+    "outcome": "HOLD",
+    "reason": "K09.REUSE.EXACT_DOCUMENT",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0013"
+  },
+  {
+    "id": "K09-S14",
+    "mode": "unavailable",
+    "outcome": "ABSTAIN",
+    "reason": "K09.ABSTAIN.INDEX_UNAVAILABLE",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0014"
+  },
+  {
+    "id": "K09-S15",
+    "mode": "no_text",
+    "outcome": "HOLD",
+    "reason": "K09.OBS.TEXT_UNAVAILABLE",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0015"
+  },
+  {
+    "id": "K09-S16",
+    "mode": "symmetric",
+    "outcome": "HOLD",
+    "reason": "K09.REUSE.EXACT_DOCUMENT",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0016"
+  },
+  {
+    "id": "K09-S17",
+    "mode": "cap",
+    "outcome": "ABSTAIN",
+    "reason": "K09.ABSTAIN.CANDIDATE_CAP",
+    "source_id": "SRC-K09-IDENTITY",
+    "label": "SYNTHETIC",
+    "test_id": "T-K09-0017"
+  }
+]

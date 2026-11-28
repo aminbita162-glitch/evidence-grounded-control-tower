@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "Coverage": {
+      "properties": {
+        "checks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "skipped": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Skipped",
+          "type": "array"
+        }
+      },
+      "required": [
+        "document_id",
+        "checks"
+      ],
+      "title": "Coverage",
+      "type": "object"
+    },
+    "Finding": {
+      "properties": {
+        "differences": {
+          "default": [],
+          "items": {
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Differences",
+          "type": "array"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "other_case_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Other Case Id"
+        },
+        "other_document_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Other Document Id"
+        },
+        "outcome": {
+          "$ref": "#/$defs/Outcome"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "similarity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Similarity"
+        }
+      },
+      "required": [
+        "reason_code",
+        "outcome",
+        "document_id"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Outcome": {
+      "enum": [
+        "ALLOW",
+        "ABSTAIN",
+        "HOLD",
+        "ESCALATE"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/Coverage"
+      },
+      "title": "Coverage",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "index_version": {
+      "default": "1.0.0",
+      "title": "Index Version",
+      "type": "string"
+    },
+    "observations": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/Outcome"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "case_id",
+    "findings",
+    "observations",
+    "coverage",
+    "outcome",
+    "reason_codes"
+  ],
+  "title": "DocumentShieldReport",
+  "type": "object"
+}

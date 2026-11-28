@@ -1,0 +1,32 @@
+{
+  "$defs": {
+    "IdentityFact": {
+      "properties": {
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "value",
+        "status"
+      ],
+      "title": "IdentityFact",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "items": {
+    "$ref": "#/$defs/IdentityFact"
+  },
+  "type": "array"
+}
