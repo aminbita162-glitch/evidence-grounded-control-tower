@@ -572,6 +572,7 @@
 | T-FIN-0014 | Unsupported case scope fails closed | fast | pairs/test_finance.py | test_T_FIN_0014_unsupported_case_scope_fails_closed |
 | T-FIN-0015 | Local financial workflow budget | fast | pairs/test_finance.py | test_T_FIN_0015_local_financial_workflow_budget |
 | T-FIN-0016 | Mutated input scopes remain bound | fast | pairs/test_finance.py | test_T_FIN_0016_mutated_input_scopes_remain_bound |
+| T-FIN-0017 | Main keeps the final phase scope | fast | gate/test_final_phase_scope.py | test_T_FIN_0017_scope_on_main |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |

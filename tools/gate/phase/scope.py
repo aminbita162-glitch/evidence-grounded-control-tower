@@ -345,12 +345,14 @@ def run_scope_gate(
 def _current_in_progress_phase() -> str:
     """Derive the in-progress phase from STATE.json.
 
-    ``last_completed_phase`` is the last merged phase; the phase being built
-    is the next one.  Falls back to ``P00`` when STATE.json is absent.
+    Use the next phase after the last completed phase. At the end of the
+    directive, retain the completed phase so the scope check still runs.
+    Fall back to ``P00`` when STATE.json is absent.
     """
     import json
 
-    state_path = _repo_root() / "docs" / "state" / "STATE.json"
+    root = _repo_root()
+    state_path = root / "docs" / "state" / "STATE.json"
     if not state_path.is_file():
         return "P00"
     try:
@@ -366,6 +368,15 @@ def _current_in_progress_phase() -> str:
         n = int(last[1:])
     except ValueError:
         return "P00"
+    directive_path = root / "directive.txt"
+    if directive_path.is_file():
+        phases = {
+            int(marker.group(1))
+            for line in directive_path.read_text(encoding="utf-8").splitlines()
+            if (marker := _PHASE_START_RE.match(line.strip()))
+        }
+        if phases and n == max(phases):
+            return f"P{n:02d}"
     return f"P{n + 1:02d}"
 
 
