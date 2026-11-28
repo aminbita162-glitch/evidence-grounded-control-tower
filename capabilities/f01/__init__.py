@@ -318,6 +318,14 @@ def evaluate(
         for rule in workflow.agreements:
             given = by_field.get(rule.field, [])
             group = [f for f in given if f.status == "VERIFIED"]
+            pending = any(
+                fact.status != "VERIFIED"
+                and (
+                    not workflow.required_document_types
+                    or fact.document_type in workflow.required_document_types
+                )
+                for fact in given
+            )
             by_document: dict[str, set[tuple[str, str | None]]] = {}
             for fact in group:
                 by_document.setdefault(fact.document_id, set()).add((fact.value, fact.unit))
@@ -334,7 +342,7 @@ def evaluate(
             if len(by_document) < rule.minimum_documents:
                 skipped.append(rule.field)
                 if rule.field in workflow.required_fields:
-                    code = "FACT_NOT_VERIFIED" if len(given) > len(group) else "MISSING_COUNTERPART"
+                    code = "FACT_NOT_VERIFIED" if pending else "MISSING_COUNTERPART"
                     findings.append(
                         _finding(
                             f"ABSTAIN.{code}",
@@ -344,7 +352,7 @@ def evaluate(
                         )
                     )
                 continue
-            if len(given) > len(group) and rule.field in workflow.required_fields:
+            if pending and rule.field in workflow.required_fields:
                 findings.append(
                     _finding(
                         "ABSTAIN.FACT_NOT_VERIFIED",

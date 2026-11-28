@@ -547,3 +547,103 @@ def test_T_F01_0126_abstention_and_solver_disagreement(monkeypatch: pytest.Monke
         "ARI-3", "ARITH.SUM_WEIGHT", (left, right), (Interval(Decimal(1), Decimal(1)),) * 2
     )
     assert decision is not None and decision.reason_code == "F01.ESCALATE.SOLVER_DISAGREEMENT"
+
+
+# id: T-F01-0205
+# title: Agreement comparators preserve precision and evidence boundaries
+# purpose: Verify name suffixes, minimum comparators, and invalid verified input.
+# level: fast
+# requirement: PR-01 PR-02 PR-16
+# input: Synthetic fields, registered comparator policy and invalid or weak values.
+# expected: Invalid evidence abstains, and only fully agreeing sets yield canonical facts.
+# risk: RSK-P-12
+# capability: F01
+@pytest.mark.fast
+def test_T_F01_0205_evidence_and_comparators() -> None:
+    import asyncio
+
+    from capabilities.f01 import Agreement, CanonicalFact, decimal_amount
+
+    left, right = facts(("1", "1"))
+    names = (
+        replace(left, field="buyer_name", value="Synthetic Ltd"),
+        replace(right, field="buyer_name", value="Synthetic"),
+    )
+    types = [left.document_type, right.document_type]
+    active = Workflow(allowed_labels=frozenset({"SYNTHETIC"}))
+    report = evaluate("case", names, types, active)
+    assert report.outcome == "ALLOW" and report.canonical[0].value == "synthetic"
+
+    class Writer:
+        records: list[CanonicalFact]
+
+        def __init__(self) -> None:
+            self.records = []
+
+        async def write(self, case_id: str, fact: CanonicalFact) -> None:
+            assert case_id == "case"
+            self.records.append(fact)
+
+    writer = Writer()
+    asyncio.run(report.publish(writer))
+    assert writer.records == list(report.canonical)
+    policy = replace(active, required_document_types=frozenset({"TRANSPORT_DOCUMENT"}))
+    assert evaluate("case", names, types, policy).canonical == ()
+    descriptions = (
+        replace(left, field="goods_description", value="a b c d"),
+        replace(right, field="goods_description", value="a b c e"),
+    )
+    information = evaluate("case", descriptions, types, active)
+    assert information.outcome == "ALLOW" and information.canonical == ()
+    money = (
+        replace(left, field="invoice_total", currency="USD"),
+        replace(right, field="invoice_total", currency="EUR"),
+    )
+    assert evaluate("case", money, types, active).reason_codes == ("F01.ABSTAIN.FACT_NOT_VERIFIED",)
+    unsupported = replace(active, agreements=(Agreement("buyer_name", "unsupported", "PARTY"),))
+    assert evaluate("case", names, types, unsupported).outcome == "ABSTAIN"
+    proposed = replace(right, document_id="D2", fact_id="F2", status="PROPOSED")
+    assert evaluate("case", (left, right, proposed), types, _POLICY).canonical == ()
+    with pytest.raises(ValueError, match="INVALID_DECIMAL"):
+        decimal_amount(replace(left, value="Infinity"))
+    with pytest.raises(ValueError, match="INVALID_DECIMAL"):
+        quantity(replace(left, value="1E30"))
+    with pytest.raises(ValueError, match="MISSING_DECIMAL_PRECISION"):
+        quantity(replace(left, scale=None))
+    assert not valid_container("not a container")
+    verified = replace(left, field="container_numbers", value="MSCU 663987 0")
+    inactive = replace(verified, status="PROPOSED", fact_id="F3")
+    policy = replace(active, container_rule_verified=True)
+    assert evaluate("case", (verified, inactive), types, policy).outcome == "ALLOW"
+
+
+# id: T-F01-0206
+# title: Invalid arithmetic operands fail closed
+# purpose: Verify malformed precision, cross-currency and incompatible unit handling.
+# level: fast
+# requirement: PR-01 PR-02 PR-16
+# input: Synthetic arithmetic sets with valid and incompatible operands.
+# expected: Invalid operands never produce a verified equality or contradictory solver result.
+# risk: RSK-P-12
+# capability: F01
+@pytest.mark.fast
+def test_T_F01_0206_invalid_and_valid_arithmetic_operands() -> None:
+    from capabilities.f01.arithmetic import money_minor
+
+    left, _ = facts(("1", "1"))
+    money = replace(left, field="invoice_total", currency="USD")
+    line = replace(money, field="line_items.0.line_amount", fact_id="F1")
+    quantity_fact = replace(line, field="line_items.0.quantity", fact_id="F2")
+    price = replace(line, field="line_items.0.unit_price", fact_id="F3")
+    with pytest.raises(ValueError, match="CURRENCY_PRECISION_UNAVAILABLE"):
+        money_minor(money, {"USD": 15})
+    policy = Workflow(currency_precision=(("USD", 2), ("EUR", 2)))
+    report = evaluate("case", (money, line, quantity_fact, price), (), policy)
+    assert report.outcome == "ALLOW"
+    assert {e.rule for e in report.edges} >= {"ARI-1", "ARI-2"}
+    cross_currency = replace(line, currency="EUR")
+    report = evaluate("case", (money, cross_currency, quantity_fact, price), (), policy)
+    assert not report.edges
+    incompatible = replace(left, field="net_weight", unit="units", fact_id="F2")
+    report = evaluate("case", (left, incompatible), (), policy)
+    assert report.outcome == "ABSTAIN"

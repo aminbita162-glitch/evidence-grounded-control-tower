@@ -39,13 +39,16 @@ def main() -> int:
         if marker.is_file():
             return 0
         return 1
+    suites = ["test-house/persistence/", "test-house/tenancy/"]
+    fingerprint_test = "test-house/k09/test_fingerprint_store.py"
+    if (root / fingerprint_test).is_file():
+        suites.append(fingerprint_test)
     result = subprocess.run(  # nosec B603
         [
             sys.executable,
             "-m",
             "pytest",
-            "test-house/persistence/",
-            "test-house/tenancy/",
+            *suites,
             "-x",
             "-q",
             "--no-header",

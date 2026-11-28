@@ -298,6 +298,8 @@
 | T-F01-0202 | Kilograms and grams preserve agreement | fast | f01/test_consistency.py | test_T_F01_0202_kilograms_and_grams_preserve_agreement |
 | T-F01-0203 | Integer model matches interval sum | fast | f01/test_consistency.py | test_T_F01_0203_integer_model_matches_interval_sum |
 | T-F01-0204 | Order independent consensus and conflict | fast | f01/test_consistency.py | test_T_F01_0204_order_independent_consensus_and_conflict |
+| T-F01-0205 | Agreement comparators preserve precision and evidence boundaries | fast | f01/test_consistency.py | test_T_F01_0205_evidence_and_comparators |
+| T-F01-0206 | Invalid arithmetic operands fail closed | fast | f01/test_consistency.py | test_T_F01_0206_invalid_and_valid_arithmetic_operands |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |
@@ -459,6 +461,8 @@
 | T-GWY-0096 | RegionPolicyChecker with custom profile | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0096_custom_profile |
 | T-INT-0001 | Document roundtrip and tenant isolation | fast | intake/test_intake.py | test_T_INT_0001_document_roundtrip_and_tenant_isolation |
 | T-INT-0010 | Parse supported formats | fast | intake/test_intake.py | test_T_INT_0010_parse_supported_formats |
+| T-INT-0011 | Erasure retains shared originals until the last document reference | fast | intake/test_intake.py | test_T_INT_0011_erasure_reference_lifecycle |
+| T-INT-0012 | Date normalization handles explicit locale and rejects invalid month names | fast | intake/test_intake.py | test_T_INT_0012_date_format_boundaries |
 | T-INT-0021 | Reader refuses unusable payload | fast | intake/test_intake.py | test_T_INT_0021_reader_refuses_unusable_payload |
 | T-INT-0022 | Rejects unsafe archive | fast | intake/test_intake.py | test_T_INT_0022_rejects_unsafe_archive |
 | T-INT-0023 | Reader crash is contained | fast | intake/test_intake.py | test_T_INT_0023_reader_crash_is_contained |
@@ -468,9 +472,12 @@
 | T-INT-0043 | Skeleton reaches replayed passport | fast | pairs/test_intake_pipeline.py | test_T_INT_0043_skeleton_reaches_replayed_passport |
 | T-INT-0044 | Api uniform capability path | fast | pairs/test_intake_pipeline.py | test_T_INT_0044_api_uniform_capability_path |
 | T-INT-0045 | Cli document workflow | fast | pairs/test_intake_pipeline.py | test_T_INT_0045_cli_document_workflow |
+| T-INT-0046 | Reviewer relation and erasure refresh related case evidence | fast | pairs/test_intake_pipeline.py | test_T_INT_0046_relation_and_erasure |
+| T-INT-0047 | Access, write-path and name-link boundaries survive repeat ingestion | fast | pairs/test_intake_pipeline.py | test_T_INT_0047_case_ownership_and_repeat_intake |
 | T-INT-0061 | Disabled and tampered ocr | fast | intake/test_intake.py | test_T_INT_0061_disabled_and_tampered_ocr |
 | T-INT-0062 | Oversized scan is refused before ocr | fast | intake/test_intake.py | test_T_INT_0062_oversized_scan_is_refused_before_ocr |
 | T-INT-0063 | Scan fixture has stable bytes | fast | intake/test_intake.py | test_T_INT_0063_scan_fixture_has_stable_bytes |
+| T-INT-0064 | OCR derives error counts and accepts only complete owner pins | fast | intake/test_intake.py | test_T_INT_0064_ocr_configuration_and_error_totals |
 | T-K09-0001 | K09-S01 golden scenario | fast | k09/test_shield.py | test_T_K09_0001_golden_scenario |
 | T-K09-0002 | K09-S02 golden scenario | fast | k09/test_shield.py | test_T_K09_0002_golden_scenario |
 | T-K09-0003 | K09-S03 golden scenario | fast | k09/test_shield.py | test_T_K09_0003_golden_scenario |
@@ -498,6 +505,8 @@
 | T-K09-0401 | Reuse is symmetric and tenant scoped | fast | k09/test_shield.py | test_T_K09_0401_reuse_is_symmetric_and_tenant_scoped |
 | T-K09-0402 | Resave detected and relation applies only to pair | fast | k09/test_shield.py | test_T_K09_0402_resave_detected_and_relation_applies_only_to_pair |
 | T-K09-0403 | Coverage and erasure | fast | k09/test_shield.py | test_T_K09_0403_coverage_and_erasure |
+| T-K09-0404 | PostgreSQL fingerprint lookup and cascade respect tenancy | slow | k09/test_fingerprint_store.py | test_T_K09_0404_postgres_fingerprint_joins_and_erasure |
+| T-K09-0405 | Approved amendments and closed cases retain their boundaries | fast | k09/test_shield.py | test_T_K09_0405_amendment_and_closed_results |
 | T-K14-0001 | K14-S01 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0001_golden_scenario |
 | T-K14-0002 | K14-S02 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0002_golden_scenario |
 | T-K14-0003 | K14-S03 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0003_golden_scenario |
@@ -527,9 +536,11 @@
 | T-K14-0203 | Bilingual values | fast | k14/test_bilingual.py | test_T_K14_0203_bilingual_values |
 | T-K14-0204 | Parallel comparisons retain only verified comparable fields | fast | k14/test_bilingual.py | test_T_K14_0204_parallel_comparator_categories |
 | T-K14-0301 | Locator and typed value both checked | fast | k14/test_bilingual.py | test_T_K14_0301_locator_and_typed_value_both_checked |
+| T-K14-0302 | Typed proposals reject mixed digits, bad identifiers and bad locators | fast | k14/test_bilingual.py | test_T_K14_0302_typed_value_protections |
 | T-K14-0401 | Recorded replay and parallel check | fast | k14/test_bilingual.py | test_T_K14_0401_recorded_replay_and_parallel_check |
 | T-K14-0501 | Abstentions | fast | k14/test_bilingual.py | test_T_K14_0501_abstentions |
 | T-K14-0502 | At most two model calls and only retry unknown | fast | k14/test_bilingual.py | test_T_K14_0502_at_most_two_model_calls_and_only_retry_unknown |
+| T-K14-0503 | The Gateway preflights case page and token ceilings | fast | k14/test_bilingual.py | test_T_K14_0503_gateway_budget_preflight |
 | T-KRN-0001 | Regeneration is byte-identical | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0001_regeneration_byte_identical |
 | T-KRN-0002 | A hand edit of a generated file fails the gate | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0002_hand_edit_fails_gate |
 | T-KRN-0003 | Every entity has tenant_id and schema_version | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version |

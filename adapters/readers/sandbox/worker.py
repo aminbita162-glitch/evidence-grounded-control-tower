@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import csv
 import ctypes
 import errno
@@ -128,7 +129,11 @@ def _date(value: object) -> str | None:
     return str(value) if value else None
 
 
-def _pdf(payload: bytes) -> tuple[list[TextSegment], ReaderMetadata]:
+def _pdf(
+    payload: bytes,
+    *,
+    include_scan: bool,
+) -> tuple[list[TextSegment], ReaderMetadata, list[tuple[int, str]]]:
     from pypdf import PdfReader
 
     document = PdfReader(io.BytesIO(payload), strict=True)
@@ -144,13 +149,29 @@ def _pdf(payload: bytes) -> tuple[list[TextSegment], ReaderMetadata]:
         modified_at=_date(metadata.modification_date) if metadata else None,
     )
     pages = []
+    scans: list[tuple[int, str]] = []
+    scan_bytes = 0
     for index, page in enumerate(document.pages):
         if "/AA" in page or "/Annots" in page:
             raise ValueError("ACTIVE_CONTENT")
         text = page.extract_text()
         if text.strip():
             pages.append(TextSegment(index, text))
-    return pages, properties
+        elif include_scan and len(scans) < 6:
+            resources = page.get("/Resources", {})
+            embedded = resources.get("/XObject")
+            if not embedded:
+                continue
+            objects = [item.get_object() for item in embedded.get_object().values()]
+            images = [item for item in objects if item.get("/Subtype") == "/Image"]
+            if len(images) != 1 or images[0].get("/Filter") != "/DCTDecode":
+                continue
+            image = images[0].get_data()
+            scan_bytes += len(image)
+            if scan_bytes > 2 * 1024 * 1024:
+                raise ValueError("IMAGE_OUTPUT_LIMIT")
+            scans.append((index, base64.b64encode(image).decode("ascii")))
+    return pages, properties, scans
 
 
 def _office(payload: bytes, media: str) -> tuple[list[TextSegment], ReaderMetadata]:
@@ -198,8 +219,6 @@ def _office(payload: bytes, media: str) -> tuple[list[TextSegment], ReaderMetada
 
 
 def _read(payload: bytes, media: str) -> tuple[list[TextSegment], ReaderMetadata]:
-    if media == "application/pdf":
-        return _pdf(payload)
     if media.startswith("application/vnd.openxmlformats-officedocument."):
         return _office(payload, media)
     if media not in {"text/plain", "text/csv"}:
@@ -226,13 +245,18 @@ def main() -> None:
 
             result = extract(payload, Path(sys.argv[4]), sys.argv[5])
         else:
-            segments, metadata = _read(payload, sys.argv[3])
+            images: list[tuple[int, str]] = []
+            if sys.argv[3] == "application/pdf":
+                segments, metadata, images = _pdf(payload, include_scan=sys.argv[4:] == ["scan"])
+            else:
+                segments, metadata = _read(payload, sys.argv[3])
             pages = [asdict(item) for item in segments if item.text.strip()]
             if len(pages) > _MAX_SEGMENTS:
                 raise ValueError("READER_OUTPUT_LIMIT")
             result = {
                 "segments": pages,
                 "metadata": asdict(metadata),
+                "images": images,
                 "reason": None if pages else "TEXT_UNAVAILABLE",
             }
         encoded = json.dumps(result, ensure_ascii=False).encode()

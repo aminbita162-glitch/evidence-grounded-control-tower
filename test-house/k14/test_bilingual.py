@@ -772,3 +772,89 @@ def test_T_K14_0204_parallel_comparator_categories() -> None:
     )
     assert parallel_differences(first, second) == tuple(sorted(kinds))
     assert parallel_differences(second, first) == tuple(sorted(kinds))
+
+
+# id: T-K14-0503
+# title: The Gateway preflights case page and token ceilings
+# purpose: Verify that an exhausted extraction meter stops the request before provider execution.
+# level: fast
+# requirement: PR-02 PR-13
+# input: Synthetic provider responses and explicit meter ceilings.
+# expected: Budget exhaustion occurs before provider execution and a normal call records use.
+# risk: RSK-M-02
+# capability: K14
+@pytest.mark.fast
+def test_T_K14_0503_gateway_budget_preflight() -> None:
+    from adapters.model.gateway import Gateway, GatewayError, ModelCallRequest, ModelCallResponse
+    from capabilities.k14.demo import FixtureProvider
+    from capabilities.k14.gateway import GatewayExtraction
+    from kernel.budget import ExtractionMeter
+
+    class Provider(FixtureProvider):
+        def __init__(self, *, available: bool = True) -> None:
+            self.calls = 0
+            self.available = available
+
+        async def call(self, request: ModelCallRequest) -> ModelCallResponse:
+            self.calls += 1
+            if not self.available:
+                raise GatewayError("SYNTHETIC_UNAVAILABLE")
+            return await super().call(request)
+
+    sample = document("Invoice\nfield: 10")
+    field = (Field("field", "number"),)
+    model = Provider()
+    gateway = Gateway(model)
+    for meter in (ExtractionMeter(case_ceiling_pages=0), ExtractionMeter(case_ceiling_tokens=1)):
+        stage = BilingualIntake(GatewayExtraction(gateway, meter))
+        report = asyncio.run(stage.evaluate(sample, field))
+        assert report.reason_codes == ("K14.NEEDS_REVIEW.EXTRACTION_BUDGET",)
+    assert model.calls == 0
+    meter = ExtractionMeter()
+    stage = BilingualIntake(GatewayExtraction(gateway, meter))
+    report = asyncio.run(stage.evaluate(sample, field))
+    assert report.reason_codes == ("K14.INTAKE.PROVIDED",)
+    assert meter.pages_processed == 1
+    assert model.calls == 1
+    failure = BilingualIntake(GatewayExtraction(Gateway(Provider(available=False))))
+    assert asyncio.run(failure.evaluate(sample, field)).reason_codes == (
+        "K14.ABSTAIN.MODEL_UNAVAILABLE",
+    )
+
+
+# id: T-K14-0302
+# title: Typed proposals reject mixed digits, bad identifiers and bad locators
+# purpose: Verify localized ground checks before issuing a verified value.
+# level: fast
+# requirement: PR-02 PR-11
+# input: Synthetic identifier, date, number, unit and span edge cases.
+# expected: Invalid and ambiguous values stay unknown and the standard unit is retained.
+# risk: RSK-M-02
+# capability: K14
+@pytest.mark.fast
+def test_T_K14_0302_typed_value_protections() -> None:
+    text = "Date ٠3/04/2026"
+    result = ground(
+        document(text), Field("field", "date"), candidate(text, "٠3/04/2026"), ExtractionPolicy()
+    )
+    assert result.flags == ("MIXED_DIGITS",)
+    for token, expected in (("INV-١2", ("MIXED_DIGITS",)), ("INV@2", ())):
+        text = f"Invoice {token}"
+        result = ground(
+            document(text), Field("field", "identifier"), candidate(text, token), ExtractionPolicy()
+        )
+        assert result.status == "UNKNOWN"
+        assert result.flags == expected
+    text = "وزن كغ"
+    field = Field("field", "unit")
+    original = candidate(text, "كغ")
+    assert ground(document(text), field, original, ExtractionPolicy()).normalized == "kg"
+    invalid = original.model_copy(update={"end": len(text) + 1})
+    assert ground(document(text), field, invalid, ExtractionPolicy()).status == "UNKNOWN"
+    text = "Amount n/a"
+    assert (
+        ground(
+            document(text), Field("field", "number"), candidate(text, "n/a"), ExtractionPolicy()
+        ).status
+        == "UNKNOWN"
+    )

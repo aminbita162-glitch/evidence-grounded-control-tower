@@ -21,6 +21,63 @@ def _gate_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
+def _verify_intake_branches(root: Path, env: dict[str, str]) -> int:
+    """Keep the Phase 14 module floors separate from the inherited repository total."""
+    if not (root / "capabilities/k14/manifest.json").is_file():
+        return 0
+    report = root / ".gate-logs" / "p14-scoped-coverage.json"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "-n0",
+            "-o",
+            "addopts=",
+            "--import-mode=importlib",
+            "--cov=capabilities",
+            "--cov=kernel/intake",
+            "--cov=kernel/lib/text",
+            "--cov-branch",
+            f"--cov-report=json:{report}",
+            "test-house/intake",
+            "test-house/k14",
+            "test-house/f01",
+            "test-house/k09",
+            "test-house/pairs",
+            "capabilities/k14/golden",
+            "capabilities/f01/golden",
+            "capabilities/k09/golden",
+        ],
+        cwd=root,
+        env={**env, "COVERAGE_FILE": str(root / ".gate-logs" / "p14-scoped.coverage")},
+        capture_output=True,
+        text=True,
+        timeout=180,
+    )
+    if result.returncode:
+        print(result.stdout, file=sys.stderr)
+        return 1
+    files = json.loads(report.read_text(encoding="utf-8"))["files"]
+    ordered = (
+        ("capabilities/k14/", 90),
+        ("capabilities/f01/", 90),
+        ("capabilities/k09/", 90),
+        ("kernel/intake/", 95),
+        ("kernel/lib/text/", 95),
+    )
+    failures = []
+    for prefix, minimum in ordered:
+        summary = [info["summary"] for name, info in files.items() if name.startswith(prefix)]
+        total = sum(item["num_branches"] for item in summary)
+        covered = sum(item["covered_branches"] for item in summary)
+        if total == 0 or covered * 100 < minimum * total:
+            failures.append(prefix)
+        print(f"mutation: {prefix} branch coverage {covered}/{total} (floor {minimum}%)")
+    return int(bool(failures))
+
+
 def main() -> int:
     """Entry point: run coverage on kernel/ and verify thresholds."""
     root = _gate_root()
@@ -87,7 +144,7 @@ def main() -> int:
         return 1
 
     print(f"mutation: branch coverage {pct:.1f}% meets threshold {threshold}%")
-    return 0
+    return _verify_intake_branches(root, env)
 
 
 if __name__ == "__main__":

@@ -4974,6 +4974,8 @@ P14-END1, P14-END2: per Part 1 §10.
 
 7. Test plan. Capabilities K14, F01, K09: every scenario of Part 5 (K14-S01 to S20, F01-S01 to S12, K09-S01 to S17) maps to the golden test with the same number (CP2, CP3), with the Definition of Done items shown in the generated table. New gates: none. Tier A: unit, property and skeleton tests; Tier B: differential, adversarial, replay, pair tests and mutation by impact (a change to `kernel/lib/text/` or the Intake stage selects all three capabilities). Test ids: T-INT-0001 to T-INT-0080, T-K14-0001 to T-K14-0599, T-F01-0001 to T-F01-0599, T-K09-0001 to T-K09-0599.
 
+Owner-approved evidence handling for P14 is recorded in `docs/decisions/P14-coverage.md`. The large reserved test-ID ranges may use parameterized acceptance evidence. The 49 golden scenario IDs remain individually indexed. The inherited repository-wide coverage shortfall is bounded by the conditions in the decision.
+
 8. Risk review: task P14-RISK.
 
 9. Exit conditions beyond Part 1 §9: all gates exit 0; the three capabilities meet the twelve Definition of Done items with a generated table; F01 output schemas registered in `contracts.lock`; the skeleton is green through library, command line and API starting from documents; mutation and coverage floors met; V-10 status recorded; README capability marks ticked by the gate; risk review filed.

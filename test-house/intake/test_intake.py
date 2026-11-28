@@ -315,3 +315,119 @@ def test_T_INT_0063_scan_fixture_has_stable_bytes() -> None:
     assert detect_media_type(raw, fixture.name) == "image/scan"
     assert raw == source.synthetic_png(reference["seed"])
     assert reference["label"] == "SYNTHETIC"
+
+
+# id: T-INT-0064
+# title: OCR derives error counts and accepts only complete owner pins
+# purpose: Verify configuration validation and comparable character and digit denominators.
+# level: fast
+# requirement: PR-02 PR-11
+# input: A synthetic scan transcription and complete or incomplete OCR pins.
+# expected: The report counts edits against the fixed source and incomplete pins disable scanning.
+# risk: THR-SEC-09
+# capability: K14
+@pytest.mark.fast
+def test_T_INT_0064_ocr_configuration_and_error_totals(tmp_path: Path) -> None:
+    from adapters.readers.scan.metrics import rates
+
+    parameters = tmp_path / "parameters.md"
+    assert ScanConfiguration.from_parameters(parameters) is None
+    content = ["P14 ocr_version: tesseract fixture"]
+    for key in ("executable", "english", "arabic"):
+        content.extend((f"P14 ocr_{key}: {tmp_path / key}", f"P14 ocr_{key}_sha256: {'a' * 64}"))
+    parameters.write_text("\n".join(content))
+    config = ScanConfiguration.from_parameters(parameters)
+    assert config is not None and config.version == "tesseract fixture"
+    assert config.english.path == tmp_path / "english"
+    parameters.write_text("\n".join([*content, "P14 ocr_version: duplicate"]))
+    assert ScanConfiguration.from_parameters(parameters) is None
+    parameters.write_text("\n".join(content[:-1]))
+    assert ScanConfiguration.from_parameters(parameters) is None
+    characters, digits = rates("TOTAL 1250", "TOTAL 1230")
+    assert characters.fraction == "1/10"
+    assert digits.fraction == "1/4"
+    assert rates("اسم", "اسم")[1].fraction is None
+
+
+# id: T-INT-0011
+# title: Erasure retains shared originals until the last document reference
+# purpose: Verify case scoping, retry behavior and payload retention.
+# level: fast
+# requirement: PR-02 PR-16
+# input: Two synthetic case documents that share the same original digest.
+# expected: Other cases cannot erase a document and the last erase removes the original.
+# risk: THR-SEC-08
+# capability: kernel
+@pytest.mark.fast
+def test_T_INT_0011_erasure_reference_lifecycle() -> None:
+    from kernel.intake import detect_media_type
+
+    class Documents(InMemoryRepository):
+        refuse_delete = False
+
+        async def delete(self, ctx: TenantContext, entity_id: str) -> bool:
+            if self.refuse_delete:
+                return False
+            return await super().delete(ctx, entity_id)
+
+    async def run() -> None:
+        repo = Documents()
+        stage = IntakeStage(FixtureReader(), repo, InMemoryRepository())
+        context = TenantContext("SYN-INTAKE", "administrator")
+        byte_data = b"Invoice contents"
+        args: _DocumentArgs = {
+            "payload": byte_data,
+            "filename": "invoice.txt",
+            "document_type": "COMMERCIAL_INVOICE",
+            "created_at": "2026-11",
+        }
+        first = await stage.ingest(
+            context,
+            InMemoryCaseChain(context.tenant_id, "FIRST"),
+            _ACTOR,
+            **args,
+        )
+        second = await stage.ingest(
+            context,
+            InMemoryCaseChain(context.tenant_id, "SECOND"),
+            _ACTOR,
+            **args,
+        )
+        assert await stage.erase(context, "FIRST", second.record.document_id) is None
+        assert await stage.erase(context, "FIRST", first.record.document_id) == (
+            first.record.sha256
+        )
+        assert await stage.original(context, first.record.sha256) == byte_data
+        repo.refuse_delete = True
+        assert await stage.erase(context, "SECOND", second.record.document_id) is None
+        repo.refuse_delete = False
+        assert await stage.erase(context, "SECOND", second.record.document_id) == (
+            second.record.sha256
+        )
+        assert await stage.original(context, second.record.sha256) is None
+
+    assert detect_media_type(b"%PDF-1.5", "renamed.txt") == "application/pdf"
+    asyncio.run(run())
+
+
+# id: T-INT-0012
+# title: Date normalization handles explicit locale and rejects invalid month names
+# purpose: Verify deterministic interpretation of supported syntax and unknown formats.
+# level: fast
+# requirement: PR-02 PR-11
+# input: Synthetic ISO dates, numeric locale hints and Arabic month text.
+# expected: Explicit and unambiguous dates parse, while invalid forms stay rejected.
+# risk: RSK-M-02
+# capability: K14
+@pytest.mark.fast
+def test_T_INT_0012_date_format_boundaries() -> None:
+    from kernel.lib.text import parse_date
+
+    assert parse_date("2026-11-28") == "2026-11-28"
+    assert parse_date("03/04/2026", locale_order="DMY") == "2026-04-03"
+    assert parse_date("03/04/2026", locale_order="MDY") == "2026-03-04"
+    assert parse_date("02/27/2026") == "2026-02-27"
+    assert parse_date("٢٧ شباط ٢٠٢٦") == "2026-02-27"
+    for bad in ("٢٧ غيرمعروف ٢٠٢٦", "date pending"):
+        with pytest.raises(ValueError, match="INVALID_DATE"):
+            parse_date(bad)

@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import json
 import os
 import signal
 import subprocess  # nosec B404
 import sys
 import tempfile
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import cast
 
@@ -73,6 +74,13 @@ class SandboxedReader:
         self._limits = limits or ReaderLimits()
         self._scan = scan
 
+    @classmethod
+    def from_run_parameters(cls, path: Path, limits: ReaderLimits | None = None) -> SandboxedReader:
+        from adapters.readers.scan import ScanConfiguration, ScanReader
+
+        pins = ScanConfiguration.from_parameters(path)
+        return cls(limits, ScanReader(pins) if pins is not None else None)
+
     async def read(self, payload: bytes, media_type: str) -> ReadResult:
         if len(payload) > MAX_INPUT:
             return ReadResult(media_type, reason="READER_SIZE_LIMIT")
@@ -81,11 +89,21 @@ class SandboxedReader:
                 return await self._scan.read(payload, media_type)
             return ReadResult(media_type, reason="TEXT_UNAVAILABLE")
         try:
-            raw = await asyncio.to_thread(run_worker, payload, (media_type,), self._limits)
+            options = (media_type, "scan") if self._scan is not None else (media_type,)
+            raw = await asyncio.to_thread(run_worker, payload, options, self._limits)
             data = json.loads(raw)
             metadata = ReaderMetadata(**data.get("metadata", {}))
             segments = tuple(TextSegment(**segment) for segment in data.get("segments", []))
             reason = cast("str | None", data.get("reason"))
         except OSError, ValueError, TypeError:
             return ReadResult(media_type, reason="READER_REFUSED")
+        if self._scan is not None:
+            image_result: list[TextSegment] = []
+            for page, encoded in data.get("images", []):
+                image = base64.b64decode(encoded, validate=True)
+                result = await self._scan.read(image, "image/scan")
+                image_result.extend(replace(segment, page=page) for segment in result.segments)
+            if image_result:
+                segments = tuple(sorted((*segments, *image_result), key=lambda s: s.page))
+                reason = None
         return ReadResult(media_type, segments, metadata, reason)

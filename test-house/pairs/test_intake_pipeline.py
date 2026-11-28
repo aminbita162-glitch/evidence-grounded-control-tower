@@ -156,3 +156,137 @@ def test_T_INT_0045_cli_document_workflow(capsys: pytest.CaptureFixture[str]) ->
     assert report["label"] == "SYNTHETIC"
     if sys.platform == "linux":
         assert report["status"] == "ALLOW"
+
+
+# id: T-INT-0046
+# title: Reviewer relation and erasure refresh related case evidence
+# purpose: Verify the lifecycle of cross-case duplicate findings.
+# level: fast
+# requirement: PR-02 PR-16
+# input: Two uploads of a synthetic invoice and tenant-scoped reviewer access.
+# expected: Reuse holds both cases until reviewer approval and erasure removes the stored match.
+# risk: THR-SEC-08
+# capability: K09
+@pytest.mark.fast
+def test_T_INT_0046_relation_and_erasure() -> None:
+    from kernel.humangate import HumanGateError
+
+    reviewer = Principal(principal_id="SYN-REVIEW", role="reviewer", tenant_id=_OWNER.tenant_id)
+    admin = Principal(principal_id="SYN-ADMIN", role="administrator", tenant_id=_OWNER.tenant_id)
+    foreign = Principal(principal_id="SYN-REVIEW", role="reviewer", tenant_id="SYN-DIFFERENT")
+    workflow = create_demo(
+        FixtureReader(),
+        case_access=lambda principal, case: (
+            principal.tenant_id == _OWNER.tenant_id and case in {"first", "second"}
+        ),
+    )
+
+    async def run() -> None:
+        await workflow.ingest(_OWNER, "first", DOCUMENTS[:1], "2026-11")
+        await workflow.ingest(_OWNER, "second", DOCUMENTS[:1], "2026-11")
+        prior, newest = workflow.result(_OWNER, "first"), workflow.result(_OWNER, "second")
+        assert prior is not None and newest is not None
+        assert prior.shield.outcome == newest.shield.outcome == "HOLD"
+        assert prior.evidence["K09"][-1]["supersedes"] == prior.evidence["K09"][0]["output_hash"]
+        doc = prior.documents[0].record.document_id
+        other = newest.documents[0].record.document_id
+        for denied in (_OWNER, foreign):
+            with pytest.raises(PermissionError, match="CASE_NOT_FOUND"):
+                await workflow.declare_relation(denied, "first", "second", doc, other, "SPLIT_OF")
+        with pytest.raises(PermissionError, match="CASE_NOT_FOUND"):
+            await workflow.declare_relation(reviewer, "first", "second", doc, "missing", "SPLIT_OF")
+        await workflow.declare_relation(reviewer, "first", "second", doc, other, "SPLIT_OF")
+        with pytest.raises(HumanGateError):
+            await workflow.declare_relation(reviewer, "first", "second", doc, other, "SPLIT_OF")
+        current = workflow.result(reviewer, "first")
+        assert current is not None and current.shield.outcome == "ALLOW"
+        assert "K09.OBS.RELATION_APPLIED" in current.shield.reason_codes
+        with pytest.raises(PermissionError, match="CASE_NOT_FOUND"):
+            await workflow.erase_document(reviewer, "first", doc)
+        assert not await workflow.erase_document(admin, "first", "missing")
+        assert await workflow.erase_document(admin, "first", doc)
+        result = workflow.result(admin, "first")
+        assert result is not None and not result.documents
+        retained = workflow.result(admin, "second")
+        assert retained is not None and retained.shield.outcome == "ALLOW"
+
+    asyncio.run(run())
+
+
+# id: T-INT-0047
+# title: Access, write-path and name-link boundaries survive repeat ingestion
+# purpose: Verify same-tenant ownership checks and canonical writes on upgraded inputs.
+# level: fast
+# requirement: PR-02 PR-11 PR-16
+# input: Paired synthetic documents, an explicit name variant and a tenant-scoped writer.
+# expected: Canonical writes contain only agreeing facts and proposed name links stay advisory.
+# risk: THR-SEC-08
+# capability: K14
+@pytest.mark.fast
+def test_T_INT_0047_case_ownership_and_repeat_intake() -> None:
+    from capabilities.f01 import CanonicalFact
+    from capabilities.k09 import FingerprintIndex
+    from kernel.ledger.chain import InMemoryCaseChain
+
+    class Writer:
+        def __init__(self) -> None:
+            self.keys: list[str] = []
+
+        async def write(self, case_id: str, fact: CanonicalFact) -> None:
+            assert case_id == "case"
+            self.keys.append(fact.key)
+
+    writer = Writer()
+    index = FingerprintIndex()
+    workflow = create_demo(
+        FixtureReader(),
+        name_variants={"مثال": ("example ltd",)},
+        canonical_writer=writer,
+        fingerprints=index,
+    )
+    same_scope = Principal(principal_id="SYN-STRANGER", role="operator", tenant_id=_OWNER.tenant_id)
+    no_tenant = Principal(principal_id="SYN-PLATFORM", role="platform")
+    wrong_tenant = Principal(principal_id="SYN-OTHER", role="operator", tenant_id="SYN-OTHER")
+    first, second = DOCUMENTS
+    alternate = SourceDocument(
+        second.filename,
+        second.document_type,
+        second.payload + "\nseller_name: مثال".encode(),
+        second.parallel_group,
+    )
+    unrelated = SourceDocument(
+        "unrelated.txt", "DELIVERY_ORDER", b"Synthetic unrelated document", "different"
+    )
+
+    async def run() -> None:
+        assert workflow.result(no_tenant, "case") is None
+        with pytest.raises(PermissionError, match="CASE_NOT_FOUND"):
+            await workflow.ingest(no_tenant, "case", (first,), "2026-11")
+        with pytest.raises(PermissionError, match="CASE_NOT_FOUND"):
+            await workflow.ingest(
+                _OWNER, "other", (first,), "2026-11", chain=InMemoryCaseChain("SYN-OTHER", "other")
+            )
+        await workflow.ingest(_OWNER, "case", (first, alternate, unrelated), "2026-11")
+        result = workflow.result(_OWNER, "case")
+        assert result is not None
+        assert "shipment.gross_weight" in writer.keys
+        assert any(report.name_link_proposals for report in result.extraction)
+        assert all(f.key != "shipment.seller_name" for f in result.consistency.canonical)
+        assert result.outcome("K09")[0] == "ABSTAIN"
+        with pytest.raises(PermissionError, match="CASE_NOT_FOUND"):
+            await workflow.ingest(same_scope, "case", (first,), "2026-11")
+        await workflow.ingest(_OWNER, "case", (first,), "2026-11")
+        result = workflow.result(_OWNER, "case")
+        assert result is not None and "K09.OBS.SAME_CASE_DUPLICATE" in result.shield.reason_codes
+        await workflow.ingest(wrong_tenant, "case", (first,), "2026-11")
+        assert result.documents[0].record.tenant_id == _OWNER.tenant_id
+        index.upsert(
+            next(
+                fp
+                for fp in index._documents[_OWNER.tenant_id or ""].values()
+                if fp.case_id == "case"
+            )
+        )
+        assert workflow.result(_OWNER, "case") is None
+
+    asyncio.run(run())

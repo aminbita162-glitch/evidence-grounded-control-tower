@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Callable, Mapping, Sequence
 
 from adapters.model.gateway import (
     Gateway,
@@ -16,6 +17,7 @@ from capabilities import f01, k09
 from capabilities.k14 import BilingualIntake, Field
 from capabilities.k14.gateway import GatewayExtraction
 from capabilities.k14.workflow import IntakeWorkflow
+from kernel.auth.roles import Principal
 from kernel.intake import DocumentReader, IntakeStage
 from kernel.persistence.repositories.in_memory import InMemoryRepository
 from kernel.skeleton.intake import SourceDocument
@@ -78,7 +80,14 @@ class FixtureProvider:
         )
 
 
-def create_demo(reader: DocumentReader | None = None) -> IntakeWorkflow:
+def create_demo(
+    reader: DocumentReader | None = None,
+    *,
+    case_access: Callable[[Principal, str], bool] | None = None,
+    name_variants: Mapping[str, Sequence[str]] | None = None,
+    canonical_writer: f01.CanonicalWriter | None = None,
+    fingerprints: k09.FingerprintIndex | None = None,
+) -> IntakeWorkflow:
     return IntakeWorkflow(
         IntakeStage(
             reader or SandboxedReader(),
@@ -86,7 +95,7 @@ def create_demo(reader: DocumentReader | None = None) -> IntakeWorkflow:
             InMemoryRepository("originals"),
         ),
         BilingualIntake(GatewayExtraction(Gateway(FixtureProvider()))),
-        k09.FingerprintIndex(),
+        fingerprints if fingerprints is not None else k09.FingerprintIndex(),
         f01.Workflow(
             required_document_types=frozenset({"COMMERCIAL_INVOICE", "PACKING_LIST"}),
             required_fields=frozenset({"gross_weight"}),
@@ -94,4 +103,7 @@ def create_demo(reader: DocumentReader | None = None) -> IntakeWorkflow:
         ),
         fields=FIELDS,
         label="SYNTHETIC",
+        case_access=case_access,
+        name_variants=name_variants,
+        canonical_writer=canonical_writer,
     )

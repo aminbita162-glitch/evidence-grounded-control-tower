@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import re
 import struct
 import tempfile
 from dataclasses import dataclass
@@ -34,6 +35,33 @@ class ScanConfiguration:
     english: PinnedFile
     arabic: PinnedFile
     version: str
+
+    @classmethod
+    def from_parameters(cls, path: Path) -> ScanConfiguration | None:
+        """Load owner-recorded V-31 pins. Incomplete or invalid records disable OCR."""
+        keys = ("executable", "english", "arabic")
+        entries: dict[str, str] = {}
+        try:
+            for line in path.read_text(encoding="utf-8").splitlines():
+                key, colon, value = line.partition(":")
+                if not colon or not key.startswith("P14 ocr_"):
+                    continue
+                name = key.removeprefix("P14 ocr_")
+                if name in entries:
+                    return None
+                entries[name] = value.strip()
+        except OSError, UnicodeError:
+            return None
+        if not entries.get("version"):
+            return None
+        verified = []
+        for name in keys:
+            candidate = Path(entries.get(name, ""))
+            digest = entries.get(f"{name}_sha256", "")
+            if not candidate.is_absolute() or not re.fullmatch(r"[0-9a-f]{64}", digest):
+                return None
+            verified.append(PinnedFile(candidate, digest))
+        return cls(verified[0], verified[1], verified[2], entries["version"])
 
 
 class _OCRLine(TypedDict):

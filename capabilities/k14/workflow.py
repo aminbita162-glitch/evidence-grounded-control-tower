@@ -158,13 +158,13 @@ class IntakeWorkflow:
                 principal, case_id
             ):
                 raise PermissionError("CASE_NOT_FOUND")
-            self._owners.setdefault(key, principal.principal_id)
             if chain is None:
                 if key not in self._chains:
                     self._chains[key] = self._case_chain(tenant, case_id)
                 chain = self._chains[key]
             if (chain.tenant_id, chain.case_id) != key:
                 raise PermissionError("CASE_NOT_FOUND")
+            self._owners.setdefault(key, principal.principal_id)
             self._chains[key] = chain
             groups = self._parallel.setdefault(key, {})
             observed = set()
@@ -296,7 +296,7 @@ class IntakeWorkflow:
             chain = self._chains[(tenant, case_id)]
             actor = Actor("ROLE", principal.role)
             event = await chain.append(
-                "Human Gate",
+                "HumanGate",
                 actor,
                 "document_relation",
                 {

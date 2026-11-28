@@ -656,3 +656,46 @@ def test_T_K09_0303_candidate_cap_boundary(monkeypatch: pytest.MonkeyPatch) -> N
     assert report.outcome == "HOLD"
     assert "K09.OBS.METADATA_SIGNAL" in report.reason_codes
     assert "K09.ABSTAIN.CANDIDATE_CAP" not in report.reason_codes
+
+
+# id: T-K09-0405
+# title: Approved amendments and closed cases retain their boundaries
+# purpose: Verify pair-scoped suppression, protected reads and stale recomputation.
+# level: fast
+# requirement: PR-02 PR-16
+# input: Two invoices with the same identity, an approved amendment and another tenant.
+# expected: The amendment applies only to its pair and foreign results remain independent.
+# risk: THR-SEC-08
+# capability: K09
+@pytest.mark.fast
+def test_T_K09_0405_amendment_and_closed_results() -> None:
+    first = document("first", "Invoice parts ten")
+    second = document("second", "Invoice parts twenty", amount="300")
+    foreign = document("third", "Invoice parts ten", tenant="SYN-B")
+    index = k09.FingerprintIndex()
+    index.erase("SYN-A", "missing")
+    for item in (first, second, foreign):
+        index.upsert(item)
+    index.mark_closed(first.tenant_id, first.case_id)
+    conflict = index.evaluate(second.tenant_id, second.case_id)
+    assert conflict.outcome == "ESCALATE"
+    assert index.result(first.tenant_id, first.case_id) is None
+    shown = conflict.view(frozenset({first.case_id}), reviewer=True)
+    assert shown.findings[0].other_case_id == first.case_id
+    with pytest.raises(ValueError, match="VERIFIED_RELATION_REQUIRED"):
+        index.declare(
+            first.tenant_id,
+            k09.Relation(first.document_id, foreign.document_id, "AMENDS", "SYN-APPROVAL"),
+        )
+    index.declare(
+        first.tenant_id,
+        k09.Relation(first.document_id, second.document_id, "AMENDS", "SYN-APPROVAL"),
+    )
+    index.recompute_stale(first.tenant_id)
+    cleared = index.result(second.tenant_id, second.case_id)
+    assert cleared is not None and cleared.outcome == "ALLOW"
+    assert "K09.OBS.RELATION_APPLIED" in cleared.reason_codes
+    assert index.result(foreign.tenant_id, foreign.case_id) is None
+    index.evaluate(foreign.tenant_id, foreign.case_id)
+    index.erase(first.tenant_id, first.document_id)
+    assert index.result(foreign.tenant_id, foreign.case_id) is not None
