@@ -171,6 +171,7 @@
     "PartialDay": {
       "enum": [
         "STARTED",
+        "STARTED_INCLUSIVE",
         "COMPLETE",
         "PRORATED"
       ],

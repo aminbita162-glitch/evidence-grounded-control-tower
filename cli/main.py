@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from kernel.skeleton import run_skeleton
+from kernel.skeleton.finance import FINANCE_IDS
 
 if TYPE_CHECKING:
     from capabilities.k14.workflow import IntakeWorkflow
@@ -34,6 +35,7 @@ __all__ = ["main", "build_parser"]
 EXIT_OK = 0
 EXIT_ERROR = 1
 EXIT_USAGE = 2
+_CAPABILITY_IDS = ("K14", "F01", "K09", "K05", "F02", *FINANCE_IDS)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -46,9 +48,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("ingest", help="Ingest a document into a case")
     evaluate = sub.add_parser("evaluate", help="Evaluate a case through the rule engine")
-    evaluate.add_argument("--capability", dest="id", choices=["K14", "F01", "K09", "K05", "F02"])
+    evaluate.add_argument("--capability", dest="id", choices=_CAPABILITY_IDS)
     evaluate.add_argument("--document", action="append", nargs=2, metavar=("TYPE", "FILE"))
 
+    evaluate.add_argument("--case-input", type=Path, help="Recorded financial case input JSON")
     evaluate.add_argument("--evaluation-time", help="Evaluation time in ISO 8601 with offset")
 
     sub.add_parser("replay", help="Replay a case from recorded evidence")
@@ -60,9 +63,10 @@ def build_parser() -> argparse.ArgumentParser:
         "--documents", action="store_true", help="Start with the bilingual synthetic document set"
     )
     capability = sub.add_parser("capability", help="Evaluate documents in the local workflow")
-    capability.add_argument("id", choices=["K14", "F01", "K09", "K05", "F02"])
+    capability.add_argument("id", choices=_CAPABILITY_IDS)
     capability.add_argument("--document", action="append", nargs=2, metavar=("TYPE", "FILE"))
 
+    capability.add_argument("--case-input", type=Path, help="Recorded financial case input JSON")
     capability.add_argument("--evaluation-time", help="Evaluation time in ISO 8601 with offset")
 
     autonomy = sub.add_parser("autonomy", help="Autonomy control commands")
@@ -227,8 +231,38 @@ def _judgment_demo() -> tuple[IntakeWorkflow, tuple[SourceDocument, ...]]:
     )
 
 
+def _cmd_finance(args: argparse.Namespace) -> int:
+    """Run a financial evaluation from an explicit recorded case input."""
+    from api.routes.capability import evaluate_finance_step
+
+    if args.case_input is None or args.document:
+        print("Financial evaluations require --case-input JSON.", file=sys.stderr)
+        return EXIT_USAGE
+    try:
+        data = json.loads(args.case_input.read_bytes())
+        if not isinstance(data, dict):
+            raise ValueError("financial case input must be an object")
+        if "inputs" in data and isinstance(data["inputs"], dict):
+            data = dict(data["inputs"])
+        saved_time = data.pop("evaluation_time", "")
+        at = datetime.fromisoformat(args.evaluation_time or saved_time)
+        result = evaluate_finance_step(args.id, data, at)
+    except OSError, ValueError, TypeError, ArithmeticError:
+        print("Invalid recorded financial case input.", file=sys.stderr)
+        return EXIT_USAGE
+    print(
+        json.dumps({"status": result.status, "report": result.report, "evidence": result.evidence})
+    )
+    return EXIT_OK
+
+
 def _cmd_capability(args: argparse.Namespace) -> int:
     """Run a registered capability against document bytes in a local case."""
+    if args.id in FINANCE_IDS:
+        return _cmd_finance(args)
+    if args.case_input is not None:
+        print("--case-input applies to financial evaluations.", file=sys.stderr)
+        return EXIT_USAGE
     from adapters.readers.sandbox import MAX_INPUT
     from capabilities.k14.demo import DOCUMENTS, create_demo
     from kernel.auth.roles import Principal

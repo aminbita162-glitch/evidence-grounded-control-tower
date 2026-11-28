@@ -567,3 +567,173 @@ def test_T_F07_0225_adjacent_periods_are_distinct() -> None:
     """
     adjacent = replace(LINE, id="L2", period_start=START + 3 * DAY, period_end=START + 5 * DAY)
     assert report((LINE, adjacent)).outcome is DecisionValue.ALLOW
+
+
+@pytest.mark.fast
+def test_T_F07_0520_overlapping_clock_versions_ambiguous() -> None:
+    """
+    id: T-F07-0520
+    title: Overlapping clock versions ambiguous
+    purpose: Overlapping clock versions ambiguous
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Overlapping clock versions ambiguous
+    risk: HZ-03
+    capability: F07
+    """
+    overlap = replace(CLOCK, clock=replace(MODEL, terms=replace(TERMS, version="2")))
+    assert report(clocks=(CLOCK, overlap)).lines[0].classification is Classification.AMBIGUOUS
+
+
+@pytest.mark.fast
+def test_T_F07_0521_unverified_clock_terms() -> None:
+    """
+    id: T-F07-0521
+    title: Unverified clock terms
+    purpose: Unverified clock terms
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Unverified clock terms
+    risk: HZ-03
+    capability: F07
+    """
+    weak = replace(CLOCK, clock=replace(MODEL, terms=replace(TERMS, verified=False)))
+    assert report(clocks=(weak,)).lines[0].classification is Classification.CLOCK
+
+
+@pytest.mark.fast
+def test_T_F07_0522_gap_before_tariff() -> None:
+    """
+    id: T-F07-0522
+    title: Gap before tariff
+    purpose: Gap before tariff
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Gap before tariff
+    risk: HZ-03
+    capability: F07
+    """
+    late = replace(CLOCK, clock=replace(MODEL, terms=replace(TERMS, valid_from=START + 2 * DAY)))
+    assert report(clocks=(late,)).lines[0].classification is Classification.CLOCK
+
+
+@pytest.mark.fast
+def test_T_F07_0523_gap_after_tariff() -> None:
+    """
+    id: T-F07-0523
+    title: Gap after tariff
+    purpose: Gap after tariff
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Gap after tariff
+    risk: HZ-03
+    capability: F07
+    """
+    early = replace(CLOCK, clock=replace(MODEL, terms=replace(TERMS, valid_until=START + 2 * DAY)))
+    assert report(clocks=(early,)).lines[0].classification is Classification.CLOCK
+
+
+@pytest.mark.fast
+def test_T_F07_0524_duplicated_event_rejected() -> None:
+    """
+    id: T-F07-0524
+    title: Duplicated event rejected
+    purpose: Duplicated event rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Duplicated event rejected
+    risk: HZ-03
+    capability: F07
+    """
+    duplicates = replace(CLOCK, clock=replace(MODEL, events=(EVENT, EVENT)))
+    assert report(clocks=(duplicates,)).lines[0].classification is Classification.CLOCK
+
+
+@pytest.mark.fast
+def test_T_F07_0525_missing_start_event_rejected() -> None:
+    """
+    id: T-F07-0525
+    title: Missing start event rejected
+    purpose: Missing start event rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Missing start event rejected
+    risk: HZ-03
+    capability: F07
+    """
+    no_events = replace(CLOCK, clock=replace(MODEL, events=()))
+    assert report(clocks=(no_events,)).lines[0].classification is Classification.CLOCK
+
+
+@pytest.mark.fast
+def test_T_F07_0526_future_event_not_in_evidence() -> None:
+    """
+    id: T-F07-0526
+    title: Future event not in evidence
+    purpose: Future event not in evidence
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Future event not in evidence
+    risk: HZ-03
+    capability: F07
+    """
+    late = replace(EVENT, kind="GATED_OUT_FULL", instant=AT + DAY)
+    future = replace(CLOCK, clock=replace(MODEL, events=(EVENT, late)))
+    assert report(clocks=(future,)).lines[0].events == (EVENT,)
+
+
+@pytest.mark.fast
+def test_T_F07_0527_invalid_movement_order() -> None:
+    """
+    id: T-F07-0527
+    title: Invalid movement order
+    purpose: Invalid movement order
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid movement order
+    risk: HZ-03
+    capability: F07
+    """
+    stop = replace(EVENT, kind="GATED_OUT_FULL", instant=START - DAY)
+    wrong = replace(CLOCK, clock=replace(MODEL, events=(EVENT, stop)))
+    assert report(clocks=(wrong,)).lines[0].classification is Classification.CLOCK
+
+
+@pytest.mark.fast
+def test_T_F07_0528_no_invoice_rows_abstains() -> None:
+    """
+    id: T-F07-0528
+    title: No invoice rows abstains
+    purpose: No invoice rows abstains
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: No invoice rows abstains
+    risk: HZ-03
+    capability: F07
+    """
+    assert report(lines=()).outcome is DecisionValue.ABSTAIN
+
+
+@pytest.mark.fast
+def test_T_F07_0529_unverified_invoice_line_abstains() -> None:
+    """
+    id: T-F07-0529
+    title: Unverified invoice line abstains
+    purpose: Unverified invoice line abstains
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F07, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Unverified invoice line abstains
+    risk: HZ-03
+    capability: F07
+    """
+    assert root(replace(LINE, verified=False)) is Classification.MATCHING

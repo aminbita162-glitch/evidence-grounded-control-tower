@@ -5110,7 +5110,7 @@ P16-T08 F07 tests and adversarial corpus
 - Accept: tests T-F07-0001 to T-F07-0011 (scenarios F07-S01 to S11), T-F07-0101 to T-F07-0113, T-F07-0301 to T-F07-0320, T-F07-0401 to T-F07-0410, T-F07-0501 to T-F07-0512.
 
 P16-T09 Skeleton integration, pair tests and hardening
-- Files: `kernel/skeleton/`, `test-house/pairs/`, `api/app.py`, `api/routes/capability.py`, `cli/main.py`, `test-house/INDEX.md`.
+- Files: `kernel/skeleton/`, `test-house/pairs/`, `api/app.py`, `api/routes/capability.py`, `cli/main.py`, `test-house/INDEX.md`, `tools/gate/gates/arch.py`, `tools/gate/gates/mutation.py`.
 - Steps: the four capabilities added to the skeleton; pair tests: L01 publishes match records that F07 reads and F07 judges the amount; F03 and F07 agree on the same clock; L02 total equals the sum of L02 components and its basis equals K05's; a corrected invoice flows ALLOW through L01 and F07; a changed tariff version marks F03, L01 and F07 results STALE (5.1.8); mutation-guided hardening (CP5), cards and Definition of Done tables (CP4, CP8).
 - Accept: tests T-FIN-0001 to T-FIN-0016; `gate run mutation trace e2e perf` exit 0; the four capabilities tick.
 

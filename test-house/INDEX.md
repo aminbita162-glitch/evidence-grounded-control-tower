@@ -444,30 +444,41 @@
 | T-F03-0510 | Contradiction requests review | fast | f03/test_outcomes.py | test_T_F03_0510_contradiction_requests_review |
 | T-F03-0511 | Extensions absent from view | fast | f03/test_outcomes.py | test_T_F03_0511_extensions_absent_from_view |
 | T-F03-0512 | No suggested record edits | fast | f03/test_outcomes.py | test_T_F03_0512_no_suggested_record_edits |
-| T-F07-0001 | Scenario 01 | fast | f07/test_reports.py | test_T_F07_0001_scenario_01 |
-| T-F07-0002 | Scenario 02 | fast | f07/test_reports.py | test_T_F07_0002_scenario_02 |
-| T-F07-0003 | Scenario 03 | fast | f07/test_reports.py | test_T_F07_0003_scenario_03 |
-| T-F07-0004 | Scenario 04 | fast | f07/test_reports.py | test_T_F07_0004_scenario_04 |
-| T-F07-0005 | Scenario 05 | fast | f07/test_reports.py | test_T_F07_0005_scenario_05 |
-| T-F07-0006 | Scenario 06 | fast | f07/test_reports.py | test_T_F07_0006_scenario_06 |
-| T-F07-0007 | Scenario 07 | fast | f07/test_reports.py | test_T_F07_0007_scenario_07 |
-| T-F07-0008 | Scenario 08 | fast | f07/test_reports.py | test_T_F07_0008_scenario_08 |
-| T-F07-0009 | Scenario 09 | fast | f07/test_reports.py | test_T_F07_0009_scenario_09 |
-| T-F07-0010 | Scenario 10 | fast | f07/test_reports.py | test_T_F07_0010_scenario_10 |
-| T-F07-0011 | Scenario 11 | fast | f07/test_reports.py | test_T_F07_0011_scenario_11 |
-| T-F07-0101 | Matched | fast | f07/test_reports.py | test_T_F07_0101_matched |
-| T-F07-0102 | Undercharge | fast | f07/test_reports.py | test_T_F07_0102_undercharge |
-| T-F07-0103 | Flat charge | fast | f07/test_reports.py | test_T_F07_0103_flat_charge |
-| T-F07-0104 | Duplicate | fast | f07/test_reports.py | test_T_F07_0104_duplicate |
-| T-F07-0105 | Not billable | fast | f07/test_reports.py | test_T_F07_0105_not_billable |
-| T-F07-0106 | Different effective rate | fast | f07/test_reports.py | test_T_F07_0106_different_effective_rate |
-| T-F07-0107 | Day count | fast | f07/test_reports.py | test_T_F07_0107_day_count |
-| T-F07-0108 | Arithmetic | fast | f07/test_reports.py | test_T_F07_0108_arithmetic |
-| T-F07-0109 | Unsupported tariff | fast | f07/test_reports.py | test_T_F07_0109_unsupported_tariff |
-| T-F07-0110 | Ambiguous tariff | fast | f07/test_reports.py | test_T_F07_0110_ambiguous_tariff |
-| T-F07-0111 | Clock missing | fast | f07/test_reports.py | test_T_F07_0111_clock_missing |
-| T-F07-0112 | Matching missing | fast | f07/test_reports.py | test_T_F07_0112_matching_missing |
-| T-F07-0113 | Label insufficient | fast | f07/test_reports.py | test_T_F07_0113_label_insufficient |
+| T-F03-0520 | Calendar rejects no working days | fast | f03/test_clock.py | test_T_F03_0520_calendar_rejects_no_working_days |
+| T-F03-0521 | Suspension rejects empty interval | fast | f03/test_clock.py | test_T_F03_0521_suspension_rejects_empty_interval |
+| T-F03-0522 | Tier rejects negative rate | fast | f03/test_clock.py | test_T_F03_0522_tier_rejects_negative_rate |
+| T-F03-0523 | Tier rejects zero edge | fast | f03/test_clock.py | test_T_F03_0523_tier_rejects_zero_edge |
+| T-F03-0524 | Terms reject reversed validity | fast | f03/test_clock.py | test_T_F03_0524_terms_reject_reversed_validity |
+| T-F03-0525 | Clock requires day rule | fast | f03/test_clock.py | test_T_F03_0525_clock_requires_day_rule |
+| T-F03-0526 | Clock rejects calendar mismatch | fast | f03/test_clock.py | test_T_F03_0526_clock_rejects_calendar_mismatch |
+| T-F03-0527 | Expiry horizon is bounded | fast | f03/test_clock.py | test_T_F03_0527_expiry_horizon_is_bounded |
+| T-F03-0528 | Reference horizon is bounded | fast | f03/test_clock.py | test_T_F03_0528_reference_horizon_is_bounded |
+| T-F03-0529 | Future stop does not stop clock | fast | f03/test_outcomes.py | test_T_F03_0529_future_stop_does_not_stop_clock |
+| T-F03-0530 | Explicit inclusive terms count the tariff boundary | fast | f03/test_clock.py | test_T_F03_0530_inclusive_terms_count_at_expiry |
+| T-F07-0001 | Scenario 01 | fast | f07/test_charge_reports.py | test_T_F07_0001_scenario_01 |
+| T-F07-0002 | Scenario 02 | fast | f07/test_charge_reports.py | test_T_F07_0002_scenario_02 |
+| T-F07-0003 | Scenario 03 | fast | f07/test_charge_reports.py | test_T_F07_0003_scenario_03 |
+| T-F07-0004 | Scenario 04 | fast | f07/test_charge_reports.py | test_T_F07_0004_scenario_04 |
+| T-F07-0005 | Scenario 05 | fast | f07/test_charge_reports.py | test_T_F07_0005_scenario_05 |
+| T-F07-0006 | Scenario 06 | fast | f07/test_charge_reports.py | test_T_F07_0006_scenario_06 |
+| T-F07-0007 | Scenario 07 | fast | f07/test_charge_reports.py | test_T_F07_0007_scenario_07 |
+| T-F07-0008 | Scenario 08 | fast | f07/test_charge_reports.py | test_T_F07_0008_scenario_08 |
+| T-F07-0009 | Scenario 09 | fast | f07/test_charge_reports.py | test_T_F07_0009_scenario_09 |
+| T-F07-0010 | Scenario 10 | fast | f07/test_charge_reports.py | test_T_F07_0010_scenario_10 |
+| T-F07-0011 | Scenario 11 | fast | f07/test_charge_reports.py | test_T_F07_0011_scenario_11 |
+| T-F07-0101 | Matched | fast | f07/test_charge_reports.py | test_T_F07_0101_matched |
+| T-F07-0102 | Undercharge | fast | f07/test_charge_reports.py | test_T_F07_0102_undercharge |
+| T-F07-0103 | Flat charge | fast | f07/test_charge_reports.py | test_T_F07_0103_flat_charge |
+| T-F07-0104 | Duplicate | fast | f07/test_charge_reports.py | test_T_F07_0104_duplicate |
+| T-F07-0105 | Not billable | fast | f07/test_charge_reports.py | test_T_F07_0105_not_billable |
+| T-F07-0106 | Different effective rate | fast | f07/test_charge_reports.py | test_T_F07_0106_different_effective_rate |
+| T-F07-0107 | Day count | fast | f07/test_charge_reports.py | test_T_F07_0107_day_count |
+| T-F07-0108 | Arithmetic | fast | f07/test_charge_reports.py | test_T_F07_0108_arithmetic |
+| T-F07-0109 | Unsupported tariff | fast | f07/test_charge_reports.py | test_T_F07_0109_unsupported_tariff |
+| T-F07-0110 | Ambiguous tariff | fast | f07/test_charge_reports.py | test_T_F07_0110_ambiguous_tariff |
+| T-F07-0111 | Clock missing | fast | f07/test_charge_reports.py | test_T_F07_0111_clock_missing |
+| T-F07-0112 | Matching missing | fast | f07/test_charge_reports.py | test_T_F07_0112_matching_missing |
+| T-F07-0113 | Label insufficient | fast | f07/test_charge_reports.py | test_T_F07_0113_label_insufficient |
 | T-F07-0201 | Recomputed amounts match F03 | fast | f07/test_audit.py | test_T_F07_0201_exact_clock_equivalence |
 | T-F07-0202 | A corrected supported invoice allows | fast | f07/test_audit.py | test_T_F07_0202_corrected_invoice_allows |
 | T-F07-0203 | More verified free time lowers expected charge | fast | f07/test_audit.py | test_T_F07_0203_verified_extension_changes_difference |
@@ -493,48 +504,74 @@
 | T-F07-0223 | Weak label indicative | fast | f07/test_audit.py | test_T_F07_0223_weak_label_indicative |
 | T-F07-0224 | After stop not billable | fast | f07/test_audit.py | test_T_F07_0224_after_stop_not_billable |
 | T-F07-0225 | Adjacent periods are distinct | fast | f07/test_audit.py | test_T_F07_0225_adjacent_periods_are_distinct |
-| T-F07-0301 | Overlapping periods | fast | f07/test_reports.py | test_T_F07_0301_overlapping_periods |
-| T-F07-0302 | Negative amount | fast | f07/test_reports.py | test_T_F07_0302_negative_amount |
-| T-F07-0303 | Negative rate | fast | f07/test_reports.py | test_T_F07_0303_negative_rate |
-| T-F07-0304 | Negative days | fast | f07/test_reports.py | test_T_F07_0304_negative_days |
-| T-F07-0305 | Tiny duplicate difference | fast | f07/test_reports.py | test_T_F07_0305_tiny_duplicate_difference |
-| T-F07-0306 | Currency mismatch | fast | f07/test_reports.py | test_T_F07_0306_currency_mismatch |
-| T-F07-0307 | Unknown currency | fast | f07/test_reports.py | test_T_F07_0307_unknown_currency |
-| T-F07-0308 | Invalid amount | fast | f07/test_reports.py | test_T_F07_0308_invalid_amount |
-| T-F07-0309 | Invalid period start | fast | f07/test_reports.py | test_T_F07_0309_invalid_period_start |
-| T-F07-0310 | Invalid period end | fast | f07/test_reports.py | test_T_F07_0310_invalid_period_end |
-| T-F07-0311 | Period without zone | fast | f07/test_reports.py | test_T_F07_0311_period_without_zone |
-| T-F07-0312 | Period reversed | fast | f07/test_reports.py | test_T_F07_0312_period_reversed |
-| T-F07-0313 | Missing start | fast | f07/test_reports.py | test_T_F07_0313_missing_start |
-| T-F07-0314 | Missing end | fast | f07/test_reports.py | test_T_F07_0314_missing_end |
-| T-F07-0315 | Unmatched container | fast | f07/test_reports.py | test_T_F07_0315_unmatched_container |
-| T-F07-0316 | Future period | fast | f07/test_reports.py | test_T_F07_0316_future_period |
-| T-F07-0317 | Confusable container | fast | f07/test_reports.py | test_T_F07_0317_confusable_container |
-| T-F07-0318 | Recorded scope empty | fast | f07/test_reports.py | test_T_F07_0318_recorded_scope_empty |
-| T-F07-0319 | Text cannot direct outcome | fast | f07/test_reports.py | test_T_F07_0319_text_cannot_direct_outcome |
-| T-F07-0320 | Nonfinite amount | fast | f07/test_reports.py | test_T_F07_0320_nonfinite_amount |
-| T-F07-0401 | Replay scenario 01 | fast | f07/test_reports.py | test_T_F07_0401_replay_scenario_01 |
-| T-F07-0402 | Replay scenario 02 | fast | f07/test_reports.py | test_T_F07_0402_replay_scenario_02 |
-| T-F07-0403 | Replay scenario 03 | fast | f07/test_reports.py | test_T_F07_0403_replay_scenario_03 |
-| T-F07-0404 | Replay scenario 04 | fast | f07/test_reports.py | test_T_F07_0404_replay_scenario_04 |
-| T-F07-0405 | Replay scenario 05 | fast | f07/test_reports.py | test_T_F07_0405_replay_scenario_05 |
-| T-F07-0406 | Replay scenario 06 | fast | f07/test_reports.py | test_T_F07_0406_replay_scenario_06 |
-| T-F07-0407 | Replay scenario 07 | fast | f07/test_reports.py | test_T_F07_0407_replay_scenario_07 |
-| T-F07-0408 | Replay scenario 08 | fast | f07/test_reports.py | test_T_F07_0408_replay_scenario_08 |
-| T-F07-0409 | Replay scenario 09 | fast | f07/test_reports.py | test_T_F07_0409_replay_scenario_09 |
-| T-F07-0410 | Replay scenario 10 | fast | f07/test_reports.py | test_T_F07_0410_replay_scenario_10 |
-| T-F07-0501 | Anchor | fast | f07/test_reports.py | test_T_F07_0501_anchor |
-| T-F07-0502 | Root cause column | fast | f07/test_reports.py | test_T_F07_0502_root_cause_column |
-| T-F07-0503 | Proportional difference | fast | f07/test_reports.py | test_T_F07_0503_proportional_difference |
-| T-F07-0504 | Changed rate two steps | fast | f07/test_reports.py | test_T_F07_0504_changed_rate_two_steps |
-| T-F07-0505 | Dossier preview | fast | f07/test_reports.py | test_T_F07_0505_dossier_preview |
-| T-F07-0506 | Json export | fast | f07/test_reports.py | test_T_F07_0506_json_export |
-| T-F07-0507 | Html export | fast | f07/test_reports.py | test_T_F07_0507_html_export |
-| T-F07-0508 | Indicative export | fast | f07/test_reports.py | test_T_F07_0508_indicative_export |
-| T-F07-0509 | Unsupported export citation | fast | f07/test_reports.py | test_T_F07_0509_unsupported_export_citation |
-| T-F07-0510 | Tax exclusion | fast | f07/test_reports.py | test_T_F07_0510_tax_exclusion |
-| T-F07-0511 | No payment instructions | fast | f07/test_reports.py | test_T_F07_0511_no_payment_instructions |
-| T-F07-0512 | No owed statement | fast | f07/test_reports.py | test_T_F07_0512_no_owed_statement |
+| T-F07-0301 | Overlapping periods | fast | f07/test_charge_reports.py | test_T_F07_0301_overlapping_periods |
+| T-F07-0302 | Negative amount | fast | f07/test_charge_reports.py | test_T_F07_0302_negative_amount |
+| T-F07-0303 | Negative rate | fast | f07/test_charge_reports.py | test_T_F07_0303_negative_rate |
+| T-F07-0304 | Negative days | fast | f07/test_charge_reports.py | test_T_F07_0304_negative_days |
+| T-F07-0305 | Tiny duplicate difference | fast | f07/test_charge_reports.py | test_T_F07_0305_tiny_duplicate_difference |
+| T-F07-0306 | Currency mismatch | fast | f07/test_charge_reports.py | test_T_F07_0306_currency_mismatch |
+| T-F07-0307 | Unknown currency | fast | f07/test_charge_reports.py | test_T_F07_0307_unknown_currency |
+| T-F07-0308 | Invalid amount | fast | f07/test_charge_reports.py | test_T_F07_0308_invalid_amount |
+| T-F07-0309 | Invalid period start | fast | f07/test_charge_reports.py | test_T_F07_0309_invalid_period_start |
+| T-F07-0310 | Invalid period end | fast | f07/test_charge_reports.py | test_T_F07_0310_invalid_period_end |
+| T-F07-0311 | Period without zone | fast | f07/test_charge_reports.py | test_T_F07_0311_period_without_zone |
+| T-F07-0312 | Period reversed | fast | f07/test_charge_reports.py | test_T_F07_0312_period_reversed |
+| T-F07-0313 | Missing start | fast | f07/test_charge_reports.py | test_T_F07_0313_missing_start |
+| T-F07-0314 | Missing end | fast | f07/test_charge_reports.py | test_T_F07_0314_missing_end |
+| T-F07-0315 | Unmatched container | fast | f07/test_charge_reports.py | test_T_F07_0315_unmatched_container |
+| T-F07-0316 | Future period | fast | f07/test_charge_reports.py | test_T_F07_0316_future_period |
+| T-F07-0317 | Confusable container | fast | f07/test_charge_reports.py | test_T_F07_0317_confusable_container |
+| T-F07-0318 | Recorded scope empty | fast | f07/test_charge_reports.py | test_T_F07_0318_recorded_scope_empty |
+| T-F07-0319 | Text cannot direct outcome | fast | f07/test_charge_reports.py | test_T_F07_0319_text_cannot_direct_outcome |
+| T-F07-0320 | Nonfinite amount | fast | f07/test_charge_reports.py | test_T_F07_0320_nonfinite_amount |
+| T-F07-0401 | Replay scenario 01 | fast | f07/test_charge_reports.py | test_T_F07_0401_replay_scenario_01 |
+| T-F07-0402 | Replay scenario 02 | fast | f07/test_charge_reports.py | test_T_F07_0402_replay_scenario_02 |
+| T-F07-0403 | Replay scenario 03 | fast | f07/test_charge_reports.py | test_T_F07_0403_replay_scenario_03 |
+| T-F07-0404 | Replay scenario 04 | fast | f07/test_charge_reports.py | test_T_F07_0404_replay_scenario_04 |
+| T-F07-0405 | Replay scenario 05 | fast | f07/test_charge_reports.py | test_T_F07_0405_replay_scenario_05 |
+| T-F07-0406 | Replay scenario 06 | fast | f07/test_charge_reports.py | test_T_F07_0406_replay_scenario_06 |
+| T-F07-0407 | Replay scenario 07 | fast | f07/test_charge_reports.py | test_T_F07_0407_replay_scenario_07 |
+| T-F07-0408 | Replay scenario 08 | fast | f07/test_charge_reports.py | test_T_F07_0408_replay_scenario_08 |
+| T-F07-0409 | Replay scenario 09 | fast | f07/test_charge_reports.py | test_T_F07_0409_replay_scenario_09 |
+| T-F07-0410 | Replay scenario 10 | fast | f07/test_charge_reports.py | test_T_F07_0410_replay_scenario_10 |
+| T-F07-0501 | Anchor | fast | f07/test_charge_reports.py | test_T_F07_0501_anchor |
+| T-F07-0502 | Root cause column | fast | f07/test_charge_reports.py | test_T_F07_0502_root_cause_column |
+| T-F07-0503 | Proportional difference | fast | f07/test_charge_reports.py | test_T_F07_0503_proportional_difference |
+| T-F07-0504 | Changed rate two steps | fast | f07/test_charge_reports.py | test_T_F07_0504_changed_rate_two_steps |
+| T-F07-0505 | Dossier preview | fast | f07/test_charge_reports.py | test_T_F07_0505_dossier_preview |
+| T-F07-0506 | Json export | fast | f07/test_charge_reports.py | test_T_F07_0506_json_export |
+| T-F07-0507 | Html export | fast | f07/test_charge_reports.py | test_T_F07_0507_html_export |
+| T-F07-0508 | Indicative export | fast | f07/test_charge_reports.py | test_T_F07_0508_indicative_export |
+| T-F07-0509 | Unsupported export citation | fast | f07/test_charge_reports.py | test_T_F07_0509_unsupported_export_citation |
+| T-F07-0510 | Tax exclusion | fast | f07/test_charge_reports.py | test_T_F07_0510_tax_exclusion |
+| T-F07-0511 | No payment instructions | fast | f07/test_charge_reports.py | test_T_F07_0511_no_payment_instructions |
+| T-F07-0512 | No owed statement | fast | f07/test_charge_reports.py | test_T_F07_0512_no_owed_statement |
+| T-F07-0520 | Overlapping clock versions ambiguous | fast | f07/test_audit.py | test_T_F07_0520_overlapping_clock_versions_ambiguous |
+| T-F07-0521 | Unverified clock terms | fast | f07/test_audit.py | test_T_F07_0521_unverified_clock_terms |
+| T-F07-0522 | Gap before tariff | fast | f07/test_audit.py | test_T_F07_0522_gap_before_tariff |
+| T-F07-0523 | Gap after tariff | fast | f07/test_audit.py | test_T_F07_0523_gap_after_tariff |
+| T-F07-0524 | Duplicated event rejected | fast | f07/test_audit.py | test_T_F07_0524_duplicated_event_rejected |
+| T-F07-0525 | Missing start event rejected | fast | f07/test_audit.py | test_T_F07_0525_missing_start_event_rejected |
+| T-F07-0526 | Future event not in evidence | fast | f07/test_audit.py | test_T_F07_0526_future_event_not_in_evidence |
+| T-F07-0527 | Invalid movement order | fast | f07/test_audit.py | test_T_F07_0527_invalid_movement_order |
+| T-F07-0528 | No invoice rows abstains | fast | f07/test_audit.py | test_T_F07_0528_no_invoice_rows_abstains |
+| T-F07-0529 | Unverified invoice line abstains | fast | f07/test_audit.py | test_T_F07_0529_unverified_invoice_line_abstains |
+| T-FIN-0001 | Time basis published for f07 | fast | pairs/test_finance.py | test_T_FIN_0001_time_basis_published_for_f07 |
+| T-FIN-0002 | Shared clock produces same charge | fast | pairs/test_finance.py | test_T_FIN_0002_shared_clock_produces_same_charge |
+| T-FIN-0003 | Total equals converted components | fast | pairs/test_finance.py | test_T_FIN_0003_total_equals_converted_components |
+| T-FIN-0004 | Basis equals k05 | fast | pairs/test_finance.py | test_T_FIN_0004_basis_equals_k05 |
+| T-FIN-0005 | Corrected invoice allows both checks | fast | pairs/test_finance.py | test_T_FIN_0005_corrected_invoice_allows_both_checks |
+| T-FIN-0006 | Tariff activation stales consumers | fast | pairs/test_finance.py | test_T_FIN_0006_tariff_activation_stales_consumers |
+| T-FIN-0007 | Skeleton records all financial steps | fast | pairs/test_finance.py | test_T_FIN_0007_skeleton_records_all_financial_steps |
+| T-FIN-0008 | Simulation uses separate result kind | fast | pairs/test_finance.py | test_T_FIN_0008_simulation_uses_separate_result_kind |
+| T-FIN-0009 | Tenant isolation | fast | pairs/test_finance.py | test_T_FIN_0009_tenant_isolation |
+| T-FIN-0010 | Server owns case facts | fast | pairs/test_finance.py | test_T_FIN_0010_server_owns_case_facts |
+| T-FIN-0011 | Idempotent exact replay | fast | pairs/test_finance.py | test_T_FIN_0011_idempotent_exact_replay |
+| T-FIN-0012 | Idempotency rejects different request | fast | pairs/test_finance.py | test_T_FIN_0012_idempotency_rejects_different_request |
+| T-FIN-0013 | Cli accepts all financial filters | fast | pairs/test_finance.py | test_T_FIN_0013_cli_accepts_all_financial_filters |
+| T-FIN-0014 | Unsupported case scope fails closed | fast | pairs/test_finance.py | test_T_FIN_0014_unsupported_case_scope_fails_closed |
+| T-FIN-0015 | Local financial workflow budget | fast | pairs/test_finance.py | test_T_FIN_0015_local_financial_workflow_budget |
+| T-FIN-0016 | Mutated input scopes remain bound | fast | pairs/test_finance.py | test_T_FIN_0016_mutated_input_scopes_remain_bound |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |
@@ -906,44 +943,44 @@
 | T-KRN-0072 | All hashes in contracts.lock match actual files | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0072_contract_gate_real_repo |
 | T-KRN-0073 | gate run arch contract property generated-files exits 0 | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0073_gate_run_all_four |
 | T-KRN-0074 | Display names not in schemas or kernel source | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0074_no_display_names_in_schemas |
-| T-L01-0001 | Scenario 01 | fast | l01/test_reports.py | test_T_L01_0001_scenario_01 |
-| T-L01-0002 | Scenario 02 | fast | l01/test_reports.py | test_T_L01_0002_scenario_02 |
-| T-L01-0003 | Scenario 03 | fast | l01/test_reports.py | test_T_L01_0003_scenario_03 |
-| T-L01-0004 | Scenario 04 | fast | l01/test_reports.py | test_T_L01_0004_scenario_04 |
-| T-L01-0005 | Scenario 05 | fast | l01/test_reports.py | test_T_L01_0005_scenario_05 |
-| T-L01-0006 | Scenario 06 | fast | l01/test_reports.py | test_T_L01_0006_scenario_06 |
-| T-L01-0007 | Scenario 07 | fast | l01/test_reports.py | test_T_L01_0007_scenario_07 |
-| T-L01-0008 | Scenario 08 | fast | l01/test_reports.py | test_T_L01_0008_scenario_08 |
-| T-L01-0009 | Scenario 09 | fast | l01/test_reports.py | test_T_L01_0009_scenario_09 |
-| T-L01-0010 | Scenario 10 | fast | l01/test_reports.py | test_T_L01_0010_scenario_10 |
-| T-L01-0011 | Scenario 11 | fast | l01/test_reports.py | test_T_L01_0011_scenario_11 |
-| T-L01-0012 | Scenario 12 | fast | l01/test_reports.py | test_T_L01_0012_scenario_12 |
-| T-L01-0013 | Scenario 13 | fast | l01/test_reports.py | test_T_L01_0013_scenario_13 |
-| T-L01-0014 | Scenario 14 | fast | l01/test_reports.py | test_T_L01_0014_scenario_14 |
-| T-L01-0015 | Scenario 15 | fast | l01/test_reports.py | test_T_L01_0015_scenario_15 |
-| T-L01-0016 | Scenario 16 | fast | l01/test_reports.py | test_T_L01_0016_scenario_16 |
-| T-L01-0017 | Scenario 17 | fast | l01/test_reports.py | test_T_L01_0017_scenario_17 |
-| T-L01-0018 | Scenario 18 | fast | l01/test_reports.py | test_T_L01_0018_scenario_18 |
-| T-L01-0101 | Match | fast | l01/test_reports.py | test_T_L01_0101_match |
-| T-L01-0102 | Below basis | fast | l01/test_reports.py | test_T_L01_0102_below_basis |
-| T-L01-0103 | Tax excluded | fast | l01/test_reports.py | test_T_L01_0103_tax_excluded |
-| T-L01-0104 | Matched for f07 | fast | l01/test_reports.py | test_T_L01_0104_matched_for_f07 |
-| T-L01-0105 | Duplicate | fast | l01/test_reports.py | test_T_L01_0105_duplicate |
-| T-L01-0106 | Rate above basis | fast | l01/test_reports.py | test_T_L01_0106_rate_above_basis |
-| T-L01-0107 | Quantity mismatch | fast | l01/test_reports.py | test_T_L01_0107_quantity_mismatch |
-| T-L01-0108 | Arithmetic | fast | l01/test_reports.py | test_T_L01_0108_arithmetic |
-| T-L01-0109 | Surcharge validity | fast | l01/test_reports.py | test_T_L01_0109_surcharge_validity |
-| T-L01-0110 | Header total | fast | l01/test_reports.py | test_T_L01_0110_header_total |
-| T-L01-0111 | Currency mismatch | fast | l01/test_reports.py | test_T_L01_0111_currency_mismatch |
-| T-L01-0112 | Possible duplicate | fast | l01/test_reports.py | test_T_L01_0112_possible_duplicate |
-| T-L01-0113 | Unquoted | fast | l01/test_reports.py | test_T_L01_0113_unquoted |
-| T-L01-0114 | Ambiguous basis | fast | l01/test_reports.py | test_T_L01_0114_ambiguous_basis |
-| T-L01-0115 | Freight terms | fast | l01/test_reports.py | test_T_L01_0115_freight_terms |
-| T-L01-0116 | Invoice unverified | fast | l01/test_reports.py | test_T_L01_0116_invoice_unverified |
-| T-L01-0117 | Taxonomy absent | fast | l01/test_reports.py | test_T_L01_0117_taxonomy_absent |
-| T-L01-0118 | Basis pack absent | fast | l01/test_reports.py | test_T_L01_0118_basis_pack_absent |
-| T-L01-0119 | Currency unsupported | fast | l01/test_reports.py | test_T_L01_0119_currency_unsupported |
-| T-L01-0120 | Label insufficient | fast | l01/test_reports.py | test_T_L01_0120_label_insufficient |
+| T-L01-0001 | Scenario 01 | fast | l01/test_invoice_reports.py | test_T_L01_0001_scenario_01 |
+| T-L01-0002 | Scenario 02 | fast | l01/test_invoice_reports.py | test_T_L01_0002_scenario_02 |
+| T-L01-0003 | Scenario 03 | fast | l01/test_invoice_reports.py | test_T_L01_0003_scenario_03 |
+| T-L01-0004 | Scenario 04 | fast | l01/test_invoice_reports.py | test_T_L01_0004_scenario_04 |
+| T-L01-0005 | Scenario 05 | fast | l01/test_invoice_reports.py | test_T_L01_0005_scenario_05 |
+| T-L01-0006 | Scenario 06 | fast | l01/test_invoice_reports.py | test_T_L01_0006_scenario_06 |
+| T-L01-0007 | Scenario 07 | fast | l01/test_invoice_reports.py | test_T_L01_0007_scenario_07 |
+| T-L01-0008 | Scenario 08 | fast | l01/test_invoice_reports.py | test_T_L01_0008_scenario_08 |
+| T-L01-0009 | Scenario 09 | fast | l01/test_invoice_reports.py | test_T_L01_0009_scenario_09 |
+| T-L01-0010 | Scenario 10 | fast | l01/test_invoice_reports.py | test_T_L01_0010_scenario_10 |
+| T-L01-0011 | Scenario 11 | fast | l01/test_invoice_reports.py | test_T_L01_0011_scenario_11 |
+| T-L01-0012 | Scenario 12 | fast | l01/test_invoice_reports.py | test_T_L01_0012_scenario_12 |
+| T-L01-0013 | Scenario 13 | fast | l01/test_invoice_reports.py | test_T_L01_0013_scenario_13 |
+| T-L01-0014 | Scenario 14 | fast | l01/test_invoice_reports.py | test_T_L01_0014_scenario_14 |
+| T-L01-0015 | Scenario 15 | fast | l01/test_invoice_reports.py | test_T_L01_0015_scenario_15 |
+| T-L01-0016 | Scenario 16 | fast | l01/test_invoice_reports.py | test_T_L01_0016_scenario_16 |
+| T-L01-0017 | Scenario 17 | fast | l01/test_invoice_reports.py | test_T_L01_0017_scenario_17 |
+| T-L01-0018 | Scenario 18 | fast | l01/test_invoice_reports.py | test_T_L01_0018_scenario_18 |
+| T-L01-0101 | Match | fast | l01/test_invoice_reports.py | test_T_L01_0101_match |
+| T-L01-0102 | Below basis | fast | l01/test_invoice_reports.py | test_T_L01_0102_below_basis |
+| T-L01-0103 | Tax excluded | fast | l01/test_invoice_reports.py | test_T_L01_0103_tax_excluded |
+| T-L01-0104 | Matched for f07 | fast | l01/test_invoice_reports.py | test_T_L01_0104_matched_for_f07 |
+| T-L01-0105 | Duplicate | fast | l01/test_invoice_reports.py | test_T_L01_0105_duplicate |
+| T-L01-0106 | Rate above basis | fast | l01/test_invoice_reports.py | test_T_L01_0106_rate_above_basis |
+| T-L01-0107 | Quantity mismatch | fast | l01/test_invoice_reports.py | test_T_L01_0107_quantity_mismatch |
+| T-L01-0108 | Arithmetic | fast | l01/test_invoice_reports.py | test_T_L01_0108_arithmetic |
+| T-L01-0109 | Surcharge validity | fast | l01/test_invoice_reports.py | test_T_L01_0109_surcharge_validity |
+| T-L01-0110 | Header total | fast | l01/test_invoice_reports.py | test_T_L01_0110_header_total |
+| T-L01-0111 | Currency mismatch | fast | l01/test_invoice_reports.py | test_T_L01_0111_currency_mismatch |
+| T-L01-0112 | Possible duplicate | fast | l01/test_invoice_reports.py | test_T_L01_0112_possible_duplicate |
+| T-L01-0113 | Unquoted | fast | l01/test_invoice_reports.py | test_T_L01_0113_unquoted |
+| T-L01-0114 | Ambiguous basis | fast | l01/test_invoice_reports.py | test_T_L01_0114_ambiguous_basis |
+| T-L01-0115 | Freight terms | fast | l01/test_invoice_reports.py | test_T_L01_0115_freight_terms |
+| T-L01-0116 | Invoice unverified | fast | l01/test_invoice_reports.py | test_T_L01_0116_invoice_unverified |
+| T-L01-0117 | Taxonomy absent | fast | l01/test_invoice_reports.py | test_T_L01_0117_taxonomy_absent |
+| T-L01-0118 | Basis pack absent | fast | l01/test_invoice_reports.py | test_T_L01_0118_basis_pack_absent |
+| T-L01-0119 | Currency unsupported | fast | l01/test_invoice_reports.py | test_T_L01_0119_currency_unsupported |
+| T-L01-0120 | Label insufficient | fast | l01/test_invoice_reports.py | test_T_L01_0120_label_insufficient |
 | T-L01-0201 | Corrected invoice allows | fast | l01/test_invoice.py | test_T_L01_0201_corrected_invoice_allows |
 | T-L01-0202 | Decimal matches fraction | fast | l01/test_invoice.py | test_T_L01_0202_decimal_matches_fraction |
 | T-L01-0203 | Widening band preserves flags | fast | l01/test_invoice.py | test_T_L01_0203_widening_band_preserves_flags |
@@ -979,81 +1016,94 @@
 | T-L01-0233 | Previous outside window | fast | l01/test_invoice.py | test_T_L01_0233_previous_outside_window |
 | T-L01-0234 | Other shipment basis | fast | l01/test_invoice.py | test_T_L01_0234_other_shipment_basis |
 | T-L01-0235 | Rounded line trace | fast | l01/test_invoice.py | test_T_L01_0235_rounded_line_trace |
-| T-L01-0301 | Cyrillic lookalike | fast | l01/test_reports.py | test_T_L01_0301_cyrillic_lookalike |
-| T-L01-0302 | Greek lookalike | fast | l01/test_reports.py | test_T_L01_0302_greek_lookalike |
-| T-L01-0303 | Negative amount | fast | l01/test_reports.py | test_T_L01_0303_negative_amount |
-| T-L01-0304 | Negative rate | fast | l01/test_reports.py | test_T_L01_0304_negative_rate |
-| T-L01-0305 | Negative quantity | fast | l01/test_reports.py | test_T_L01_0305_negative_quantity |
-| T-L01-0306 | Invalid decimal | fast | l01/test_reports.py | test_T_L01_0306_invalid_decimal |
-| T-L01-0307 | Nan amount | fast | l01/test_reports.py | test_T_L01_0307_nan_amount |
-| T-L01-0308 | Infinite rate | fast | l01/test_reports.py | test_T_L01_0308_infinite_rate |
-| T-L01-0309 | Oversized quantity | fast | l01/test_reports.py | test_T_L01_0309_oversized_quantity |
-| T-L01-0310 | Malformed currency | fast | l01/test_reports.py | test_T_L01_0310_malformed_currency |
-| T-L01-0311 | Empty citation | fast | l01/test_reports.py | test_T_L01_0311_empty_citation |
-| T-L01-0312 | Empty shipment | fast | l01/test_reports.py | test_T_L01_0312_empty_shipment |
-| T-L01-0313 | Required quantity | fast | l01/test_reports.py | test_T_L01_0313_required_quantity |
-| T-L01-0314 | Invalid service date | fast | l01/test_reports.py | test_T_L01_0314_invalid_service_date |
-| T-L01-0315 | Overlapping validity | fast | l01/test_reports.py | test_T_L01_0315_overlapping_validity |
-| T-L01-0316 | Split duplicate | fast | l01/test_reports.py | test_T_L01_0316_split_duplicate |
-| T-L01-0317 | Split band disabled | fast | l01/test_reports.py | test_T_L01_0317_split_band_disabled |
-| T-L01-0318 | Header minor unit | fast | l01/test_reports.py | test_T_L01_0318_header_minor_unit |
-| T-L01-0319 | Stale surcharge | fast | l01/test_reports.py | test_T_L01_0319_stale_surcharge |
-| T-L01-0320 | Secondary tariff | fast | l01/test_reports.py | test_T_L01_0320_secondary_tariff |
-| T-L01-0321 | Adversarial note | fast | l01/test_reports.py | test_T_L01_0321_adversarial_note |
-| T-L01-0322 | Invoice row not object | fast | l01/test_reports.py | test_T_L01_0322_invoice_row_not_object |
-| T-L01-0323 | Taxonomy row not object | fast | l01/test_reports.py | test_T_L01_0323_taxonomy_row_not_object |
-| T-L01-0324 | Basis row not object | fast | l01/test_reports.py | test_T_L01_0324_basis_row_not_object |
-| T-L01-0325 | Tax claim as text | fast | l01/test_reports.py | test_T_L01_0325_tax_claim_as_text |
-| T-L01-0401 | Replay scenario 01 | fast | l01/test_reports.py | test_T_L01_0401_replay_scenario_01 |
-| T-L01-0402 | Replay scenario 02 | fast | l01/test_reports.py | test_T_L01_0402_replay_scenario_02 |
-| T-L01-0403 | Replay scenario 03 | fast | l01/test_reports.py | test_T_L01_0403_replay_scenario_03 |
-| T-L01-0404 | Replay scenario 04 | fast | l01/test_reports.py | test_T_L01_0404_replay_scenario_04 |
-| T-L01-0405 | Replay scenario 05 | fast | l01/test_reports.py | test_T_L01_0405_replay_scenario_05 |
-| T-L01-0406 | Replay scenario 06 | fast | l01/test_reports.py | test_T_L01_0406_replay_scenario_06 |
-| T-L01-0407 | Replay scenario 07 | fast | l01/test_reports.py | test_T_L01_0407_replay_scenario_07 |
-| T-L01-0408 | Replay scenario 08 | fast | l01/test_reports.py | test_T_L01_0408_replay_scenario_08 |
-| T-L01-0409 | Replay scenario 09 | fast | l01/test_reports.py | test_T_L01_0409_replay_scenario_09 |
-| T-L01-0410 | Replay scenario 10 | fast | l01/test_reports.py | test_T_L01_0410_replay_scenario_10 |
-| T-L01-0501 | Anchor | fast | l01/test_reports.py | test_T_L01_0501_anchor |
-| T-L01-0502 | Basis visible | fast | l01/test_reports.py | test_T_L01_0502_basis_visible |
-| T-L01-0503 | Billed column | fast | l01/test_reports.py | test_T_L01_0503_billed_column |
-| T-L01-0504 | Expected column | fast | l01/test_reports.py | test_T_L01_0504_expected_column |
-| T-L01-0505 | Trace expansion | fast | l01/test_reports.py | test_T_L01_0505_trace_expansion |
-| T-L01-0506 | Line citation | fast | l01/test_reports.py | test_T_L01_0506_line_citation |
-| T-L01-0507 | Header details | fast | l01/test_reports.py | test_T_L01_0507_header_details |
-| T-L01-0508 | Time based match | fast | l01/test_reports.py | test_T_L01_0508_time_based_match |
-| T-L01-0509 | Currency totals | fast | l01/test_reports.py | test_T_L01_0509_currency_totals |
-| T-L01-0510 | Unblock requirements | fast | l01/test_reports.py | test_T_L01_0510_unblock_requirements |
-| T-L01-0511 | No dispute draft | fast | l01/test_reports.py | test_T_L01_0511_no_dispute_draft |
-| T-L01-0512 | No withhold advice | fast | l01/test_reports.py | test_T_L01_0512_no_withhold_advice |
-| T-L02-0001 | Scenario 01 | fast | l02/test_reports.py | test_T_L02_0001_scenario_01 |
-| T-L02-0002 | Scenario 02 | fast | l02/test_reports.py | test_T_L02_0002_scenario_02 |
-| T-L02-0003 | Scenario 03 | fast | l02/test_reports.py | test_T_L02_0003_scenario_03 |
-| T-L02-0004 | Scenario 04 | fast | l02/test_reports.py | test_T_L02_0004_scenario_04 |
-| T-L02-0005 | Scenario 05 | fast | l02/test_reports.py | test_T_L02_0005_scenario_05 |
-| T-L02-0006 | Scenario 06 | fast | l02/test_reports.py | test_T_L02_0006_scenario_06 |
-| T-L02-0007 | Scenario 07 | fast | l02/test_reports.py | test_T_L02_0007_scenario_07 |
-| T-L02-0008 | Scenario 08 | fast | l02/test_reports.py | test_T_L02_0008_scenario_08 |
-| T-L02-0009 | Scenario 09 | fast | l02/test_reports.py | test_T_L02_0009_scenario_09 |
-| T-L02-0010 | Scenario 10 | fast | l02/test_reports.py | test_T_L02_0010_scenario_10 |
-| T-L02-0011 | Scenario 11 | fast | l02/test_reports.py | test_T_L02_0011_scenario_11 |
-| T-L02-0012 | Scenario 12 | fast | l02/test_reports.py | test_T_L02_0012_scenario_12 |
-| T-L02-0013 | Scenario 13 | fast | l02/test_reports.py | test_T_L02_0013_scenario_13 |
-| T-L02-0014 | Scenario 14 | fast | l02/test_reports.py | test_T_L02_0014_scenario_14 |
-| T-L02-0015 | Scenario 15 | fast | l02/test_reports.py | test_T_L02_0015_scenario_15 |
-| T-L02-0016 | Scenario 16 | fast | l02/test_reports.py | test_T_L02_0016_scenario_16 |
-| T-L02-0017 | Scenario 17 | fast | l02/test_reports.py | test_T_L02_0017_scenario_17 |
-| T-L02-0101 | Provided | fast | l02/test_reports.py | test_T_L02_0101_provided |
-| T-L02-0102 | Indicative | fast | l02/test_reports.py | test_T_L02_0102_indicative |
-| T-L02-0103 | Incomplete | fast | l02/test_reports.py | test_T_L02_0103_incomplete |
-| T-L02-0104 | Variance | fast | l02/test_reports.py | test_T_L02_0104_variance |
-| T-L02-0105 | Rate conflict | fast | l02/test_reports.py | test_T_L02_0105_rate_conflict |
-| T-L02-0106 | Missing upstream | fast | l02/test_reports.py | test_T_L02_0106_missing_upstream |
-| T-L02-0107 | Valuation rule | fast | l02/test_reports.py | test_T_L02_0107_valuation_rule |
-| T-L02-0108 | Missing duty pack | fast | l02/test_reports.py | test_T_L02_0108_missing_duty_pack |
-| T-L02-0109 | Declared code absent | fast | l02/test_reports.py | test_T_L02_0109_declared_code_absent |
-| T-L02-0110 | Missing fx | fast | l02/test_reports.py | test_T_L02_0110_missing_fx |
-| T-L02-0111 | Missing currency | fast | l02/test_reports.py | test_T_L02_0111_missing_currency |
+| T-L01-0301 | Cyrillic lookalike | fast | l01/test_invoice_reports.py | test_T_L01_0301_cyrillic_lookalike |
+| T-L01-0302 | Greek lookalike | fast | l01/test_invoice_reports.py | test_T_L01_0302_greek_lookalike |
+| T-L01-0303 | Negative amount | fast | l01/test_invoice_reports.py | test_T_L01_0303_negative_amount |
+| T-L01-0304 | Negative rate | fast | l01/test_invoice_reports.py | test_T_L01_0304_negative_rate |
+| T-L01-0305 | Negative quantity | fast | l01/test_invoice_reports.py | test_T_L01_0305_negative_quantity |
+| T-L01-0306 | Invalid decimal | fast | l01/test_invoice_reports.py | test_T_L01_0306_invalid_decimal |
+| T-L01-0307 | Nan amount | fast | l01/test_invoice_reports.py | test_T_L01_0307_nan_amount |
+| T-L01-0308 | Infinite rate | fast | l01/test_invoice_reports.py | test_T_L01_0308_infinite_rate |
+| T-L01-0309 | Oversized quantity | fast | l01/test_invoice_reports.py | test_T_L01_0309_oversized_quantity |
+| T-L01-0310 | Malformed currency | fast | l01/test_invoice_reports.py | test_T_L01_0310_malformed_currency |
+| T-L01-0311 | Empty citation | fast | l01/test_invoice_reports.py | test_T_L01_0311_empty_citation |
+| T-L01-0312 | Empty shipment | fast | l01/test_invoice_reports.py | test_T_L01_0312_empty_shipment |
+| T-L01-0313 | Required quantity | fast | l01/test_invoice_reports.py | test_T_L01_0313_required_quantity |
+| T-L01-0314 | Invalid service date | fast | l01/test_invoice_reports.py | test_T_L01_0314_invalid_service_date |
+| T-L01-0315 | Overlapping validity | fast | l01/test_invoice_reports.py | test_T_L01_0315_overlapping_validity |
+| T-L01-0316 | Split duplicate | fast | l01/test_invoice_reports.py | test_T_L01_0316_split_duplicate |
+| T-L01-0317 | Split band disabled | fast | l01/test_invoice_reports.py | test_T_L01_0317_split_band_disabled |
+| T-L01-0318 | Header minor unit | fast | l01/test_invoice_reports.py | test_T_L01_0318_header_minor_unit |
+| T-L01-0319 | Stale surcharge | fast | l01/test_invoice_reports.py | test_T_L01_0319_stale_surcharge |
+| T-L01-0320 | Secondary tariff | fast | l01/test_invoice_reports.py | test_T_L01_0320_secondary_tariff |
+| T-L01-0321 | Adversarial note | fast | l01/test_invoice_reports.py | test_T_L01_0321_adversarial_note |
+| T-L01-0322 | Invoice row not object | fast | l01/test_invoice_reports.py | test_T_L01_0322_invoice_row_not_object |
+| T-L01-0323 | Taxonomy row not object | fast | l01/test_invoice_reports.py | test_T_L01_0323_taxonomy_row_not_object |
+| T-L01-0324 | Basis row not object | fast | l01/test_invoice_reports.py | test_T_L01_0324_basis_row_not_object |
+| T-L01-0325 | Tax claim as text | fast | l01/test_invoice_reports.py | test_T_L01_0325_tax_claim_as_text |
+| T-L01-0401 | Replay scenario 01 | fast | l01/test_invoice_reports.py | test_T_L01_0401_replay_scenario_01 |
+| T-L01-0402 | Replay scenario 02 | fast | l01/test_invoice_reports.py | test_T_L01_0402_replay_scenario_02 |
+| T-L01-0403 | Replay scenario 03 | fast | l01/test_invoice_reports.py | test_T_L01_0403_replay_scenario_03 |
+| T-L01-0404 | Replay scenario 04 | fast | l01/test_invoice_reports.py | test_T_L01_0404_replay_scenario_04 |
+| T-L01-0405 | Replay scenario 05 | fast | l01/test_invoice_reports.py | test_T_L01_0405_replay_scenario_05 |
+| T-L01-0406 | Replay scenario 06 | fast | l01/test_invoice_reports.py | test_T_L01_0406_replay_scenario_06 |
+| T-L01-0407 | Replay scenario 07 | fast | l01/test_invoice_reports.py | test_T_L01_0407_replay_scenario_07 |
+| T-L01-0408 | Replay scenario 08 | fast | l01/test_invoice_reports.py | test_T_L01_0408_replay_scenario_08 |
+| T-L01-0409 | Replay scenario 09 | fast | l01/test_invoice_reports.py | test_T_L01_0409_replay_scenario_09 |
+| T-L01-0410 | Replay scenario 10 | fast | l01/test_invoice_reports.py | test_T_L01_0410_replay_scenario_10 |
+| T-L01-0501 | Anchor | fast | l01/test_invoice_reports.py | test_T_L01_0501_anchor |
+| T-L01-0502 | Basis visible | fast | l01/test_invoice_reports.py | test_T_L01_0502_basis_visible |
+| T-L01-0503 | Billed column | fast | l01/test_invoice_reports.py | test_T_L01_0503_billed_column |
+| T-L01-0504 | Expected column | fast | l01/test_invoice_reports.py | test_T_L01_0504_expected_column |
+| T-L01-0505 | Trace expansion | fast | l01/test_invoice_reports.py | test_T_L01_0505_trace_expansion |
+| T-L01-0506 | Line citation | fast | l01/test_invoice_reports.py | test_T_L01_0506_line_citation |
+| T-L01-0507 | Header details | fast | l01/test_invoice_reports.py | test_T_L01_0507_header_details |
+| T-L01-0508 | Time based match | fast | l01/test_invoice_reports.py | test_T_L01_0508_time_based_match |
+| T-L01-0509 | Currency totals | fast | l01/test_invoice_reports.py | test_T_L01_0509_currency_totals |
+| T-L01-0510 | Unblock requirements | fast | l01/test_invoice_reports.py | test_T_L01_0510_unblock_requirements |
+| T-L01-0511 | No dispute draft | fast | l01/test_invoice_reports.py | test_T_L01_0511_no_dispute_draft |
+| T-L01-0512 | No withhold advice | fast | l01/test_invoice_reports.py | test_T_L01_0512_no_withhold_advice |
+| T-L01-0520 | Taxonomy rejects invalid dates | fast | l01/test_invoice.py | test_T_L01_0520_taxonomy_rejects_invalid_dates |
+| T-L01-0521 | Taxonomy rejects duplicate codes | fast | l01/test_invoice.py | test_T_L01_0521_taxonomy_rejects_duplicate_codes |
+| T-L01-0522 | Taxonomy rejects shared synonym | fast | l01/test_invoice.py | test_T_L01_0522_taxonomy_rejects_shared_synonym |
+| T-L01-0523 | Invalid invoice identity | fast | l01/test_invoice.py | test_T_L01_0523_invalid_invoice_identity |
+| T-L01-0524 | Invalid duplicate line id | fast | l01/test_invoice.py | test_T_L01_0524_invalid_duplicate_line_id |
+| T-L01-0525 | Invalid nonfinite header | fast | l01/test_invoice.py | test_T_L01_0525_invalid_nonfinite_header |
+| T-L01-0526 | Basis reject negative rate | fast | l01/test_invoice.py | test_T_L01_0526_basis_reject_negative_rate |
+| T-L01-0527 | Incommensurate quantity abstains | fast | l01/test_invoice.py | test_T_L01_0527_incommensurate_quantity_abstains |
+| T-L01-0528 | Basis uses declared rounding | fast | l01/test_invoice.py | test_T_L01_0528_basis_uses_declared_rounding |
+| T-L01-0529 | Negative duplicate window rejected | fast | l01/test_invoice.py | test_T_L01_0529_negative_duplicate_window_rejected |
+| T-L01-0530 | Negative duplicate band rejected | fast | l01/test_invoice.py | test_T_L01_0530_negative_duplicate_band_rejected |
+| T-L01-0531 | Unverified invoice abstains | fast | l01/test_invoice.py | test_T_L01_0531_unverified_invoice_abstains |
+| T-L01-0532 | Weak invoice fails closed | fast | l01/test_invoice.py | test_T_L01_0532_weak_invoice_fails_closed |
+| T-L02-0001 | Scenario 01 | fast | l02/test_landed_reports.py | test_T_L02_0001_scenario_01 |
+| T-L02-0002 | Scenario 02 | fast | l02/test_landed_reports.py | test_T_L02_0002_scenario_02 |
+| T-L02-0003 | Scenario 03 | fast | l02/test_landed_reports.py | test_T_L02_0003_scenario_03 |
+| T-L02-0004 | Scenario 04 | fast | l02/test_landed_reports.py | test_T_L02_0004_scenario_04 |
+| T-L02-0005 | Scenario 05 | fast | l02/test_landed_reports.py | test_T_L02_0005_scenario_05 |
+| T-L02-0006 | Scenario 06 | fast | l02/test_landed_reports.py | test_T_L02_0006_scenario_06 |
+| T-L02-0007 | Scenario 07 | fast | l02/test_landed_reports.py | test_T_L02_0007_scenario_07 |
+| T-L02-0008 | Scenario 08 | fast | l02/test_landed_reports.py | test_T_L02_0008_scenario_08 |
+| T-L02-0009 | Scenario 09 | fast | l02/test_landed_reports.py | test_T_L02_0009_scenario_09 |
+| T-L02-0010 | Scenario 10 | fast | l02/test_landed_reports.py | test_T_L02_0010_scenario_10 |
+| T-L02-0011 | Scenario 11 | fast | l02/test_landed_reports.py | test_T_L02_0011_scenario_11 |
+| T-L02-0012 | Scenario 12 | fast | l02/test_landed_reports.py | test_T_L02_0012_scenario_12 |
+| T-L02-0013 | Scenario 13 | fast | l02/test_landed_reports.py | test_T_L02_0013_scenario_13 |
+| T-L02-0014 | Scenario 14 | fast | l02/test_landed_reports.py | test_T_L02_0014_scenario_14 |
+| T-L02-0015 | Scenario 15 | fast | l02/test_landed_reports.py | test_T_L02_0015_scenario_15 |
+| T-L02-0016 | Scenario 16 | fast | l02/test_landed_reports.py | test_T_L02_0016_scenario_16 |
+| T-L02-0017 | Scenario 17 | fast | l02/test_landed_reports.py | test_T_L02_0017_scenario_17 |
+| T-L02-0101 | Provided | fast | l02/test_landed_reports.py | test_T_L02_0101_provided |
+| T-L02-0102 | Indicative | fast | l02/test_landed_reports.py | test_T_L02_0102_indicative |
+| T-L02-0103 | Incomplete | fast | l02/test_landed_reports.py | test_T_L02_0103_incomplete |
+| T-L02-0104 | Variance | fast | l02/test_landed_reports.py | test_T_L02_0104_variance |
+| T-L02-0105 | Rate conflict | fast | l02/test_landed_reports.py | test_T_L02_0105_rate_conflict |
+| T-L02-0106 | Missing upstream | fast | l02/test_landed_reports.py | test_T_L02_0106_missing_upstream |
+| T-L02-0107 | Valuation rule | fast | l02/test_landed_reports.py | test_T_L02_0107_valuation_rule |
+| T-L02-0108 | Missing duty pack | fast | l02/test_landed_reports.py | test_T_L02_0108_missing_duty_pack |
+| T-L02-0109 | Declared code absent | fast | l02/test_landed_reports.py | test_T_L02_0109_declared_code_absent |
+| T-L02-0110 | Missing fx | fast | l02/test_landed_reports.py | test_T_L02_0110_missing_fx |
+| T-L02-0111 | Missing currency | fast | l02/test_landed_reports.py | test_T_L02_0111_missing_currency |
 | T-L02-0201 | Ad valorem duty scales with goods value | fast | l02/test_cost.py | test_T_L02_0201_ad_valorem_scales |
 | T-L02-0202 | Duty and tax match a rational oracle | fast | l02/test_cost.py | test_T_L02_0202_fraction_oracle |
 | T-L02-0203 | K05 and L02 produce an identical basis | fast | l02/test_cost.py | test_T_L02_0203_parallel_k05_and_l02_basis |
@@ -1089,48 +1139,60 @@
 | T-L02-0233 | Weak preference | fast | l02/test_cost.py | test_T_L02_0233_weak_preference |
 | T-L02-0234 | Adjusted basis | fast | l02/test_cost.py | test_T_L02_0234_adjusted_basis |
 | T-L02-0235 | Zero goods value | fast | l02/test_cost.py | test_T_L02_0235_zero_goods_value |
-| T-L02-0301 | Zero value | fast | l02/test_reports.py | test_T_L02_0301_zero_value |
-| T-L02-0302 | Negative value | fast | l02/test_reports.py | test_T_L02_0302_negative_value |
-| T-L02-0303 | Negative quantity | fast | l02/test_reports.py | test_T_L02_0303_negative_quantity |
-| T-L02-0304 | Negative weight | fast | l02/test_reports.py | test_T_L02_0304_negative_weight |
-| T-L02-0305 | Huge quantity | fast | l02/test_reports.py | test_T_L02_0305_huge_quantity |
-| T-L02-0306 | Huge weight | fast | l02/test_reports.py | test_T_L02_0306_huge_weight |
-| T-L02-0307 | Nonfinite amount | fast | l02/test_reports.py | test_T_L02_0307_nonfinite_amount |
-| T-L02-0308 | Nonfinite quantity | fast | l02/test_reports.py | test_T_L02_0308_nonfinite_quantity |
-| T-L02-0309 | Wrong decimal | fast | l02/test_reports.py | test_T_L02_0309_wrong_decimal |
-| T-L02-0310 | Bad goods date | fast | l02/test_reports.py | test_T_L02_0310_bad_goods_date |
-| T-L02-0311 | Overlapping rates | fast | l02/test_reports.py | test_T_L02_0311_overlapping_rates |
-| T-L02-0312 | Missing currency exponent | fast | l02/test_reports.py | test_T_L02_0312_missing_currency_exponent |
-| T-L02-0313 | Missing fx not zero | fast | l02/test_reports.py | test_T_L02_0313_missing_fx_not_zero |
-| T-L02-0314 | Free text exemption | fast | l02/test_reports.py | test_T_L02_0314_free_text_exemption |
-| T-L02-0315 | Alternative code ignored | fast | l02/test_reports.py | test_T_L02_0315_alternative_code_ignored |
-| T-L02-0316 | Preference unverified | fast | l02/test_reports.py | test_T_L02_0316_preference_unverified |
-| T-L02-0317 | Invalid components | fast | l02/test_reports.py | test_T_L02_0317_invalid_components |
-| T-L02-0318 | Invalid rate pack | fast | l02/test_reports.py | test_T_L02_0318_invalid_rate_pack |
-| T-L02-0319 | Unsafe plan component | fast | l02/test_reports.py | test_T_L02_0319_unsafe_plan_component |
-| T-L02-0320 | No partial total | fast | l02/test_reports.py | test_T_L02_0320_no_partial_total |
-| T-L02-0401 | Replay scenario 01 | fast | l02/test_reports.py | test_T_L02_0401_replay_scenario_01 |
-| T-L02-0402 | Replay scenario 02 | fast | l02/test_reports.py | test_T_L02_0402_replay_scenario_02 |
-| T-L02-0403 | Replay scenario 03 | fast | l02/test_reports.py | test_T_L02_0403_replay_scenario_03 |
-| T-L02-0404 | Replay scenario 04 | fast | l02/test_reports.py | test_T_L02_0404_replay_scenario_04 |
-| T-L02-0405 | Replay scenario 05 | fast | l02/test_reports.py | test_T_L02_0405_replay_scenario_05 |
-| T-L02-0406 | Replay scenario 06 | fast | l02/test_reports.py | test_T_L02_0406_replay_scenario_06 |
-| T-L02-0407 | Replay scenario 07 | fast | l02/test_reports.py | test_T_L02_0407_replay_scenario_07 |
-| T-L02-0408 | Replay scenario 08 | fast | l02/test_reports.py | test_T_L02_0408_replay_scenario_08 |
-| T-L02-0409 | Replay scenario 09 | fast | l02/test_reports.py | test_T_L02_0409_replay_scenario_09 |
-| T-L02-0410 | Replay scenario 10 | fast | l02/test_reports.py | test_T_L02_0410_replay_scenario_10 |
-| T-L02-0501 | Anchor | fast | l02/test_reports.py | test_T_L02_0501_anchor |
-| T-L02-0502 | Component origins | fast | l02/test_reports.py | test_T_L02_0502_component_origins |
-| T-L02-0503 | Trace details | fast | l02/test_reports.py | test_T_L02_0503_trace_details |
-| T-L02-0504 | Range visible | fast | l02/test_reports.py | test_T_L02_0504_range_visible |
-| T-L02-0505 | Missing components visible | fast | l02/test_reports.py | test_T_L02_0505_missing_components_visible |
-| T-L02-0506 | No incomplete total | fast | l02/test_reports.py | test_T_L02_0506_no_incomplete_total |
-| T-L02-0507 | Simulation record only | fast | l02/test_reports.py | test_T_L02_0507_simulation_record_only |
-| T-L02-0508 | Proposal replaces transport | fast | l02/test_reports.py | test_T_L02_0508_proposal_replaces_transport |
-| T-L02-0509 | Observed eight percent | fast | l02/test_reports.py | test_T_L02_0509_observed_eight_percent |
-| T-L02-0510 | Unestimated visible | fast | l02/test_reports.py | test_T_L02_0510_unestimated_visible |
-| T-L02-0511 | No declaration advice | fast | l02/test_reports.py | test_T_L02_0511_no_declaration_advice |
-| T-L02-0512 | No variance without audit | fast | l02/test_reports.py | test_T_L02_0512_no_variance_without_audit |
+| T-L02-0301 | Zero value | fast | l02/test_landed_reports.py | test_T_L02_0301_zero_value |
+| T-L02-0302 | Negative value | fast | l02/test_landed_reports.py | test_T_L02_0302_negative_value |
+| T-L02-0303 | Negative quantity | fast | l02/test_landed_reports.py | test_T_L02_0303_negative_quantity |
+| T-L02-0304 | Negative weight | fast | l02/test_landed_reports.py | test_T_L02_0304_negative_weight |
+| T-L02-0305 | Huge quantity | fast | l02/test_landed_reports.py | test_T_L02_0305_huge_quantity |
+| T-L02-0306 | Huge weight | fast | l02/test_landed_reports.py | test_T_L02_0306_huge_weight |
+| T-L02-0307 | Nonfinite amount | fast | l02/test_landed_reports.py | test_T_L02_0307_nonfinite_amount |
+| T-L02-0308 | Nonfinite quantity | fast | l02/test_landed_reports.py | test_T_L02_0308_nonfinite_quantity |
+| T-L02-0309 | Wrong decimal | fast | l02/test_landed_reports.py | test_T_L02_0309_wrong_decimal |
+| T-L02-0310 | Bad goods date | fast | l02/test_landed_reports.py | test_T_L02_0310_bad_goods_date |
+| T-L02-0311 | Overlapping rates | fast | l02/test_landed_reports.py | test_T_L02_0311_overlapping_rates |
+| T-L02-0312 | Missing currency exponent | fast | l02/test_landed_reports.py | test_T_L02_0312_missing_currency_exponent |
+| T-L02-0313 | Missing fx not zero | fast | l02/test_landed_reports.py | test_T_L02_0313_missing_fx_not_zero |
+| T-L02-0314 | Free text exemption | fast | l02/test_landed_reports.py | test_T_L02_0314_free_text_exemption |
+| T-L02-0315 | Alternative code ignored | fast | l02/test_landed_reports.py | test_T_L02_0315_alternative_code_ignored |
+| T-L02-0316 | Preference unverified | fast | l02/test_landed_reports.py | test_T_L02_0316_preference_unverified |
+| T-L02-0317 | Invalid components | fast | l02/test_landed_reports.py | test_T_L02_0317_invalid_components |
+| T-L02-0318 | Invalid rate pack | fast | l02/test_landed_reports.py | test_T_L02_0318_invalid_rate_pack |
+| T-L02-0319 | Unsafe plan component | fast | l02/test_landed_reports.py | test_T_L02_0319_unsafe_plan_component |
+| T-L02-0320 | No partial total | fast | l02/test_landed_reports.py | test_T_L02_0320_no_partial_total |
+| T-L02-0401 | Replay scenario 01 | fast | l02/test_landed_reports.py | test_T_L02_0401_replay_scenario_01 |
+| T-L02-0402 | Replay scenario 02 | fast | l02/test_landed_reports.py | test_T_L02_0402_replay_scenario_02 |
+| T-L02-0403 | Replay scenario 03 | fast | l02/test_landed_reports.py | test_T_L02_0403_replay_scenario_03 |
+| T-L02-0404 | Replay scenario 04 | fast | l02/test_landed_reports.py | test_T_L02_0404_replay_scenario_04 |
+| T-L02-0405 | Replay scenario 05 | fast | l02/test_landed_reports.py | test_T_L02_0405_replay_scenario_05 |
+| T-L02-0406 | Replay scenario 06 | fast | l02/test_landed_reports.py | test_T_L02_0406_replay_scenario_06 |
+| T-L02-0407 | Replay scenario 07 | fast | l02/test_landed_reports.py | test_T_L02_0407_replay_scenario_07 |
+| T-L02-0408 | Replay scenario 08 | fast | l02/test_landed_reports.py | test_T_L02_0408_replay_scenario_08 |
+| T-L02-0409 | Replay scenario 09 | fast | l02/test_landed_reports.py | test_T_L02_0409_replay_scenario_09 |
+| T-L02-0410 | Replay scenario 10 | fast | l02/test_landed_reports.py | test_T_L02_0410_replay_scenario_10 |
+| T-L02-0501 | Anchor | fast | l02/test_landed_reports.py | test_T_L02_0501_anchor |
+| T-L02-0502 | Component origins | fast | l02/test_landed_reports.py | test_T_L02_0502_component_origins |
+| T-L02-0503 | Trace details | fast | l02/test_landed_reports.py | test_T_L02_0503_trace_details |
+| T-L02-0504 | Range visible | fast | l02/test_landed_reports.py | test_T_L02_0504_range_visible |
+| T-L02-0505 | Missing components visible | fast | l02/test_landed_reports.py | test_T_L02_0505_missing_components_visible |
+| T-L02-0506 | No incomplete total | fast | l02/test_landed_reports.py | test_T_L02_0506_no_incomplete_total |
+| T-L02-0507 | Simulation record only | fast | l02/test_landed_reports.py | test_T_L02_0507_simulation_record_only |
+| T-L02-0508 | Proposal replaces transport | fast | l02/test_landed_reports.py | test_T_L02_0508_proposal_replaces_transport |
+| T-L02-0509 | Observed eight percent | fast | l02/test_landed_reports.py | test_T_L02_0509_observed_eight_percent |
+| T-L02-0510 | Unestimated visible | fast | l02/test_landed_reports.py | test_T_L02_0510_unestimated_visible |
+| T-L02-0511 | No declaration advice | fast | l02/test_landed_reports.py | test_T_L02_0511_no_declaration_advice |
+| T-L02-0512 | No variance without audit | fast | l02/test_landed_reports.py | test_T_L02_0512_no_variance_without_audit |
+| T-L02-0520 | Invalid range rejected | fast | l02/test_cost.py | test_T_L02_0520_invalid_range_rejected |
+| T-L02-0521 | Negative component rejected | fast | l02/test_cost.py | test_T_L02_0521_negative_component_rejected |
+| T-L02-0522 | Assumption requires its label | fast | l02/test_cost.py | test_T_L02_0522_assumption_requires_its_label |
+| T-L02-0523 | Specific per piece | fast | l02/test_cost.py | test_T_L02_0523_specific_per_piece |
+| T-L02-0524 | Unsupported weight unit | fast | l02/test_cost.py | test_T_L02_0524_unsupported_weight_unit |
+| T-L02-0525 | Negative preference rejected | fast | l02/test_cost.py | test_T_L02_0525_negative_preference_rejected |
+| T-L02-0526 | Invalid duty rate rejected | fast | l02/test_cost.py | test_T_L02_0526_invalid_duty_rate_rejected |
+| T-L02-0527 | Invalid pack rejected | fast | l02/test_cost.py | test_T_L02_0527_invalid_pack_rejected |
+| T-L02-0528 | Invalid tax rate rejected | fast | l02/test_cost.py | test_T_L02_0528_invalid_tax_rate_rejected |
+| T-L02-0529 | Overlapping tax rates need review | fast | l02/test_cost.py | test_T_L02_0529_overlapping_tax_rates_need_review |
+| T-L02-0530 | Unknown duty currency | fast | l02/test_cost.py | test_T_L02_0530_unknown_duty_currency |
+| T-L02-0531 | Tax rounding honors pack | fast | l02/test_cost.py | test_T_L02_0531_tax_rounding_honors_pack |
 | T-LED-0001 | Sequence starts at 1 and increments by 1 | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0001_sequence_starts_at_1 |
 | T-LED-0002 | No gaps under concurrent appends | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0002_no_gaps_concurrent |
 | T-LED-0003 | Every field change alters the record hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0003_field_change_alters_hash |

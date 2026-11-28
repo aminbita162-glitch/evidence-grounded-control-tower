@@ -29,6 +29,7 @@ class DayOne(StrEnum):
 
 class PartialDay(StrEnum):
     STARTED = "STARTED"
+    STARTED_INCLUSIVE = "STARTED_INCLUSIVE"
     COMPLETE = "COMPLETE"
     PRORATED = "PRORATED"
 
@@ -263,8 +264,15 @@ class Clock:
             )
         )
         if duration <= _ZERO:
+            if (
+                self.terms.partial == PartialDay.STARTED_INCLUSIVE
+                and begin == finish == left
+                and start <= left <= end
+                and not any(a <= left < b for a, b in windows)
+            ):
+                return Fraction(1)
             return Fraction(0)
-        if self.terms.partial == PartialDay.STARTED:
+        if self.terms.partial in (PartialDay.STARTED, PartialDay.STARTED_INCLUSIVE):
             return Fraction(1)
         if self.terms.partial == PartialDay.COMPLETE:
             return Fraction(duration == right - left)
@@ -273,7 +281,7 @@ class Clock:
         )
 
     def _units(self, start: datetime, end: datetime) -> Fraction:
-        if end <= start:
+        if end < start or (end == start and self.terms.partial != PartialDay.STARTED_INCLUSIVE):
             return Fraction(0)
         first, last = self.day_at(start), self.day_at(end)
         if (last - first).days > _MAX_DAYS:

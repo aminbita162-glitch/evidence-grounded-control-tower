@@ -694,3 +694,177 @@ def test_T_F03_0235_tariff_day_continuity(berlin: Clock) -> None:
     assert berlin.day_at(berlin.boundary(date(2024, 3, 31)) + timedelta(hours=22)) == date(
         2024, 3, 31
     )
+
+
+@pytest.mark.fast
+def test_T_F03_0520_calendar_rejects_no_working_days() -> None:
+    """
+    id: T-F03-0520
+    title: Calendar rejects no working days
+    purpose: Calendar rejects no working days
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Calendar rejects no working days
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="working weekdays"):
+        replace(CALENDAR, weekend=frozenset(range(7)))
+
+
+@pytest.mark.fast
+def test_T_F03_0521_suspension_rejects_empty_interval() -> None:
+    """
+    id: T-F03-0521
+    title: Suspension rejects empty interval
+    purpose: Suspension rejects empty interval
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Suspension rejects empty interval
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="ordered period"):
+        Suspension(START, START, SOURCE, True)
+
+
+@pytest.mark.fast
+def test_T_F03_0522_tier_rejects_negative_rate() -> None:
+    """
+    id: T-F03-0522
+    title: Tier rejects negative rate
+    purpose: Tier rejects negative rate
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Tier rejects negative rate
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="nonnegative"):
+        Tier(None, Decimal(-1))
+
+
+@pytest.mark.fast
+def test_T_F03_0523_tier_rejects_zero_edge() -> None:
+    """
+    id: T-F03-0523
+    title: Tier rejects zero edge
+    purpose: Tier rejects zero edge
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Tier rejects zero edge
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="positive day"):
+        Tier(0, Decimal(1))
+
+
+@pytest.mark.fast
+def test_T_F03_0524_terms_reject_reversed_validity() -> None:
+    """
+    id: T-F03-0524
+    title: Terms reject reversed validity
+    purpose: Terms reject reversed validity
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Terms reject reversed validity
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="invalid tariff"):
+        replace(TERMS, valid_until=TERMS.valid_from)
+
+
+@pytest.mark.fast
+def test_T_F03_0525_clock_requires_day_rule() -> None:
+    """
+    id: T-F03-0525
+    title: Clock requires day rule
+    purpose: Clock requires day rule
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Clock requires day rule
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="day rule"):
+        Clock(replace(TERMS, cutoff=None), None, (), TABLE)
+
+
+@pytest.mark.fast
+def test_T_F03_0526_clock_rejects_calendar_mismatch() -> None:
+    """
+    id: T-F03-0526
+    title: Clock rejects calendar mismatch
+    purpose: Clock rejects calendar mismatch
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Clock rejects calendar mismatch
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="working calendar"):
+        Clock(replace(TERMS, basis=DayBasis.WORKING, calendar_id="other"), CALENDAR, (), TABLE)
+
+
+@pytest.mark.fast
+def test_T_F03_0527_expiry_horizon_is_bounded() -> None:
+    """
+    id: T-F03-0527
+    title: Expiry horizon is bounded
+    purpose: Expiry horizon is bounded
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Expiry horizon is bounded
+    risk: HZ-04
+    capability: F03
+    """
+    pause = Suspension(START - DAY, START + 40_000 * DAY, SOURCE, True)
+    with pytest.raises(ValueError, match="free period"):
+        Clock(TERMS, None, (pause,), TABLE).expiry(START)
+
+
+@pytest.mark.fast
+def test_T_F03_0528_reference_horizon_is_bounded() -> None:
+    """
+    id: T-F03-0528
+    title: Reference horizon is bounded
+    purpose: Reference horizon is bounded
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Reference horizon is bounded
+    risk: HZ-04
+    capability: F03
+    """
+    with pytest.raises(ValueError, match="charge period"):
+        Clock(TERMS, None, (), TABLE).simulate(START, START + 40_000 * DAY)
+
+
+@pytest.mark.fast
+def test_T_F03_0530_inclusive_terms_count_at_expiry(clock: Clock) -> None:
+    """
+    id: T-F03-0530
+    title: Explicit inclusive terms count the tariff boundary
+    purpose: Compare the inclusive and exclusive period rules
+    level: fast
+    requirement: P16-T09, F03-S04, DoD 7
+    input: Two versions of a synthetic tariff with different partial-day rules
+    expected: Inclusive terms charge at the exact boundary
+    risk: HZ-04
+    capability: F03
+    """
+    expiry = clock.expiry(START)
+    inclusive = replace(clock, terms=replace(TERMS, partial=PartialDay.STARTED_INCLUSIVE))
+    assert inclusive.charge(START, expiry).days == 1
+    assert inclusive.charge(START, expiry - timedelta(microseconds=1)).days == 0
+    assert clock.charge(START, expiry).days == 0

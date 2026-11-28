@@ -2,7 +2,7 @@
 
 from dataclasses import replace
 from datetime import UTC, date, datetime, timedelta
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from fractions import Fraction
 
 import pytest
@@ -26,7 +26,7 @@ from capabilities.l02 import (
     evaluate,
 )
 from kernel.decision import FactEntry
-from kernel.lib.money import CurrencyTable, Money, RateDatum
+from kernel.lib.money import CurrencyTable, Money, RateDatum, RoundAt, RoundingRule
 from kernel.lib.valuation import Adjustment, FxPack, ValuationRule
 
 DAY = date(2024, 3, 1)
@@ -739,3 +739,207 @@ def test_T_L02_0235_zero_goods_value() -> None:
     capability: L02
     """
     assert cost(replace(GOODS, value=Money(Decimal(0), "USD"))).duties[0].amount == Decimal(0)
+
+
+@pytest.mark.fast
+def test_T_L02_0520_invalid_range_rejected() -> None:
+    """
+    id: T-L02-0520
+    title: Invalid range rejected
+    purpose: Invalid range rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid range rejected
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="ordered"):
+        Range(Decimal(2), Decimal(1), Decimal(3))
+
+
+@pytest.mark.fast
+def test_T_L02_0521_negative_component_rejected() -> None:
+    """
+    id: T-L02-0521
+    title: Negative component rejected
+    purpose: Negative component rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Negative component rejected
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="nonnegative"):
+        component("FREIGHT", "-1")
+
+
+@pytest.mark.fast
+def test_T_L02_0522_assumption_requires_its_label() -> None:
+    """
+    id: T-L02-0522
+    title: Assumption requires its label
+    purpose: Assumption requires its label
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Assumption requires its label
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="evidence label"):
+        replace(component("FREIGHT"), kind=Kind.ASSUMPTION)
+
+
+@pytest.mark.fast
+def test_T_L02_0523_specific_per_piece() -> None:
+    """
+    id: T-L02-0523
+    title: Specific per piece
+    purpose: Specific per piece
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Specific per piece
+    risk: HZ-03
+    capability: L02
+    """
+    mode = replace(AD, kind=DutyKind.SPECIFIC, specific=Decimal(2), unit="piece")
+    assert cost(rate=mode).duties[0].amount == Decimal(20)
+
+
+@pytest.mark.fast
+def test_T_L02_0524_unsupported_weight_unit() -> None:
+    """
+    id: T-L02-0524
+    title: Unsupported weight unit
+    purpose: Unsupported weight unit
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Unsupported weight unit
+    risk: HZ-03
+    capability: L02
+    """
+    mode = replace(AD, kind=DutyKind.SPECIFIC, specific=Decimal(2))
+    assert Reason.UPSTREAM in cost(replace(GOODS, weight_unit="unsupported"), mode).reason_codes
+
+
+@pytest.mark.fast
+def test_T_L02_0525_negative_preference_rejected() -> None:
+    """
+    id: T-L02-0525
+    title: Negative preference rejected
+    purpose: Negative preference rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Negative preference rejected
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="nonnegative"):
+        Preference("origin", "yes", Decimal(-1))
+
+
+@pytest.mark.fast
+def test_T_L02_0526_invalid_duty_rate_rejected() -> None:
+    """
+    id: T-L02-0526
+    title: Invalid duty rate rejected
+    purpose: Invalid duty rate rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid duty rate rejected
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="invalid duty rate"):
+        replace(AD, specific=Decimal(-1))
+
+
+@pytest.mark.fast
+def test_T_L02_0527_invalid_pack_rejected() -> None:
+    """
+    id: T-L02-0527
+    title: Invalid pack rejected
+    purpose: Invalid pack rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid pack rejected
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="invalid duty pack"):
+        DutyPack("", SRC, FROM, TO, (AD,))
+
+
+@pytest.mark.fast
+def test_T_L02_0528_invalid_tax_rate_rejected() -> None:
+    """
+    id: T-L02-0528
+    title: Invalid tax rate rejected
+    purpose: Invalid tax rate rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid tax rate rejected
+    risk: HZ-03
+    capability: L02
+    """
+    with pytest.raises(ValueError, match="invalid tax rate"):
+        replace(TAX, base_codes=())
+
+
+@pytest.mark.fast
+def test_T_L02_0529_overlapping_tax_rates_need_review() -> None:
+    """
+    id: T-L02-0529
+    title: Overlapping tax rates need review
+    purpose: Overlapping tax rates need review
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Overlapping tax rates need review
+    risk: HZ-03
+    capability: L02
+    """
+    result = cost(taxes=(TAX, replace(TAX, id="second")))
+    assert Reason.CONFLICT in result.reason_codes and result.total is None
+
+
+@pytest.mark.fast
+def test_T_L02_0530_unknown_duty_currency() -> None:
+    """
+    id: T-L02-0530
+    title: Unknown duty currency
+    purpose: Unknown duty currency
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Unknown duty currency
+    risk: HZ-03
+    capability: L02
+    """
+    assert Reason.CURRENCY in cost(rate=replace(AD, currency="ZZZ")).reason_codes
+
+
+@pytest.mark.fast
+def test_T_L02_0531_tax_rounding_honors_pack() -> None:
+    """
+    id: T-L02-0531
+    title: Tax rounding honors pack
+    purpose: Tax rounding honors pack
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L02, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Tax rounding honors pack
+    risk: HZ-03
+    capability: L02
+    """
+    rounding = RoundingRule(RoundAt.LINE, ROUND_HALF_UP, SRC)
+    report = cost(taxes=(replace(TAX, rate=Decimal("0.001"), rounding=rounding),))
+    assert actual(report) == Decimal("105.11")

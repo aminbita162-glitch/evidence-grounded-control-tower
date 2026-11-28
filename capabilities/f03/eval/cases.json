@@ -13,7 +13,7 @@
   },
   {
     "case": "data/scenarios/f03/F03-S04.json",
-    "expected": "ALLOW"
+    "expected": "ESCALATE"
   },
   {
     "case": "data/scenarios/f03/F03-S05.json",

@@ -1149,3 +1149,24 @@ def test_T_F03_0512_no_suggested_record_edits() -> None:
         not any(term in view(n).lower() for term in ("backdate", "change the recorded"))
         for n in range(1, 13)
     )
+
+
+@pytest.mark.fast
+def test_T_F03_0529_future_stop_does_not_stop_clock() -> None:
+    """
+    id: T-F03-0529
+    title: Future stop does not stop clock
+    purpose: Future stop does not stop clock
+    level: fast
+    requirement: P16-T09, Part 5 section 5.F03, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Future stop does not stop clock
+    risk: HZ-04
+    capability: F03
+    """
+    _, inputs, at = case()
+    data = INPUT.validate_python(inputs)
+    item = data.clocks[0]
+    future = replace(item.events[0], kind="GATED_OUT_FULL", instant=at + timedelta(days=1))
+    result, _ = register(replace(data, clocks=(replace(item, events=(*item.events, future)),)), at)
+    assert result.clocks[0].stop is None

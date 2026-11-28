@@ -187,6 +187,16 @@ def build_matrix(repo_root: Path) -> TraceMatrix:
                 if {"id", "requirement"} <= entry.fields.keys()
             }
     matrix.broken = check_matrix(matrix)
+    if (repo_root / "capabilities/f07/manifest.json").is_file():
+        from tools.trace.phase16 import CAPABILITIES, scenarios
+
+        for capability in CAPABILITIES:
+            try:
+                scenarios(repo_root, capability)
+            except (OSError, ValueError, KeyError) as error:
+                matrix.broken.append(
+                    BrokenLink("unresolved_scenario_basis", capability, str(error))
+                )
     return matrix
 
 

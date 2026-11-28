@@ -2,7 +2,7 @@
 
 from dataclasses import replace
 from datetime import date, timedelta
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from fractions import Fraction
 
 import pytest
@@ -22,7 +22,7 @@ from capabilities.l01 import (
     Reason,
     evaluate,
 )
-from kernel.lib.money import CurrencyTable
+from kernel.lib.money import CurrencyTable, RoundAt, RoundingRule
 from kernel.lib.taxonomy import ChargeName, LineKind, Taxonomy
 from kernel.types.decision import DecisionValue
 
@@ -741,3 +741,225 @@ def test_T_L01_0235_rounded_line_trace() -> None:
     capability: L01
     """
     assert audit().lines[0].trace is not None
+
+
+@pytest.mark.fast
+def test_T_L01_0520_taxonomy_rejects_invalid_dates() -> None:
+    """
+    id: T-L01-0520
+    title: Taxonomy rejects invalid dates
+    purpose: Taxonomy rejects invalid dates
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Taxonomy rejects invalid dates
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="ordered validity"):
+        replace(TAXONOMY, valid_until=TAXONOMY.valid_from)
+
+
+@pytest.mark.fast
+def test_T_L01_0521_taxonomy_rejects_duplicate_codes() -> None:
+    """
+    id: T-L01-0521
+    title: Taxonomy rejects duplicate codes
+    purpose: Taxonomy rejects duplicate codes
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Taxonomy rejects duplicate codes
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="unique"):
+        replace(TAXONOMY, entries=(TAXONOMY.entries[0],) * 2)
+
+
+@pytest.mark.fast
+def test_T_L01_0522_taxonomy_rejects_shared_synonym() -> None:
+    """
+    id: T-L01-0522
+    title: Taxonomy rejects shared synonym
+    purpose: Taxonomy rejects shared synonym
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Taxonomy rejects shared synonym
+    risk: HZ-03
+    capability: L01
+    """
+    entry = replace(TAXONOMY.entries[0], code="OTHER")
+    with pytest.raises(ValueError, match="more than one"):
+        replace(TAXONOMY, entries=(TAXONOMY.entries[0], entry))
+
+
+@pytest.mark.fast
+def test_T_L01_0523_invalid_invoice_identity() -> None:
+    """
+    id: T-L01-0523
+    title: Invalid invoice identity
+    purpose: Invalid invoice identity
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid invoice identity
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="identifier"):
+        replace(INVOICE, number="")
+
+
+@pytest.mark.fast
+def test_T_L01_0524_invalid_duplicate_line_id() -> None:
+    """
+    id: T-L01-0524
+    title: Invalid duplicate line id
+    purpose: Invalid duplicate line id
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid duplicate line id
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="unique"):
+        replace(INVOICE, lines=(LINE, LINE))
+
+
+@pytest.mark.fast
+def test_T_L01_0525_invalid_nonfinite_header() -> None:
+    """
+    id: T-L01-0525
+    title: Invalid nonfinite header
+    purpose: Invalid nonfinite header
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Invalid nonfinite header
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="finite"):
+        replace(INVOICE, total=Decimal("NaN"))
+
+
+@pytest.mark.fast
+def test_T_L01_0526_basis_reject_negative_rate() -> None:
+    """
+    id: T-L01-0526
+    title: Basis reject negative rate
+    purpose: Basis reject negative rate
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Basis reject negative rate
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="invalid invoice charge"):
+        replace(BASIS, rate=Decimal(-1))
+
+
+@pytest.mark.fast
+def test_T_L01_0527_incommensurate_quantity_abstains() -> None:
+    """
+    id: T-L01-0527
+    title: Incommensurate quantity abstains
+    purpose: Incommensurate quantity abstains
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Incommensurate quantity abstains
+    risk: HZ-03
+    capability: L01
+    """
+    assert category(line(quantity=Quantity(ONE, "piece"))) is LineClass.UNVERIFIED
+
+
+@pytest.mark.fast
+def test_T_L01_0528_basis_uses_declared_rounding() -> None:
+    """
+    id: T-L01-0528
+    title: Basis uses declared rounding
+    purpose: Basis uses declared rounding
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Basis uses declared rounding
+    risk: HZ-03
+    capability: L01
+    """
+    rule = RoundingRule(RoundAt.LINE, ROUND_HALF_UP, SRC)
+    basis = replace(BASIS, rate=Decimal("1.005"), rounding=rule)
+    bill = line(rate=basis.rate, amount=Decimal("1.01"))
+    item = audit(bill, (basis,)).lines[0]
+    assert item.classification is LineClass.MATCH and item.expected == Decimal("1.01")
+
+
+@pytest.mark.fast
+def test_T_L01_0529_negative_duplicate_window_rejected() -> None:
+    """
+    id: T-L01-0529
+    title: Negative duplicate window rejected
+    purpose: Negative duplicate window rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Negative duplicate window rejected
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="duplicate window"):
+        Policy(duplicate_days=-1)
+
+
+@pytest.mark.fast
+def test_T_L01_0530_negative_duplicate_band_rejected() -> None:
+    """
+    id: T-L01-0530
+    title: Negative duplicate band rejected
+    purpose: Negative duplicate band rejected
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Negative duplicate band rejected
+    risk: HZ-03
+    capability: L01
+    """
+    with pytest.raises(ValueError, match="near-duplicate band"):
+        Policy(near_band=Decimal(-1))
+
+
+@pytest.mark.fast
+def test_T_L01_0531_unverified_invoice_abstains() -> None:
+    """
+    id: T-L01-0531
+    title: Unverified invoice abstains
+    purpose: Unverified invoice abstains
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Unverified invoice abstains
+    risk: HZ-03
+    capability: L01
+    """
+    assert Reason.INVOICE in audit(replace(INVOICE, verified=False)).reason_codes
+
+
+@pytest.mark.fast
+def test_T_L01_0532_weak_invoice_fails_closed() -> None:
+    """
+    id: T-L01-0532
+    title: Weak invoice fails closed
+    purpose: Weak invoice fails closed
+    level: fast
+    requirement: P16-T09, Part 5 section 5.L01, DoD 12
+    input: Versioned synthetic case and referenced packs
+    expected: Weak invoice fails closed
+    risk: HZ-03
+    capability: L01
+    """
+    assert Reason.LABEL in audit(replace(INVOICE, label="UNVERIFIED")).reason_codes

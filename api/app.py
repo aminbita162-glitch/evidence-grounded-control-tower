@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from capabilities.f02.registration import ClassificationJudge
     from capabilities.k05.registration import ValuationJudge
     from capabilities.k14.workflow import IntakeWorkflow
+    from kernel.skeleton.finance import FinanceSource
 
 __all__ = [
     "API_VERSION",
@@ -49,6 +50,7 @@ class AppPorts:
         intake: IntakeWorkflow | None = None,
         valuation: ValuationJudge | None = None,
         classification: ClassificationJudge | None = None,
+        finance: FinanceSource | None = None,
     ) -> None:
         """Store injected ports.
 
@@ -65,6 +67,7 @@ class AppPorts:
         self.intake = intake
         self.valuation = valuation
         self.classification = classification
+        self.finance = finance
 
 
 def create_app(ports: AppPorts | None = None, *, production: bool = False) -> FastAPI:
@@ -128,6 +131,7 @@ def _register_routes(app: FastAPI, ports: AppPorts) -> None:
         intake=ports.intake,
         valuation=ports.valuation,
         classification=ports.classification,
+        finance=ports.finance,
     )
     register_command_routes(app)
 
