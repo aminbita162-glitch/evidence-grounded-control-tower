@@ -51,6 +51,9 @@ The system reads case documents, extracts facts with sources and labels, applies
 
 Each capability returns one Decision (ALLOW, ABSTAIN, HOLD, ESCALATE) with reason codes and cited facts.
 
+- K05 Valuation Anomaly ✓, view accessibility pending P27.
+- F02 Classification Judge ✓, English with the active synthetic pack, view accessibility pending P27.
+
 ## 7 Trust model
 
 A person decides before any irreversible action. The system does not take an irreversible action without a human gate.
@@ -73,7 +76,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P12 | Packaging and operations | ✓ November 2026 |
 | P13 | Capability support library | ✓ November 2026 |
 | P14 | Intake | ✓ November 2026 |
-| P15 | Valuation and classification | ☐ |
+| P15 | Valuation and classification | ✓ November 2026 |
 | P16 | Clock, freight cost and charge control | ☐ |
 
 ## 9 Quality gates
