@@ -1,0 +1,33 @@
+{
+  "basis": "WORKING",
+  "calendar_id": "SRC-SYNTHETIC-F03",
+  "currency": "USD",
+  "cutoff": "00:00:00",
+  "day_one": "INCLUDE",
+  "free_days": 4,
+  "label": "SYNTHETIC",
+  "partial": "STARTED",
+  "rounding": {
+    "mode": "ROUND_HALF_EVEN",
+    "point": "TOTAL",
+    "source_id": "SRC-SYNTHETIC-F03"
+  },
+  "source_id": "SRC-SYNTHETIC-F03",
+  "start_event": "DISCHARGED",
+  "stop_event": "GATED_OUT_FULL",
+  "tiers": [
+    {
+      "rate": "5",
+      "through_day": 2
+    },
+    {
+      "rate": "8",
+      "through_day": null
+    }
+  ],
+  "valid_from": "2024-01-01T00:00Z",
+  "valid_until": "2025-01-01T00:00Z",
+  "verified": true,
+  "version": "1.0.0",
+  "zone": "UTC"
+}

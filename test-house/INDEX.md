@@ -344,6 +344,29 @@
 | T-F02-0507 | No duty or rewording advice | fast | f02/test_classification.py | test_no_duty_or_rewording_advice |
 | T-F02-0511 | Calibration hash appears in evidence | fast | f02/test_classification.py | test_T_F02_0511_calibration_hash_appears_in_evidence |
 | T-F02-0512 | Case reports supported languages | fast | f02/test_classification.py | test_T_F02_0512_case_reports_supported_languages |
+| T-F03-0001 | Scenario 01 | fast | f03/test_outcomes.py | test_T_F03_0001_scenario_01 |
+| T-F03-0002 | Scenario 02 | fast | f03/test_outcomes.py | test_T_F03_0002_scenario_02 |
+| T-F03-0003 | Scenario 03 | fast | f03/test_outcomes.py | test_T_F03_0003_scenario_03 |
+| T-F03-0004 | Scenario 04 | fast | f03/test_outcomes.py | test_T_F03_0004_scenario_04 |
+| T-F03-0005 | Scenario 05 | fast | f03/test_outcomes.py | test_T_F03_0005_scenario_05 |
+| T-F03-0006 | Scenario 06 | fast | f03/test_outcomes.py | test_T_F03_0006_scenario_06 |
+| T-F03-0007 | Scenario 07 | fast | f03/test_outcomes.py | test_T_F03_0007_scenario_07 |
+| T-F03-0008 | Scenario 08 | fast | f03/test_outcomes.py | test_T_F03_0008_scenario_08 |
+| T-F03-0009 | Scenario 09 | fast | f03/test_outcomes.py | test_T_F03_0009_scenario_09 |
+| T-F03-0010 | Scenario 10 | fast | f03/test_outcomes.py | test_T_F03_0010_scenario_10 |
+| T-F03-0011 | Scenario 11 | fast | f03/test_outcomes.py | test_T_F03_0011_scenario_11 |
+| T-F03-0012 | Scenario 12 | fast | f03/test_outcomes.py | test_T_F03_0012_scenario_12 |
+| T-F03-0101 | Within free | fast | f03/test_outcomes.py | test_T_F03_0101_within_free |
+| T-F03-0102 | Stopped | fast | f03/test_outcomes.py | test_T_F03_0102_stopped |
+| T-F03-0103 | Ending | fast | f03/test_outcomes.py | test_T_F03_0103_ending |
+| T-F03-0104 | Accruing | fast | f03/test_outcomes.py | test_T_F03_0104_accruing |
+| T-F03-0105 | Order invalid | fast | f03/test_outcomes.py | test_T_F03_0105_order_invalid |
+| T-F03-0106 | Missing event | fast | f03/test_outcomes.py | test_T_F03_0106_missing_event |
+| T-F03-0107 | Missing tariff | fast | f03/test_outcomes.py | test_T_F03_0107_missing_tariff |
+| T-F03-0108 | Unspecified day rule | fast | f03/test_outcomes.py | test_T_F03_0108_unspecified_day_rule |
+| T-F03-0109 | Missing calendar | fast | f03/test_outcomes.py | test_T_F03_0109_missing_calendar |
+| T-F03-0110 | Unmatched container | fast | f03/test_outcomes.py | test_T_F03_0110_unmatched_container |
+| T-F03-0111 | Insufficient label | fast | f03/test_outcomes.py | test_T_F03_0111_insufficient_label |
 | T-F03-0201 | Optimized clock matches day simulation | fast | f03/test_clock.py | test_T_F03_0201_optimized_matches_day_simulation |
 | T-F03-0202 | Later clock end is monotonic | fast | f03/test_clock.py | test_T_F03_0202_later_end_is_monotonic |
 | T-F03-0203 | A verified suspension cannot increase charge | fast | f03/test_clock.py | test_T_F03_0203_verified_suspension_is_monotonic |
@@ -379,6 +402,48 @@
 | T-F03-0233 | Period after end | fast | f03/test_clock.py | test_T_F03_0233_period_after_end |
 | T-F03-0234 | Apportioned tiers | fast | f03/test_clock.py | test_T_F03_0234_apportioned_tiers |
 | T-F03-0235 | Tariff day continuity | fast | f03/test_clock.py | test_T_F03_0235_tariff_day_continuity |
+| T-F03-0301 | Ignore extension claim | fast | f03/test_outcomes.py | test_T_F03_0301_ignore_extension_claim |
+| T-F03-0302 | Ignore instruction in note | fast | f03/test_outcomes.py | test_T_F03_0302_ignore_instruction_in_note |
+| T-F03-0303 | Impossible leap day | fast | f03/test_outcomes.py | test_T_F03_0303_impossible_leap_day |
+| T-F03-0304 | Impossible day | fast | f03/test_outcomes.py | test_T_F03_0304_impossible_day |
+| T-F03-0305 | Impossible month | fast | f03/test_outcomes.py | test_T_F03_0305_impossible_month |
+| T-F03-0306 | Impossible time | fast | f03/test_outcomes.py | test_T_F03_0306_impossible_time |
+| T-F03-0307 | Time without zone | fast | f03/test_outcomes.py | test_T_F03_0307_time_without_zone |
+| T-F03-0308 | Wrong year syntax | fast | f03/test_outcomes.py | test_T_F03_0308_wrong_year_syntax |
+| T-F03-0309 | Empty time | fast | f03/test_outcomes.py | test_T_F03_0309_empty_time |
+| T-F03-0310 | Text as timestamp | fast | f03/test_outcomes.py | test_T_F03_0310_text_as_timestamp |
+| T-F03-0311 | Reversed movements | fast | f03/test_outcomes.py | test_T_F03_0311_reversed_movements |
+| T-F03-0312 | Duplicate movements | fast | f03/test_outcomes.py | test_T_F03_0312_duplicate_movements |
+| T-F03-0313 | Unverified tariff | fast | f03/test_outcomes.py | test_T_F03_0313_unverified_tariff |
+| T-F03-0314 | Expired tariff | fast | f03/test_outcomes.py | test_T_F03_0314_expired_tariff |
+| T-F03-0315 | Wrong currency | fast | f03/test_outcomes.py | test_T_F03_0315_wrong_currency |
+| T-F03-0316 | Required cutoff | fast | f03/test_outcomes.py | test_T_F03_0316_required_cutoff |
+| T-F03-0317 | Required day one | fast | f03/test_outcomes.py | test_T_F03_0317_required_day_one |
+| T-F03-0318 | Confusable container | fast | f03/test_outcomes.py | test_T_F03_0318_confusable_container |
+| T-F03-0319 | Overlapping suspensions | fast | f03/test_outcomes.py | test_T_F03_0319_overlapping_suspensions |
+| T-F03-0320 | Huge period fails closed | fast | f03/test_outcomes.py | test_T_F03_0320_huge_period_fails_closed |
+| T-F03-0401 | Replay scenario 01 | fast | f03/test_outcomes.py | test_T_F03_0401_replay_scenario_01 |
+| T-F03-0402 | Replay scenario 02 | fast | f03/test_outcomes.py | test_T_F03_0402_replay_scenario_02 |
+| T-F03-0403 | Replay scenario 03 | fast | f03/test_outcomes.py | test_T_F03_0403_replay_scenario_03 |
+| T-F03-0404 | Replay scenario 04 | fast | f03/test_outcomes.py | test_T_F03_0404_replay_scenario_04 |
+| T-F03-0405 | Replay scenario 05 | fast | f03/test_outcomes.py | test_T_F03_0405_replay_scenario_05 |
+| T-F03-0406 | Replay scenario 06 | fast | f03/test_outcomes.py | test_T_F03_0406_replay_scenario_06 |
+| T-F03-0407 | Replay scenario 07 | fast | f03/test_outcomes.py | test_T_F03_0407_replay_scenario_07 |
+| T-F03-0408 | Replay scenario 08 | fast | f03/test_outcomes.py | test_T_F03_0408_replay_scenario_08 |
+| T-F03-0409 | Replay scenario 09 | fast | f03/test_outcomes.py | test_T_F03_0409_replay_scenario_09 |
+| T-F03-0410 | Replay scenario 10 | fast | f03/test_outcomes.py | test_T_F03_0410_replay_scenario_10 |
+| T-F03-0501 | Stable anchor | fast | f03/test_outcomes.py | test_T_F03_0501_stable_anchor |
+| T-F03-0502 | Event citations | fast | f03/test_outcomes.py | test_T_F03_0502_event_citations |
+| T-F03-0503 | Free expiry text | fast | f03/test_outcomes.py | test_T_F03_0503_free_expiry_text |
+| T-F03-0504 | Free bar has text | fast | f03/test_outcomes.py | test_T_F03_0504_free_bar_has_text |
+| T-F03-0505 | Accrual bar has text | fast | f03/test_outcomes.py | test_T_F03_0505_accrual_bar_has_text |
+| T-F03-0506 | Suspension text | fast | f03/test_outcomes.py | test_T_F03_0506_suspension_text |
+| T-F03-0507 | Projection horizons | fast | f03/test_outcomes.py | test_T_F03_0507_projection_horizons |
+| T-F03-0508 | Operational action text | fast | f03/test_outcomes.py | test_T_F03_0508_operational_action_text |
+| T-F03-0509 | Unknown without charge | fast | f03/test_outcomes.py | test_T_F03_0509_unknown_without_charge |
+| T-F03-0510 | Contradiction requests review | fast | f03/test_outcomes.py | test_T_F03_0510_contradiction_requests_review |
+| T-F03-0511 | Extensions absent from view | fast | f03/test_outcomes.py | test_T_F03_0511_extensions_absent_from_view |
+| T-F03-0512 | No suggested record edits | fast | f03/test_outcomes.py | test_T_F03_0512_no_suggested_record_edits |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |

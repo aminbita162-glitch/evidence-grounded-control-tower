@@ -1,0 +1,50 @@
+[
+  {
+    "case": "data/scenarios/f03/F03-S01.json",
+    "expected": "ALLOW"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S02.json",
+    "expected": "HOLD"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S03.json",
+    "expected": "ESCALATE"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S04.json",
+    "expected": "ALLOW"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S05.json",
+    "expected": "ESCALATE"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S06.json",
+    "expected": "ABSTAIN"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S07.json",
+    "expected": "HOLD"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S08.json",
+    "expected": "ESCALATE"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S09.json",
+    "expected": "ESCALATE"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S10.json",
+    "expected": "ESCALATE"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S11.json",
+    "expected": "ESCALATE"
+  },
+  {
+    "case": "data/scenarios/f03/F03-S12.json",
+    "expected": "ESCALATE"
+  }
+]

@@ -1,0 +1,588 @@
+{
+  "$defs": {
+    "ClockReport": {
+      "properties": {
+        "calendar_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calendar Version"
+        },
+        "charge": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Charge"
+        },
+        "charge_kind": {
+          "title": "Charge Kind",
+          "type": "string"
+        },
+        "charge_trace": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Charge Trace"
+        },
+        "chargeable_days": {
+          "anyOf": [
+            {
+              "format": "fraction",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Chargeable Days"
+        },
+        "container": {
+          "title": "Container",
+          "type": "string"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "decision": {
+          "$ref": "#/$defs/DecisionValue"
+        },
+        "evaluated_at": {
+          "format": "date-time",
+          "title": "Evaluated At",
+          "type": "string"
+        },
+        "free_expiry": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Free Expiry"
+        },
+        "projections": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Projection"
+          },
+          "title": "Projections",
+          "type": "array"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "remaining": {
+          "anyOf": [
+            {
+              "format": "duration",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remaining"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        },
+        "state": {
+          "$ref": "#/$defs/State"
+        },
+        "stop": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop"
+        },
+        "suspended": {
+          "anyOf": [
+            {
+              "format": "duration",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suspended"
+        },
+        "suspensions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Suspension"
+          },
+          "title": "Suspensions",
+          "type": "array"
+        },
+        "terms": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Terms"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timeline": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Timeline",
+          "type": "array"
+        }
+      },
+      "required": [
+        "container",
+        "charge_kind",
+        "state",
+        "reason",
+        "decision",
+        "evaluated_at"
+      ],
+      "title": "ClockReport",
+      "type": "object"
+    },
+    "DayBasis": {
+      "enum": [
+        "CALENDAR",
+        "WORKING"
+      ],
+      "title": "DayBasis",
+      "type": "string"
+    },
+    "DayOne": {
+      "enum": [
+        "INCLUDE",
+        "EXCLUDE"
+      ],
+      "title": "DayOne",
+      "type": "string"
+    },
+    "DecisionValue": {
+      "description": "The four decision values ordered by severity.",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "title": "DecisionValue",
+      "type": "integer"
+    },
+    "Event": {
+      "properties": {
+        "instant": {
+          "format": "date-time",
+          "title": "Instant",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "zone_source": {
+          "title": "Zone Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "instant",
+        "source_id",
+        "zone_source",
+        "label",
+        "verified"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "PartialDay": {
+      "enum": [
+        "STARTED",
+        "COMPLETE",
+        "PRORATED"
+      ],
+      "title": "PartialDay",
+      "type": "string"
+    },
+    "Projection": {
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "charge": {
+          "title": "Charge",
+          "type": "string"
+        },
+        "days_ahead": {
+          "title": "Days Ahead",
+          "type": "integer"
+        },
+        "latest_effective": {
+          "format": "date-time",
+          "title": "Latest Effective",
+          "type": "string"
+        },
+        "savings": {
+          "title": "Savings",
+          "type": "string"
+        },
+        "through": {
+          "format": "date-time",
+          "title": "Through",
+          "type": "string"
+        }
+      },
+      "required": [
+        "days_ahead",
+        "through",
+        "charge",
+        "action",
+        "latest_effective",
+        "savings"
+      ],
+      "title": "Projection",
+      "type": "object"
+    },
+    "Reason": {
+      "enum": [
+        "F03.OK.WITHIN_FREE",
+        "F03.OK.STOPPED",
+        "F03.WARN.FREE_TIME_ENDING",
+        "F03.CHARGES.ACCRUING",
+        "F03.EVENT.ORDER_INVALID",
+        "F03.ABSTAIN.EVENT_MISSING",
+        "F03.ABSTAIN.TARIFF_TERMS_MISSING",
+        "F03.ABSTAIN.DAY_RULE_UNSPECIFIED",
+        "F03.ABSTAIN.CALENDAR_UNAVAILABLE",
+        "F03.ABSTAIN.CONTAINER_UNMATCHED",
+        "F03.ABSTAIN.LABEL_INSUFFICIENT"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "RoundAt": {
+      "description": "The operation point to which a pack rule applies.",
+      "enum": [
+        "LINE",
+        "TOTAL",
+        "PRESENTATION"
+      ],
+      "title": "RoundAt",
+      "type": "string"
+    },
+    "RoundingRule": {
+      "description": "The pack's approved rounding rule.",
+      "properties": {
+        "mode": {
+          "title": "Mode",
+          "type": "string"
+        },
+        "point": {
+          "$ref": "#/$defs/RoundAt"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "point",
+        "mode",
+        "source_id"
+      ],
+      "title": "RoundingRule",
+      "type": "object"
+    },
+    "State": {
+      "enum": [
+        "STOPPED",
+        "ACCRUING",
+        "ENDING",
+        "WITHIN_FREE",
+        "UNKNOWN"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "Suspension": {
+      "properties": {
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "source_id",
+        "verified"
+      ],
+      "title": "Suspension",
+      "type": "object"
+    },
+    "Terms": {
+      "properties": {
+        "basis": {
+          "$ref": "#/$defs/DayBasis"
+        },
+        "calendar_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calendar Id"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "cutoff": {
+          "anyOf": [
+            {
+              "format": "time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cutoff"
+        },
+        "day_one": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DayOne"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "free_days": {
+          "title": "Free Days",
+          "type": "integer"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "partial": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PartialDay"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rounding": {
+          "$ref": "#/$defs/RoundingRule"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "start_event": {
+          "title": "Start Event",
+          "type": "string"
+        },
+        "stop_event": {
+          "title": "Stop Event",
+          "type": "string"
+        },
+        "tiers": {
+          "items": {
+            "$ref": "#/$defs/Tier"
+          },
+          "title": "Tiers",
+          "type": "array"
+        },
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "format": "date-time",
+          "title": "Valid Until",
+          "type": "string"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "zone": {
+          "format": "zoneinfo",
+          "title": "Zone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "version",
+        "label",
+        "valid_from",
+        "valid_until",
+        "verified",
+        "start_event",
+        "stop_event",
+        "free_days",
+        "basis",
+        "zone",
+        "day_one",
+        "cutoff",
+        "partial",
+        "currency",
+        "rounding",
+        "tiers"
+      ],
+      "title": "Terms",
+      "type": "object"
+    },
+    "Tier": {
+      "properties": {
+        "rate": {
+          "title": "Rate",
+          "type": "string"
+        },
+        "through_day": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Through Day"
+        }
+      },
+      "required": [
+        "through_day",
+        "rate"
+      ],
+      "title": "Tier",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "clocks": {
+      "items": {
+        "$ref": "#/$defs/ClockReport"
+      },
+      "title": "Clocks",
+      "type": "array"
+    },
+    "decision": {
+      "$ref": "#/$defs/DecisionValue"
+    },
+    "totals": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Totals",
+      "type": "object"
+    }
+  },
+  "required": [
+    "decision",
+    "clocks",
+    "totals"
+  ],
+  "title": "CaseClocks",
+  "type": "object"
+}

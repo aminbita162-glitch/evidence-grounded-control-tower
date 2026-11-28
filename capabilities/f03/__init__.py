@@ -9,6 +9,7 @@ from decimal import Decimal
 from enum import StrEnum
 from fractions import Fraction
 
+from kernel.lib.calctrace import DecimalSettings, Formula, Operand, Operation, calculate
 from kernel.lib.clock import Calendar, Clock, DayBasis, Suspension, Terms, aware
 from kernel.lib.money import CurrencyTable
 from kernel.types.decision import DecisionValue
@@ -64,6 +65,7 @@ class ContainerClock:
     terms: Terms | None
     calendar: Calendar | None = None
     suspensions: tuple[Suspension, ...] = ()
+    document_note: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -97,6 +99,7 @@ class ClockReport:
     calendar_version: str | None = None
     timeline: tuple[Event, ...] = ()
     suspensions: tuple[Suspension, ...] = ()
+    charge_trace: dict[str, object] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -196,6 +199,20 @@ def evaluate_clock(
     except ValueError, OverflowError, ArithmeticError:
         return unknown(Reason.TARIFF)
 
+    trace = calculate(
+        Formula("F03.TIERED_CHARGE_ROUNDING", 1, Operation.QUANTIZE, terms.rounding.source_id),
+        DecimalSettings(len(accrued.unrounded.as_tuple().digits) + 12, terms.rounding.mode),
+        Operand(
+            f"{terms.source_id}:{terms.version}:tier-sum",
+            accrued.unrounded,
+            terms.currency,
+            terms.label,
+        ),
+        Operand(
+            currencies.source_id, currencies.quantum(terms.currency), terms.currency, terms.label
+        ),
+        unit=terms.currency,
+    )
     remaining = max(timedelta(), expiry - at)
     if stop is not None:
         state, reason, decision = State.STOPPED, Reason.STOPPED, DecisionValue.ALLOW
@@ -226,6 +243,7 @@ def evaluate_clock(
         calendar.version if calendar else None,
         tuple(event for event in events if event.instant.astimezone(UTC) <= at),
         windows,
+        trace.payload(),
     )
 
 

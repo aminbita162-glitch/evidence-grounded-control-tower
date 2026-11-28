@@ -788,3 +788,16 @@ sources:
     status: VERIFIED
     max_age_months: 12
     v_item: none
+
+  - source_id: SRC-SYNTHETIC-F03
+    publisher: "Customs & Transit Control Tower"
+    reference: "Synthetic F03 packs and verification scenarios"
+    retrieved_month: "2026-11"
+    label: SYNTHETIC
+    license_summary: "Project-owned synthetic fixtures"
+    redistributable: "no"
+    kind: DATASET
+    use_class: CATALOGUE
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none

@@ -120,6 +120,7 @@ class Charge:
     days: Fraction
     amount: Money
     rates: tuple[Decimal, ...]
+    unrounded: Decimal
 
 
 def aware(instant: datetime) -> datetime:
@@ -320,7 +321,7 @@ class Clock:
             context=context,
             rule=self.terms.rounding,
         )
-        return Charge(units, posted.money, tuple(rates))
+        return Charge(units, posted.money, tuple(rates), value)
 
     def charge(
         self, start: datetime, end: datetime, *, period_start: datetime | None = None
@@ -343,6 +344,7 @@ class Clock:
             incremental.days,
             Money(amount, through.amount.currency, through.amount.rounding),
             incremental.rates,
+            incremental.unrounded,
         )
 
     def simulate(self, start: datetime, end: datetime) -> Charge:
