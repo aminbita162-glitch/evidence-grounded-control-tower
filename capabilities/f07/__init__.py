@@ -140,6 +140,7 @@ class Comparison:
     events: tuple[Event, ...]
     steps: tuple[TariffStep, ...]
     label: str
+    evidence_labels: tuple[str, ...]
 
 
 def _eligible(label: str, synthetic: bool) -> bool:
@@ -229,7 +230,7 @@ def recompute(
     rates: set[Decimal] = set()
     evidence: dict[tuple[str, datetime, str], Event] = {}
     steps = []
-    label = weakest_of(line.label, match.basis.label)
+    labels = {line.label, match.basis.label}
     for window_start, window_end, data in windows:
         terms = data.terms
         if terms is None or not terms.verified or terms.currency != line.currency:
@@ -250,11 +251,11 @@ def recompute(
         for event in data.events:
             if aware(event.instant) <= at:
                 evidence[(event.kind, aware(event.instant), event.source_id)] = event
-        label = weakest_of(weakest_of(label, terms.label), start_event.label)
+        labels.update((terms.label, start_event.label))
         if stop_event:
-            label = weakest_of(label, stop_event.label)
+            labels.add(stop_event.label)
         if data.calendar is not None:
-            label = weakest_of(label, data.calendar.label)
+            labels.add(data.calendar.label)
         try:
             clock = Clock(terms, data.calendar, data.suspensions, currencies)
             start = aware(start_event.instant)
@@ -288,6 +289,9 @@ def recompute(
         cursor = finish
     if cursor != right:
         return Classification.CLOCK
+    label = "OFFICIAL"
+    for candidate in sorted(labels):
+        label = weakest_of(label, candidate)
     return Comparison(
         total,
         days,
@@ -296,6 +300,7 @@ def recompute(
         tuple(evidence[k] for k in sorted(evidence)),
         tuple(steps),
         label,
+        tuple(sorted(labels)),
     )
 
 
@@ -312,7 +317,7 @@ def _classify(
     if calculated.non_billable and line.quantity.value > 0:
         return Classification.NOT_BILLABLE, None
     currency = line.currency
-    if not _eligible(calculated.label, synthetic):
+    if not all(_eligible(label, synthetic) for label in calculated.evidence_labels):
         return Classification.LABEL, None
     if _equal(line.amount, calculated.expected, currency, currencies):
         return Classification.MATCH, _ZERO
@@ -393,6 +398,9 @@ def evaluate(
                 _row(item, Classification.DUPLICATE if duplicate else Classification.MATCHING)
             )
             continue
+        if match.reason == InvoiceReason.INVOICE:
+            rows.append(_row(item, Classification.MATCHING))
+            continue
         if match.basis is None:
             code = (
                 Classification.AMBIGUOUS
@@ -412,6 +420,11 @@ def evaluate(
             duplicate=duplicate,
             synthetic=synthetic,
         )
+        if (
+            code in (Classification.MATCH, Classification.UNDERCHARGE)
+            and match.reason == InvoiceReason.LABEL
+        ):
+            code, remainder = Classification.LABEL, None
         rows.append(_row(item, code, computed=calculated, remainder=remainder))
     rows.sort(key=lambda row: row.line_id)
     totals = {}

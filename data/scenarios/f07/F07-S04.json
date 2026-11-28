@@ -1,0 +1,226 @@
+{
+  "basis": "5.F07 T11 F07-S04",
+  "id": "F07-S04",
+  "inputs": {
+    "canonical_containers": [
+      "SYN-CONT-1"
+    ],
+    "clocks": [
+      {
+        "basis_id": "SYN-QUOTE-1",
+        "clock": {
+          "charge_kind": "DEMURRAGE",
+          "container": "SYN-CONT-1",
+          "events": [
+            {
+              "instant": "2024-03-01T00:00Z",
+              "kind": "DISCHARGED",
+              "label": "SYNTHETIC",
+              "source_id": "SRC-SYNTHETIC-F07",
+              "verified": true,
+              "zone_source": "SRC-SYNTHETIC-F07"
+            }
+          ],
+          "terms": {
+            "basis": "CALENDAR",
+            "currency": "USD",
+            "cutoff": "00:00:00",
+            "day_one": "INCLUDE",
+            "free_days": 1,
+            "label": "SYNTHETIC",
+            "partial": "STARTED",
+            "rounding": {
+              "mode": "ROUND_HALF_EVEN",
+              "point": "TOTAL",
+              "source_id": "SRC-SYNTHETIC-F03"
+            },
+            "source_id": "SRC-SYNTHETIC-F07",
+            "start_event": "DISCHARGED",
+            "stop_event": "GATED_OUT_FULL",
+            "tiers": [
+              {
+                "rate": "5",
+                "through_day": null
+              }
+            ],
+            "valid_from": "2024-01-01T00:00Z",
+            "valid_until": "2024-03-03T00:00Z",
+            "verified": true,
+            "version": "1.0.0",
+            "zone": "UTC"
+          }
+        }
+      },
+      {
+        "basis_id": "SYN-QUOTE-1",
+        "clock": {
+          "charge_kind": "DEMURRAGE",
+          "container": "SYN-CONT-1",
+          "events": [
+            {
+              "instant": "2024-03-01T00:00Z",
+              "kind": "DISCHARGED",
+              "label": "SYNTHETIC",
+              "source_id": "SRC-SYNTHETIC-F07",
+              "verified": true,
+              "zone_source": "SRC-SYNTHETIC-F07"
+            }
+          ],
+          "terms": {
+            "basis": "CALENDAR",
+            "currency": "USD",
+            "cutoff": "00:00:00",
+            "day_one": "INCLUDE",
+            "free_days": 1,
+            "label": "SYNTHETIC",
+            "partial": "STARTED",
+            "rounding": {
+              "mode": "ROUND_HALF_EVEN",
+              "point": "TOTAL",
+              "source_id": "SRC-SYNTHETIC-F03"
+            },
+            "source_id": "SRC-SYNTHETIC-F07",
+            "start_event": "DISCHARGED",
+            "stop_event": "GATED_OUT_FULL",
+            "tiers": [
+              {
+                "rate": "3",
+                "through_day": null
+              }
+            ],
+            "valid_from": "2024-03-03T00:00Z",
+            "valid_until": "2025-01-01T00:00Z",
+            "verified": true,
+            "version": "2.0.0",
+            "zone": "UTC"
+          }
+        }
+      }
+    ],
+    "evaluation_time": "2024-03-10T00:00Z",
+    "invoice": {
+      "bases": [
+        {
+          "citation": "SRC-SYNTHETIC-L01",
+          "currency": "USD",
+          "id": "SYN-QUOTE-1",
+          "kind": "DEMURRAGE",
+          "label": "SYNTHETIC",
+          "rate": "5",
+          "source": "QUOTE",
+          "unit": "day",
+          "valid_from": "2024-01-01",
+          "valid_until": "2025-01-01",
+          "version": "1.0.0"
+        }
+      ],
+      "currencies": {
+        "EUR": 2,
+        "USD": 2
+      },
+      "currency_source": "SRC-SYNTHETIC-L01",
+      "invoice": {
+        "citation": "SYN-DOC-1",
+        "currency": "USD",
+        "issued_on": "2024-03-01",
+        "issuer": "Synthetic Carrier",
+        "label": "SYNTHETIC",
+        "lines": [
+          {
+            "amount": "10",
+            "citation": "SYN-DOC-1:L1",
+            "container": "SYN-CONT-1",
+            "currency": "USD",
+            "id": "INV-01-L1",
+            "label": "SYNTHETIC",
+            "name": "Demurrage",
+            "period_end": "2024-03-04T00:00Z",
+            "period_start": "2024-03-02T00:00Z",
+            "quantity": {
+              "unit": "day",
+              "value": "2"
+            },
+            "rate": "5",
+            "shipment": "SYN-1"
+          }
+        ],
+        "number": "INV-01",
+        "total": null
+      },
+      "previous": [],
+      "synthetic": true,
+      "taxonomy": {
+        "entries": [
+          {
+            "code": "HANDLING",
+            "kind": "OTHER",
+            "synonyms": [
+              "Handling fee",
+              "رسوم المناولة"
+            ]
+          },
+          {
+            "code": "FREIGHT",
+            "kind": "OTHER",
+            "synonyms": [
+              "Freight",
+              "أجرة الشحن"
+            ]
+          },
+          {
+            "code": "FUEL",
+            "kind": "OTHER",
+            "synonyms": [
+              "Fuel surcharge",
+              "رسوم الوقود"
+            ]
+          },
+          {
+            "code": "DEMURRAGE",
+            "kind": "TIME_BASED",
+            "synonyms": [
+              "Demurrage",
+              "أرضيات"
+            ]
+          },
+          {
+            "code": "DETENTION",
+            "kind": "TIME_BASED",
+            "synonyms": [
+              "Detention",
+              "احتجاز"
+            ]
+          },
+          {
+            "code": "STORAGE",
+            "kind": "TIME_BASED",
+            "synonyms": [
+              "Storage",
+              "تخزين"
+            ]
+          },
+          {
+            "code": "TAX",
+            "kind": "TAX",
+            "synonyms": [
+              "VAT",
+              "ضريبة"
+            ]
+          }
+        ],
+        "label": "SYNTHETIC",
+        "source_id": "SRC-SYNTHETIC-L01",
+        "valid_from": "2024-01-01",
+        "valid_until": "2025-01-01",
+        "version": "1.0.0"
+      }
+    }
+  },
+  "label": "SYNTHETIC",
+  "outcome": "HOLD",
+  "reason_codes": [
+    "F07.OVERCHARGE.RATE_MISMATCH"
+  ],
+  "source_id": "SRC-SYNTHETIC-F07",
+  "test_id": "T-F07-0004"
+}

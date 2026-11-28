@@ -444,6 +444,30 @@
 | T-F03-0510 | Contradiction requests review | fast | f03/test_outcomes.py | test_T_F03_0510_contradiction_requests_review |
 | T-F03-0511 | Extensions absent from view | fast | f03/test_outcomes.py | test_T_F03_0511_extensions_absent_from_view |
 | T-F03-0512 | No suggested record edits | fast | f03/test_outcomes.py | test_T_F03_0512_no_suggested_record_edits |
+| T-F07-0001 | Scenario 01 | fast | f07/test_reports.py | test_T_F07_0001_scenario_01 |
+| T-F07-0002 | Scenario 02 | fast | f07/test_reports.py | test_T_F07_0002_scenario_02 |
+| T-F07-0003 | Scenario 03 | fast | f07/test_reports.py | test_T_F07_0003_scenario_03 |
+| T-F07-0004 | Scenario 04 | fast | f07/test_reports.py | test_T_F07_0004_scenario_04 |
+| T-F07-0005 | Scenario 05 | fast | f07/test_reports.py | test_T_F07_0005_scenario_05 |
+| T-F07-0006 | Scenario 06 | fast | f07/test_reports.py | test_T_F07_0006_scenario_06 |
+| T-F07-0007 | Scenario 07 | fast | f07/test_reports.py | test_T_F07_0007_scenario_07 |
+| T-F07-0008 | Scenario 08 | fast | f07/test_reports.py | test_T_F07_0008_scenario_08 |
+| T-F07-0009 | Scenario 09 | fast | f07/test_reports.py | test_T_F07_0009_scenario_09 |
+| T-F07-0010 | Scenario 10 | fast | f07/test_reports.py | test_T_F07_0010_scenario_10 |
+| T-F07-0011 | Scenario 11 | fast | f07/test_reports.py | test_T_F07_0011_scenario_11 |
+| T-F07-0101 | Matched | fast | f07/test_reports.py | test_T_F07_0101_matched |
+| T-F07-0102 | Undercharge | fast | f07/test_reports.py | test_T_F07_0102_undercharge |
+| T-F07-0103 | Flat charge | fast | f07/test_reports.py | test_T_F07_0103_flat_charge |
+| T-F07-0104 | Duplicate | fast | f07/test_reports.py | test_T_F07_0104_duplicate |
+| T-F07-0105 | Not billable | fast | f07/test_reports.py | test_T_F07_0105_not_billable |
+| T-F07-0106 | Different effective rate | fast | f07/test_reports.py | test_T_F07_0106_different_effective_rate |
+| T-F07-0107 | Day count | fast | f07/test_reports.py | test_T_F07_0107_day_count |
+| T-F07-0108 | Arithmetic | fast | f07/test_reports.py | test_T_F07_0108_arithmetic |
+| T-F07-0109 | Unsupported tariff | fast | f07/test_reports.py | test_T_F07_0109_unsupported_tariff |
+| T-F07-0110 | Ambiguous tariff | fast | f07/test_reports.py | test_T_F07_0110_ambiguous_tariff |
+| T-F07-0111 | Clock missing | fast | f07/test_reports.py | test_T_F07_0111_clock_missing |
+| T-F07-0112 | Matching missing | fast | f07/test_reports.py | test_T_F07_0112_matching_missing |
+| T-F07-0113 | Label insufficient | fast | f07/test_reports.py | test_T_F07_0113_label_insufficient |
 | T-F07-0201 | Recomputed amounts match F03 | fast | f07/test_audit.py | test_T_F07_0201_exact_clock_equivalence |
 | T-F07-0202 | A corrected supported invoice allows | fast | f07/test_audit.py | test_T_F07_0202_corrected_invoice_allows |
 | T-F07-0203 | More verified free time lowers expected charge | fast | f07/test_audit.py | test_T_F07_0203_verified_extension_changes_difference |
@@ -469,6 +493,48 @@
 | T-F07-0223 | Weak label indicative | fast | f07/test_audit.py | test_T_F07_0223_weak_label_indicative |
 | T-F07-0224 | After stop not billable | fast | f07/test_audit.py | test_T_F07_0224_after_stop_not_billable |
 | T-F07-0225 | Adjacent periods are distinct | fast | f07/test_audit.py | test_T_F07_0225_adjacent_periods_are_distinct |
+| T-F07-0301 | Overlapping periods | fast | f07/test_reports.py | test_T_F07_0301_overlapping_periods |
+| T-F07-0302 | Negative amount | fast | f07/test_reports.py | test_T_F07_0302_negative_amount |
+| T-F07-0303 | Negative rate | fast | f07/test_reports.py | test_T_F07_0303_negative_rate |
+| T-F07-0304 | Negative days | fast | f07/test_reports.py | test_T_F07_0304_negative_days |
+| T-F07-0305 | Tiny duplicate difference | fast | f07/test_reports.py | test_T_F07_0305_tiny_duplicate_difference |
+| T-F07-0306 | Currency mismatch | fast | f07/test_reports.py | test_T_F07_0306_currency_mismatch |
+| T-F07-0307 | Unknown currency | fast | f07/test_reports.py | test_T_F07_0307_unknown_currency |
+| T-F07-0308 | Invalid amount | fast | f07/test_reports.py | test_T_F07_0308_invalid_amount |
+| T-F07-0309 | Invalid period start | fast | f07/test_reports.py | test_T_F07_0309_invalid_period_start |
+| T-F07-0310 | Invalid period end | fast | f07/test_reports.py | test_T_F07_0310_invalid_period_end |
+| T-F07-0311 | Period without zone | fast | f07/test_reports.py | test_T_F07_0311_period_without_zone |
+| T-F07-0312 | Period reversed | fast | f07/test_reports.py | test_T_F07_0312_period_reversed |
+| T-F07-0313 | Missing start | fast | f07/test_reports.py | test_T_F07_0313_missing_start |
+| T-F07-0314 | Missing end | fast | f07/test_reports.py | test_T_F07_0314_missing_end |
+| T-F07-0315 | Unmatched container | fast | f07/test_reports.py | test_T_F07_0315_unmatched_container |
+| T-F07-0316 | Future period | fast | f07/test_reports.py | test_T_F07_0316_future_period |
+| T-F07-0317 | Confusable container | fast | f07/test_reports.py | test_T_F07_0317_confusable_container |
+| T-F07-0318 | Recorded scope empty | fast | f07/test_reports.py | test_T_F07_0318_recorded_scope_empty |
+| T-F07-0319 | Text cannot direct outcome | fast | f07/test_reports.py | test_T_F07_0319_text_cannot_direct_outcome |
+| T-F07-0320 | Nonfinite amount | fast | f07/test_reports.py | test_T_F07_0320_nonfinite_amount |
+| T-F07-0401 | Replay scenario 01 | fast | f07/test_reports.py | test_T_F07_0401_replay_scenario_01 |
+| T-F07-0402 | Replay scenario 02 | fast | f07/test_reports.py | test_T_F07_0402_replay_scenario_02 |
+| T-F07-0403 | Replay scenario 03 | fast | f07/test_reports.py | test_T_F07_0403_replay_scenario_03 |
+| T-F07-0404 | Replay scenario 04 | fast | f07/test_reports.py | test_T_F07_0404_replay_scenario_04 |
+| T-F07-0405 | Replay scenario 05 | fast | f07/test_reports.py | test_T_F07_0405_replay_scenario_05 |
+| T-F07-0406 | Replay scenario 06 | fast | f07/test_reports.py | test_T_F07_0406_replay_scenario_06 |
+| T-F07-0407 | Replay scenario 07 | fast | f07/test_reports.py | test_T_F07_0407_replay_scenario_07 |
+| T-F07-0408 | Replay scenario 08 | fast | f07/test_reports.py | test_T_F07_0408_replay_scenario_08 |
+| T-F07-0409 | Replay scenario 09 | fast | f07/test_reports.py | test_T_F07_0409_replay_scenario_09 |
+| T-F07-0410 | Replay scenario 10 | fast | f07/test_reports.py | test_T_F07_0410_replay_scenario_10 |
+| T-F07-0501 | Anchor | fast | f07/test_reports.py | test_T_F07_0501_anchor |
+| T-F07-0502 | Root cause column | fast | f07/test_reports.py | test_T_F07_0502_root_cause_column |
+| T-F07-0503 | Proportional difference | fast | f07/test_reports.py | test_T_F07_0503_proportional_difference |
+| T-F07-0504 | Changed rate two steps | fast | f07/test_reports.py | test_T_F07_0504_changed_rate_two_steps |
+| T-F07-0505 | Dossier preview | fast | f07/test_reports.py | test_T_F07_0505_dossier_preview |
+| T-F07-0506 | Json export | fast | f07/test_reports.py | test_T_F07_0506_json_export |
+| T-F07-0507 | Html export | fast | f07/test_reports.py | test_T_F07_0507_html_export |
+| T-F07-0508 | Indicative export | fast | f07/test_reports.py | test_T_F07_0508_indicative_export |
+| T-F07-0509 | Unsupported export citation | fast | f07/test_reports.py | test_T_F07_0509_unsupported_export_citation |
+| T-F07-0510 | Tax exclusion | fast | f07/test_reports.py | test_T_F07_0510_tax_exclusion |
+| T-F07-0511 | No payment instructions | fast | f07/test_reports.py | test_T_F07_0511_no_payment_instructions |
+| T-F07-0512 | No owed statement | fast | f07/test_reports.py | test_T_F07_0512_no_owed_statement |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |

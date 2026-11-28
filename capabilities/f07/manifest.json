@@ -1,0 +1,11 @@
+{
+  "calibration_artifacts": [],
+  "capability_id": "F07",
+  "depends": [
+    "L01",
+    "F03"
+  ],
+  "statistical": false,
+  "title": "Charge Control",
+  "version": "1.0.0"
+}
