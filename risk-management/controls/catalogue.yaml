@@ -689,3 +689,30 @@ records:
     target_phase: P13
     verifying_test_ids: [T-LIB-0096, T-LIB-0098, T-LIB-0108]
     source: P13-RISK
+
+  - id: CTL-INT-01
+    title: Bounded isolated document parsing
+    type: preventive
+    mechanism: Refuse unsafe formats and cap subprocess resources and network access.
+    lifecycle_status: VERIFIED
+    target_phase: P14
+    verifying_test_ids: [T-INT-0021, T-INT-0022, T-INT-0024, T-INT-0062]
+    source: P14-T02 and P14-T13
+
+  - id: CTL-INT-02
+    title: Bilingual grounding and consistency
+    type: detective
+    mechanism: Reparse cited values and compare verified facts with explicit units and intervals.
+    lifecycle_status: VERIFIED
+    target_phase: P14
+    verifying_test_ids: [T-K14-0301, T-INT-0041, T-INT-0042, T-F01-0203]
+    source: P14-T04 and P14-T07
+
+  - id: CTL-INT-03
+    title: Tenant-scoped document fingerprints
+    type: detective
+    mechanism: Compare candidate shingles exactly and propagate symmetric findings within a tenant.
+    lifecycle_status: VERIFIED
+    target_phase: P14
+    verifying_test_ids: [T-INT-0001, T-K09-0401, T-K09-0403, T-K09-0201]
+    source: P14-T09 and P14-T10

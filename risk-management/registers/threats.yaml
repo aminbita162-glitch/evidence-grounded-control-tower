@@ -86,7 +86,7 @@ records:
       Data from one case or tenant leaks to another. Trust boundary:
       operators (authenticated, role-bound, tenant-scoped).
     trust_boundary: operators
-    controls: [CTL-PROD-07]
+    controls: [CTL-PROD-07, CTL-INT-03]
     source: Part 3 section 3.15
 
   - id: THR-SEC-09
@@ -96,7 +96,7 @@ records:
       Decompression bombs, malformed documents or other hostile files exploit
       the intake parser. Trust boundary: external documents (untrusted).
     trust_boundary: external documents
-    controls: [CTL-PROD-03]
+    controls: [CTL-PROD-03, CTL-INT-01]
     source: Part 3 section 3.15
 
   - id: THR-SEC-10
