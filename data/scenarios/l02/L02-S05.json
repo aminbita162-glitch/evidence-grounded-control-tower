@@ -1,0 +1,112 @@
+{
+  "basis": "5.L02 T11 L02-S05",
+  "id": "L02-S05",
+  "inputs": {
+    "components": [
+      {
+        "code": "FREIGHT",
+        "currency": "USD",
+        "interval": {
+          "base": "100",
+          "maximum": "100",
+          "minimum": "100"
+        },
+        "kind": "DOCUMENT",
+        "label": "SYNTHETIC",
+        "source_id": "SRC-SYNTHETIC-L02"
+      }
+    ],
+    "currency": "USD",
+    "duty_pack": {
+      "rates": [
+        {
+          "ad_valorem": "0.05",
+          "code": "1101",
+          "currency": "USD",
+          "id": "SYN-DUTY-1",
+          "kind": "AD_VALOREM",
+          "label": "SYNTHETIC",
+          "preference": {
+            "expected": "eligible",
+            "fact_key": "origin_certificate",
+            "rate": "0.025"
+          },
+          "valid_from": "2024-01-01",
+          "valid_until": "2025-01-01"
+        }
+      ],
+      "source_id": "SRC-SYNTHETIC-L02",
+      "valid_from": "2024-01-01",
+      "valid_until": "2025-01-01",
+      "version": "1.0.0"
+    },
+    "evaluation_time": "2024-03-01T12:00Z",
+    "exchange": {
+      "currencies": {
+        "EUR": 2,
+        "USD": 2
+      },
+      "currency_source": "SRC-SYNTHETIC-L02",
+      "label": "SYNTHETIC",
+      "version": "1.0.0"
+    },
+    "facts": [
+      {
+        "key": "origin_certificate",
+        "label": "SYNTHETIC",
+        "status": "UNKNOWN",
+        "value": "eligible"
+      }
+    ],
+    "goods": [
+      {
+        "adjustments": {},
+        "code": "1101",
+        "declared_on": "2024-03-01",
+        "id": "SYN-G1",
+        "incoterm": "CIF",
+        "label": "SYNTHETIC",
+        "quantities_verified": true,
+        "quantity": "10",
+        "source_id": "SRC-SYNTHETIC-L02",
+        "value": {
+          "amount": "100",
+          "currency": "USD"
+        },
+        "weight": "25"
+      }
+    ],
+    "required_components": [
+      "FREIGHT"
+    ],
+    "synthetic": true,
+    "taxes": [
+      {
+        "base_codes": [
+          "VALUATION",
+          "DUTY"
+        ],
+        "code": "VAT",
+        "id": "SYN-TAX-1",
+        "label": "SYNTHETIC",
+        "rate": "0.10",
+        "valid_from": "2024-01-01",
+        "valid_until": "2025-01-01"
+      }
+    ],
+    "valuation_rules": {
+      "CIF": {
+        "label": "SYNTHETIC",
+        "required_adjustments": [],
+        "rule_id": "SYN-VAL-CIF"
+      }
+    }
+  },
+  "label": "SYNTHETIC",
+  "outcome": "PROVIDED",
+  "reason_codes": [
+    "L02.ESTIMATE.INDICATIVE"
+  ],
+  "source_id": "SRC-SYNTHETIC-L02",
+  "test_id": "T-L02-0005"
+}

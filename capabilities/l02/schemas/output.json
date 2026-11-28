@@ -1,0 +1,601 @@
+{
+  "$defs": {
+    "Basis": {
+      "properties": {
+        "adjustment_fact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Adjustment Fact Ids",
+          "type": "array"
+        },
+        "amount": {
+          "$ref": "#/$defs/Money"
+        },
+        "fx_version_hash": {
+          "title": "Fx Version Hash",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "rates": {
+          "items": {
+            "$ref": "#/$defs/RateDatum"
+          },
+          "title": "Rates",
+          "type": "array"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "label",
+        "rule_id",
+        "fx_version_hash",
+        "rates",
+        "adjustment_fact_ids"
+      ],
+      "title": "Basis",
+      "type": "object"
+    },
+    "Component": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "interval": {
+          "$ref": "#/$defs/Range"
+        },
+        "kind": {
+          "$ref": "#/$defs/Kind"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "interval",
+        "currency",
+        "kind",
+        "label",
+        "source_id"
+      ],
+      "title": "Component",
+      "type": "object"
+    },
+    "CostLine": {
+      "properties": {
+        "component": {
+          "$ref": "#/$defs/Component"
+        },
+        "converted": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Range"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fx_rate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fx Rate"
+        },
+        "fx_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fx Source"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "rate_day": {
+          "format": "date",
+          "title": "Rate Day",
+          "type": "string"
+        },
+        "trace": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Trace",
+          "type": "array"
+        }
+      },
+      "required": [
+        "component",
+        "converted",
+        "fx_rate",
+        "fx_source",
+        "rate_day",
+        "label"
+      ],
+      "title": "CostLine",
+      "type": "object"
+    },
+    "Difference": {
+      "properties": {
+        "actual": {
+          "title": "Actual",
+          "type": "string"
+        },
+        "actual_citations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Actual Citations",
+          "type": "array"
+        },
+        "charge_kind": {
+          "title": "Charge Kind",
+          "type": "string"
+        },
+        "difference": {
+          "title": "Difference",
+          "type": "string"
+        },
+        "estimate_citations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Estimate Citations",
+          "type": "array"
+        },
+        "estimated": {
+          "title": "Estimated",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "percent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Percent"
+        }
+      },
+      "required": [
+        "charge_kind",
+        "actual",
+        "estimated",
+        "difference",
+        "percent",
+        "actual_citations",
+        "estimate_citations",
+        "label"
+      ],
+      "title": "Difference",
+      "type": "object"
+    },
+    "DutyLine": {
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "string"
+        },
+        "basis": {
+          "$ref": "#/$defs/Basis"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "goods_id": {
+          "title": "Goods Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "preferred": {
+          "title": "Preferred",
+          "type": "boolean"
+        },
+        "rate_id": {
+          "title": "Rate Id",
+          "type": "string"
+        },
+        "trace": {
+          "additionalProperties": true,
+          "title": "Trace",
+          "type": "object"
+        }
+      },
+      "required": [
+        "goods_id",
+        "code",
+        "basis",
+        "rate_id",
+        "amount",
+        "currency",
+        "label",
+        "preferred",
+        "trace"
+      ],
+      "title": "DutyLine",
+      "type": "object"
+    },
+    "Estimate": {
+      "properties": {
+        "components": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CostLine"
+          },
+          "title": "Components",
+          "type": "array"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "duties": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DutyLine"
+          },
+          "title": "Duties",
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "missing": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing",
+          "type": "array"
+        },
+        "notes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "total": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Range"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "unblock": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Unblock",
+          "type": "array"
+        },
+        "unit_costs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UnitCosts"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "status",
+        "reason_codes",
+        "currency"
+      ],
+      "title": "Estimate",
+      "type": "object"
+    },
+    "Kind": {
+      "enum": [
+        "DOCUMENT",
+        "PACK",
+        "ASSUMPTION"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "Money": {
+      "description": "A fixed-point monetary amount with an ISO 4217 currency code.\n\nAttributes:\n    amount: The decimal amount (never float).\n    currency: ISO 4217 three-letter currency code.\n    rounding: The rounding mode for arithmetic.",
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "default": "ROUND_HALF_EVEN",
+          "title": "Rounding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "Range": {
+      "properties": {
+        "base": {
+          "title": "Base",
+          "type": "string"
+        },
+        "maximum": {
+          "title": "Maximum",
+          "type": "string"
+        },
+        "minimum": {
+          "title": "Minimum",
+          "type": "string"
+        }
+      },
+      "required": [
+        "minimum",
+        "base",
+        "maximum"
+      ],
+      "title": "Range",
+      "type": "object"
+    },
+    "RateDatum": {
+      "description": "A positively valued FX rate from an identified datum.",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source_currency": {
+          "title": "Source Currency",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "target_currency": {
+          "title": "Target Currency",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_currency",
+        "target_currency",
+        "value",
+        "source_id",
+        "label"
+      ],
+      "title": "RateDatum",
+      "type": "object"
+    },
+    "Reason": {
+      "enum": [
+        "L02.ESTIMATE.PROVIDED",
+        "L02.ESTIMATE.INDICATIVE",
+        "L02.ESTIMATE.INCOMPLETE",
+        "L02.OBS.VARIANCE_REPORTED",
+        "L02.NEEDS_REVIEW.RATE_CONFLICT",
+        "L02.ABSTAIN.UPSTREAM",
+        "L02.ABSTAIN.VALUATION_RULE_UNAVAILABLE",
+        "L02.ABSTAIN.DUTY_PACK_MISSING",
+        "L02.ABSTAIN.CODE_NOT_IN_PACK",
+        "L02.ABSTAIN.FX_UNAVAILABLE",
+        "L02.ABSTAIN.CURRENCY_UNSUPPORTED"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "Status": {
+      "enum": [
+        "PROVIDED",
+        "NEEDS_REVIEW",
+        "ABSTAINED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "UnitCosts": {
+      "properties": {
+        "context_precision": {
+          "title": "Context Precision",
+          "type": "integer"
+        },
+        "per_kg": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Per Kg"
+        },
+        "per_line": {
+          "title": "Per Line",
+          "type": "string"
+        },
+        "per_piece": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Per Piece"
+        }
+      },
+      "required": [
+        "per_piece",
+        "per_kg",
+        "per_line",
+        "context_precision"
+      ],
+      "title": "UnitCosts",
+      "type": "object"
+    },
+    "Variance": {
+      "properties": {
+        "components": {
+          "items": {
+            "$ref": "#/$defs/Difference"
+          },
+          "title": "Components",
+          "type": "array"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "observation_only": {
+          "default": true,
+          "title": "Observation Only",
+          "type": "boolean"
+        },
+        "total": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Difference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unconverted": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unconverted",
+          "type": "array"
+        },
+        "unestimated": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unestimated",
+          "type": "array"
+        }
+      },
+      "required": [
+        "currency",
+        "components",
+        "total",
+        "unestimated",
+        "unconverted"
+      ],
+      "title": "Variance",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "estimate": {
+      "$ref": "#/$defs/Estimate"
+    },
+    "simulated": {
+      "default": false,
+      "title": "Simulated",
+      "type": "boolean"
+    },
+    "variance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Variance"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "estimate"
+  ],
+  "title": "LandedCostReport",
+  "type": "object"
+}

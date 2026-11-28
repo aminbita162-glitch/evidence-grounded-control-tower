@@ -935,6 +935,34 @@
 | T-L01-0510 | Unblock requirements | fast | l01/test_reports.py | test_T_L01_0510_unblock_requirements |
 | T-L01-0511 | No dispute draft | fast | l01/test_reports.py | test_T_L01_0511_no_dispute_draft |
 | T-L01-0512 | No withhold advice | fast | l01/test_reports.py | test_T_L01_0512_no_withhold_advice |
+| T-L02-0001 | Scenario 01 | fast | l02/test_reports.py | test_T_L02_0001_scenario_01 |
+| T-L02-0002 | Scenario 02 | fast | l02/test_reports.py | test_T_L02_0002_scenario_02 |
+| T-L02-0003 | Scenario 03 | fast | l02/test_reports.py | test_T_L02_0003_scenario_03 |
+| T-L02-0004 | Scenario 04 | fast | l02/test_reports.py | test_T_L02_0004_scenario_04 |
+| T-L02-0005 | Scenario 05 | fast | l02/test_reports.py | test_T_L02_0005_scenario_05 |
+| T-L02-0006 | Scenario 06 | fast | l02/test_reports.py | test_T_L02_0006_scenario_06 |
+| T-L02-0007 | Scenario 07 | fast | l02/test_reports.py | test_T_L02_0007_scenario_07 |
+| T-L02-0008 | Scenario 08 | fast | l02/test_reports.py | test_T_L02_0008_scenario_08 |
+| T-L02-0009 | Scenario 09 | fast | l02/test_reports.py | test_T_L02_0009_scenario_09 |
+| T-L02-0010 | Scenario 10 | fast | l02/test_reports.py | test_T_L02_0010_scenario_10 |
+| T-L02-0011 | Scenario 11 | fast | l02/test_reports.py | test_T_L02_0011_scenario_11 |
+| T-L02-0012 | Scenario 12 | fast | l02/test_reports.py | test_T_L02_0012_scenario_12 |
+| T-L02-0013 | Scenario 13 | fast | l02/test_reports.py | test_T_L02_0013_scenario_13 |
+| T-L02-0014 | Scenario 14 | fast | l02/test_reports.py | test_T_L02_0014_scenario_14 |
+| T-L02-0015 | Scenario 15 | fast | l02/test_reports.py | test_T_L02_0015_scenario_15 |
+| T-L02-0016 | Scenario 16 | fast | l02/test_reports.py | test_T_L02_0016_scenario_16 |
+| T-L02-0017 | Scenario 17 | fast | l02/test_reports.py | test_T_L02_0017_scenario_17 |
+| T-L02-0101 | Provided | fast | l02/test_reports.py | test_T_L02_0101_provided |
+| T-L02-0102 | Indicative | fast | l02/test_reports.py | test_T_L02_0102_indicative |
+| T-L02-0103 | Incomplete | fast | l02/test_reports.py | test_T_L02_0103_incomplete |
+| T-L02-0104 | Variance | fast | l02/test_reports.py | test_T_L02_0104_variance |
+| T-L02-0105 | Rate conflict | fast | l02/test_reports.py | test_T_L02_0105_rate_conflict |
+| T-L02-0106 | Missing upstream | fast | l02/test_reports.py | test_T_L02_0106_missing_upstream |
+| T-L02-0107 | Valuation rule | fast | l02/test_reports.py | test_T_L02_0107_valuation_rule |
+| T-L02-0108 | Missing duty pack | fast | l02/test_reports.py | test_T_L02_0108_missing_duty_pack |
+| T-L02-0109 | Declared code absent | fast | l02/test_reports.py | test_T_L02_0109_declared_code_absent |
+| T-L02-0110 | Missing fx | fast | l02/test_reports.py | test_T_L02_0110_missing_fx |
+| T-L02-0111 | Missing currency | fast | l02/test_reports.py | test_T_L02_0111_missing_currency |
 | T-L02-0201 | Ad valorem duty scales with goods value | fast | l02/test_cost.py | test_T_L02_0201_ad_valorem_scales |
 | T-L02-0202 | Duty and tax match a rational oracle | fast | l02/test_cost.py | test_T_L02_0202_fraction_oracle |
 | T-L02-0203 | K05 and L02 produce an identical basis | fast | l02/test_cost.py | test_T_L02_0203_parallel_k05_and_l02_basis |
@@ -970,6 +998,48 @@
 | T-L02-0233 | Weak preference | fast | l02/test_cost.py | test_T_L02_0233_weak_preference |
 | T-L02-0234 | Adjusted basis | fast | l02/test_cost.py | test_T_L02_0234_adjusted_basis |
 | T-L02-0235 | Zero goods value | fast | l02/test_cost.py | test_T_L02_0235_zero_goods_value |
+| T-L02-0301 | Zero value | fast | l02/test_reports.py | test_T_L02_0301_zero_value |
+| T-L02-0302 | Negative value | fast | l02/test_reports.py | test_T_L02_0302_negative_value |
+| T-L02-0303 | Negative quantity | fast | l02/test_reports.py | test_T_L02_0303_negative_quantity |
+| T-L02-0304 | Negative weight | fast | l02/test_reports.py | test_T_L02_0304_negative_weight |
+| T-L02-0305 | Huge quantity | fast | l02/test_reports.py | test_T_L02_0305_huge_quantity |
+| T-L02-0306 | Huge weight | fast | l02/test_reports.py | test_T_L02_0306_huge_weight |
+| T-L02-0307 | Nonfinite amount | fast | l02/test_reports.py | test_T_L02_0307_nonfinite_amount |
+| T-L02-0308 | Nonfinite quantity | fast | l02/test_reports.py | test_T_L02_0308_nonfinite_quantity |
+| T-L02-0309 | Wrong decimal | fast | l02/test_reports.py | test_T_L02_0309_wrong_decimal |
+| T-L02-0310 | Bad goods date | fast | l02/test_reports.py | test_T_L02_0310_bad_goods_date |
+| T-L02-0311 | Overlapping rates | fast | l02/test_reports.py | test_T_L02_0311_overlapping_rates |
+| T-L02-0312 | Missing currency exponent | fast | l02/test_reports.py | test_T_L02_0312_missing_currency_exponent |
+| T-L02-0313 | Missing fx not zero | fast | l02/test_reports.py | test_T_L02_0313_missing_fx_not_zero |
+| T-L02-0314 | Free text exemption | fast | l02/test_reports.py | test_T_L02_0314_free_text_exemption |
+| T-L02-0315 | Alternative code ignored | fast | l02/test_reports.py | test_T_L02_0315_alternative_code_ignored |
+| T-L02-0316 | Preference unverified | fast | l02/test_reports.py | test_T_L02_0316_preference_unverified |
+| T-L02-0317 | Invalid components | fast | l02/test_reports.py | test_T_L02_0317_invalid_components |
+| T-L02-0318 | Invalid rate pack | fast | l02/test_reports.py | test_T_L02_0318_invalid_rate_pack |
+| T-L02-0319 | Unsafe plan component | fast | l02/test_reports.py | test_T_L02_0319_unsafe_plan_component |
+| T-L02-0320 | No partial total | fast | l02/test_reports.py | test_T_L02_0320_no_partial_total |
+| T-L02-0401 | Replay scenario 01 | fast | l02/test_reports.py | test_T_L02_0401_replay_scenario_01 |
+| T-L02-0402 | Replay scenario 02 | fast | l02/test_reports.py | test_T_L02_0402_replay_scenario_02 |
+| T-L02-0403 | Replay scenario 03 | fast | l02/test_reports.py | test_T_L02_0403_replay_scenario_03 |
+| T-L02-0404 | Replay scenario 04 | fast | l02/test_reports.py | test_T_L02_0404_replay_scenario_04 |
+| T-L02-0405 | Replay scenario 05 | fast | l02/test_reports.py | test_T_L02_0405_replay_scenario_05 |
+| T-L02-0406 | Replay scenario 06 | fast | l02/test_reports.py | test_T_L02_0406_replay_scenario_06 |
+| T-L02-0407 | Replay scenario 07 | fast | l02/test_reports.py | test_T_L02_0407_replay_scenario_07 |
+| T-L02-0408 | Replay scenario 08 | fast | l02/test_reports.py | test_T_L02_0408_replay_scenario_08 |
+| T-L02-0409 | Replay scenario 09 | fast | l02/test_reports.py | test_T_L02_0409_replay_scenario_09 |
+| T-L02-0410 | Replay scenario 10 | fast | l02/test_reports.py | test_T_L02_0410_replay_scenario_10 |
+| T-L02-0501 | Anchor | fast | l02/test_reports.py | test_T_L02_0501_anchor |
+| T-L02-0502 | Component origins | fast | l02/test_reports.py | test_T_L02_0502_component_origins |
+| T-L02-0503 | Trace details | fast | l02/test_reports.py | test_T_L02_0503_trace_details |
+| T-L02-0504 | Range visible | fast | l02/test_reports.py | test_T_L02_0504_range_visible |
+| T-L02-0505 | Missing components visible | fast | l02/test_reports.py | test_T_L02_0505_missing_components_visible |
+| T-L02-0506 | No incomplete total | fast | l02/test_reports.py | test_T_L02_0506_no_incomplete_total |
+| T-L02-0507 | Simulation record only | fast | l02/test_reports.py | test_T_L02_0507_simulation_record_only |
+| T-L02-0508 | Proposal replaces transport | fast | l02/test_reports.py | test_T_L02_0508_proposal_replaces_transport |
+| T-L02-0509 | Observed eight percent | fast | l02/test_reports.py | test_T_L02_0509_observed_eight_percent |
+| T-L02-0510 | Unestimated visible | fast | l02/test_reports.py | test_T_L02_0510_unestimated_visible |
+| T-L02-0511 | No declaration advice | fast | l02/test_reports.py | test_T_L02_0511_no_declaration_advice |
+| T-L02-0512 | No variance without audit | fast | l02/test_reports.py | test_T_L02_0512_no_variance_without_audit |
 | T-LED-0001 | Sequence starts at 1 and increments by 1 | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0001_sequence_starts_at_1 |
 | T-LED-0002 | No gaps under concurrent appends | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0002_no_gaps_concurrent |
 | T-LED-0003 | Every field change alters the record hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0003_field_change_alters_hash |

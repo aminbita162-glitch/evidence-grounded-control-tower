@@ -1,0 +1,21 @@
+{
+  "currencies": {
+    "EUR": 2,
+    "USD": 2
+  },
+  "currency_source": "SRC-SYNTHETIC-L02",
+  "label": "SYNTHETIC",
+  "rates": [
+    {
+      "day": "2024-03-01",
+      "rate": {
+        "label": "SYNTHETIC",
+        "source_currency": "EUR",
+        "source_id": "SRC-SYNTHETIC-L02",
+        "target_currency": "USD",
+        "value": "1.125"
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

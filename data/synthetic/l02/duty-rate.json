@@ -1,0 +1,18 @@
+{
+  "rates": [
+    {
+      "ad_valorem": "0.05",
+      "code": "1101",
+      "currency": "USD",
+      "id": "SYN-DUTY-1",
+      "kind": "AD_VALOREM",
+      "label": "SYNTHETIC",
+      "valid_from": "2024-01-01",
+      "valid_until": "2025-01-01"
+    }
+  ],
+  "source_id": "SRC-SYNTHETIC-L02",
+  "valid_from": "2024-01-01",
+  "valid_until": "2025-01-01",
+  "version": "1.0.0"
+}
