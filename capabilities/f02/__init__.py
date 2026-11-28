@@ -9,6 +9,7 @@ from enum import StrEnum
 
 from capabilities.f02.calibration import Calibration
 from capabilities.f02.scoring import (
+    ALPHA,
     CALIBRATION_MINIMUM,
     CHAPTER_MINIMUM,
     MAX_CANDIDATES,
@@ -175,17 +176,15 @@ def _line(
     tokens = tokenize(description.value, pack)
     if not tokens.supported:
         return replace(result, reason=Reason.LANGUAGE_UNSUPPORTED)
-    if len(tokens.terms) < 3:
+    if len(set(tokens.terms)) < 3:
         return replace(result, reason=Reason.DESCRIPTION_TOO_SHORT)
     bound = calibration.get(tokens.language)
     if bound is None:
-        reason = (
-            Reason.CALIBRATION_STALE if tokens.language == "en" else Reason.LANGUAGE_UNSUPPORTED
-        )
-        return replace(result, reason=reason)
+        return replace(result, reason=Reason.LANGUAGE_UNSUPPORTED)
     if (
         bound.pack_hash != index.pack_hash
         or bound.language != tokens.language
+        or bound.alpha != ALPHA
         or not 0 <= bound.threshold <= 1
         or bound.chapter_count != len(pack.chapters)
         or bound.count < max(CALIBRATION_MINIMUM, CHAPTER_MINIMUM * bound.chapter_count)

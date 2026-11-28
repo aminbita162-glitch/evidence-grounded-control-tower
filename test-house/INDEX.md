@@ -324,8 +324,10 @@
 | T-F02-0233 | Shift on old pack abstains | fast | f02/test_classification.py | test_T_F02_0233_shift_on_old_pack_abstains |
 | T-F02-0234 | Statistical claim label is enforced | fast | f02/test_classification.py | test_T_F02_0234_statistical_claim_label_is_enforced |
 | T-F02-0235 | Digit only tokens are removed before scoring | fast | f02/test_scoring.py | test_T_F02_0235_digit_only_tokens_are_removed_before_scoring |
+| T-F02-0236 | Active calibration must support the published claim | fast | f02/test_classification.py | test_T_F02_0236_active_calibration_must_support_the_published_claim |
 | T-F02-0301 | Adversarial description never creates allow | fast | f02/test_classification.py | test_adversarial_description_never_creates_allow |
 | T-F02-0317 | Copied headings and embedded codes are scorer inputs only | fast | f02/test_classification.py | test_copied_headings_and_embedded_codes_are_scorer_inputs_only |
+| T-F02-0321 | Repeated single keyword cannot pass with the active pack | fast | f02/test_classification.py | test_T_F02_0321_repeated_single_keyword_cannot_pass_with_the_active_pack |
 | T-F02-0401 | Replay commits to same output | fast | f02/test_classification.py | test_T_F02_0401_replay_commits_to_same_output |
 | T-F02-0402 | Changed description changes commitments | fast | f02/test_classification.py | test_T_F02_0402_changed_description_changes_commitments |
 | T-F02-0403 | Line order does not affect case outcome | fast | f02/test_classification.py | test_T_F02_0403_line_order_does_not_affect_case_outcome |

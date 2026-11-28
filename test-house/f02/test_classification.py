@@ -255,7 +255,7 @@ def test_T_F02_0012_shifted_coverage_is_diagnostic() -> None:
         (assess((shipment("goods"),)), Reason.DESCRIPTION_TOO_SHORT),
         (assess((shipment("خبز كعك دقيق"),)), Reason.LANGUAGE_UNSUPPORTED),
         (assess(index=None), Reason.TARIFF_UNAVAILABLE),
-        (assess(calibration={}), Reason.CALIBRATION_STALE),
+        (assess(calibration={}), Reason.LANGUAGE_UNSUPPORTED),
         (assess(()), Reason.UPSTREAM),
         (
             assess(
@@ -761,3 +761,45 @@ def test_T_F02_0512_case_reports_supported_languages() -> None:
     capability: F02
     """
     assert assess().view("operator")["languages"] == ("en",)
+
+
+@pytest.mark.fast
+def test_T_F02_0236_active_calibration_must_support_the_published_claim() -> None:
+    """
+    id: T-F02-0236
+    title: Active calibration must support the published claim
+    purpose: Active calibration must support the published claim
+    level: fast
+    requirement: P15, Part 5 section 5.F02
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: F02
+    """
+    result = assess(calibration={"en": replace(CAL, alpha=0.2)})
+    assert result.reasons == (Reason.CALIBRATION_STALE,)
+    assert result.lines[0].calibration is None
+
+
+@pytest.mark.fast
+def test_T_F02_0321_repeated_single_keyword_cannot_pass_with_the_active_pack() -> None:
+    """
+    id: T-F02-0321
+    title: Repeated single keyword cannot pass with the active pack
+    purpose: Repeated single keyword cannot pass with the active pack
+    level: fast
+    requirement: P15, Part 5 section 5.F02
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: F02
+    """
+    from capabilities.f02.synthetic import create_judge
+
+    active = create_judge()
+    result = assess(
+        (shipment("wheat wheat wheat wheat"),),
+        index=active.index,
+        calibration=dict(active.calibration),
+    )
+    assert result.reasons == (Reason.DESCRIPTION_TOO_SHORT,)
