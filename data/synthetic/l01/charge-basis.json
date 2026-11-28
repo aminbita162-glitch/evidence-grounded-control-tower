@@ -1,0 +1,20 @@
+{
+  "bases": [
+    {
+      "citation": "SRC-SYNTHETIC-L01",
+      "currency": "USD",
+      "id": "SYN-QUOTE-1",
+      "kind": "HANDLING",
+      "label": "SYNTHETIC",
+      "rate": "100",
+      "source": "QUOTE",
+      "unit": "container",
+      "valid_from": "2024-01-01",
+      "valid_until": "2025-01-01",
+      "version": "1.0.0"
+    }
+  ],
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-L01",
+  "version": "1.0.0"
+}

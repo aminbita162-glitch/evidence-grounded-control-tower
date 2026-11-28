@@ -690,7 +690,7 @@ def test_T_L01_0232_previous_in_window() -> None:
     risk: HZ-03
     capability: L01
     """
-    prior = replace(INVOICE, number="INV-2", date=DAY - timedelta(days=30))
+    prior = replace(INVOICE, number="INV-2", issued_on=DAY - timedelta(days=30))
     assert audit(previous=(prior,)).lines[0].classification is LineClass.DUPLICATE
 
 
@@ -707,7 +707,7 @@ def test_T_L01_0233_previous_outside_window() -> None:
     risk: HZ-03
     capability: L01
     """
-    prior = replace(INVOICE, number="INV-2", date=DAY - timedelta(days=31))
+    prior = replace(INVOICE, number="INV-2", issued_on=DAY - timedelta(days=31))
     assert audit(previous=(prior,)).outcome is DecisionValue.ALLOW
 
 

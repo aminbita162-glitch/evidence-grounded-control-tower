@@ -172,7 +172,7 @@ class InvoiceLine:
 class Invoice:
     number: str
     issuer: str
-    date: date
+    issued_on: date
     currency: str
     lines: tuple[InvoiceLine, ...]
     label: str
@@ -305,7 +305,7 @@ def classify_duplicate(
         for bill in (invoice, *previous)
         if bill.verified
         and comparison_form(bill.issuer) == comparison_form(invoice.issuer)
-        and abs((invoice.date - bill.date).days) <= policy.duplicate_days
+        and abs((invoice.issued_on - bill.issued_on).days) <= policy.duplicate_days
         for other in bill.lines
         if (bill.number != invoice.number or other.id != line.id)
         and other.verified
@@ -436,7 +436,9 @@ def _audit_basis(
         return _row(line, kind, LineClass.UNVERIFIED)
     if kind.kind == LineKind.TAX:
         return _row(line, kind, LineClass.TAX)
-    basis, basis_issue = select_basis(line, kind, line.service_date or invoice.date, bases, policy)
+    basis, basis_issue = select_basis(
+        line, kind, line.service_date or invoice.issued_on, bases, policy
+    )
     if basis_issue in (LineClass.UNQUOTED, LineClass.AMBIGUOUS):
         return _row(line, kind, basis_issue)
     if basis is None:

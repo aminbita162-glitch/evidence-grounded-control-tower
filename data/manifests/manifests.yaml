@@ -343,3 +343,9 @@ manifests:
     attribution_text: "Customs & Transit Control Tower"
     permitted_uses: "Synthetic software tests and diagnostics."
     redistribution_permission: "no"
+
+  - source_id: SRC-SYNTHETIC-L01
+    terms: "Internal project use"
+    attribution_text: "Customs & Transit Control Tower"
+    permitted_uses: "Synthetic software tests and diagnostics."
+    redistribution_permission: "no"
