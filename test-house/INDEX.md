@@ -815,6 +815,41 @@
 | T-KRN-0072 | All hashes in contracts.lock match actual files | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0072_contract_gate_real_repo |
 | T-KRN-0073 | gate run arch contract property generated-files exits 0 | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0073_gate_run_all_four |
 | T-KRN-0074 | Display names not in schemas or kernel source | fast | kernel/test_T_KRN_0065_to_0074.py | test_T_KRN_0074_no_display_names_in_schemas |
+| T-L01-0201 | Corrected invoice allows | fast | l01/test_invoice.py | test_T_L01_0201_corrected_invoice_allows |
+| T-L01-0202 | Decimal matches fraction | fast | l01/test_invoice.py | test_T_L01_0202_decimal_matches_fraction |
+| T-L01-0203 | Widening band preserves flags | fast | l01/test_invoice.py | test_T_L01_0203_widening_band_preserves_flags |
+| T-L01-0204 | Adding duplicate preserves severity | fast | l01/test_invoice.py | test_T_L01_0204_adding_duplicate_preserves_severity |
+| T-L01-0205 | Line permutation preserves output | fast | l01/test_invoice.py | test_T_L01_0205_line_permutation_preserves_output |
+| T-L01-0206 | Unit conversion preserves outcome | fast | l01/test_invoice.py | test_T_L01_0206_unit_conversion_preserves_outcome |
+| T-L01-0207 | Arabic synonym preserves outcome | fast | l01/test_invoice.py | test_T_L01_0207_arabic_synonym_preserves_outcome |
+| T-L01-0208 | Exact duplicate | fast | l01/test_invoice.py | test_T_L01_0208_exact_duplicate |
+| T-L01-0209 | Near duplicate | fast | l01/test_invoice.py | test_T_L01_0209_near_duplicate |
+| T-L01-0210 | Zero band | fast | l01/test_invoice.py | test_T_L01_0210_zero_band |
+| T-L01-0211 | Unknown charge | fast | l01/test_invoice.py | test_T_L01_0211_unknown_charge |
+| T-L01-0212 | Confusable charge | fast | l01/test_invoice.py | test_T_L01_0212_confusable_charge |
+| T-L01-0213 | Ambiguous quote | fast | l01/test_invoice.py | test_T_L01_0213_ambiguous_quote |
+| T-L01-0214 | Agreeing quotes | fast | l01/test_invoice.py | test_T_L01_0214_agreeing_quotes |
+| T-L01-0215 | Accepted quote wins | fast | l01/test_invoice.py | test_T_L01_0215_accepted_quote_wins |
+| T-L01-0216 | Contract fallback | fast | l01/test_invoice.py | test_T_L01_0216_contract_fallback |
+| T-L01-0217 | Tariff fallback | fast | l01/test_invoice.py | test_T_L01_0217_tariff_fallback |
+| T-L01-0218 | Invalid surcharge | fast | l01/test_invoice.py | test_T_L01_0218_invalid_surcharge |
+| T-L01-0219 | Validity start | fast | l01/test_invoice.py | test_T_L01_0219_validity_start |
+| T-L01-0220 | Validity end | fast | l01/test_invoice.py | test_T_L01_0220_validity_end |
+| T-L01-0221 | Currency mismatch | fast | l01/test_invoice.py | test_T_L01_0221_currency_mismatch |
+| T-L01-0222 | Anchor quantity | fast | l01/test_invoice.py | test_T_L01_0222_anchor_quantity |
+| T-L01-0223 | Above rate | fast | l01/test_invoice.py | test_T_L01_0223_above_rate |
+| T-L01-0224 | Arithmetic mismatch | fast | l01/test_invoice.py | test_T_L01_0224_arithmetic_mismatch |
+| T-L01-0225 | Freight terms conflict | fast | l01/test_invoice.py | test_T_L01_0225_freight_terms_conflict |
+| T-L01-0226 | Under basis | fast | l01/test_invoice.py | test_T_L01_0226_under_basis |
+| T-L01-0227 | Exact basis | fast | l01/test_invoice.py | test_T_L01_0227_exact_basis |
+| T-L01-0228 | Header sum includes tax | fast | l01/test_invoice.py | test_T_L01_0228_header_sum_includes_tax |
+| T-L01-0229 | Header exposes minor unit | fast | l01/test_invoice.py | test_T_L01_0229_header_exposes_minor_unit |
+| T-L01-0230 | Subminor difference | fast | l01/test_invoice.py | test_T_L01_0230_subminor_difference |
+| T-L01-0231 | Independent issuers | fast | l01/test_invoice.py | test_T_L01_0231_independent_issuers |
+| T-L01-0232 | Previous in window | fast | l01/test_invoice.py | test_T_L01_0232_previous_in_window |
+| T-L01-0233 | Previous outside window | fast | l01/test_invoice.py | test_T_L01_0233_previous_outside_window |
+| T-L01-0234 | Other shipment basis | fast | l01/test_invoice.py | test_T_L01_0234_other_shipment_basis |
+| T-L01-0235 | Rounded line trace | fast | l01/test_invoice.py | test_T_L01_0235_rounded_line_trace |
 | T-LED-0001 | Sequence starts at 1 and increments by 1 | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0001_sequence_starts_at_1 |
 | T-LED-0002 | No gaps under concurrent appends | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0002_no_gaps_concurrent |
 | T-LED-0003 | Every field change alters the record hash | fast | ledger/test_T_LED_0001_to_0012.py | test_T_LED_0003_field_change_alters_hash |
