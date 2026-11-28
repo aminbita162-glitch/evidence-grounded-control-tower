@@ -277,6 +277,27 @@
 | T-DOCS-0005 | A hand-edited tick in Build Progress makes the docs gate fail | fast | gate/test_docs.py | test_hand_edited_tick_fails |
 | T-DOCS-0006 | A forbidden pattern in the README makes the docs gate fail | fast | gate/test_docs.py | test_forbidden_pattern_fails |
 | T-DOCS-LINKS | check_links skips http, https and anchor links | fast | gate/test_docs.py | test_check_links_skips_external_and_anchor |
+| T-F01-0001 | F01-S01 golden scenario | fast | f01/test_consistency.py | test_T_F01_0001_golden_scenario |
+| T-F01-0002 | F01-S02 golden scenario | fast | f01/test_consistency.py | test_T_F01_0002_golden_scenario |
+| T-F01-0003 | F01-S03 golden scenario | fast | f01/test_consistency.py | test_T_F01_0003_golden_scenario |
+| T-F01-0004 | F01-S04 golden scenario | fast | f01/test_consistency.py | test_T_F01_0004_golden_scenario |
+| T-F01-0005 | F01-S05 golden scenario | fast | f01/test_consistency.py | test_T_F01_0005_golden_scenario |
+| T-F01-0006 | F01-S06 golden scenario | fast | f01/test_consistency.py | test_T_F01_0006_golden_scenario |
+| T-F01-0007 | F01-S07 golden scenario | fast | f01/test_consistency.py | test_T_F01_0007_golden_scenario |
+| T-F01-0008 | F01-S08 golden scenario | fast | f01/test_consistency.py | test_T_F01_0008_golden_scenario |
+| T-F01-0009 | F01-S09 golden scenario | fast | f01/test_consistency.py | test_T_F01_0009_golden_scenario |
+| T-F01-0010 | F01-S10 golden scenario | fast | f01/test_consistency.py | test_T_F01_0010_golden_scenario |
+| T-F01-0011 | F01-S11 golden scenario | fast | f01/test_consistency.py | test_T_F01_0011_golden_scenario |
+| T-F01-0012 | F01-S12 golden scenario | fast | f01/test_consistency.py | test_T_F01_0012_golden_scenario |
+| T-F01-0102 | Missing and proposed never publish | fast | f01/test_consistency.py | test_T_F01_0102_missing_and_proposed_never_publish |
+| T-F01-0103 | Registry gates the container rule | fast | f01/test_consistency.py | test_T_F01_0103_registry_gates_the_container_rule |
+| T-F01-0104 | Mismatch taxonomy | fast | f01/test_consistency.py | test_T_F01_0104_mismatch_taxonomy |
+| T-F01-0113 | Arithmetic taxonomy | fast | f01/test_consistency.py | test_T_F01_0113_arithmetic_taxonomy |
+| T-F01-0126 | Abstention and solver disagreement | fast | f01/test_consistency.py | test_T_F01_0126_abstention_and_solver_disagreement |
+| T-F01-0201 | Common intersection | fast | f01/test_consistency.py | test_T_F01_0201_common_intersection |
+| T-F01-0202 | Kilograms and grams preserve agreement | fast | f01/test_consistency.py | test_T_F01_0202_kilograms_and_grams_preserve_agreement |
+| T-F01-0203 | Integer model matches interval sum | fast | f01/test_consistency.py | test_T_F01_0203_integer_model_matches_interval_sum |
+| T-F01-0204 | Order independent consensus and conflict | fast | f01/test_consistency.py | test_T_F01_0204_order_independent_consensus_and_conflict |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |
@@ -436,6 +457,79 @@
 | T-GWY-0094 | DEFAULT_PROFILE is local-only | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0094_default_profile_local |
 | T-GWY-0095 | REGION_POLICY_REASON is defined | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0095_region_policy_reason |
 | T-GWY-0096 | RegionPolicyChecker with custom profile | fast | gateway/test_T_GWY_0085_to_0096.py | test_T_GWY_0096_custom_profile |
+| T-INT-0001 | Document roundtrip and tenant isolation | fast | intake/test_intake.py | test_T_INT_0001_document_roundtrip_and_tenant_isolation |
+| T-INT-0010 | Parse supported formats | fast | intake/test_intake.py | test_T_INT_0010_parse_supported_formats |
+| T-INT-0021 | Reader refuses unusable payload | fast | intake/test_intake.py | test_T_INT_0021_reader_refuses_unusable_payload |
+| T-INT-0022 | Rejects unsafe archive | fast | intake/test_intake.py | test_T_INT_0022_rejects_unsafe_archive |
+| T-INT-0023 | Reader crash is contained | fast | intake/test_intake.py | test_T_INT_0023_reader_crash_is_contained |
+| T-INT-0024 | Network denied in worker | fast | intake/test_intake.py | test_T_INT_0024_network_denied_in_worker |
+| T-INT-0041 | Parallel extraction feeds consistency | fast | pairs/test_intake_pipeline.py | test_T_INT_0041_parallel_extraction_feeds_consistency |
+| T-INT-0042 | Flagged value is not canonical | fast | pairs/test_intake_pipeline.py | test_T_INT_0042_flagged_value_is_not_canonical |
+| T-INT-0043 | Skeleton reaches replayed passport | fast | pairs/test_intake_pipeline.py | test_T_INT_0043_skeleton_reaches_replayed_passport |
+| T-INT-0044 | Api uniform capability path | fast | pairs/test_intake_pipeline.py | test_T_INT_0044_api_uniform_capability_path |
+| T-INT-0045 | Cli document workflow | fast | pairs/test_intake_pipeline.py | test_T_INT_0045_cli_document_workflow |
+| T-INT-0061 | Disabled and tampered ocr | fast | intake/test_intake.py | test_T_INT_0061_disabled_and_tampered_ocr |
+| T-INT-0062 | Oversized scan is refused before ocr | fast | intake/test_intake.py | test_T_INT_0062_oversized_scan_is_refused_before_ocr |
+| T-INT-0063 | Scan fixture has stable bytes | fast | intake/test_intake.py | test_T_INT_0063_scan_fixture_has_stable_bytes |
+| T-K09-0001 | K09-S01 golden scenario | fast | k09/test_shield.py | test_T_K09_0001_golden_scenario |
+| T-K09-0002 | K09-S02 golden scenario | fast | k09/test_shield.py | test_T_K09_0002_golden_scenario |
+| T-K09-0003 | K09-S03 golden scenario | fast | k09/test_shield.py | test_T_K09_0003_golden_scenario |
+| T-K09-0004 | K09-S04 golden scenario | fast | k09/test_shield.py | test_T_K09_0004_golden_scenario |
+| T-K09-0005 | K09-S05 golden scenario | fast | k09/test_shield.py | test_T_K09_0005_golden_scenario |
+| T-K09-0006 | K09-S06 golden scenario | fast | k09/test_shield.py | test_T_K09_0006_golden_scenario |
+| T-K09-0007 | K09-S07 golden scenario | fast | k09/test_shield.py | test_T_K09_0007_golden_scenario |
+| T-K09-0008 | K09-S08 golden scenario | fast | k09/test_shield.py | test_T_K09_0008_golden_scenario |
+| T-K09-0009 | K09-S09 golden scenario | fast | k09/test_shield.py | test_T_K09_0009_golden_scenario |
+| T-K09-0010 | K09-S10 golden scenario | fast | k09/test_shield.py | test_T_K09_0010_golden_scenario |
+| T-K09-0011 | K09-S11 golden scenario | fast | k09/test_shield.py | test_T_K09_0011_golden_scenario |
+| T-K09-0012 | K09-S12 golden scenario | fast | k09/test_shield.py | test_T_K09_0012_golden_scenario |
+| T-K09-0013 | K09-S13 golden scenario | fast | k09/test_shield.py | test_T_K09_0013_golden_scenario |
+| T-K09-0014 | K09-S14 golden scenario | fast | k09/test_shield.py | test_T_K09_0014_golden_scenario |
+| T-K09-0015 | K09-S15 golden scenario | fast | k09/test_shield.py | test_T_K09_0015_golden_scenario |
+| T-K09-0016 | K09-S16 golden scenario | fast | k09/test_shield.py | test_T_K09_0016_golden_scenario |
+| T-K09-0017 | K09-S17 golden scenario | fast | k09/test_shield.py | test_T_K09_0017_golden_scenario |
+| T-K09-0101 | Fail closed modes | fast | k09/test_shield.py | test_T_K09_0101_fail_closed_modes |
+| T-K09-0111 | Index and identity completeness | fast | k09/test_shield.py | test_T_K09_0111_index_and_identity_completeness |
+| T-K09-0201 | Bucket agrees with brute force | fast | k09/test_shield.py | test_T_K09_0201_bucket_agrees_with_brute_force |
+| T-K09-0202 | Similarity bands | fast | k09/test_shield.py | test_T_K09_0202_similarity_bands |
+| T-K09-0301 | Unrelated documents do not change findings | fast | k09/test_shield.py | test_T_K09_0301_unrelated_documents_do_not_change_findings |
+| T-K09-0302 | Confusables are protective only for identity | fast | k09/test_shield.py | test_T_K09_0302_confusables_are_protective_only_for_identity |
+| T-K09-0303 | Producer observations leave candidate caps unchanged | fast | k09/test_shield.py | test_T_K09_0303_candidate_cap_boundary |
+| T-K09-0401 | Reuse is symmetric and tenant scoped | fast | k09/test_shield.py | test_T_K09_0401_reuse_is_symmetric_and_tenant_scoped |
+| T-K09-0402 | Resave detected and relation applies only to pair | fast | k09/test_shield.py | test_T_K09_0402_resave_detected_and_relation_applies_only_to_pair |
+| T-K09-0403 | Coverage and erasure | fast | k09/test_shield.py | test_T_K09_0403_coverage_and_erasure |
+| T-K14-0001 | K14-S01 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0001_golden_scenario |
+| T-K14-0002 | K14-S02 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0002_golden_scenario |
+| T-K14-0003 | K14-S03 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0003_golden_scenario |
+| T-K14-0004 | K14-S04 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0004_golden_scenario |
+| T-K14-0005 | K14-S05 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0005_golden_scenario |
+| T-K14-0006 | K14-S06 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0006_golden_scenario |
+| T-K14-0007 | K14-S07 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0007_golden_scenario |
+| T-K14-0008 | K14-S08 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0008_golden_scenario |
+| T-K14-0009 | K14-S09 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0009_golden_scenario |
+| T-K14-0010 | K14-S10 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0010_golden_scenario |
+| T-K14-0011 | K14-S11 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0011_golden_scenario |
+| T-K14-0012 | K14-S12 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0012_golden_scenario |
+| T-K14-0013 | K14-S13 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0013_golden_scenario |
+| T-K14-0014 | K14-S14 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0014_golden_scenario |
+| T-K14-0015 | K14-S15 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0015_golden_scenario |
+| T-K14-0016 | K14-S16 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0016_golden_scenario |
+| T-K14-0017 | K14-S17 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0017_golden_scenario |
+| T-K14-0018 | K14-S18 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0018_golden_scenario |
+| T-K14-0019 | K14-S19 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0019_golden_scenario |
+| T-K14-0020 | K14-S20 golden scenario | fast | k14/test_bilingual.py | test_T_K14_0020_golden_scenario |
+| T-K14-0101 | Flagged values stay unknown | fast | k14/test_bilingual.py | test_T_K14_0101_flagged_values_stay_unknown |
+| T-K14-0102 | Ocr cannot verify and low confidence abstains | fast | k14/test_bilingual.py | test_T_K14_0102_ocr_cannot_verify_and_low_confidence_abstains |
+| T-K14-0103 | Hijri requires explicit calendar pack | fast | k14/test_bilingual.py | test_T_K14_0103_hijri_requires_explicit_calendar_pack |
+| T-K14-0110 | Meter exhaustion | fast | k14/test_bilingual.py | test_T_K14_0110_meter_exhaustion |
+| T-K14-0201 | Comparison idempotence | fast | k14/test_bilingual.py | test_T_K14_0201_comparison_idempotence |
+| T-K14-0202 | Digit mapping keeps originals | fast | k14/test_bilingual.py | test_T_K14_0202_digit_mapping_keeps_originals |
+| T-K14-0203 | Bilingual values | fast | k14/test_bilingual.py | test_T_K14_0203_bilingual_values |
+| T-K14-0204 | Parallel comparisons retain only verified comparable fields | fast | k14/test_bilingual.py | test_T_K14_0204_parallel_comparator_categories |
+| T-K14-0301 | Locator and typed value both checked | fast | k14/test_bilingual.py | test_T_K14_0301_locator_and_typed_value_both_checked |
+| T-K14-0401 | Recorded replay and parallel check | fast | k14/test_bilingual.py | test_T_K14_0401_recorded_replay_and_parallel_check |
+| T-K14-0501 | Abstentions | fast | k14/test_bilingual.py | test_T_K14_0501_abstentions |
+| T-K14-0502 | At most two model calls and only retry unknown | fast | k14/test_bilingual.py | test_T_K14_0502_at_most_two_model_calls_and_only_retry_unknown |
 | T-KRN-0001 | Regeneration is byte-identical | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0001_regeneration_byte_identical |
 | T-KRN-0002 | A hand edit of a generated file fails the gate | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0002_hand_edit_fails_gate |
 | T-KRN-0003 | Every entity has tenant_id and schema_version | fast | kernel/test_T_KRN_0001_to_0008.py | test_T_KRN_0003_every_entity_has_tenant_id_and_schema_version |
