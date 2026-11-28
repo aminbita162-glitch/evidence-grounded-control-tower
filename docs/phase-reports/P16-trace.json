@@ -8,6 +8,12 @@
     "CTL-DLR-04",
     "CTL-DLR-05",
     "CTL-DLR-06",
+    "CTL-FIN-01",
+    "CTL-FIN-02",
+    "CTL-FIN-03",
+    "CTL-FIN-04",
+    "CTL-FIN-05",
+    "CTL-FIN-06",
     "CTL-HZC-01",
     "CTL-HZC-02",
     "CTL-HZC-03",
@@ -139,11 +145,17 @@
     ],
     "HZ-03": [
       "CTL-HZD-03",
-      "CTL-HZC-03"
+      "CTL-HZC-03",
+      "CTL-FIN-03",
+      "CTL-FIN-04",
+      "CTL-FIN-05",
+      "CTL-FIN-06"
     ],
     "HZ-04": [
       "CTL-HZD-04",
-      "CTL-HZC-04"
+      "CTL-HZC-04",
+      "CTL-FIN-01",
+      "CTL-FIN-02"
     ],
     "RSK-DL-01": [
       "CTL-DLR-01"
@@ -232,7 +244,8 @@
       "CTL-PROD-01",
       "CTL-LIB-01",
       "CTL-VAL-01",
-      "CTL-VAL-05"
+      "CTL-VAL-05",
+      "CTL-FIN-05"
     ],
     "RSK-P-02": [
       "CTL-PROD-02"
@@ -241,13 +254,15 @@
       "CTL-PROD-03"
     ],
     "RSK-P-04": [
-      "CTL-PROD-04"
+      "CTL-PROD-04",
+      "CTL-FIN-02"
     ],
     "RSK-P-05": [
       "CTL-PROD-05",
       "CTL-LIB-03",
       "CTL-VAL-03",
-      "CTL-VAL-04"
+      "CTL-VAL-04",
+      "CTL-FIN-02"
     ],
     "RSK-P-06": [
       "CTL-PROD-06"
@@ -281,11 +296,13 @@
     "RSK-P-14": [
       "CTL-PROD-14",
       "CTL-LIB-02",
-      "CTL-VAL-01"
+      "CTL-VAL-01",
+      "CTL-FIN-06"
     ],
     "RSK-P-15": [
       "CTL-PROD-15",
-      "CTL-VAL-02"
+      "CTL-VAL-02",
+      "CTL-FIN-06"
     ],
     "RSK-P-16": [
       "CTL-PROD-16",
