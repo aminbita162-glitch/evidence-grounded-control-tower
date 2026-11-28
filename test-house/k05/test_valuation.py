@@ -26,7 +26,6 @@ from capabilities.k05.reference import ReferenceGroup
 from kernel.lib.money import Money
 from kernel.types.decision import DecisionValue
 
-pytestmark = pytest.mark.fast
 AT = datetime.fromisoformat("2026-11-01T00:00:00+00:00")
 CODE = "2001"
 PARENT = "20"
@@ -86,6 +85,7 @@ def small_pack(child: int, parent: int) -> ReferencePack:
     return replace(PACK, groups=groups)
 
 
+@pytest.mark.fast
 @pytest.mark.parametrize(
     ("value", "reason", "outcome"),
     [
@@ -97,34 +97,111 @@ def small_pack(child: int, parent: int) -> ReferencePack:
     ids=["T-K05-0001", "T-K05-0003", "T-K05-0004", "T-K05-0005"],
 )
 def test_interval_scenarios(value: str, reason: Reason, outcome: DecisionValue) -> None:
+    """
+    id: T-K05-0001
+    title: Interval scenarios
+    purpose: Interval scenarios
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S01
+    """
     report = assess(replace(INPUT, lines=(line(value),)))
     assert report.outcome == outcome
     assert reason in report.reasons
 
 
+@pytest.mark.fast
 def test_T_K05_0002_declared_documentary_mismatch() -> None:
+    """
+    id: T-K05-0002
+    title: Declared documentary mismatch
+    purpose: Declared documentary mismatch
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S02
+    """
     report = assess(replace(INPUT, declared=Money(Decimal("0.95"), "AED")))
     assert (report.outcome, report.reasons) == (DecisionValue.HOLD, (Reason.MISMATCH,))
 
 
+@pytest.mark.fast
 def test_T_K05_0006_falls_back_to_parent() -> None:
+    """
+    id: T-K05-0006
+    title: Falls back to parent
+    purpose: Falls back to parent
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S06
+    """
     report = assess(reference=small_pack(12, 80))
     assert report.reasons == (Reason.OK, Reason.FALLBACK)
     assert report.lines[0].reference_code == PARENT
     assert report.lines[0].reference_count == 80
 
 
+@pytest.mark.fast
 def test_T_K05_0007_missing_dated_rate() -> None:
+    """
+    id: T-K05-0007
+    title: Missing dated rate
+    purpose: Missing dated rate
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S07
+    """
     inputs = replace(INPUT, invoice=Money(Decimal(1), "USD"), declared_date=DAY + timedelta(days=1))
     assert assess(inputs).reasons == (Reason.FX_UNAVAILABLE,)
 
 
+@pytest.mark.fast
 def test_T_K05_0008_tonnes_match_kilograms() -> None:
+    """
+    id: T-K05-0008
+    title: Tonnes match kilograms
+    purpose: Tonnes match kilograms
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S08
+    """
     tonnes = assess(replace(INPUT, lines=(line("1", quantity="0.001", unit="t"),)))
     assert tonnes == assess()
 
 
+@pytest.mark.fast
 def test_T_K05_0009_quantity_weighted_aggregate_is_below() -> None:
+    """
+    id: T-K05-0009
+    title: Quantity weighted aggregate is below
+    purpose: Quantity weighted aggregate is below
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S09
+    """
     inputs = replace(INPUT, lines=(line(), line("1", quantity="9", key="2")))
     report = assess(inputs)
     assert [item.position for item in report.lines] == ["INSIDE", "BELOW"]
@@ -133,7 +210,20 @@ def test_T_K05_0009_quantity_weighted_aggregate_is_below() -> None:
     assert report.outcome == DecisionValue.ESCALATE
 
 
+@pytest.mark.fast
 def test_T_K05_0010_bounds_require_review_privilege() -> None:
+    """
+    id: T-K05-0010
+    title: Bounds require review privilege
+    purpose: Bounds require review privilege
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S10
+    """
     report = assess()
     for role in ("operator", "viewer", "platform_operator", "unknown"):
         public_items = report.view(role)["lines"]
@@ -147,6 +237,18 @@ def test_T_K05_0010_bounds_require_review_privilege() -> None:
 
 @pytest.mark.slow
 def test_T_K05_0011_calibration_coverage() -> None:
+    """
+    id: T-K05-0011
+    title: Calibration coverage
+    purpose: Calibration coverage
+    level: slow
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S11
+    """
     rng = Random(1763)
     covered = 0
     # Independent draws share the same distribution; no score is reused at evaluation.
@@ -160,24 +262,77 @@ def test_T_K05_0011_calibration_coverage() -> None:
     assert "SYNTHETIC" in COVERAGE_CLAIM
 
 
+@pytest.mark.fast
 def test_T_K05_0012_untrusted_label_is_not_an_instruction() -> None:
+    """
+    id: T-K05-0012
+    title: Untrusted label is not an instruction
+    purpose: Untrusted label is not an instruction
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S12
+    """
     report = assess(replace(INPUT, label="price agreed with customs"))
     assert report.outcome == DecisionValue.ABSTAIN
 
 
+@pytest.mark.fast
 def test_T_K05_0013_expired_reference() -> None:
+    """
+    id: T-K05-0013
+    title: Expired reference
+    purpose: Expired reference
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S13
+    """
     assert assess(at=PACK.ends).outcome == DecisionValue.ALLOW
     assert assess(at=PACK.ends + timedelta(microseconds=1)).reasons == (Reason.REFERENCE_EXPIRED,)
 
 
+@pytest.mark.fast
 def test_T_K05_0014_missing_required_adjustment() -> None:
+    """
+    id: T-K05-0014
+    title: Missing required adjustment
+    purpose: Missing required adjustment
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S14
+    """
     assert assess(replace(INPUT, incoterm="FOB")).reasons == (Reason.ADJUSTMENT_MISSING,)
 
 
+@pytest.mark.fast
 def test_T_K05_0015_floor_bounds_for_zero_spread() -> None:
+    """
+    id: T-K05-0015
+    title: Floor bounds for zero spread
+    purpose: Floor bounds for zero spread
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    scenario ids: K05-S15
+    """
     assert assess().lines[0].log_bounds == (Decimal("-0.10"), Decimal("0.10"))
 
 
+@pytest.mark.fast
 @pytest.mark.parametrize(
     ("report", "expected", "outcome"),
     [
@@ -233,11 +388,34 @@ def test_T_K05_0015_floor_bounds_for_zero_spread() -> None:
 def test_closed_reason_registry(
     report: ValuationReport, expected: Reason, outcome: DecisionValue
 ) -> None:
+    """
+    id: T-K05-0101
+    title: Closed reason registry
+    purpose: Closed reason registry
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     assert expected in report.reasons
     assert report.outcome == outcome
 
 
-def test_real_origin_requires_tenant_calibration() -> None:
+@pytest.mark.fast
+def test_T_K05_0115_real_origin_requires_tenant_calibration() -> None:
+    """
+    id: T-K05-0115
+    title: Real origin requires tenant calibration
+    purpose: Real origin requires tenant calibration
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     report = evaluate(
         INPUT,
         at=AT,

@@ -40,7 +40,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("ingest", help="Ingest a document into a case")
     evaluate = sub.add_parser("evaluate", help="Evaluate a case through the rule engine")
-    evaluate.add_argument("--capability", dest="id", choices=["K14", "F01", "K09"])
+    evaluate.add_argument("--capability", dest="id", choices=["K14", "F01", "K09", "K05"])
     evaluate.add_argument("--document", action="append", nargs=2, metavar=("TYPE", "FILE"))
 
     sub.add_parser("replay", help="Replay a case from recorded evidence")
@@ -52,7 +52,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--documents", action="store_true", help="Start with the bilingual synthetic document set"
     )
     capability = sub.add_parser("capability", help="Evaluate documents in the local workflow")
-    capability.add_argument("id", choices=["K14", "F01", "K09"])
+    capability.add_argument("id", choices=["K14", "F01", "K09", "K05"])
     capability.add_argument("--document", action="append", nargs=2, metavar=("TYPE", "FILE"))
 
     autonomy = sub.add_parser("autonomy", help="Autonomy control commands")
@@ -185,6 +185,28 @@ def _cmd_capability(args: argparse.Namespace) -> int:
     result = workflow.result(principal, "LOCAL-CASE")
     if result is None:
         return EXIT_ERROR
+    if args.id == "K05":
+        from datetime import datetime
+
+        from pydantic_core import to_jsonable_python
+
+        from capabilities.k05.registration import register
+
+        timestamp = datetime.fromisoformat(result.consistency.evaluation_time)
+        valuation, evidence = register(None, result.consistency.canonical, timestamp, result.label)
+        print(
+            json.dumps(
+                to_jsonable_python(
+                    {
+                        "capability_id": "K05",
+                        "case_id": result.case_id,
+                        "report": valuation.view(principal.role),
+                        "evidence": evidence,
+                    }
+                )
+            )
+        )
+        return EXIT_OK
     outcome, codes = result.outcome(args.id)
     print(
         json.dumps(

@@ -105,7 +105,11 @@ def _scan_scenarios(scenarios_dir: Path) -> dict[str, str]:
     mapping: dict[str, str] = {}
     if not scenarios_dir.exists():
         return mapping
-    files = [*scenarios_dir.glob("*.json"), *scenarios_dir.glob("*/cases.json")]
+    files = [
+        *scenarios_dir.glob("*.json"),
+        *scenarios_dir.glob("*/cases.json"),
+        *scenarios_dir.glob("*/[FKL][0-9][0-9]-S*.json"),
+    ]
     for json_file in sorted(files):
         data = json.loads(json_file.read_text(encoding="utf-8"))
         records = data if isinstance(data, list) else [data]

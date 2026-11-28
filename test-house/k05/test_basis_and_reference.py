@@ -26,7 +26,6 @@ from kernel.lib.valuation import (
     valuation_basis,
 )
 
-pytestmark = pytest.mark.fast
 DAY = date.fromisoformat("2026-11-01")
 CONTEXT = Context(prec=60)
 SYNTHETIC = "SYNTHETIC"
@@ -89,21 +88,46 @@ def normalized(value: Money, quantity: Decimal, unit: str) -> Decimal:
     ).unit_value(CONTEXT)
 
 
+@pytest.mark.fast
 @given(amount=st.integers(1, 10**12), quantity=st.integers(1, 10**9))
 def test_T_K05_0201_exact_unit_conversion(amount: int, quantity: int) -> None:
+    """
+    id: T-K05-0201
+    title: Exact unit conversion
+    purpose: Exact unit conversion
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     value = Money(Decimal(amount), "AED")
     assert normalized(value, Decimal(quantity), "t") == normalized(
         value, Decimal(quantity * 1000), "kg"
     )
 
 
+@pytest.mark.fast
 @given(amount=st.integers(1, 10**12), quantity=st.integers(1, 10**9))
 def test_T_K05_0202_exact_currency_conversion(amount: int, quantity: int) -> None:
+    """
+    id: T-K05-0202
+    title: Exact currency conversion
+    purpose: Exact currency conversion
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     assert normalized(Money(Decimal(amount), "USD"), Decimal(quantity), "kg") == normalized(
         Money(Decimal(amount) * Decimal("3.67"), "AED"), Decimal(quantity), "kg"
     )
 
 
+@pytest.mark.fast
 @given(
     invoice=st.integers(1, 10**10),
     freight=st.integers(0, 10**7),
@@ -112,6 +136,17 @@ def test_T_K05_0202_exact_currency_conversion(amount: int, quantity: int) -> Non
 def test_T_K05_0203_documentary_basis_fraction_oracle(
     invoice: int, freight: int, insurance: int
 ) -> None:
+    """
+    id: T-K05-0203
+    title: Documentary basis fraction oracle
+    purpose: Documentary basis fraction oracle
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     adjustments = {
         "freight": Adjustment(Money(Decimal(freight), "EUR"), "fact-freight", SYNTHETIC),
         "insurance": Adjustment(Money(Decimal(insurance), "AED"), "fact-insurance", SYNTHETIC),
@@ -128,6 +163,7 @@ def oracle_median(values: list[Decimal]) -> Decimal:
     return (ordered[middle - 1] + ordered[middle]) / 2
 
 
+@pytest.mark.fast
 @pytest.mark.parametrize(
     ("test_id", "sample"),
     [
@@ -152,6 +188,17 @@ def oracle_median(values: list[Decimal]) -> Decimal:
     ],
 )
 def test_reference_median_and_mad(test_id: str, sample: tuple[int, ...]) -> None:
+    """
+    id: T-K05-0204
+    title: Reference median and mad
+    purpose: Reference median and mad
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     values = tuple(map(Decimal, sample))
     group = ReferenceGroup("20", "kg", "AED", values)
     stats = reference_statistics("20", groups={"20": group}, parent=None, context=CONTEXT)
@@ -166,6 +213,7 @@ def test_reference_median_and_mad(test_id: str, sample: tuple[int, ...]) -> None
         )
 
 
+@pytest.mark.fast
 @pytest.mark.parametrize(
     ("size", "parent_size", "expected"),
     [
@@ -180,6 +228,17 @@ def test_reference_median_and_mad(test_id: str, sample: tuple[int, ...]) -> None
     ids=[f"T-K05-{number:04}" for number in range(212, 219)],
 )
 def test_reference_sample_boundaries(size: int, parent_size: int, expected: str | None) -> None:
+    """
+    id: T-K05-0212
+    title: Reference sample boundaries
+    purpose: Reference sample boundaries
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     groups = {
         code: ReferenceGroup(code, "kg", "AED", (Decimal(10),) * count)
         for code, count in (("2001", size), ("20", parent_size))
@@ -192,6 +251,7 @@ def test_reference_sample_boundaries(size: int, parent_size: int, expected: str 
         assert stats.scale == Decimal("0.05")
 
 
+@pytest.mark.fast
 @pytest.mark.parametrize(
     ("values", "alpha"),
     [
@@ -205,6 +265,17 @@ def test_reference_sample_boundaries(size: int, parent_size: int, expected: str 
     ids=[f"T-K05-{number:04}" for number in range(219, 225)],
 )
 def test_split_quantile_matches_rank(values: list[float], alpha: float) -> None:
+    """
+    id: T-K05-0219
+    title: Split quantile matches rank
+    purpose: Split quantile matches rank
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     rank = ceil((len(values) + 1) * (1 - Fraction(str(alpha))))
     threshold = next(
         (
@@ -218,6 +289,7 @@ def test_split_quantile_matches_rank(values: list[float], alpha: float) -> None:
     assert artifact.thresholds[0].threshold == threshold
 
 
+@pytest.mark.fast
 @pytest.mark.parametrize(
     ("currency", "day", "incoterm", "issue"),
     [
@@ -229,16 +301,51 @@ def test_split_quantile_matches_rank(values: list[float], alpha: float) -> None:
     ids=[f"T-K05-{number:04}" for number in range(225, 229)],
 )
 def test_unavailable_inputs_abstain(currency: str, day: date, incoterm: str, issue: str) -> None:
+    """
+    id: T-K05-0225
+    title: Unavailable inputs abstain
+    purpose: Unavailable inputs abstain
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     with pytest.raises(BasisUnavailable, match=issue):
         basis(Money(Decimal(12), currency), {}, day=day, incoterm=incoterm)
 
 
+@pytest.mark.fast
 def test_T_K05_0229_grams_scale_exactly() -> None:
+    """
+    id: T-K05-0229
+    title: Grams scale exactly
+    purpose: Grams scale exactly
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     amount = Money(Decimal("3.67"), "AED")
     assert normalized(amount, Decimal(1200), "g") == normalized(amount, Decimal("1.2"), "kg")
 
 
+@pytest.mark.fast
 def test_T_K05_0230_currency_and_unit_conversion_compose() -> None:
+    """
+    id: T-K05-0230
+    title: Currency and unit conversion compose
+    purpose: Currency and unit conversion compose
+    level: fast
+    requirement: P15, Part 5 section 5.K05
+    input: Versioned synthetic case or pack
+    expected: The specified decision or invariant holds
+    risk: RSK-J-06
+    capability: K05
+    """
     assert normalized(Money(Decimal("0.1"), "USD"), Decimal("0.000001"), "t") == normalized(
         Money(Decimal("0.367"), "AED"), Decimal(1), "g"
     )

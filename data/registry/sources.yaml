@@ -762,3 +762,16 @@ sources:
     status: VERIFIED
     max_age_months: 12
     v_item: none
+
+  - source_id: SRC-SYNTHETIC-K05
+    publisher: "Customs & Transit Control Tower"
+    reference: "Synthetic valuation rules, reference draws and adversarial scenarios"
+    retrieved_month: "2026-11"
+    label: SYNTHETIC
+    license_summary: "Project-owned synthetic fixtures"
+    redistributable: "no"
+    kind: DATASET
+    use_class: CATALOGUE
+    status: VERIFIED
+    max_age_months: 12
+    v_item: none

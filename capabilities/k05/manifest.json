@@ -1,0 +1,12 @@
+{
+  "calibration_artifacts": [
+    "interval"
+  ],
+  "capability_id": "K05",
+  "depends": [
+    "F01"
+  ],
+  "statistical": true,
+  "title": "Valuation Anomaly",
+  "version": "1.0.0"
+}

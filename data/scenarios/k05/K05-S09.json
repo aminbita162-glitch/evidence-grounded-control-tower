@@ -1,0 +1,15 @@
+{
+  "id": "K05-S09",
+  "test_id": "T-K05-0009",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S09",
+  "inputs": {
+    "split_quantity": "9",
+    "split_value": "1"
+  },
+  "outcome": "ESCALATE",
+  "reason_codes": [
+    "K05.ANOMALY.BELOW_RANGE"
+  ]
+}

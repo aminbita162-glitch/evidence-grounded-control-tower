@@ -1,0 +1,14 @@
+{
+  "id": "K05-S03",
+  "test_id": "T-K05-0003",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S03",
+  "inputs": {
+    "value": "0.5"
+  },
+  "outcome": "ESCALATE",
+  "reason_codes": [
+    "K05.ANOMALY.BELOW_RANGE"
+  ]
+}

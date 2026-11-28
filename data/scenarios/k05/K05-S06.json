@@ -1,0 +1,15 @@
+{
+  "id": "K05-S06",
+  "test_id": "T-K05-0006",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S06",
+  "inputs": {
+    "child_count": 12,
+    "parent_count": 80
+  },
+  "outcome": "ALLOW",
+  "reason_codes": [
+    "K05.OBS.FALLBACK_LEVEL_USED"
+  ]
+}

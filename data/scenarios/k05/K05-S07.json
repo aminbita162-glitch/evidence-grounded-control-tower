@@ -1,0 +1,15 @@
+{
+  "id": "K05-S07",
+  "test_id": "T-K05-0007",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S07",
+  "inputs": {
+    "invoice_currency": "USD",
+    "date_offset": 1
+  },
+  "outcome": "ABSTAIN",
+  "reason_codes": [
+    "K05.ABSTAIN.FX_UNAVAILABLE"
+  ]
+}

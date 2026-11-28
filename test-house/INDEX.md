@@ -478,6 +478,53 @@
 | T-INT-0062 | Oversized scan is refused before ocr | fast | intake/test_intake.py | test_T_INT_0062_oversized_scan_is_refused_before_ocr |
 | T-INT-0063 | Scan fixture has stable bytes | fast | intake/test_intake.py | test_T_INT_0063_scan_fixture_has_stable_bytes |
 | T-INT-0064 | OCR derives error counts and accepts only complete owner pins | fast | intake/test_intake.py | test_T_INT_0064_ocr_configuration_and_error_totals |
+| T-K05-0001 | Interval scenarios | fast | k05/test_valuation.py | test_interval_scenarios |
+| T-K05-0002 | Declared documentary mismatch | fast | k05/test_valuation.py | test_T_K05_0002_declared_documentary_mismatch |
+| T-K05-0006 | Falls back to parent | fast | k05/test_valuation.py | test_T_K05_0006_falls_back_to_parent |
+| T-K05-0007 | Missing dated rate | fast | k05/test_valuation.py | test_T_K05_0007_missing_dated_rate |
+| T-K05-0008 | Tonnes match kilograms | fast | k05/test_valuation.py | test_T_K05_0008_tonnes_match_kilograms |
+| T-K05-0009 | Quantity weighted aggregate is below | fast | k05/test_valuation.py | test_T_K05_0009_quantity_weighted_aggregate_is_below |
+| T-K05-0010 | Bounds require review privilege | fast | k05/test_valuation.py | test_T_K05_0010_bounds_require_review_privilege |
+| T-K05-0011 | Calibration coverage | slow | k05/test_valuation.py | test_T_K05_0011_calibration_coverage |
+| T-K05-0012 | Untrusted label is not an instruction | fast | k05/test_valuation.py | test_T_K05_0012_untrusted_label_is_not_an_instruction |
+| T-K05-0013 | Expired reference | fast | k05/test_valuation.py | test_T_K05_0013_expired_reference |
+| T-K05-0014 | Missing required adjustment | fast | k05/test_valuation.py | test_T_K05_0014_missing_required_adjustment |
+| T-K05-0015 | Floor bounds for zero spread | fast | k05/test_valuation.py | test_T_K05_0015_floor_bounds_for_zero_spread |
+| T-K05-0101 | Closed reason registry | fast | k05/test_valuation.py | test_closed_reason_registry |
+| T-K05-0115 | Real origin requires tenant calibration | fast | k05/test_valuation.py | test_T_K05_0115_real_origin_requires_tenant_calibration |
+| T-K05-0201 | Exact unit conversion | fast | k05/test_basis_and_reference.py | test_T_K05_0201_exact_unit_conversion |
+| T-K05-0202 | Exact currency conversion | fast | k05/test_basis_and_reference.py | test_T_K05_0202_exact_currency_conversion |
+| T-K05-0203 | Documentary basis fraction oracle | fast | k05/test_basis_and_reference.py | test_T_K05_0203_documentary_basis_fraction_oracle |
+| T-K05-0204 | Reference median and mad | fast | k05/test_basis_and_reference.py | test_reference_median_and_mad |
+| T-K05-0212 | Reference sample boundaries | fast | k05/test_basis_and_reference.py | test_reference_sample_boundaries |
+| T-K05-0219 | Split quantile matches rank | fast | k05/test_basis_and_reference.py | test_split_quantile_matches_rank |
+| T-K05-0225 | Unavailable inputs abstain | fast | k05/test_basis_and_reference.py | test_unavailable_inputs_abstain |
+| T-K05-0229 | Grams scale exactly | fast | k05/test_basis_and_reference.py | test_T_K05_0229_grams_scale_exactly |
+| T-K05-0230 | Currency and unit conversion compose | fast | k05/test_basis_and_reference.py | test_T_K05_0230_currency_and_unit_conversion_compose |
+| T-K05-0301 | Rejects nonpositive and nonfinite values | fast | k05/test_interfaces.py | test_rejects_nonpositive_and_nonfinite_values |
+| T-K05-0308 | Rejects invalid quantities | fast | k05/test_interfaces.py | test_rejects_invalid_quantities |
+| T-K05-0313 | Rejects unknown or incompatible units | fast | k05/test_interfaces.py | test_rejects_unknown_or_incompatible_units |
+| T-K05-0319 | Tiny quantity is detected | fast | k05/test_interfaces.py | test_T_K05_0319_tiny_quantity_is_detected |
+| T-K05-0320 | Extreme reference outlier keeps robust position | fast | k05/test_interfaces.py | test_T_K05_0320_extreme_reference_outlier_keeps_robust_position |
+| T-K05-0401 | Replay is deterministic | fast | k05/test_interfaces.py | test_T_K05_0401_replay_is_deterministic |
+| T-K05-0402 | Evidence commits to input change | fast | k05/test_interfaces.py | test_T_K05_0402_evidence_commits_to_input_change |
+| T-K05-0403 | Operator report uses redacted positions | fast | k05/test_interfaces.py | test_T_K05_0403_operator_report_uses_redacted_positions |
+| T-K05-0404 | Reviewer can inspect bounds | fast | k05/test_interfaces.py | test_T_K05_0404_reviewer_can_inspect_bounds |
+| T-K05-0405 | Other tenant cannot invoke | fast | k05/test_interfaces.py | test_T_K05_0405_other_tenant_cannot_invoke |
+| T-K05-0406 | Other tenant cannot retrieve | fast | k05/test_interfaces.py | test_T_K05_0406_other_tenant_cannot_retrieve |
+| T-K05-0407 | Fact revocation marks result stale | fast | k05/test_interfaces.py | test_T_K05_0407_fact_revocation_marks_result_stale |
+| T-K05-0408 | Same idempotency key returns same evaluation | fast | k05/test_interfaces.py | test_T_K05_0408_same_idempotency_key_returns_same_evaluation |
+| T-K05-0409 | Idempotency payload change returns conflict | fast | k05/test_interfaces.py | test_T_K05_0409_idempotency_payload_change_returns_conflict |
+| T-K05-0410 | Query cannot select supplied facts | fast | k05/test_interfaces.py | test_T_K05_0410_query_cannot_select_supplied_facts |
+| T-K05-0501 | Registration reads verified canonical facts | fast | k05/test_interfaces.py | test_T_K05_0501_registration_reads_verified_canonical_facts |
+| T-K05-0502 | Missing idempotency key fails validation | fast | k05/test_interfaces.py | test_T_K05_0502_missing_idempotency_key_fails_validation |
+| T-K05-0503 | Naive time fails validation | fast | k05/test_interfaces.py | test_T_K05_0503_naive_time_fails_validation |
+| T-K05-0504 | Generated openapi has evaluation operations | fast | k05/test_interfaces.py | test_T_K05_0504_generated_openapi_has_evaluation_operations |
+| T-K05-0505 | View banner is verbatim | fast | k05/test_interfaces.py | test_T_K05_0505_view_banner_is_verbatim |
+| T-K05-0506 | Coverage claim is verbatim | fast | k05/test_interfaces.py | test_T_K05_0506_coverage_claim_is_verbatim |
+| T-K05-0507 | View never recommends a value | fast | k05/test_interfaces.py | test_view_never_recommends_a_value |
+| T-K05-0511 | Evidence cites reference and calibration | fast | k05/test_interfaces.py | test_T_K05_0511_evidence_cites_reference_and_calibration |
+| T-K05-0512 | Untrusted note cannot change report | fast | k05/test_interfaces.py | test_T_K05_0512_untrusted_note_cannot_change_report |
 | T-K09-0001 | K09-S01 golden scenario | fast | k09/test_shield.py | test_T_K09_0001_golden_scenario |
 | T-K09-0002 | K09-S02 golden scenario | fast | k09/test_shield.py | test_T_K09_0002_golden_scenario |
 | T-K09-0003 | K09-S03 golden scenario | fast | k09/test_shield.py | test_T_K09_0003_golden_scenario |

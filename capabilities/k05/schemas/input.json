@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "evaluation_time": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "facts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "pattern": "^shipment\\.",
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "source_fact_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "status": {
+            "const": "VERIFIED"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "array"
+            ]
+          }
+        },
+        "required": [
+          "key",
+          "value",
+          "status",
+          "label",
+          "source_fact_ids"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "facts",
+    "evaluation_time"
+  ],
+  "title": "K05 input",
+  "type": "object"
+}
