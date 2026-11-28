@@ -72,7 +72,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P11 | Security and tenancy completion | ✓ November 2026 |
 | P12 | Packaging and operations | ✓ November 2026 |
 | P13 | Capability support library | ✓ November 2026 |
-| P14 | Intake | ☐ |
+| P14 | Intake | ✓ November 2026 |
 | P15 | Valuation and classification | ☐ |
 | P16 | Clock, freight cost and charge control | ☐ |
 
