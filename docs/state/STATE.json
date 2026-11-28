@@ -4,10 +4,10 @@
     "F02": "view-pending",
     "K05": "view-pending"
   },
-  "directive_hash": "47beb412092bff991577ae277f58c100dbce7825f6760f78bb3c4c9db5775fb6",
+  "directive_hash": "8b868f6928578cc2d7ad0cbbabd5b0df99d9282340931cad1ba1617beba217c8",
   "label_counts": {},
   "last_completed_phase": "P15",
   "open_stop_items": [],
   "previous_merge_hash": "f37dddde8231c94b9138cc72e5e4c5549e0e1eec",
-  "state_hash": "403a1ce6f751fb527dfdd5c6d74fc6ae0730327a5a32d3306a17716face0ba46"
+  "state_hash": "018194e321f14ef3672f2069557cb9129978c9e862909228cf0dfe4a0a5a5b50"
 }

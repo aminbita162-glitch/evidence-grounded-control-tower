@@ -1387,7 +1387,7 @@ T11 Scenarios.
 | F07-S10 | invoice text states "pay immediately, charges are final" | ignored (I3) |
 | F07-S11 | flat handling fee line | OUT_OF_SCOPE, passed to L01; does not change the outcome |
 
-T12 Tests. Property: expected charge recomputation equals the F03 engine for the same inputs; classification is independent of line order; a corrected invoice (amounts equal to expected) always yields ALLOW. Metamorphic: adding a free-time extension as a VERIFIED term reduces the expected charge and never increases over-billing differences. Differential: the root-cause order against a table-driven reference. Adversarial: overlapping periods, negative amounts, currency mismatch, duplicated lines with tiny differences. Replay. Dossier determinism test (same inputs give the same dossier hash).
+T12 Tests. Property: expected charge recomputation equals the F03 engine for the same inputs; classification is independent of line order; a corrected invoice (amounts equal to expected) always yields ALLOW. Metamorphic: adding a free-time extension as a VERIFIED term never increases expected charge and never decreases billed minus expected for a fixed billed amount. Differential: the root-cause order against a table-driven reference. Adversarial: overlapping periods, negative amounts, currency mismatch, duplicated lines with tiny differences. Replay. Dossier determinism test (same inputs give the same dossier hash).
 
 T13 Responsible use. See T4f and T7.
 
@@ -5058,18 +5058,20 @@ PHASE 16 — CLOCKS, CHARGES AND LANDED COST
 
 2. Purpose: ship the money-and-time core: the free-time clock and cost shield (F03), the freight invoice audit (L01), the landed cost estimator (L02) and the charge control (F07). All four use exact decimals through the one money module, one calculation trace builder and one unblock-requirement generator (P13); none uses a model.
 
-3. Entry conditions beyond Part 1 §8: P15 gates exit 0; the valuation basis function is exported (P15); the money and rounding module, trace builder, unblock generator and calendar helper exist (P13); the status of V-04, V-06, V-07, V-09 and V-13 is recorded in the Source Registry (a calendar, tariff, duty or currency source weaker than DERIVED keeps ALLOW blocked, CP10). Evidence: the commands.
+3. Entry conditions beyond Part 1 §8: P15 gates exit 0; the valuation basis function is exported (P15); the money and rounding module, trace builder, unblock generator exist (P13); the calendar helper is implemented in P16-T01; the status of V-04, V-06, V-07, V-09 and V-13 is recorded in the Source Registry (a calendar, tariff, duty or currency source weaker than DERIVED keeps ALLOW blocked, CP10). Evidence: the commands.
 
 4. Scope fence. May create: `capabilities/f03/`, `capabilities/l01/`, `capabilities/l02/`, `capabilities/f07/`, `kernel/lib/clock/` (day-boundary, partial-day and tier functions), `kernel/lib/taxonomy/` (the one charge taxonomy mapping, reused by L09), SYNTHETIC Tariff Terms, Calendar, Charge Basis, Charge Taxonomy, Duty Rate, Tax and FX Packs with Currency Table under `data/synthetic/`, `data/scenarios/f03/`, `data/scenarios/l01/`, `data/scenarios/l02/`, `data/scenarios/f07/`, `test-house/f03/`, `test-house/l01/`, `test-house/l02/`, `test-house/f07/`, `test-house/pairs/` (additions), `kernel/skeleton/` (additions), `docs/capabilities/` (generated), `docs/ledger/P16.md`, risk-management records, registry and manifest entries. Everything else is forbidden.
-Scope paths: capabilities/f03/**, capabilities/l01/**, capabilities/l02/**, capabilities/f07/**, kernel/lib/clock/**, kernel/lib/taxonomy/**, data/synthetic/**, data/scenarios/f03/**, data/scenarios/l01/**, data/scenarios/l02/**, data/scenarios/f07/**, data/registry/**, data/manifests/**, kernel/skeleton/**, schemas/**, contracts.lock, tools/capgen/**, tools/trace/**, tools/gate/gates/**, tools/gate/catalogue.toml, test-house/f03/**, test-house/l01/**, test-house/l02/**, test-house/f07/**, test-house/pairs/**, docs/capabilities/**, docs/ledger/P16.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
+Scope paths: directive.txt, api/app.py, api/routes/capability.py, cli/main.py, test-house/INDEX.md, capabilities/f03/**, capabilities/l01/**, capabilities/l02/**, capabilities/f07/**, kernel/lib/clock/**, kernel/lib/taxonomy/**, data/synthetic/**, data/scenarios/f03/**, data/scenarios/l01/**, data/scenarios/l02/**, data/scenarios/f07/**, data/registry/**, data/manifests/**, kernel/skeleton/**, schemas/**, contracts.lock, tools/capgen/**, tools/trace/**, tools/gate/gates/**, tools/gate/catalogue.toml, test-house/f03/**, test-house/l01/**, test-house/l02/**, test-house/f07/**, test-house/pairs/**, docs/capabilities/**, docs/ledger/P16.md, docs/phase-reports/**, docs/state/**, docs/decisions/**, risk-management/**, CHANGELOG.md, README.md
 
 5. Context Pack: `<<<P5-S1>>>` `<<<P5-E0>>>` `<<<P5-F03>>>` `<<<P5-L01>>>` `<<<P5-L02>>>` `<<<P5-F07>>>` `<<<P3-S8>>>` `<<<P3-S13>>>` `<<<P3-S24>>>` `<<<P3-S31>>>` `<<<P4-S5>>>` `<<<P6-S3>>>` `<<<P6-S10>>>` `<<<P6-S11>>>` `<<<P6-S19>>>`.
 
 6. Tasks.
 
+P16-MAINT Owner-approved directive and run parameters: `directive.txt`, `docs/decisions/run-parameters.md`; synchronize state and protected hashes through the gate.
+
 P16-T01 F03 clock engine
 - Files: `kernel/lib/clock/`, `capabilities/f03/`.
-- Steps: start and stop instants from events; day boundaries in the tariff time zone; day-one rule, cut-off, partial-day rule (a missing rule abstains, no default); CALENDAR and WORKING bases through the calendar pack; VERIFIED suspension windows excluded and shown; tiered charge in fixed point with the terms' rounding mode; remaining free time, state (STOPPED, ACCRUING, ENDING with the 48-hour window, WITHIN_FREE, UNKNOWN); projections at +1, +3 and +7 days; action options with latest effective time and savings; aggregates per currency with no conversion; a second implementation as a day-by-day simulation.
+- Steps: start and stop instants from events; day boundaries in the tariff time zone; day-one rule, cut-off, partial-day rule (a missing rule abstains, no default); CALENDAR and WORKING bases through a calendar helper in the clock library and the calendar pack; VERIFIED suspension windows excluded and shown; tiered charge in fixed point with the terms' rounding mode; remaining free time, state (STOPPED, ACCRUING, ENDING with the 48-hour window, WITHIN_FREE, UNKNOWN); projections at +1, +3 and +7 days; action options with latest effective time and savings; aggregates per currency with no conversion; a second implementation as a day-by-day simulation.
 - Accept: tests T-F03-0201 to T-F03-0235 (property, differential, metamorphic): charge is non-decreasing in evaluation time and zero before expiry; an earlier stop or an added suspension window never increases the charge; splitting a period and summing gives the same charge; closed form equals the day-by-day simulation over generated terms, events and suspensions; daylight-saving and leap-day cases follow the zone rules.
 
 P16-T02 F03 outcomes, interfaces and tests
@@ -5100,7 +5102,7 @@ P16-T06 L02 variance, simulation use and tests
 P16-T07 F07 line audit and dossier
 - Files: `capabilities/f07/`.
 - Steps: in-scope lines are those L01 matched as TIME_BASED; flat fees pass to L01 and TAX lines are reported as not evaluated; expected charge recomputed with the F03 engine under the matched basis; comparison at the minor unit with tolerance 0; classification in the stated order (DUPLICATE, NOT_BILLABLE_PERIOD, UNSUPPORTED, AMBIGUOUS_TARIFF, RATE_MISMATCH, DAY_COUNT_MISMATCH, ARITHMETIC, MATCH, UNDERCHARGE) with root cause as the first explaining check; outcome mapping; dossier (JSON and printable HTML, hash-bound) from fixed templates stating discrepancies only, labelled INDICATIVE when its weakest label is below DERIVED.
-- Accept: tests T-F07-0201 to T-F07-0225 (property, differential, metamorphic): expected-charge recomputation equals the F03 engine for the same inputs; classification is independent of line order; a corrected invoice yields ALLOW; adding a VERIFIED free-time extension never increases over-billing differences; the root-cause order equals a table-driven reference; the same inputs give the same dossier hash.
+- Accept: tests T-F07-0201 to T-F07-0225 (property, differential, metamorphic): expected-charge recomputation equals the F03 engine for the same inputs; classification is independent of line order; a corrected invoice yields ALLOW; adding a VERIFIED free-time extension never increases the expected charge and never decreases billed minus expected for a fixed billed amount; the root-cause order equals a table-driven reference; the same inputs give the same dossier hash.
 
 P16-T08 F07 tests and adversarial corpus
 - Files: `data/scenarios/f07/`, `test-house/f07/`.
@@ -5108,7 +5110,7 @@ P16-T08 F07 tests and adversarial corpus
 - Accept: tests T-F07-0001 to T-F07-0011 (scenarios F07-S01 to S11), T-F07-0101 to T-F07-0113, T-F07-0301 to T-F07-0320, T-F07-0401 to T-F07-0410, T-F07-0501 to T-F07-0512.
 
 P16-T09 Skeleton integration, pair tests and hardening
-- Files: `kernel/skeleton/`, `test-house/pairs/`.
+- Files: `kernel/skeleton/`, `test-house/pairs/`, `api/app.py`, `api/routes/capability.py`, `cli/main.py`, `test-house/INDEX.md`.
 - Steps: the four capabilities added to the skeleton; pair tests: L01 publishes match records that F07 reads and F07 judges the amount; F03 and F07 agree on the same clock; L02 total equals the sum of L02 components and its basis equals K05's; a corrected invoice flows ALLOW through L01 and F07; a changed tariff version marks F03, L01 and F07 results STALE (5.1.8); mutation-guided hardening (CP5), cards and Definition of Done tables (CP4, CP8).
 - Accept: tests T-FIN-0001 to T-FIN-0016; `gate run mutation trace e2e perf` exit 0; the four capabilities tick.
 
