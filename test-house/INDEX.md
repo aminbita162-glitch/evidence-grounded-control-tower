@@ -444,6 +444,31 @@
 | T-F03-0510 | Contradiction requests review | fast | f03/test_outcomes.py | test_T_F03_0510_contradiction_requests_review |
 | T-F03-0511 | Extensions absent from view | fast | f03/test_outcomes.py | test_T_F03_0511_extensions_absent_from_view |
 | T-F03-0512 | No suggested record edits | fast | f03/test_outcomes.py | test_T_F03_0512_no_suggested_record_edits |
+| T-F07-0201 | Recomputed amounts match F03 | fast | f07/test_audit.py | test_T_F07_0201_exact_clock_equivalence |
+| T-F07-0202 | A corrected supported invoice allows | fast | f07/test_audit.py | test_T_F07_0202_corrected_invoice_allows |
+| T-F07-0203 | More verified free time lowers expected charge | fast | f07/test_audit.py | test_T_F07_0203_verified_extension_changes_difference |
+| T-F07-0204 | Line order independent | fast | f07/test_audit.py | test_T_F07_0204_line_order_independent |
+| T-F07-0205 | Dossier hash deterministic | fast | f07/test_audit.py | test_T_F07_0205_dossier_hash_deterministic |
+| T-F07-0206 | Dossier hash covers artifacts | fast | f07/test_audit.py | test_T_F07_0206_dossier_hash_covers_artifacts |
+| T-F07-0207 | Duplicate precedes period | fast | f07/test_audit.py | test_T_F07_0207_duplicate_precedes_period |
+| T-F07-0208 | Period precedes rate | fast | f07/test_audit.py | test_T_F07_0208_period_precedes_rate |
+| T-F07-0209 | Rate precedes days | fast | f07/test_audit.py | test_T_F07_0209_rate_precedes_days |
+| T-F07-0210 | Days precede arithmetic | fast | f07/test_audit.py | test_T_F07_0210_days_precede_arithmetic |
+| T-F07-0211 | Arithmetic precedes outcome | fast | f07/test_audit.py | test_T_F07_0211_arithmetic_precedes_outcome |
+| T-F07-0212 | Unsupported basis | fast | f07/test_audit.py | test_T_F07_0212_unsupported_basis |
+| T-F07-0213 | Ambiguous basis | fast | f07/test_audit.py | test_T_F07_0213_ambiguous_basis |
+| T-F07-0214 | Missing clock | fast | f07/test_audit.py | test_T_F07_0214_missing_clock |
+| T-F07-0215 | Missing match | fast | f07/test_audit.py | test_T_F07_0215_missing_match |
+| T-F07-0216 | Undercharge observed | fast | f07/test_audit.py | test_T_F07_0216_undercharge_observed |
+| T-F07-0217 | Below minor unit matches | fast | f07/test_audit.py | test_T_F07_0217_below_minor_unit_matches |
+| T-F07-0218 | Tax not evaluated | fast | f07/test_audit.py | test_T_F07_0218_tax_not_evaluated |
+| T-F07-0219 | Flat charge passes to l01 | fast | f07/test_audit.py | test_T_F07_0219_flat_charge_passes_to_l01 |
+| T-F07-0220 | Currency mismatch | fast | f07/test_audit.py | test_T_F07_0220_currency_mismatch |
+| T-F07-0221 | Missing period | fast | f07/test_audit.py | test_T_F07_0221_missing_period |
+| T-F07-0222 | Step carries exact days | fast | f07/test_audit.py | test_T_F07_0222_step_carries_exact_days |
+| T-F07-0223 | Weak label indicative | fast | f07/test_audit.py | test_T_F07_0223_weak_label_indicative |
+| T-F07-0224 | After stop not billable | fast | f07/test_audit.py | test_T_F07_0224_after_stop_not_billable |
+| T-F07-0225 | Adjacent periods are distinct | fast | f07/test_audit.py | test_T_F07_0225_adjacent_periods_are_distinct |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |
