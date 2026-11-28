@@ -1,0 +1,14 @@
+{
+  "basis": "5.F02 T11 F02-S08",
+  "id": "F02-S08",
+  "inputs": {
+    "pack_label": "SECONDARY"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "ABSTAIN",
+  "reason_codes": [
+    "F02.ABSTAIN.LABEL_INSUFFICIENT"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0008"
+}

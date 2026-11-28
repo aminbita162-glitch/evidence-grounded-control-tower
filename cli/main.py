@@ -19,6 +19,7 @@ import asyncio
 import json
 import sys
 from collections.abc import Sequence
+from datetime import UTC, datetime
 from pathlib import Path
 
 from kernel.skeleton import run_skeleton
@@ -40,8 +41,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("ingest", help="Ingest a document into a case")
     evaluate = sub.add_parser("evaluate", help="Evaluate a case through the rule engine")
-    evaluate.add_argument("--capability", dest="id", choices=["K14", "F01", "K09", "K05"])
+    evaluate.add_argument("--capability", dest="id", choices=["K14", "F01", "K09", "K05", "F02"])
     evaluate.add_argument("--document", action="append", nargs=2, metavar=("TYPE", "FILE"))
+
+    evaluate.add_argument("--evaluation-time", help="Evaluation time in ISO 8601 with offset")
 
     sub.add_parser("replay", help="Replay a case from recorded evidence")
     sub.add_parser("verify-ledger", help="Verify the evidence ledger offline")
@@ -52,8 +55,10 @@ def build_parser() -> argparse.ArgumentParser:
         "--documents", action="store_true", help="Start with the bilingual synthetic document set"
     )
     capability = sub.add_parser("capability", help="Evaluate documents in the local workflow")
-    capability.add_argument("id", choices=["K14", "F01", "K09", "K05"])
+    capability.add_argument("id", choices=["K14", "F01", "K09", "K05", "F02"])
     capability.add_argument("--document", action="append", nargs=2, metavar=("TYPE", "FILE"))
+
+    capability.add_argument("--evaluation-time", help="Evaluation time in ISO 8601 with offset")
 
     autonomy = sub.add_parser("autonomy", help="Autonomy control commands")
     autonomy.add_argument(
@@ -181,26 +186,49 @@ def _cmd_capability(args: argparse.Namespace) -> int:
         print(json.dumps({"error": "INTAKE_DOCUMENT_UNAVAILABLE"}), file=sys.stderr)
         return EXIT_ERROR
     principal = Principal(principal_id="LOCAL-OPERATOR", role="operator", tenant_id="LOCAL")
-    asyncio.run(workflow.ingest(principal, "LOCAL-CASE", uploads, ""))
+    evaluation_time = ""
+    if args.id in {"K05", "F02"}:
+        if args.evaluation_time:
+            try:
+                timestamp = datetime.fromisoformat(args.evaluation_time)
+                if timestamp.utcoffset() is None:
+                    raise ValueError("evaluation time requires an offset")
+            except ValueError:
+                print(json.dumps({"error": "EVALUATION_TIME_REQUIRED"}), file=sys.stderr)
+                return EXIT_USAGE
+        elif args.document:
+            print(json.dumps({"error": "EVALUATION_TIME_REQUIRED"}), file=sys.stderr)
+            return EXIT_USAGE
+        else:
+            timestamp = datetime(2026, 11, 1, tzinfo=UTC)
+        evaluation_time = timestamp.isoformat()
+    asyncio.run(workflow.ingest(principal, "LOCAL-CASE", uploads, evaluation_time))
     result = workflow.result(principal, "LOCAL-CASE")
     if result is None:
         return EXIT_ERROR
-    if args.id == "K05":
-        from datetime import datetime
-
+    if args.id in {"K05", "F02"}:
         from pydantic_core import to_jsonable_python
 
-        from capabilities.k05.registration import register
+        from capabilities.f02.registration import register as classify
+        from capabilities.k05.registration import register as value
 
         timestamp = datetime.fromisoformat(result.consistency.evaluation_time)
-        valuation, evidence = register(None, result.consistency.canonical, timestamp, result.label)
+        origin = result.label if not args.document else "DERIVED"
+        if args.id == "K05":
+            valuation, evidence = value(None, result.consistency.canonical, timestamp, origin)
+            report = valuation.view(principal.role)
+        else:
+            classification, evidence = classify(
+                None, result.consistency.canonical, timestamp, origin
+            )
+            report = classification.view(principal.role)
         print(
             json.dumps(
                 to_jsonable_python(
                     {
-                        "capability_id": "K05",
+                        "capability_id": args.id,
                         "case_id": result.case_id,
-                        "report": valuation.view(principal.role),
+                        "report": report,
                         "evidence": evidence,
                     }
                 )

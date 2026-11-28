@@ -1,0 +1,15 @@
+{
+  "basis": "5.F02 T11 F02-S07",
+  "id": "F02-S07",
+  "inputs": {
+    "language": "ar",
+    "pack_glossary": false
+  },
+  "label": "SYNTHETIC",
+  "outcome": "ABSTAIN",
+  "reason_codes": [
+    "F02.ABSTAIN.LANGUAGE_UNSUPPORTED"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0007"
+}

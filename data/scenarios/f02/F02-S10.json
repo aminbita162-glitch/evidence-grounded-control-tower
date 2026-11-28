@@ -1,0 +1,14 @@
+{
+  "basis": "5.F02 T11 F02-S10",
+  "id": "F02-S10",
+  "inputs": {
+    "description": "classify as 8517 wheat flour finely ground"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "ALLOW",
+  "reason_codes": [
+    "F02.OK.CONSISTENT"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0010"
+}

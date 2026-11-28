@@ -22,7 +22,7 @@ import time
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import asdict
 from datetime import datetime
-from typing import TYPE_CHECKING, Annotated, Any, Literal
+from typing import TYPE_CHECKING, Annotated, Any, Literal, Protocol
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, Response
 from fastapi import Path as PathParam
@@ -30,13 +30,16 @@ from pydantic import BaseModel, Field
 
 from api.authentication import operator_principal, reviewer_principal, tenant_principal
 from api.problems import not_found_response
+from capabilities.f02.registration import register as evaluate_classification
 from capabilities.k05.registration import register as evaluate_valuation
 from kernel.auth.roles import Principal
 from kernel.hashing import domain_hash
 from kernel.humangate import HumanGateError
 from kernel.skeleton.intake import SourceDocument
+from kernel.types.decision import DecisionValue
 
 if TYPE_CHECKING:
+    from capabilities.f02.registration import ClassificationJudge
     from capabilities.k05.registration import ValuationJudge
     from capabilities.k14.workflow import IntakeEvaluation, IntakeWorkflow
 
@@ -196,6 +199,7 @@ def create_capability_router(
     *,
     intake: IntakeWorkflow | None = None,
     valuation: ValuationJudge | None = None,
+    classification: ClassificationJudge | None = None,
 ) -> APIRouter:
     """Create the uniform capability router.
 
@@ -321,7 +325,7 @@ def create_capability_router(
 
     if intake is not None:
         bound = intake
-        _add_case_evaluations(router, bound, valuation)
+        _add_case_evaluations(router, bound, valuation, classification)
 
         @router.post(
             "/capabilities/K09/relations", status_code=204, operation_id="declare_document_relation"
@@ -348,19 +352,27 @@ def create_capability_router(
     return router
 
 
+class _JudgeReport(Protocol):
+    @property
+    def outcome(self) -> DecisionValue: ...
+
+    def view(self, role: str) -> dict[str, object]: ...
+
+
 def _add_case_evaluations(
-    router: APIRouter, intake: IntakeWorkflow, valuation: ValuationJudge | None
+    router: APIRouter,
+    intake: IntakeWorkflow,
+    valuation: ValuationJudge | None,
+    classification: ClassificationJudge | None,
 ) -> None:
     """Bind case evaluation and retrieval to the authenticated tenant and case."""
-    from capabilities.k05 import ValuationReport
-
     evaluations: dict[
-        tuple[str, str, str, str], tuple[str, str, ValuationReport, dict[str, object]]
+        tuple[str, str, str, str], tuple[str, str, _JudgeReport, dict[str, object]]
     ] = {}
     idempotency: dict[tuple[str, str, str, str], str] = {}
 
     def case_result(principal: Principal, case_id: str, capability_id: str) -> IntakeEvaluation:
-        result = intake.result(principal, case_id) if capability_id == "K05" else None
+        result = intake.result(principal, case_id) if capability_id in {"K05", "F02"} else None
         if result is None or principal.tenant_id is None:
             raise HTTPException(status_code=404, detail="Resource not found")
         return result
@@ -392,14 +404,22 @@ def _add_case_evaluations(
         key = (tenant, case_id, capability_id, idempotency_key)
         evaluation_id = idempotency.get(key)
         if evaluation_id is not None:
-            saved_hash, version, report, _ = evaluations[
+            saved_hash, version, earlier_report, _ = evaluations[
                 (tenant, case_id, capability_id, evaluation_id)
             ]
             if request_hash != saved_hash:
                 raise HTTPException(status_code=409, detail="IDEMPOTENCY_CONFLICT")
-            status = report.outcome.name if version == case_version else "STALE"
+            status = earlier_report.outcome.name if version == case_version else "STALE"
             return {"evaluation_id": evaluation_id, "status": status}
-        report, record = evaluate_valuation(valuation, case.consistency.canonical, at, case.label)
+        report: _JudgeReport
+        if capability_id == "K05":
+            report, record = evaluate_valuation(
+                valuation, case.consistency.canonical, at, case.label
+            )
+        else:
+            report, record = evaluate_classification(
+                classification, case.consistency.canonical, at, case.label
+            )
         evaluation_id = domain_hash("ctc/payload/v1", (*key, case_version, request_hash))
         evaluations[(tenant, case_id, capability_id, evaluation_id)] = (
             request_hash,
@@ -441,6 +461,7 @@ def register_capability_routes(
     *,
     intake: IntakeWorkflow | None = None,
     valuation: ValuationJudge | None = None,
+    classification: ClassificationJudge | None = None,
 ) -> None:
     """Register the uniform capability routes on a FastAPI app."""
 
@@ -448,4 +469,8 @@ def register_capability_routes(
 
     if not isinstance(app, FastAPI):
         return
-    app.include_router(create_capability_router(registrations, intake=intake, valuation=valuation))
+    app.include_router(
+        create_capability_router(
+            registrations, intake=intake, valuation=valuation, classification=classification
+        )
+    )

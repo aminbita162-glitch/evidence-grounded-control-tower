@@ -1,0 +1,14 @@
+{
+  "basis": "5.F02 T11 F02-S06",
+  "id": "F02-S06",
+  "inputs": {
+    "code": "1901"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "HOLD",
+  "reason_codes": [
+    "F02.CODE.INVALID"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0006"
+}

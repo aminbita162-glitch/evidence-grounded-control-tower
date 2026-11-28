@@ -1,0 +1,12 @@
+{
+  "calibration_artifacts": [
+    "quantile"
+  ],
+  "capability_id": "F02",
+  "depends": [
+    "F01"
+  ],
+  "statistical": true,
+  "title": "Classification Judge",
+  "version": "1.0.0"
+}

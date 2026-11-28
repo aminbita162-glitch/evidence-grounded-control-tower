@@ -1,0 +1,14 @@
+{
+  "basis": "5.F02 T11 F02-S03",
+  "id": "F02-S03",
+  "inputs": {
+    "shared_heading": true
+  },
+  "label": "SYNTHETIC",
+  "outcome": "ESCALATE",
+  "reason_codes": [
+    "F02.AMBIGUOUS.MULTIPLE_CANDIDATES"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0003"
+}

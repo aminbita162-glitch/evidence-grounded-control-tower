@@ -1,0 +1,62 @@
+[
+  {
+    "case": "data/scenarios/f02/F02-S01.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0001"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S02.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0002"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S03.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0003"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S04.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0004"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S05.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0005"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S06.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0006"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S07.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0007"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S08.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0008"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S09.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0009"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S10.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0010"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S11.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0011"
+  },
+  {
+    "case": "data/scenarios/f02/F02-S12.json",
+    "label": "SYNTHETIC",
+    "test_id": "T-F02-0012"
+  }
+]

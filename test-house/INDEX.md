@@ -300,6 +300,15 @@
 | T-F01-0204 | Order independent consensus and conflict | fast | f01/test_consistency.py | test_T_F01_0204_order_independent_consensus_and_conflict |
 | T-F01-0205 | Agreement comparators preserve precision and evidence boundaries | fast | f01/test_consistency.py | test_T_F01_0205_evidence_and_comparators |
 | T-F01-0206 | Invalid arithmetic operands fail closed | fast | f01/test_consistency.py | test_T_F01_0206_invalid_and_valid_arithmetic_operands |
+| T-F02-0001 | Classification scenarios | fast | f02/test_classification.py | test_classification_scenarios |
+| T-F02-0003 | Shared headings escalate | fast | f02/test_classification.py | test_T_F02_0003_shared_headings_escalate |
+| T-F02-0005 | Code valid through last instant | fast | f02/test_classification.py | test_T_F02_0005_code_valid_through_last_instant |
+| T-F02-0008 | Secondary pack forces abstention | fast | f02/test_classification.py | test_T_F02_0008_secondary_pack_forces_abstention |
+| T-F02-0009 | Older calibration is stale | fast | f02/test_classification.py | test_T_F02_0009_older_calibration_is_stale |
+| T-F02-0010 | Claimed code in description is ignored | fast | f02/test_classification.py | test_T_F02_0010_claimed_code_in_description_is_ignored |
+| T-F02-0011 | Statistical report carries the required label | fast | f02/test_classification.py | test_T_F02_0011_statistical_report_carries_the_required_label |
+| T-F02-0012 | Shifted coverage is diagnostic | fast | f02/test_classification.py | test_T_F02_0012_shifted_coverage_is_diagnostic |
+| T-F02-0101 | Closed outcome reasons | fast | f02/test_classification.py | test_closed_outcome_reasons |
 | T-F02-0201 | Similarity matches reference | fast | f02/test_scoring.py | test_T_F02_0201_similarity_matches_reference |
 | T-F02-0202 | Scorer optimized and differential | fast | f02/test_scoring.py | test_scorer_optimized_and_differential |
 | T-F02-0212 | Smaller alpha never shrinks candidates | fast | f02/test_scoring.py | test_smaller_alpha_never_shrinks_candidates |
@@ -310,6 +319,28 @@
 | T-F02-0219 | Refuse a mismatched calibration language | fast | f02/test_scoring.py | test_T_F02_0219_refuse_a_mismatched_calibration_language |
 | T-F02-0220 | Pack derived minimum | fast | f02/test_scoring.py | test_pack_derived_minimum |
 | T-F02-0227 | Tariff filter requires verified applicability | fast | f02/test_scoring.py | test_tariff_filter_requires_verified_applicability |
+| T-F02-0231 | Shift increases abstain or escalate by margin | fast | f02/test_classification.py | test_T_F02_0231_shift_increases_abstain_or_escalate_by_margin |
+| T-F02-0232 | Shift cannot increase allow share | fast | f02/test_classification.py | test_T_F02_0232_shift_cannot_increase_allow_share |
+| T-F02-0233 | Shift on old pack abstains | fast | f02/test_classification.py | test_T_F02_0233_shift_on_old_pack_abstains |
+| T-F02-0234 | Statistical claim label is enforced | fast | f02/test_classification.py | test_T_F02_0234_statistical_claim_label_is_enforced |
+| T-F02-0301 | Adversarial description never creates allow | fast | f02/test_classification.py | test_adversarial_description_never_creates_allow |
+| T-F02-0317 | Copied headings and embedded codes are scorer inputs only | fast | f02/test_classification.py | test_copied_headings_and_embedded_codes_are_scorer_inputs_only |
+| T-F02-0401 | Replay commits to same output | fast | f02/test_classification.py | test_T_F02_0401_replay_commits_to_same_output |
+| T-F02-0402 | Changed description changes commitments | fast | f02/test_classification.py | test_T_F02_0402_changed_description_changes_commitments |
+| T-F02-0403 | Line order does not affect case outcome | fast | f02/test_classification.py | test_T_F02_0403_line_order_does_not_affect_case_outcome |
+| T-F02-0404 | Report keeps each line decision | fast | f02/test_classification.py | test_T_F02_0404_report_keeps_each_line_decision |
+| T-F02-0405 | Deep code reports the comparison level | fast | f02/test_classification.py | test_T_F02_0405_deep_code_reports_the_comparison_level |
+| T-F02-0406 | Exclusions are recorded on verified facts | fast | f02/test_classification.py | test_T_F02_0406_exclusions_are_recorded_on_verified_facts |
+| T-F02-0407 | Unverified attribute cannot exclude | fast | f02/test_classification.py | test_unverified_attribute_cannot_exclude |
+| T-F02-0501 | Http invocation returns decision | fast | f02/test_classification.py | test_T_F02_0501_http_invocation_returns_decision |
+| T-F02-0502 | Case result has verbatim banner | fast | f02/test_classification.py | test_T_F02_0502_case_result_has_verbatim_banner |
+| T-F02-0503 | Other tenant cannot invoke | fast | f02/test_classification.py | test_T_F02_0503_other_tenant_cannot_invoke |
+| T-F02-0504 | Unknown evaluation is not found | fast | f02/test_classification.py | test_T_F02_0504_unknown_evaluation_is_not_found |
+| T-F02-0505 | View anchor is stable | fast | f02/test_classification.py | test_T_F02_0505_view_anchor_is_stable |
+| T-F02-0506 | Coverage claim and language are recorded | fast | f02/test_classification.py | test_T_F02_0506_coverage_claim_and_language_are_recorded |
+| T-F02-0507 | No duty or rewording advice | fast | f02/test_classification.py | test_no_duty_or_rewording_advice |
+| T-F02-0511 | Calibration hash appears in evidence | fast | f02/test_classification.py | test_T_F02_0511_calibration_hash_appears_in_evidence |
+| T-F02-0512 | Case reports supported languages | fast | f02/test_classification.py | test_T_F02_0512_case_reports_supported_languages |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |

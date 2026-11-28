@@ -1,0 +1,11 @@
+{
+  "basis": "5.F02 T11 F02-S12",
+  "id": "F02-S12",
+  "inputs": {
+    "distribution": "shifted"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "DIAGNOSTIC",
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0012"
+}
