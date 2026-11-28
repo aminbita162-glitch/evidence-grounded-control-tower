@@ -1,0 +1,14 @@
+{
+  "basis": "5.F02 T11 F02-S09",
+  "id": "F02-S09",
+  "inputs": {
+    "calibration_version": "older"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "ABSTAIN",
+  "reason_codes": [
+    "F02.ABSTAIN.CALIBRATION_STALE"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0009"
+}

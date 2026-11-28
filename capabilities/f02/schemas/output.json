@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "banner": {
+      "type": "string"
+    },
+    "label": {
+      "enum": [
+        "SYNTHETIC",
+        null
+      ]
+    },
+    "languages": {
+      "items": {
+        "enum": [
+          "en",
+          "ar"
+        ]
+      },
+      "type": "array"
+    },
+    "lines": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "alpha": {
+            "oneOf": [
+              {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "calibration_basis": {
+            "properties": {
+              "artifact_id": {
+                "type": "string"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "validation_class": {
+                "type": "string"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "candidates": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "pattern": "^[0-9]+$",
+                  "type": "string"
+                },
+                "rank": {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "score": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "code",
+                "score",
+                "rank"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "coverage_claim": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "declared_code": {
+            "type": "string"
+          },
+          "diagnostics": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "exclusions": {
+            "type": "array"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "glossary_expansion": {
+            "type": "array"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "ar",
+              null
+            ]
+          },
+          "line_id": {
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "ALLOW",
+              "ABSTAIN",
+              "HOLD",
+              "ESCALATE"
+            ]
+          },
+          "reason_codes": {
+            "items": {
+              "enum": [
+                "F02.OK.CONSISTENT",
+                "F02.AMBIGUOUS.MULTIPLE_CANDIDATES",
+                "F02.MISMATCH.OUTSIDE_SET",
+                "F02.CODE.INVALID",
+                "F02.CODE.NOT_VALID_AT_TIME",
+                "F02.ABSTAIN.SET_EMPTY",
+                "F02.ABSTAIN.SET_TOO_LARGE",
+                "F02.ABSTAIN.DESCRIPTION_MISSING",
+                "F02.ABSTAIN.DESCRIPTION_TOO_SHORT",
+                "F02.ABSTAIN.LANGUAGE_UNSUPPORTED",
+                "F02.ABSTAIN.TARIFF_UNAVAILABLE",
+                "F02.ABSTAIN.CALIBRATION_STALE",
+                "F02.ABSTAIN.UPSTREAM",
+                "F02.ABSTAIN.LABEL_INSUFFICIENT",
+                "F02.REVIEW.UNVALIDATED_CALIBRATION"
+              ]
+            },
+            "type": "array"
+          },
+          "resolved_level": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "threshold": {
+            "oneOf": [
+              {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "alpha",
+          "calibration_basis",
+          "candidates",
+          "coverage_claim",
+          "declared_code",
+          "diagnostics",
+          "exclusions",
+          "explanation",
+          "glossary_expansion",
+          "language",
+          "line_id",
+          "outcome",
+          "reason_codes",
+          "resolved_level",
+          "threshold"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "ALLOW",
+        "ABSTAIN",
+        "HOLD",
+        "ESCALATE"
+      ]
+    },
+    "reason_codes": {
+      "items": {
+        "enum": [
+          "F02.OK.CONSISTENT",
+          "F02.AMBIGUOUS.MULTIPLE_CANDIDATES",
+          "F02.MISMATCH.OUTSIDE_SET",
+          "F02.CODE.INVALID",
+          "F02.CODE.NOT_VALID_AT_TIME",
+          "F02.ABSTAIN.SET_EMPTY",
+          "F02.ABSTAIN.SET_TOO_LARGE",
+          "F02.ABSTAIN.DESCRIPTION_MISSING",
+          "F02.ABSTAIN.DESCRIPTION_TOO_SHORT",
+          "F02.ABSTAIN.LANGUAGE_UNSUPPORTED",
+          "F02.ABSTAIN.TARIFF_UNAVAILABLE",
+          "F02.ABSTAIN.CALIBRATION_STALE",
+          "F02.ABSTAIN.UPSTREAM",
+          "F02.ABSTAIN.LABEL_INSUFFICIENT",
+          "F02.REVIEW.UNVALIDATED_CALIBRATION"
+        ]
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "banner",
+    "label",
+    "languages",
+    "lines",
+    "outcome",
+    "reason_codes"
+  ],
+  "title": "F02 output",
+  "type": "object"
+}

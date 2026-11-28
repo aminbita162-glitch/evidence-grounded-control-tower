@@ -1,0 +1,14 @@
+{
+  "id": "K05-S12",
+  "test_id": "T-K05-0012",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S12",
+  "inputs": {
+    "untrusted_note": "price agreed with customs"
+  },
+  "outcome": "ALLOW",
+  "reason_codes": [
+    "K05.OK.WITHIN_RANGE"
+  ]
+}

@@ -81,6 +81,40 @@ _AGREEMENTS = (
 )
 
 
+_VALUATION_FIELDS = {
+    "declared_customs_value": ("MONEY", "VALUE"),
+    "declared_date": ("DATE", "DATE"),
+    "freight": ("MONEY", "VALUE"),
+    "insurance": ("MONEY", "VALUE"),
+}
+_LINE_FIELDS = {
+    "description": ("TOKENS", "DESCRIPTION"),
+    "declared_classification_code": ("PREFIX", "CLASSIFICATION"),
+    "quantity": ("COUNT", "QUANTITY"),
+    "line_amount": ("MONEY", "VALUE"),
+    "material": ("EXACT", "DESCRIPTION"),
+    "composition": ("EXACT", "DESCRIPTION"),
+    "use": ("EXACT", "DESCRIPTION"),
+}
+_LINE_KEY = re.compile(r"line_items\.[A-Za-z0-9_-]{1,32}\.([a-z_]+)")
+
+
+def _downstream_agreements(fields: Sequence[str]) -> tuple[Agreement, ...]:
+    """Define agreement rules for shipment fields read by valuation and classification."""
+    additional = []
+    for field in fields:
+        match = _LINE_KEY.fullmatch(field)
+        if match:
+            rule = _LINE_FIELDS.get(match[1])
+        elif field.startswith("adjustment."):
+            rule = ("MONEY", "VALUE")
+        else:
+            rule = _VALUATION_FIELDS.get(field)
+        if rule is not None:
+            additional.append(Agreement(field, *rule))
+    return tuple(additional)
+
+
 @dataclass(frozen=True)
 class Workflow:
     required_document_types: frozenset[str] = frozenset()
@@ -315,7 +349,10 @@ def evaluate(
         )
     with localcontext() as ctx:
         ctx.prec = 120
-        for rule in workflow.agreements:
+        configured = {rule.field for rule in workflow.agreements}
+        extra = _downstream_agreements(sorted(set(by_field) - configured))
+        downstream_fields = {rule.field for rule in extra}
+        for rule in (*workflow.agreements, *extra):
             given = by_field.get(rule.field, [])
             group = [f for f in given if f.status == "VERIFIED"]
             pending = any(
@@ -352,7 +389,9 @@ def evaluate(
                         )
                     )
                 continue
-            if pending and rule.field in workflow.required_fields:
+            if pending and (
+                rule.field in workflow.required_fields or rule.field in downstream_fields
+            ):
                 findings.append(
                     _finding(
                         "ABSTAIN.FACT_NOT_VERIFIED",

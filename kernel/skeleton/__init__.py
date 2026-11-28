@@ -217,8 +217,16 @@ class WalkingSkeleton:
         )
         if intake_inputs is not None:
             outcome, reasons = combine_decisions(
-                [eligibility.value, *(value for value, _ in intake_inputs.decisions)],
-                [eligibility.reason_codes, *(list(codes) for _, codes in intake_inputs.decisions)],
+                [
+                    eligibility.value,
+                    *(value for value, _ in intake_inputs.decisions),
+                    *(judgment.outcome for judgment in intake_inputs.judgments),
+                ],
+                [
+                    eligibility.reason_codes,
+                    *(list(codes) for _, codes in intake_inputs.decisions),
+                    *(list(judgment.reasons) for judgment in intake_inputs.judgments),
+                ],
             )
             eligibility = EligibilityResult(outcome, reasons, eligibility.stamped_label)
         decision_str: str = DecisionValue(eligibility.value).name

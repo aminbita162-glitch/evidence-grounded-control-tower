@@ -7,9 +7,10 @@ import hashlib
 import json
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import asdict, dataclass, replace
+from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Protocol
 
 from adapters.postgres.tenant_context import TenantContext
 from capabilities import f01, k09
@@ -28,7 +29,7 @@ from kernel.humangate import HumanGate
 from kernel.intake import IntakeDocument, IntakeStage
 from kernel.ledger.chain import CaseChain, InMemoryCaseChain
 from kernel.ledger.records import Actor
-from kernel.skeleton.intake import IntakeInputs, SourceDocument
+from kernel.skeleton.intake import IntakeInputs, Judgment, SourceDocument
 from kernel.types.decision import DecisionValue
 
 _COMMON = (
@@ -56,8 +57,26 @@ _COMMON = (
     Field("certificate_number", "identifier"),
     Field("delivery_order_number", "identifier"),
     Field("declaration_number", "identifier"),
+    Field("declared_customs_value", "number"),
+    Field("declared_date", "date"),
+    Field("freight", "number"),
+    Field("insurance", "number"),
 )
 _REGISTRY = Path(__file__).resolve().parents[2] / "data" / "registry" / "sources.yaml"
+
+
+class JudgeReport(Protocol):
+    @property
+    def outcome(self) -> DecisionValue: ...
+
+    @property
+    def reasons(self) -> Sequence[str]: ...
+
+
+class CaseJudge(Protocol):
+    def run(
+        self, facts: Sequence[f01.CanonicalFact], at: datetime, origin: str
+    ) -> tuple[JudgeReport, dict[str, object]]: ...
 
 
 @dataclass(frozen=True)
@@ -69,6 +88,7 @@ class IntakeEvaluation:
     consistency: f01.ConsistencyReport
     shield: k09.DocumentShieldReport
     evidence: dict[str, list[dict[str, object]]]
+    judgments: tuple[Judgment, ...] = ()
 
     def outcome(self, capability: str) -> tuple[str, tuple[str, ...]]:
         if capability == "F01":
@@ -96,6 +116,7 @@ class IntakeWorkflow:
         canonical_writer: f01.CanonicalWriter | None = None,
         case_access: Callable[[Principal, str], bool] | None = None,
         case_chain: Callable[[str, str], CaseChain] = InMemoryCaseChain,
+        judges: Mapping[str, CaseJudge] | None = None,
     ) -> None:
         self._intake = intake
         self._extract = extraction
@@ -107,6 +128,7 @@ class IntakeWorkflow:
         self._writer = canonical_writer
         self._case_access = case_access
         self._case_chain = case_chain
+        self._judges = dict(judges or {})
         self._chains: dict[tuple[str, str], CaseChain] = {}
         self._owners: dict[tuple[str, str], str] = {}
         self._results: dict[tuple[str, str], IntakeEvaluation] = {}
@@ -212,6 +234,7 @@ class IntakeWorkflow:
                     (DecisionValue[result.shield.outcome], result.shield.reason_codes),
                 ),
                 self._label,
+                result.judgments,
             )
 
     async def erase_document(
@@ -480,7 +503,12 @@ class IntakeWorkflow:
                     "document_id": shield_finding.document_id,
                 },
             )
-        self._results[(context.tenant_id, chain.case_id)] = IntakeEvaluation(
+        key = (context.tenant_id, chain.case_id)
+        previous = self._results.get(key)
+        judgments = await self._judge_case(chain, actor, consistency, previous)
+        for judgment in judgments:
+            evidence[judgment.capability_id] = [dict(judgment.evidence)]
+        self._results[key] = IntakeEvaluation(
             chain.case_id,
             self._label,
             documents,
@@ -488,9 +516,55 @@ class IntakeWorkflow:
             consistency,
             shield,
             evidence,
+            judgments,
         )
         self._index.recompute_stale(context.tenant_id)
         await self._record_symmetry(context.tenant_id)
+
+    async def _judge_case(
+        self,
+        chain: CaseChain,
+        actor: Actor,
+        consistency: f01.ConsistencyReport,
+        previous: IntakeEvaluation | None,
+    ) -> tuple[Judgment, ...]:
+        """Recompute configured judgments and record when earlier evidence becomes stale."""
+        if not self._judges:
+            return ()
+        at = datetime.fromisoformat(consistency.evaluation_time)
+        previous_judgments = {
+            item.capability_id: item.evidence for item in (previous.judgments if previous else ())
+        }
+        judgments = []
+        for capability_id, judge in sorted(self._judges.items()):
+            report, record = judge.run(consistency.canonical, at, self._label)
+            prior = previous_judgments.get(capability_id)
+            if prior and any(
+                record.get(key) != prior.get(key)
+                for key in (
+                    "input_hash",
+                    "configuration_hash",
+                    "reference_pack_hash",
+                    "fx_pack_hash",
+                    "tariff_pack_hash",
+                    "calibration_hash",
+                    "calibration_hashes",
+                )
+            ):
+                old = prior["output_hash"]
+                await chain.append(
+                    "Facts",
+                    actor,
+                    "case_judgment_stale",
+                    {
+                        "capability_id": capability_id,
+                        "output_hash": old,
+                    },
+                )
+                record["supersedes"] = old
+            await chain.append("Facts", actor, "case_judgment", record)
+            judgments.append(Judgment(capability_id, report.outcome, tuple(report.reasons), record))
+        return tuple(judgments)
 
 
 def _parallel(

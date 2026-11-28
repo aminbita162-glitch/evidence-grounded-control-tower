@@ -716,3 +716,48 @@ records:
     target_phase: P14
     verifying_test_ids: [T-INT-0001, T-K09-0401, T-K09-0403, T-K09-0201]
     source: P14-T09 and P14-T10
+
+  - id: CTL-VAL-01
+    title: Synthetic calibration claim and real-case decision cap
+    type: preventive
+    mechanism: Emit the recorded marginal claim and require tenant validation before an ALLOW on real case data.
+    lifecycle_status: VERIFIED
+    target_phase: P15
+    verifying_test_ids: [T-K05-0011, T-K05-0115, T-F02-0011, T-F02-0506]
+    source: P15-T02 and P15-T05
+
+  - id: CTL-VAL-02
+    title: Role-scoped valuation bounds
+    type: preventive
+    mechanism: Restrict interval bounds to tenant reviewers and administrators and scan views for proposed amounts.
+    lifecycle_status: VERIFIED
+    target_phase: P15
+    verifying_test_ids: [T-K05-0010, T-K05-0403, T-K05-0404, T-K05-0507]
+    source: P15-T02 and P15-T03
+
+  - id: CTL-VAL-03
+    title: Pack-bound calibration and shift diagnostics
+    type: detective
+    mechanism: Bind thresholds to the pack version and report held-out and shifted coverage separately.
+    lifecycle_status: VERIFIED
+    target_phase: P15
+    verifying_test_ids: [T-F02-0012, T-F02-0201, T-F02-0231, T-F02-0233]
+    source: P15-T04 and P15-T05
+
+  - id: CTL-VAL-04
+    title: Reference and tariff validity
+    type: preventive
+    mechanism: Check validity at the evaluation instant and block ALLOW when required pack labels are weak.
+    lifecycle_status: VERIFIED
+    target_phase: P15
+    verifying_test_ids: [T-K05-0013, T-F02-0005, T-VAL-0004, T-VAL-0005]
+    source: P15-T02, P15-T05 and P15-T06
+
+  - id: CTL-VAL-05
+    title: Exact currency and unit conversion
+    type: preventive
+    mechanism: Use dated rates and dimensional units and abstain on missing adjustment evidence.
+    lifecycle_status: VERIFIED
+    target_phase: P15
+    verifying_test_ids: [T-K05-0201, T-K05-0202, T-K05-0203, T-K05-0014]
+    source: P15-T01 and P15-T02

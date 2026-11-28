@@ -1,0 +1,14 @@
+{
+  "id": "K05-S01",
+  "test_id": "T-K05-0001",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S01",
+  "inputs": {
+    "value": "1"
+  },
+  "outcome": "ALLOW",
+  "reason_codes": [
+    "K05.OK.WITHIN_RANGE"
+  ]
+}

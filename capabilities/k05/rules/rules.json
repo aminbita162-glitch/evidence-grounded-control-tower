@@ -1,0 +1,47 @@
+[
+  {
+    "code": "K05.OK.WITHIN_RANGE"
+  },
+  {
+    "code": "K05.VALUE.DECLARED_MISMATCH"
+  },
+  {
+    "code": "K05.ANOMALY.BELOW_RANGE"
+  },
+  {
+    "code": "K05.ANOMALY.ABOVE_RANGE"
+  },
+  {
+    "code": "K05.OBS.FALLBACK_LEVEL_USED"
+  },
+  {
+    "code": "K05.ABSTAIN.REFERENCE_INSUFFICIENT"
+  },
+  {
+    "code": "K05.ABSTAIN.REFERENCE_EXPIRED"
+  },
+  {
+    "code": "K05.ABSTAIN.FX_UNAVAILABLE"
+  },
+  {
+    "code": "K05.ABSTAIN.UNIT_UNSUPPORTED"
+  },
+  {
+    "code": "K05.ABSTAIN.VALUATION_RULE_UNAVAILABLE"
+  },
+  {
+    "code": "K05.ABSTAIN.ADJUSTMENT_MISSING"
+  },
+  {
+    "code": "K05.ABSTAIN.CALIBRATION_STALE"
+  },
+  {
+    "code": "K05.ABSTAIN.UPSTREAM"
+  },
+  {
+    "code": "K05.ABSTAIN.LABEL_INSUFFICIENT"
+  },
+  {
+    "code": "K05.REVIEW.UNVALIDATED_CALIBRATION"
+  }
+]

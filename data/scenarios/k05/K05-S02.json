@@ -1,0 +1,14 @@
+{
+  "id": "K05-S02",
+  "test_id": "T-K05-0002",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S02",
+  "inputs": {
+    "declared": "0.95"
+  },
+  "outcome": "HOLD",
+  "reason_codes": [
+    "K05.VALUE.DECLARED_MISMATCH"
+  ]
+}

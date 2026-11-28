@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "aggregates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "currency": {
+            "pattern": "^[A-Z]{3}$",
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "log_bounds": {
+            "items": {
+              "pattern": "^-?[0-9]+(?:\\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?$",
+              "type": "string"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+          },
+          "position": {
+            "enum": [
+              "INSIDE",
+              "BELOW",
+              "ABOVE"
+            ]
+          },
+          "reference_code": {
+            "type": "string"
+          },
+          "reference_count": {
+            "minimum": 30,
+            "type": "integer"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "unit_value": {
+            "pattern": "^-?[0-9]+(?:\\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "unit_value",
+          "unit",
+          "currency",
+          "reference_code",
+          "reference_count",
+          "position"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "banner": {
+      "type": "string"
+    },
+    "basis": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "calibration_basis": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "coverage_claim": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "label": {
+      "enum": [
+        "SYNTHETIC",
+        null
+      ]
+    },
+    "lines": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "currency": {
+            "pattern": "^[A-Z]{3}$",
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "log_bounds": {
+            "items": {
+              "pattern": "^-?[0-9]+(?:\\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?$",
+              "type": "string"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+          },
+          "position": {
+            "enum": [
+              "INSIDE",
+              "BELOW",
+              "ABOVE"
+            ]
+          },
+          "reference_code": {
+            "type": "string"
+          },
+          "reference_count": {
+            "minimum": 30,
+            "type": "integer"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "unit_value": {
+            "pattern": "^-?[0-9]+(?:\\.[0-9]+)?(?:[Ee][+-]?[0-9]+)?$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "unit_value",
+          "unit",
+          "currency",
+          "reference_code",
+          "reference_count",
+          "position"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "ALLOW",
+        "ABSTAIN",
+        "HOLD",
+        "ESCALATE"
+      ]
+    },
+    "reason_codes": {
+      "items": {
+        "enum": [
+          "K05.OK.WITHIN_RANGE",
+          "K05.VALUE.DECLARED_MISMATCH",
+          "K05.ANOMALY.BELOW_RANGE",
+          "K05.ANOMALY.ABOVE_RANGE",
+          "K05.OBS.FALLBACK_LEVEL_USED",
+          "K05.ABSTAIN.REFERENCE_INSUFFICIENT",
+          "K05.ABSTAIN.REFERENCE_EXPIRED",
+          "K05.ABSTAIN.FX_UNAVAILABLE",
+          "K05.ABSTAIN.UNIT_UNSUPPORTED",
+          "K05.ABSTAIN.VALUATION_RULE_UNAVAILABLE",
+          "K05.ABSTAIN.ADJUSTMENT_MISSING",
+          "K05.ABSTAIN.CALIBRATION_STALE",
+          "K05.ABSTAIN.UPSTREAM",
+          "K05.ABSTAIN.LABEL_INSUFFICIENT",
+          "K05.REVIEW.UNVALIDATED_CALIBRATION"
+        ]
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "banner",
+    "outcome",
+    "reason_codes",
+    "basis",
+    "lines",
+    "aggregates",
+    "coverage_claim",
+    "calibration_basis",
+    "label"
+  ],
+  "title": "K05 output",
+  "type": "object"
+}

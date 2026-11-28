@@ -1,0 +1,152 @@
+{
+  "/api/v1/cases/{case_id}/capabilities/{capability_id}/evaluations": {
+    "post": {
+      "operationId": "create_case_capability_evaluation",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "case_id",
+          "required": true,
+          "schema": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Case Id",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "capability_id",
+          "required": true,
+          "schema": {
+            "title": "Capability Id",
+            "type": "string"
+          }
+        },
+        {
+          "in": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "schema": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Idempotency-Key",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/InvokeRequest"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "201": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "title": "Response Create Case Capability Evaluation",
+                "type": "object"
+              }
+            }
+          },
+          "description": "Successful Response"
+        },
+        "422": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          },
+          "description": "Validation Error"
+        }
+      },
+      "security": [
+        {
+          "HTTPBearer": []
+        }
+      ],
+      "summary": "Create Evaluation",
+      "tags": [
+        "capabilities"
+      ]
+    }
+  },
+  "/api/v1/cases/{case_id}/capabilities/{capability_id}/evaluations/{evaluation_id}": {
+    "get": {
+      "operationId": "get_case_capability_evaluation",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "case_id",
+          "required": true,
+          "schema": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Case Id",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "capability_id",
+          "required": true,
+          "schema": {
+            "title": "Capability Id",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "evaluation_id",
+          "required": true,
+          "schema": {
+            "title": "Evaluation Id",
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "title": "Response Get Case Capability Evaluation",
+                "type": "object"
+              }
+            }
+          },
+          "description": "Successful Response"
+        },
+        "422": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HTTPValidationError"
+              }
+            }
+          },
+          "description": "Validation Error"
+        }
+      },
+      "security": [
+        {
+          "HTTPBearer": []
+        }
+      ],
+      "summary": "Get Evaluation",
+      "tags": [
+        "capabilities"
+      ]
+    }
+  }
+}

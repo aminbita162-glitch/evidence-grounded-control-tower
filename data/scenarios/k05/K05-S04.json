@@ -1,0 +1,14 @@
+{
+  "id": "K05-S04",
+  "test_id": "T-K05-0004",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S04",
+  "inputs": {
+    "value": "1.11"
+  },
+  "outcome": "ESCALATE",
+  "reason_codes": [
+    "K05.ANOMALY.ABOVE_RANGE"
+  ]
+}

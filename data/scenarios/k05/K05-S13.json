@@ -1,0 +1,14 @@
+{
+  "id": "K05-S13",
+  "test_id": "T-K05-0013",
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-K05",
+  "basis": "5.K05 T11 K05-S13",
+  "inputs": {
+    "evaluation": "after_end"
+  },
+  "outcome": "ABSTAIN",
+  "reason_codes": [
+    "K05.ABSTAIN.REFERENCE_EXPIRED"
+  ]
+}

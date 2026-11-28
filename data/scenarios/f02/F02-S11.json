@@ -1,0 +1,13 @@
+{
+  "basis": "5.F02 T11 F02-S11",
+  "id": "F02-S11",
+  "inputs": {
+    "seed": 9817,
+    "trials": 1000
+  },
+  "label": "SYNTHETIC",
+  "outcome": "STATISTICAL_TRIALS",
+  "report_label": "implementation-correctness",
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0011"
+}

@@ -1,0 +1,15 @@
+{
+  "basis": "5.F02 T11 F02-S05",
+  "id": "F02-S05",
+  "inputs": {
+    "also_test_last_instant": true,
+    "code_window": "past_end"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "HOLD",
+  "reason_codes": [
+    "F02.CODE.NOT_VALID_AT_TIME"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0005"
+}

@@ -1,0 +1,14 @@
+{
+  "basis": "5.F02 T11 F02-S04",
+  "id": "F02-S04",
+  "inputs": {
+    "description": "goods"
+  },
+  "label": "SYNTHETIC",
+  "outcome": "ABSTAIN",
+  "reason_codes": [
+    "F02.ABSTAIN.DESCRIPTION_TOO_SHORT"
+  ],
+  "source_id": "SRC-SYNTHETIC-F02",
+  "test_id": "T-F02-0004"
+}

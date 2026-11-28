@@ -21,6 +21,8 @@ from kernel.auth.tokens import TokenService
 
 if TYPE_CHECKING:
     from api.routes.capability import CapabilityInvocation
+    from capabilities.f02.registration import ClassificationJudge
+    from capabilities.k05.registration import ValuationJudge
     from capabilities.k14.workflow import IntakeWorkflow
 
 __all__ = [
@@ -45,6 +47,8 @@ class AppPorts:
         storage: object | None = None,
         capabilities: Mapping[str, CapabilityInvocation] | None = None,
         intake: IntakeWorkflow | None = None,
+        valuation: ValuationJudge | None = None,
+        classification: ClassificationJudge | None = None,
     ) -> None:
         """Store injected ports.
 
@@ -59,6 +63,8 @@ class AppPorts:
         self.storage = storage
         self.capabilities = dict(capabilities or {})
         self.intake = intake
+        self.valuation = valuation
+        self.classification = classification
 
 
 def create_app(ports: AppPorts | None = None, *, production: bool = False) -> FastAPI:
@@ -116,7 +122,13 @@ def _register_routes(app: FastAPI, ports: AppPorts) -> None:
             "K09": register_k09(ports.intake),
             **handlers,
         }
-    register_capability_routes(app, handlers, intake=ports.intake)
+    register_capability_routes(
+        app,
+        handlers,
+        intake=ports.intake,
+        valuation=ports.valuation,
+        classification=ports.classification,
+    )
     register_command_routes(app)
 
     from api.health import register_health_routes

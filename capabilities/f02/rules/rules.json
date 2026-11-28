@@ -1,0 +1,47 @@
+[
+  {
+    "code": "F02.OK.CONSISTENT"
+  },
+  {
+    "code": "F02.AMBIGUOUS.MULTIPLE_CANDIDATES"
+  },
+  {
+    "code": "F02.MISMATCH.OUTSIDE_SET"
+  },
+  {
+    "code": "F02.CODE.INVALID"
+  },
+  {
+    "code": "F02.CODE.NOT_VALID_AT_TIME"
+  },
+  {
+    "code": "F02.ABSTAIN.SET_EMPTY"
+  },
+  {
+    "code": "F02.ABSTAIN.SET_TOO_LARGE"
+  },
+  {
+    "code": "F02.ABSTAIN.DESCRIPTION_MISSING"
+  },
+  {
+    "code": "F02.ABSTAIN.DESCRIPTION_TOO_SHORT"
+  },
+  {
+    "code": "F02.ABSTAIN.LANGUAGE_UNSUPPORTED"
+  },
+  {
+    "code": "F02.ABSTAIN.TARIFF_UNAVAILABLE"
+  },
+  {
+    "code": "F02.ABSTAIN.CALIBRATION_STALE"
+  },
+  {
+    "code": "F02.ABSTAIN.UPSTREAM"
+  },
+  {
+    "code": "F02.ABSTAIN.LABEL_INSUFFICIENT"
+  },
+  {
+    "code": "F02.REVIEW.UNVALIDATED_CALIBRATION"
+  }
+]

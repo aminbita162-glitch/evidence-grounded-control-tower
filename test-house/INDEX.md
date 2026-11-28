@@ -300,6 +300,50 @@
 | T-F01-0204 | Order independent consensus and conflict | fast | f01/test_consistency.py | test_T_F01_0204_order_independent_consensus_and_conflict |
 | T-F01-0205 | Agreement comparators preserve precision and evidence boundaries | fast | f01/test_consistency.py | test_T_F01_0205_evidence_and_comparators |
 | T-F01-0206 | Invalid arithmetic operands fail closed | fast | f01/test_consistency.py | test_T_F01_0206_invalid_and_valid_arithmetic_operands |
+| T-F02-0001 | Classification scenarios | fast | f02/test_classification.py | test_classification_scenarios |
+| T-F02-0003 | Shared headings escalate | fast | f02/test_classification.py | test_T_F02_0003_shared_headings_escalate |
+| T-F02-0005 | Code valid through last instant | fast | f02/test_classification.py | test_T_F02_0005_code_valid_through_last_instant |
+| T-F02-0008 | Secondary pack forces abstention | fast | f02/test_classification.py | test_T_F02_0008_secondary_pack_forces_abstention |
+| T-F02-0009 | Older calibration is stale | fast | f02/test_classification.py | test_T_F02_0009_older_calibration_is_stale |
+| T-F02-0010 | Claimed code in description is ignored | fast | f02/test_classification.py | test_T_F02_0010_claimed_code_in_description_is_ignored |
+| T-F02-0011 | Statistical report carries the required label | fast | f02/test_classification.py | test_T_F02_0011_statistical_report_carries_the_required_label |
+| T-F02-0012 | Shifted coverage is diagnostic | fast | f02/test_classification.py | test_T_F02_0012_shifted_coverage_is_diagnostic |
+| T-F02-0101 | Closed outcome reasons | fast | f02/test_classification.py | test_closed_outcome_reasons |
+| T-F02-0201 | Similarity matches reference | fast | f02/test_scoring.py | test_T_F02_0201_similarity_matches_reference |
+| T-F02-0202 | Scorer optimized and differential | fast | f02/test_scoring.py | test_scorer_optimized_and_differential |
+| T-F02-0212 | Smaller alpha never shrinks candidates | fast | f02/test_scoring.py | test_smaller_alpha_never_shrinks_candidates |
+| T-F02-0215 | Quantile matches definition | fast | f02/test_scoring.py | test_T_F02_0215_quantile_matches_definition |
+| T-F02-0216 | Seeded conformal coverage implementation correctness | slow | f02/test_scoring.py | test_T_F02_0216_seeded_conformal_coverage_implementation_correctness |
+| T-F02-0217 | English only without glossary | fast | f02/test_scoring.py | test_T_F02_0217_english_only_without_glossary |
+| T-F02-0218 | Glossary expansion is stable and recorded | fast | f02/test_scoring.py | test_T_F02_0218_glossary_expansion_is_stable_and_recorded |
+| T-F02-0219 | Refuse a mismatched calibration language | fast | f02/test_scoring.py | test_T_F02_0219_refuse_a_mismatched_calibration_language |
+| T-F02-0220 | Pack derived minimum | fast | f02/test_scoring.py | test_pack_derived_minimum |
+| T-F02-0227 | Tariff filter requires verified applicability | fast | f02/test_scoring.py | test_tariff_filter_requires_verified_applicability |
+| T-F02-0231 | Shift increases abstain or escalate by margin | fast | f02/test_classification.py | test_T_F02_0231_shift_increases_abstain_or_escalate_by_margin |
+| T-F02-0232 | Shift cannot increase allow share | fast | f02/test_classification.py | test_T_F02_0232_shift_cannot_increase_allow_share |
+| T-F02-0233 | Shift on old pack abstains | fast | f02/test_classification.py | test_T_F02_0233_shift_on_old_pack_abstains |
+| T-F02-0234 | Statistical claim label is enforced | fast | f02/test_classification.py | test_T_F02_0234_statistical_claim_label_is_enforced |
+| T-F02-0235 | Digit only tokens are removed before scoring | fast | f02/test_scoring.py | test_T_F02_0235_digit_only_tokens_are_removed_before_scoring |
+| T-F02-0236 | Active calibration must support the published claim | fast | f02/test_classification.py | test_T_F02_0236_active_calibration_must_support_the_published_claim |
+| T-F02-0301 | Adversarial description never creates allow | fast | f02/test_classification.py | test_adversarial_description_never_creates_allow |
+| T-F02-0317 | Copied headings and embedded codes are scorer inputs only | fast | f02/test_classification.py | test_copied_headings_and_embedded_codes_are_scorer_inputs_only |
+| T-F02-0321 | Repeated single keyword cannot pass with the active pack | fast | f02/test_classification.py | test_T_F02_0321_repeated_single_keyword_cannot_pass_with_the_active_pack |
+| T-F02-0401 | Replay commits to same output | fast | f02/test_classification.py | test_T_F02_0401_replay_commits_to_same_output |
+| T-F02-0402 | Changed description changes commitments | fast | f02/test_classification.py | test_T_F02_0402_changed_description_changes_commitments |
+| T-F02-0403 | Line order does not affect case outcome | fast | f02/test_classification.py | test_T_F02_0403_line_order_does_not_affect_case_outcome |
+| T-F02-0404 | Report keeps each line decision | fast | f02/test_classification.py | test_T_F02_0404_report_keeps_each_line_decision |
+| T-F02-0405 | Deep code reports the comparison level | fast | f02/test_classification.py | test_T_F02_0405_deep_code_reports_the_comparison_level |
+| T-F02-0406 | Exclusions are recorded on verified facts | fast | f02/test_classification.py | test_T_F02_0406_exclusions_are_recorded_on_verified_facts |
+| T-F02-0407 | Unverified attribute cannot exclude | fast | f02/test_classification.py | test_unverified_attribute_cannot_exclude |
+| T-F02-0501 | Http invocation returns decision | fast | f02/test_classification.py | test_T_F02_0501_http_invocation_returns_decision |
+| T-F02-0502 | Case result has verbatim banner | fast | f02/test_classification.py | test_T_F02_0502_case_result_has_verbatim_banner |
+| T-F02-0503 | Other tenant cannot invoke | fast | f02/test_classification.py | test_T_F02_0503_other_tenant_cannot_invoke |
+| T-F02-0504 | Unknown evaluation is not found | fast | f02/test_classification.py | test_T_F02_0504_unknown_evaluation_is_not_found |
+| T-F02-0505 | View anchor is stable | fast | f02/test_classification.py | test_T_F02_0505_view_anchor_is_stable |
+| T-F02-0506 | Coverage claim and language are recorded | fast | f02/test_classification.py | test_T_F02_0506_coverage_claim_and_language_are_recorded |
+| T-F02-0507 | No duty or rewording advice | fast | f02/test_classification.py | test_no_duty_or_rewording_advice |
+| T-F02-0511 | Calibration hash appears in evidence | fast | f02/test_classification.py | test_T_F02_0511_calibration_hash_appears_in_evidence |
+| T-F02-0512 | Case reports supported languages | fast | f02/test_classification.py | test_T_F02_0512_case_reports_supported_languages |
 | T-GATE-0001 | Exit-code semantics (pass / fail / misconfiguration) | fast | gate/test_runner.py | test_exit_code_pass |
 | T-GATE-0002 | Gate timeout records reason TIMEOUT | slow | gate/test_runner.py | test_timeout_reason |
 | T-GATE-0003 | JSON result has the required schema | fast | gate/test_runner.py | test_json_result_schema |
@@ -478,6 +522,62 @@
 | T-INT-0062 | Oversized scan is refused before ocr | fast | intake/test_intake.py | test_T_INT_0062_oversized_scan_is_refused_before_ocr |
 | T-INT-0063 | Scan fixture has stable bytes | fast | intake/test_intake.py | test_T_INT_0063_scan_fixture_has_stable_bytes |
 | T-INT-0064 | OCR derives error counts and accepts only complete owner pins | fast | intake/test_intake.py | test_T_INT_0064_ocr_configuration_and_error_totals |
+| T-K05-0001 | Interval scenarios | fast | k05/test_valuation.py | test_interval_scenarios |
+| T-K05-0002 | Declared documentary mismatch | fast | k05/test_valuation.py | test_T_K05_0002_declared_documentary_mismatch |
+| T-K05-0006 | Falls back to parent | fast | k05/test_valuation.py | test_T_K05_0006_falls_back_to_parent |
+| T-K05-0007 | Missing dated rate | fast | k05/test_valuation.py | test_T_K05_0007_missing_dated_rate |
+| T-K05-0008 | Tonnes match kilograms | fast | k05/test_valuation.py | test_T_K05_0008_tonnes_match_kilograms |
+| T-K05-0009 | Quantity weighted aggregate is below | fast | k05/test_valuation.py | test_T_K05_0009_quantity_weighted_aggregate_is_below |
+| T-K05-0010 | Bounds require review privilege | fast | k05/test_valuation.py | test_T_K05_0010_bounds_require_review_privilege |
+| T-K05-0011 | Calibration coverage | slow | k05/test_valuation.py | test_T_K05_0011_calibration_coverage |
+| T-K05-0012 | Untrusted label is not an instruction | fast | k05/test_valuation.py | test_T_K05_0012_untrusted_label_is_not_an_instruction |
+| T-K05-0013 | Expired reference | fast | k05/test_valuation.py | test_T_K05_0013_expired_reference |
+| T-K05-0014 | Missing required adjustment | fast | k05/test_valuation.py | test_T_K05_0014_missing_required_adjustment |
+| T-K05-0015 | Floor bounds for zero spread | fast | k05/test_valuation.py | test_T_K05_0015_floor_bounds_for_zero_spread |
+| T-K05-0101 | Closed reason registry | fast | k05/test_valuation.py | test_closed_reason_registry |
+| T-K05-0115 | Real origin requires tenant calibration | fast | k05/test_valuation.py | test_T_K05_0115_real_origin_requires_tenant_calibration |
+| T-K05-0201 | Exact unit conversion | fast | k05/test_basis_and_reference.py | test_T_K05_0201_exact_unit_conversion |
+| T-K05-0202 | Exact currency conversion | fast | k05/test_basis_and_reference.py | test_T_K05_0202_exact_currency_conversion |
+| T-K05-0203 | Documentary basis fraction oracle | fast | k05/test_basis_and_reference.py | test_T_K05_0203_documentary_basis_fraction_oracle |
+| T-K05-0204 | Reference median and mad | fast | k05/test_basis_and_reference.py | test_reference_median_and_mad |
+| T-K05-0212 | Reference sample boundaries | fast | k05/test_basis_and_reference.py | test_reference_sample_boundaries |
+| T-K05-0219 | Split quantile matches rank | fast | k05/test_basis_and_reference.py | test_split_quantile_matches_rank |
+| T-K05-0225 | Unavailable inputs abstain | fast | k05/test_basis_and_reference.py | test_unavailable_inputs_abstain |
+| T-K05-0229 | Grams scale exactly | fast | k05/test_basis_and_reference.py | test_T_K05_0229_grams_scale_exactly |
+| T-K05-0230 | Currency and unit conversion compose | fast | k05/test_basis_and_reference.py | test_T_K05_0230_currency_and_unit_conversion_compose |
+| T-K05-0231 | Invalid unit factor is refused | fast | k05/test_interfaces.py | test_T_K05_0231_invalid_unit_factor_is_refused |
+| T-K05-0232 | Invalid reference sample abstains | fast | k05/test_interfaces.py | test_T_K05_0232_invalid_reference_sample_abstains |
+| T-K05-0233 | Calibration rejects insufficient draws | fast | k05/test_interfaces.py | test_T_K05_0233_calibration_rejects_insufficient_draws |
+| T-K05-0234 | Public abstention has no basis or calibration | fast | k05/test_interfaces.py | test_T_K05_0234_public_abstention_has_no_basis_or_calibration |
+| T-K05-0235 | Ambiguous canonical quantity abstains | fast | k05/test_interfaces.py | test_T_K05_0235_ambiguous_canonical_quantity_abstains |
+| T-K05-0236 | Missing adjustment reference abstains | fast | k05/test_interfaces.py | test_T_K05_0236_missing_adjustment_reference_abstains |
+| T-K05-0237 | Duplicate rule adjustment rejected | fast | k05/test_interfaces.py | test_T_K05_0237_duplicate_rule_adjustment_rejected |
+| T-K05-0238 | Unbound valuation rules abstain | fast | k05/test_interfaces.py | test_T_K05_0238_unbound_valuation_rules_abstain |
+| T-K05-0239 | Exact upper endpoint is inside | fast | k05/test_valuation.py | test_T_K05_0239_exact_upper_endpoint_is_inside |
+| T-K05-0301 | Rejects nonpositive and nonfinite values | fast | k05/test_interfaces.py | test_rejects_nonpositive_and_nonfinite_values |
+| T-K05-0308 | Rejects invalid quantities | fast | k05/test_interfaces.py | test_rejects_invalid_quantities |
+| T-K05-0313 | Rejects unknown or incompatible units | fast | k05/test_interfaces.py | test_rejects_unknown_or_incompatible_units |
+| T-K05-0319 | Tiny quantity is detected | fast | k05/test_interfaces.py | test_T_K05_0319_tiny_quantity_is_detected |
+| T-K05-0320 | Extreme reference outlier keeps robust position | fast | k05/test_interfaces.py | test_T_K05_0320_extreme_reference_outlier_keeps_robust_position |
+| T-K05-0401 | Replay is deterministic | fast | k05/test_interfaces.py | test_T_K05_0401_replay_is_deterministic |
+| T-K05-0402 | Evidence commits to input change | fast | k05/test_interfaces.py | test_T_K05_0402_evidence_commits_to_input_change |
+| T-K05-0403 | Operator report uses redacted positions | fast | k05/test_interfaces.py | test_T_K05_0403_operator_report_uses_redacted_positions |
+| T-K05-0404 | Reviewer can inspect bounds | fast | k05/test_interfaces.py | test_T_K05_0404_reviewer_can_inspect_bounds |
+| T-K05-0405 | Other tenant cannot invoke | fast | k05/test_interfaces.py | test_T_K05_0405_other_tenant_cannot_invoke |
+| T-K05-0406 | Other tenant cannot retrieve | fast | k05/test_interfaces.py | test_T_K05_0406_other_tenant_cannot_retrieve |
+| T-K05-0407 | Fact revocation marks result stale | fast | k05/test_interfaces.py | test_T_K05_0407_fact_revocation_marks_result_stale |
+| T-K05-0408 | Same idempotency key returns same evaluation | fast | k05/test_interfaces.py | test_T_K05_0408_same_idempotency_key_returns_same_evaluation |
+| T-K05-0409 | Idempotency payload change returns conflict | fast | k05/test_interfaces.py | test_T_K05_0409_idempotency_payload_change_returns_conflict |
+| T-K05-0410 | Query cannot select supplied facts | fast | k05/test_interfaces.py | test_T_K05_0410_query_cannot_select_supplied_facts |
+| T-K05-0501 | Registration reads verified canonical facts | fast | k05/test_interfaces.py | test_T_K05_0501_registration_reads_verified_canonical_facts |
+| T-K05-0502 | Missing idempotency key fails validation | fast | k05/test_interfaces.py | test_T_K05_0502_missing_idempotency_key_fails_validation |
+| T-K05-0503 | Naive time fails validation | fast | k05/test_interfaces.py | test_T_K05_0503_naive_time_fails_validation |
+| T-K05-0504 | Generated openapi has evaluation operations | fast | k05/test_interfaces.py | test_T_K05_0504_generated_openapi_has_evaluation_operations |
+| T-K05-0505 | View banner is verbatim | fast | k05/test_interfaces.py | test_T_K05_0505_view_banner_is_verbatim |
+| T-K05-0506 | Coverage claim is verbatim | fast | k05/test_interfaces.py | test_T_K05_0506_coverage_claim_is_verbatim |
+| T-K05-0507 | View never recommends a value | fast | k05/test_interfaces.py | test_view_never_recommends_a_value |
+| T-K05-0511 | Evidence cites reference and calibration | fast | k05/test_interfaces.py | test_T_K05_0511_evidence_cites_reference_and_calibration |
+| T-K05-0512 | Untrusted note cannot change report | fast | k05/test_interfaces.py | test_T_K05_0512_untrusted_note_cannot_change_report |
 | T-K09-0001 | K09-S01 golden scenario | fast | k09/test_shield.py | test_T_K09_0001_golden_scenario |
 | T-K09-0002 | K09-S02 golden scenario | fast | k09/test_shield.py | test_T_K09_0002_golden_scenario |
 | T-K09-0003 | K09-S03 golden scenario | fast | k09/test_shield.py | test_T_K09_0003_golden_scenario |
@@ -1305,3 +1405,19 @@
 | T-SEC-0090 | Catalog JSON matches Python | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0090_catalog_json_matches |
 | T-SEC-0091 | All new items covered | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0091_all_new_items_covered |
 | T-SEC-0092 | Deferred items non-empty | fast | security/test_T_SEC_0085_to_0092.py | test_T_SEC_0092_deferred_items_nonempty |
+| T-VAL-0001 | Consensus feeds both judgments | fast | pairs/test_valuation_classification.py | test_T_VAL_0001_consensus_feeds_both_judgments |
+| T-VAL-0002 | Absent consensus causes both to abstain | fast | pairs/test_valuation_classification.py | test_T_VAL_0002_absent_consensus_causes_both_to_abstain |
+| T-VAL-0003 | Description change marks both stale and recomputes | fast | pairs/test_valuation_classification.py | test_T_VAL_0003_description_change_marks_both_stale_and_recomputes |
+| T-VAL-0004 | Secondary reference cannot allow | fast | pairs/test_valuation_classification.py | test_T_VAL_0004_secondary_reference_cannot_allow |
+| T-VAL-0005 | Secondary tariff cannot allow | fast | pairs/test_valuation_classification.py | test_T_VAL_0005_secondary_tariff_cannot_allow |
+| T-VAL-0006 | Secondary tariff contributes to skeleton decision | fast | pairs/test_valuation_classification.py | test_T_VAL_0006_secondary_tariff_contributes_to_skeleton_decision |
+| T-VAL-0007 | Secondary reference contributes to skeleton decision | fast | pairs/test_valuation_classification.py | test_T_VAL_0007_secondary_reference_contributes_to_skeleton_decision |
+| T-VAL-0008 | Both allow on synthetic consensus and replay | fast | pairs/test_valuation_classification.py | test_T_VAL_0008_both_allow_on_synthetic_consensus_and_replay |
+| T-VAL-0009 | Judgment records are in the case chain | fast | pairs/test_valuation_classification.py | test_T_VAL_0009_judgment_records_are_in_the_case_chain |
+| T-VAL-0010 | Agreed exact quantity reaches the judge | fast | pairs/test_valuation_classification.py | test_T_VAL_0010_agreed_exact_quantity_reaches_the_judge |
+| T-VAL-0011 | Missing description is not inferred | fast | pairs/test_valuation_classification.py | test_T_VAL_0011_missing_description_is_not_inferred |
+| T-VAL-0012 | Conflicting line codes are not canonical | fast | pairs/test_valuation_classification.py | test_T_VAL_0012_conflicting_line_codes_are_not_canonical |
+| T-VAL-0013 | Tenant boundary covers judgment evidence | fast | pairs/test_valuation_classification.py | test_T_VAL_0013_tenant_boundary_covers_judgment_evidence |
+| T-VAL-0014 | Repeated workflows commit to identical judgments | fast | pairs/test_valuation_classification.py | test_T_VAL_0014_repeated_workflows_commit_to_identical_judgments |
+| T-VAL-0015 | Two judgments meet the deterministic budget | fast | pairs/test_valuation_classification.py | test_T_VAL_0015_two_judgments_meet_the_deterministic_budget |
+| T-VAL-0016 | Cli evaluates the synthetic shipment | fast | pairs/test_valuation_classification.py | test_T_VAL_0016_cli_evaluates_the_synthetic_shipment |
