@@ -40,7 +40,7 @@ records:
       A wrong cost is reported to the operator.
     harm: >-
       Financial loss; demurrage or detention charges; a wrong advisory output.
-    controls: [CTL-HZD-03, CTL-HZC-03]
+    controls: [CTL-HZD-03, CTL-HZC-03, CTL-FIN-03, CTL-FIN-04, CTL-FIN-05, CTL-FIN-06]
     source: P7-RISK section 6
 
   - id: HZ-04
@@ -53,5 +53,5 @@ records:
       A wrong deadline is reported; the operator misses the real deadline.
     harm: >-
       Demurrage or detention charges; a missed regulatory deadline.
-    controls: [CTL-HZD-04, CTL-HZC-04]
+    controls: [CTL-HZD-04, CTL-HZC-04, CTL-FIN-01, CTL-FIN-02]
     source: P7-RISK section 6

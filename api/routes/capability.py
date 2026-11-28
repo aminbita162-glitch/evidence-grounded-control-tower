@@ -20,22 +20,25 @@ import base64
 import binascii
 import time
 from collections.abc import Awaitable, Callable, Mapping
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime
+from http import HTTPStatus
 from typing import TYPE_CHECKING, Annotated, Any, Literal, Protocol
 
-from fastapi import APIRouter, Depends, Header, HTTPException, Query, Response
+from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request, Response
 from fastapi import Path as PathParam
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 from pydantic_core import to_jsonable_python
 
 from api.authentication import operator_principal, reviewer_principal, tenant_principal
-from api.problems import not_found_response
+from api.problems import not_found_response, problem_response
 from capabilities.f02.registration import register as evaluate_classification
 from capabilities.k05.registration import register as evaluate_valuation
 from kernel.auth.roles import Principal
+from kernel.errors import ProblemDetails
 from kernel.hashing import domain_hash
 from kernel.humangate import HumanGateError
+from kernel.skeleton.finance import FINANCE_IDS, CaseFinance, FinanceResult, FinanceSource
 from kernel.skeleton.intake import SourceDocument
 from kernel.types.decision import DecisionValue
 
@@ -201,6 +204,7 @@ def create_capability_router(
     intake: IntakeWorkflow | None = None,
     valuation: ValuationJudge | None = None,
     classification: ClassificationJudge | None = None,
+    finance: FinanceSource | None = None,
 ) -> APIRouter:
     """Create the uniform capability router.
 
@@ -324,7 +328,7 @@ def create_capability_router(
             bundle_hash="",
         )
 
-    _add_case_evaluations(router, intake, valuation, classification)
+    _add_case_evaluations(router, intake, valuation, classification, finance)
     if intake is not None:
         bound = intake
 
@@ -360,17 +364,136 @@ class _JudgeReport(Protocol):
     def view(self, role: str) -> dict[str, object]: ...
 
 
+class FinanceProblem(HTTPException):
+    """A stable problem response for the case finance route."""
+
+
+async def _finance_problem(_request: Request, error: Exception) -> Response:
+    if not isinstance(error, FinanceProblem):
+        raise error
+    if error.status_code == 404:
+        return not_found_response()
+    detail = str(error.detail)
+    return problem_response(
+        ProblemDetails(
+            type=f"urn:ctc:problem:{detail.lower().replace('_', '-')}",
+            title=HTTPStatus(error.status_code).phrase,
+            status=error.status_code,
+            detail=detail,
+        )
+    )
+
+
+def _validate_finance_decimals(value: object) -> None:
+    if isinstance(value, float):
+        raise ValueError("recorded decimal inputs require exact decimal strings")
+    if isinstance(value, Mapping):
+        for item in value.values():
+            _validate_finance_decimals(item)
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            _validate_finance_decimals(item)
+
+
+def evaluate_finance_step(
+    capability_id: str,
+    payload: Mapping[str, object],
+    at: datetime,
+) -> FinanceResult:
+    """Validate and evaluate a recorded case input for the requested financial step."""
+    _validate_finance_decimals(payload)
+
+    from capabilities.f03 import registration as f03
+    from capabilities.f07 import registration as f07
+    from capabilities.l01 import registration as l01
+    from capabilities.l02 import registration as l02
+
+    if capability_id == "F03":
+        clocks, evidence = f03.register(f03.INPUT.validate_python(payload), at)
+        public = f03.OUTPUT.dump_python(clocks, mode="json")
+        return FinanceResult(
+            clocks.decision.name,
+            public,
+            evidence,
+            f03.render_timeline(clocks),
+            tuple(sorted({row.reason.value for row in clocks.clocks})),
+        )
+    if capability_id == "L01":
+        invoice, evidence = l01.register(l01.INPUT.validate_python(payload), at)
+        public = l01.OUTPUT.dump_python(invoice, mode="json")
+        return FinanceResult(
+            invoice.outcome.name,
+            public,
+            evidence,
+            l01.render_audit(invoice),
+            tuple(invoice.reason_codes),
+        )
+    if capability_id == "L02":
+        estimate, evidence = l02.register(l02.INPUT.validate_python(payload), at)
+        public = l02.OUTPUT.dump_python(estimate, mode="json")
+        return FinanceResult(
+            estimate.status.value,
+            public,
+            evidence,
+            l02.render_estimate(estimate),
+            tuple(estimate.reason_codes),
+        )
+    if capability_id == "F07":
+        charges, evidence = f07.register(f07.INPUT.validate_python(payload), at)
+        public = f07.OUTPUT.dump_python(charges, mode="json")
+        return FinanceResult(
+            charges.outcome.name,
+            public,
+            evidence,
+            f07.render_audit(charges),
+            tuple(charges.reason_codes),
+        )
+    raise ValueError("unknown case finance capability")
+
+
 def _add_case_evaluations(
     router: APIRouter,
     intake: IntakeWorkflow | None,
     valuation: ValuationJudge | None,
     classification: ClassificationJudge | None,
+    finance: FinanceSource | None,
 ) -> None:
     """Bind case evaluation and retrieval to the authenticated tenant and case."""
     evaluations: dict[
         tuple[str, str, str, str], tuple[str, str, _JudgeReport, dict[str, object]]
     ] = {}
     idempotency: dict[tuple[str, str, str, str], str] = {}
+
+    finance_evaluations: dict[tuple[str, str, str, str], tuple[str, str, FinanceResult]] = {}
+    finance_simulations: dict[tuple[str, str, str, str], tuple[str, str, FinanceResult]] = {}
+
+    def saved_finance(key: tuple[str, str, str, str]) -> tuple[str, str, FinanceResult] | None:
+        return finance_evaluations.get(key) or finance_simulations.get(key)
+
+    def finance_case(principal: Principal, case_id: str) -> CaseFinance:
+        tenant = principal.tenant_id
+        snapshot = finance(tenant, case_id) if finance is not None and tenant else None
+        if snapshot is None or (snapshot.tenant_id, snapshot.case_id) != (tenant, case_id):
+            raise FinanceProblem(status_code=404, detail="Resource not found")
+        if intake is not None and ("F03" in snapshot.inputs or "F07" in snapshot.inputs):
+            intake_result = intake.result(principal, case_id)
+            if intake_result is None:
+                raise FinanceProblem(status_code=404, detail="Resource not found")
+            containers: set[str] = set()
+            for fact in intake_result.consistency.canonical:
+                if fact.key == "shipment.container_numbers" and fact.status == "VERIFIED":
+                    if isinstance(fact.value, (list, tuple)):
+                        containers.update(item for item in fact.value if isinstance(item, str))
+                    elif isinstance(fact.value, str):
+                        containers.add(fact.value)
+            inputs = {
+                name: {**values, "canonical_containers": sorted(containers)}
+                if name in {"F03", "F07"}
+                else values
+                for name, values in snapshot.inputs.items()
+            }
+            snapshot = replace(snapshot, inputs=inputs)
+        return snapshot
 
     def case_result(principal: Principal, case_id: str, capability_id: str) -> IntakeEvaluation:
         result = (
@@ -394,17 +517,58 @@ def _add_case_evaluations(
         request: InvokeRequest,
         idempotency_key: Annotated[str, Header(min_length=1, max_length=128)],
     ) -> dict[str, object]:
-        case = case_result(principal, case_id, capability_id)
         tenant = principal.tenant_id or ""
+        snapshot = finance_case(principal, case_id) if capability_id in FINANCE_IDS else None
+        case = None if snapshot is not None else case_result(principal, case_id, capability_id)
+        error_type = FinanceProblem if snapshot is not None else HTTPException
         if request.facts:
-            raise HTTPException(status_code=422, detail="CASE_FACTS_ARE_SERVER_OWNED")
+            raise error_type(status_code=422, detail="CASE_FACTS_ARE_SERVER_OWNED")
         try:
             at = datetime.fromisoformat(request.evaluation_time)
         except ValueError as error:
-            raise HTTPException(status_code=422, detail="EVALUATION_TIME_REQUIRED") from error
+            raise error_type(status_code=422, detail="EVALUATION_TIME_REQUIRED") from error
         if at.tzinfo is None:
-            raise HTTPException(status_code=422, detail="EVALUATION_TIME_REQUIRED")
+            raise error_type(status_code=422, detail="EVALUATION_TIME_REQUIRED")
         request_hash = domain_hash("ctc/payload/v1", at.isoformat())
+        if snapshot is not None:
+            payload = snapshot.input_for(capability_id)
+            if payload is None:
+                raise FinanceProblem(status_code=404, detail="Resource not found")
+            version = snapshot.version(capability_id)
+            key = (tenant, case_id, capability_id, idempotency_key)
+            identifier = idempotency.get(key)
+            if identifier is not None:
+                saved = saved_finance((tenant, case_id, capability_id, identifier))
+                if saved is None:
+                    raise FinanceProblem(status_code=404, detail="Resource not found")
+                saved_request, saved_version, earlier = saved
+                if saved_request != request_hash:
+                    raise FinanceProblem(status_code=409, detail="IDEMPOTENCY_CONFLICT")
+                return {
+                    "evaluation_id": identifier,
+                    "status": earlier.status if saved_version == version else "STALE",
+                }
+            try:
+                finance_result = evaluate_finance_step(capability_id, payload, at)
+            except (ValidationError, ValueError, ArithmeticError) as error:
+                raise FinanceProblem(
+                    status_code=422, detail="INVALID_RECORDED_FINANCE_INPUT"
+                ) from error
+            identifier = domain_hash("ctc/payload/v1", (*key, version, request_hash))
+            records = (
+                finance_simulations
+                if finance_result.evidence.get("record_kind") == "SIMULATION"
+                else finance_evaluations
+            )
+            records[(tenant, case_id, capability_id, identifier)] = (
+                request_hash,
+                version,
+                finance_result,
+            )
+            idempotency[key] = identifier
+            return {"evaluation_id": identifier, "status": finance_result.status}
+        if case is None:
+            raise HTTPException(status_code=404, detail="Resource not found")
         case_version = case.consistency.output_hash
         key = (tenant, case_id, capability_id, idempotency_key)
         evaluation_id = idempotency.get(key)
@@ -445,6 +609,23 @@ def _add_case_evaluations(
         capability_id: str,
         evaluation_id: str,
     ) -> dict[str, object]:
+        if capability_id in FINANCE_IDS:
+            snapshot = finance_case(principal, case_id)
+            saved = saved_finance(
+                (principal.tenant_id or "", case_id, capability_id, evaluation_id)
+            )
+            if saved is None:
+                raise FinanceProblem(status_code=404, detail="Resource not found")
+            _, version, result = saved
+            response = {"evaluation_id": evaluation_id, "evidence": result.evidence}
+            if version != snapshot.version(capability_id):
+                return {**response, "status": "STALE"}
+            return {
+                **response,
+                "status": result.status,
+                "report": result.report,
+                "view": result.view,
+            }
         case = case_result(principal, case_id, capability_id)
         entry = evaluations.get((principal.tenant_id or "", case_id, capability_id, evaluation_id))
         if entry is None:
@@ -467,6 +648,7 @@ def register_capability_routes(
     intake: IntakeWorkflow | None = None,
     valuation: ValuationJudge | None = None,
     classification: ClassificationJudge | None = None,
+    finance: FinanceSource | None = None,
 ) -> None:
     """Register the uniform capability routes on a FastAPI app."""
 
@@ -474,8 +656,13 @@ def register_capability_routes(
 
     if not isinstance(app, FastAPI):
         return
+    app.add_exception_handler(FinanceProblem, _finance_problem)
     app.include_router(
         create_capability_router(
-            registrations, intake=intake, valuation=valuation, classification=classification
+            registrations,
+            intake=intake,
+            valuation=valuation,
+            classification=classification,
+            finance=finance,
         )
     )

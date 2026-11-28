@@ -1,0 +1,65 @@
+{
+  "entries": [
+    {
+      "code": "HANDLING",
+      "kind": "OTHER",
+      "synonyms": [
+        "Handling fee",
+        "رسوم المناولة"
+      ]
+    },
+    {
+      "code": "FREIGHT",
+      "kind": "OTHER",
+      "synonyms": [
+        "Freight",
+        "أجرة الشحن"
+      ]
+    },
+    {
+      "code": "FUEL",
+      "kind": "OTHER",
+      "synonyms": [
+        "Fuel surcharge",
+        "رسوم الوقود"
+      ]
+    },
+    {
+      "code": "DEMURRAGE",
+      "kind": "TIME_BASED",
+      "synonyms": [
+        "Demurrage",
+        "أرضيات"
+      ]
+    },
+    {
+      "code": "DETENTION",
+      "kind": "TIME_BASED",
+      "synonyms": [
+        "Detention",
+        "احتجاز"
+      ]
+    },
+    {
+      "code": "STORAGE",
+      "kind": "TIME_BASED",
+      "synonyms": [
+        "Storage",
+        "تخزين"
+      ]
+    },
+    {
+      "code": "TAX",
+      "kind": "TAX",
+      "synonyms": [
+        "VAT",
+        "ضريبة"
+      ]
+    }
+  ],
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-L01",
+  "valid_from": "2024-01-01",
+  "valid_until": "2025-01-01",
+  "version": "1.0.0"
+}

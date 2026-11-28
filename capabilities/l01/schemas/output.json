@@ -1,0 +1,619 @@
+{
+  "$defs": {
+    "AuditedLine": {
+      "properties": {
+        "basis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Basis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "billed": {
+          "title": "Billed",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/LineClass"
+        },
+        "decision": {
+          "$ref": "#/$defs/DecisionValue"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected"
+        },
+        "kind": {
+          "$ref": "#/$defs/ChargeName"
+        },
+        "line": {
+          "$ref": "#/$defs/InvoiceLine"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "trace": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Trace"
+        }
+      },
+      "required": [
+        "line",
+        "kind",
+        "classification",
+        "reason",
+        "decision",
+        "billed",
+        "expected",
+        "trace",
+        "basis"
+      ],
+      "title": "AuditedLine",
+      "type": "object"
+    },
+    "Basis": {
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "freight": {
+          "default": false,
+          "title": "Freight",
+          "type": "boolean"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "rate": {
+          "title": "Rate",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RoundingRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "shipment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shipment"
+        },
+        "source": {
+          "$ref": "#/$defs/BasisSource"
+        },
+        "surcharge": {
+          "default": false,
+          "title": "Surcharge",
+          "type": "boolean"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "format": "date",
+          "title": "Valid Until",
+          "type": "string"
+        },
+        "verified": {
+          "default": true,
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "source",
+        "rate",
+        "currency",
+        "unit",
+        "valid_from",
+        "valid_until",
+        "citation",
+        "label",
+        "version"
+      ],
+      "title": "Basis",
+      "type": "object"
+    },
+    "BasisSource": {
+      "enum": [
+        "QUOTE",
+        "TERMS",
+        "TARIFF"
+      ],
+      "title": "BasisSource",
+      "type": "string"
+    },
+    "ChargeName": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/LineKind"
+        },
+        "synonyms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Synonyms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "kind",
+        "synonyms"
+      ],
+      "title": "ChargeName",
+      "type": "object"
+    },
+    "CurrencyTotal": {
+      "properties": {
+        "billed": {
+          "title": "Billed",
+          "type": "string"
+        },
+        "difference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Difference"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected"
+        }
+      },
+      "required": [
+        "billed",
+        "expected",
+        "difference"
+      ],
+      "title": "CurrencyTotal",
+      "type": "object"
+    },
+    "DecisionValue": {
+      "description": "The four decision values ordered by severity.",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "title": "DecisionValue",
+      "type": "integer"
+    },
+    "HeaderTotal": {
+      "properties": {
+        "line_sum": {
+          "title": "Line Sum",
+          "type": "string"
+        },
+        "matches": {
+          "title": "Matches",
+          "type": "boolean"
+        },
+        "stated": {
+          "title": "Stated",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stated",
+        "line_sum",
+        "matches"
+      ],
+      "title": "HeaderTotal",
+      "type": "object"
+    },
+    "InvoiceLine": {
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "string"
+        },
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "container": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "freight_conflict": {
+          "default": false,
+          "title": "Freight Conflict",
+          "type": "boolean"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "default": "DERIVED",
+          "title": "Label",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "percent_base": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Percent Base"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period Start"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "rate": {
+          "title": "Rate",
+          "type": "string"
+        },
+        "service_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Service Date"
+        },
+        "shipment": {
+          "title": "Shipment",
+          "type": "string"
+        },
+        "tax": {
+          "default": false,
+          "title": "Tax",
+          "type": "boolean"
+        },
+        "verified": {
+          "default": true,
+          "title": "Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "shipment",
+        "currency",
+        "quantity",
+        "rate",
+        "amount",
+        "citation"
+      ],
+      "title": "InvoiceLine",
+      "type": "object"
+    },
+    "LineClass": {
+      "enum": [
+        "DUPLICATE",
+        "POSSIBLE_DUPLICATE",
+        "UNQUOTED",
+        "AMBIGUOUS",
+        "CURRENCY_MISMATCH",
+        "SURCHARGE_OUT_OF_VALIDITY",
+        "QUANTITY_MISMATCH",
+        "RATE_ABOVE_BASIS",
+        "ARITHMETIC",
+        "FREIGHT_TERMS_CONFLICT",
+        "MATCH",
+        "BELOW_BASIS",
+        "TAX_EXCLUDED",
+        "TIME_BASED_MATCHED",
+        "CURRENCY_UNSUPPORTED",
+        "LABEL_INSUFFICIENT",
+        "INVOICE_FACT_NOT_VERIFIED"
+      ],
+      "title": "LineClass",
+      "type": "string"
+    },
+    "LineKind": {
+      "enum": [
+        "TIME_BASED",
+        "TAX",
+        "OTHER"
+      ],
+      "title": "LineKind",
+      "type": "string"
+    },
+    "MatchRecord": {
+      "properties": {
+        "basis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Basis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "line_id": {
+          "title": "Line Id",
+          "type": "string"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "required": [
+        "line_id",
+        "kind",
+        "basis",
+        "reason"
+      ],
+      "title": "MatchRecord",
+      "type": "object"
+    },
+    "Quantity": {
+      "properties": {
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    },
+    "Reason": {
+      "enum": [
+        "L01.OK.MATCH",
+        "L01.OBS.BELOW_BASIS",
+        "L01.OBS.TAX_EXCLUDED",
+        "L01.OBS.TIME_BASED_MATCHED",
+        "L01.OVERCHARGE.DUPLICATE",
+        "L01.OVERCHARGE.RATE_ABOVE_BASIS",
+        "L01.OVERCHARGE.QUANTITY",
+        "L01.OVERCHARGE.ARITHMETIC",
+        "L01.OVERCHARGE.SURCHARGE_VALIDITY",
+        "L01.OVERCHARGE.HEADER_TOTAL",
+        "L01.CURRENCY.MISMATCH",
+        "L01.REVIEW.POSSIBLE_DUPLICATE",
+        "L01.UNQUOTED.NO_BASIS",
+        "L01.AMBIGUOUS.BASIS",
+        "L01.TERMS.FREIGHT_CONFLICT",
+        "L01.ABSTAIN.INVOICE_FACT_NOT_VERIFIED",
+        "L01.ABSTAIN.TAXONOMY_MISSING",
+        "L01.ABSTAIN.BASIS_PACK_MISSING",
+        "L01.ABSTAIN.CURRENCY_UNSUPPORTED",
+        "L01.ABSTAIN.LABEL_INSUFFICIENT"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "RoundAt": {
+      "description": "The operation point to which a pack rule applies.",
+      "enum": [
+        "LINE",
+        "TOTAL",
+        "PRESENTATION"
+      ],
+      "title": "RoundAt",
+      "type": "string"
+    },
+    "RoundingRule": {
+      "description": "The pack's approved rounding rule.",
+      "properties": {
+        "mode": {
+          "title": "Mode",
+          "type": "string"
+        },
+        "point": {
+          "$ref": "#/$defs/RoundAt"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "point",
+        "mode",
+        "source_id"
+      ],
+      "title": "RoundingRule",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "header": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HeaderTotal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lines": {
+      "items": {
+        "$ref": "#/$defs/AuditedLine"
+      },
+      "title": "Lines",
+      "type": "array"
+    },
+    "matches": {
+      "items": {
+        "$ref": "#/$defs/MatchRecord"
+      },
+      "title": "Matches",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/DecisionValue"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "#/$defs/Reason"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "totals": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CurrencyTotal"
+      },
+      "title": "Totals",
+      "type": "object"
+    },
+    "unblock": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Unblock",
+      "type": "array"
+    }
+  },
+  "required": [
+    "outcome",
+    "lines",
+    "matches",
+    "reason_codes",
+    "totals",
+    "header",
+    "unblock"
+  ],
+  "title": "InvoiceAudit",
+  "type": "object"
+}

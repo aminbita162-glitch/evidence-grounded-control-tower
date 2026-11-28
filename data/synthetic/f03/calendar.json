@@ -1,0 +1,12 @@
+{
+  "holidays": [
+    "2024-03-01"
+  ],
+  "label": "SYNTHETIC",
+  "source_id": "SRC-SYNTHETIC-F03",
+  "version": "1.0.0",
+  "weekend": [
+    5,
+    6
+  ]
+}

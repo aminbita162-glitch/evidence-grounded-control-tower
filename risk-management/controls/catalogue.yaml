@@ -761,3 +761,57 @@ records:
     target_phase: P15
     verifying_test_ids: [T-K05-0201, T-K05-0202, T-K05-0203, T-K05-0014]
     source: P15-T01 and P15-T02
+
+  - id: CTL-FIN-01
+    title: Local tariff day calculation
+    type: preventive
+    mechanism: Apply explicit tariff boundaries, day-one and partial-day rules with a differential simulation.
+    lifecycle_status: VERIFIED
+    target_phase: P16
+    verifying_test_ids: [T-F03-0201, T-F03-0219, T-F03-0220, T-F03-0530]
+    source: P16-RISK
+
+  - id: CTL-FIN-02
+    title: Versioned working calendar
+    type: preventive
+    mechanism: Require the referenced calendar and admit only recorded verified suspensions.
+    lifecycle_status: VERIFIED
+    target_phase: P16
+    verifying_test_ids: [T-F03-0005, T-F03-0012, T-F03-0109, T-F03-0203]
+    source: P16-RISK
+
+  - id: CTL-FIN-03
+    title: Exact amounts and traceable rounding
+    type: preventive
+    mechanism: Use fixed-point amounts with minor-unit comparisons and record pack-selected rounding.
+    lifecycle_status: VERIFIED
+    target_phase: P16
+    verifying_test_ids: [T-F03-0204, T-L01-0202, T-L01-0528, T-L02-0202]
+    source: P16-RISK
+
+  - id: CTL-FIN-04
+    title: Duplicate charge and overlapping-period detection
+    type: detective
+    mechanism: Identify repeated invoice lines and overlapping container periods before amount comparisons.
+    lifecycle_status: VERIFIED
+    target_phase: P16
+    verifying_test_ids: [T-L01-0002, T-L01-0015, T-F07-0002, T-F07-0305]
+    source: P16-RISK
+
+  - id: CTL-FIN-05
+    title: Verified preference and declared classification
+    type: preventive
+    mechanism: Require verified facts for a preferential rate and calculate duty only for the declared code.
+    lifecycle_status: VERIFIED
+    target_phase: P16
+    verifying_test_ids: [T-L02-0005, T-L02-0009, T-L02-0230, T-L02-0231]
+    source: P16-RISK
+
+  - id: CTL-FIN-06
+    title: Incomplete estimates and isolated simulations
+    type: preventive
+    mechanism: Omit totals when rates or components are unavailable and store proposals as simulations.
+    lifecycle_status: VERIFIED
+    target_phase: P16
+    verifying_test_ids: [T-L02-0006, T-L02-0212, T-L02-0507, T-FIN-0008]
+    source: P16-RISK

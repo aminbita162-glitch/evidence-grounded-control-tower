@@ -1,0 +1,10 @@
+{
+  "calibration_artifacts": [],
+  "capability_id": "L02",
+  "depends": [
+    "F01"
+  ],
+  "statistical": false,
+  "title": "Landed Cost Estimator",
+  "version": "1.0.0"
+}

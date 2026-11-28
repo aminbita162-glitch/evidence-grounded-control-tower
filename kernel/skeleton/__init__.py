@@ -30,6 +30,13 @@ from kernel.ledger.records import Actor, LedgerRecord
 from kernel.ledger.replay import CaseExport, compute_passport_hash, replay
 from kernel.ledger.verify import verify_structural
 from kernel.rules.interpreter import FactSet, RuleResult, interpret
+from kernel.skeleton.finance import (
+    CaseFinance,
+    FinanceResult,
+    FinanceStep,
+    evaluation_instant,
+    run_finance,
+)
 from kernel.skeleton.intake import IntakePipelinePort, SourceDocument
 from kernel.types.decision import DecisionValue, combine_decisions
 
@@ -140,6 +147,8 @@ class SkeletonResult:
     bundle_ok: bool = False
     replay_ok: bool = False
     configuration_hash: str = ""
+    financial_results: dict[str, FinanceResult] = field(default_factory=dict)
+    simulations: dict[str, FinanceResult] = field(default_factory=dict)
 
 
 class WalkingSkeleton:
@@ -169,6 +178,9 @@ class WalkingSkeleton:
         *,
         intake: IntakePipelinePort | None = None,
         uploads: Sequence[SourceDocument] = (),
+        financial_case: CaseFinance | None = None,
+        finance_steps: Mapping[str, FinanceStep] | None = None,
+        finance_at: str | None = None,
     ) -> SkeletonResult:
         """Run the full skeleton pipeline and return a :class:`SkeletonResult`."""
         chain = InMemoryCaseChain(self.tenant_id, self.case_id)
@@ -229,6 +241,40 @@ class WalkingSkeleton:
                 ],
             )
             eligibility = EligibilityResult(outcome, reasons, eligibility.stamped_label)
+        finance_results: dict[str, FinanceResult] = {}
+        simulations: dict[str, FinanceResult] = {}
+        if financial_case is not None:
+            if (
+                (financial_case.tenant_id, financial_case.case_id) != (self.tenant_id, self.case_id)
+                or finance_steps is None
+                or finance_at is None
+            ):
+                raise ValueError(
+                    "financial step requires an authorized case and evaluation instant"
+                )
+            for capability, result in run_finance(
+                financial_case, finance_steps, evaluation_instant(finance_at)
+            ).items():
+                if result.evidence.get("record_kind") == "SIMULATION":
+                    simulations[capability] = result
+                    continue
+                finance_results[capability] = result
+                await chain.append(
+                    stage="Rules",
+                    actor=_ACTOR,
+                    record_type="financial_evaluation",
+                    payload=result.evidence,
+                )
+            decided = [
+                result
+                for result in finance_results.values()
+                if result.status in DecisionValue.__members__
+            ]
+            outcome, codes = combine_decisions(
+                [eligibility.value, *(DecisionValue[result.status] for result in decided)],
+                [eligibility.reason_codes, *(list(result.reasons) for result in decided)],
+            )
+            eligibility = EligibilityResult(outcome, codes, eligibility.stamped_label)
         decision_str: str = DecisionValue(eligibility.value).name
         decision_payload = {
             "decision": decision_str,
@@ -321,6 +367,8 @@ class WalkingSkeleton:
             bundle_ok=bundle_ok,
             replay_ok=replay_result.ok,
             configuration_hash=self.configuration_hash,
+            financial_results=finance_results,
+            simulations=simulations,
         )
 
     async def _fixture_facts(self, chain: InMemoryCaseChain) -> list[FactEntry]:

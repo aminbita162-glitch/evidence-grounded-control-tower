@@ -49,10 +49,14 @@ The system reads case documents, extracts facts with sources and labels, applies
 
 ## 6 Capabilities
 
-Each capability returns one Decision (ALLOW, ABSTAIN, HOLD, ESCALATE) with reason codes and cited facts.
+Decision capabilities return ALLOW, ABSTAIN, HOLD or ESCALATE with reason codes and cited facts. Advisory capabilities report an estimate or its status.
 
 - K05 Valuation Anomaly ✓, view accessibility pending P27.
 - F02 Classification Judge ✓, English with the active synthetic pack, view accessibility pending P27.
+- F03 Free-Time Clock & Cost Shield ✓, view accessibility pending P27.
+- L01 Freight Invoice Audit ✓, view accessibility pending P27.
+- L02 Landed Cost Estimator ✓, view accessibility pending P27.
+- F07 Charge Control ✓, view accessibility pending P27.
 
 ## 7 Trust model
 
@@ -77,7 +81,7 @@ A person decides before any irreversible action. The system does not take an irr
 | P13 | Capability support library | ✓ November 2026 |
 | P14 | Intake | ✓ November 2026 |
 | P15 | Valuation and classification | ✓ November 2026 |
-| P16 | Clock, freight cost and charge control | ☐ |
+| P16 | Clock, freight cost and charge control | ✓ November 2026 |
 
 ## 9 Quality gates
 

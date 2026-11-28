@@ -1,13 +1,17 @@
 {
-  "awaiting_merge_phase": null,
+  "awaiting_merge_phase": "P16",
   "capability_status_map": {
     "F02": "view-pending",
-    "K05": "view-pending"
+    "F03": "view-pending",
+    "F07": "view-pending",
+    "K05": "view-pending",
+    "L01": "view-pending",
+    "L02": "view-pending"
   },
-  "directive_hash": "47beb412092bff991577ae277f58c100dbce7825f6760f78bb3c4c9db5775fb6",
+  "directive_hash": "de91caaff2c1e40c9b08c3c0bb47d401e972fe3227d3783b4a943010133f4c31",
   "label_counts": {},
-  "last_completed_phase": "P15",
+  "last_completed_phase": "P16",
   "open_stop_items": [],
   "previous_merge_hash": "f37dddde8231c94b9138cc72e5e4c5549e0e1eec",
-  "state_hash": "403a1ce6f751fb527dfdd5c6d74fc6ae0730327a5a32d3306a17716face0ba46"
+  "state_hash": "8d6f646b12b0ebc3cbbc5d0d24734e5dbc32687e5338479d6d2a7d19236dc496"
 }

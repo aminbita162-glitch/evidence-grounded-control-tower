@@ -1,0 +1,10 @@
+{
+  "calibration_artifacts": [],
+  "capability_id": "F03",
+  "depends": [
+    "F01"
+  ],
+  "statistical": false,
+  "title": "Free-Time Clock & Cost Shield",
+  "version": "1.0.0"
+}

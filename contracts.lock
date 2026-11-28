@@ -26,6 +26,26 @@
       "type": "schema"
     },
     {
+      "path": "capabilities/f03/schemas/input.json",
+      "hash": "b48a953ac0e3e2db488e9892b170fd67d669f9af6054a6a3634108a85bea290b",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/f03/schemas/output.json",
+      "hash": "be5615d348ca1a1f2b619cba99d8b1647653801b70f1cedadd85d30cce5f041b",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/f07/schemas/input.json",
+      "hash": "679314631da92895eb4fc50d66a0bcd7998736855c97e317967697ab4a0b01c2",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/f07/schemas/output.json",
+      "hash": "ec5dc189d229503cb31ac083423118615738f54e2ea51092012139df32222b5c",
+      "type": "schema"
+    },
+    {
       "path": "capabilities/k05/schemas/input.json",
       "hash": "577b9f193a101f3d5c04ae4a5b4849d4877723b7641ba453ac345245bf05083b",
       "type": "schema"
@@ -56,8 +76,33 @@
       "type": "schema"
     },
     {
+      "path": "capabilities/l01/schemas/input.json",
+      "hash": "75dd3ce7b12168ee7f5e5f17caf481e6f0889bdfedcb34d5d1ca20bb503d3d56",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/l01/schemas/output.json",
+      "hash": "94b236c481aff48c31cb0ed57d9359cfa3cd241211af6e1cd82a62efad44b2a0",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/l02/schemas/input.json",
+      "hash": "933534c9a913ff1fc0259fc1970e8ee55be9ac9ab50e7125d4962d8f2a90624d",
+      "type": "schema"
+    },
+    {
+      "path": "capabilities/l02/schemas/output.json",
+      "hash": "878fc5890768231b8c59cf286a3f060e44b44989fad220bd85407ea29c133ec5",
+      "type": "schema"
+    },
+    {
       "path": "schemas/api/phase15-openapi.json",
       "hash": "cf9f4060a5c4ed3e5cc50a3d054f16125210952a47a9ebe4fbd884ae4a0ef4bc",
+      "type": "schema"
+    },
+    {
+      "path": "schemas/api/phase16-openapi.json",
+      "hash": "2470c398887a99173e66dfd66fed7d18ee02c7798f8e1e0d672a001ddf22ba24",
       "type": "schema"
     },
     {

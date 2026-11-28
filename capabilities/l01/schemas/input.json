@@ -1,0 +1,629 @@
+{
+  "$defs": {
+    "Basis": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "freight": {
+          "default": false,
+          "title": "Freight",
+          "type": "boolean"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Rate"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RoundingRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "shipment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shipment"
+        },
+        "source": {
+          "$ref": "#/$defs/BasisSource"
+        },
+        "surcharge": {
+          "default": false,
+          "title": "Surcharge",
+          "type": "boolean"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "format": "date",
+          "title": "Valid Until",
+          "type": "string"
+        },
+        "verified": {
+          "default": true,
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "source",
+        "rate",
+        "currency",
+        "unit",
+        "valid_from",
+        "valid_until",
+        "citation",
+        "label",
+        "version"
+      ],
+      "title": "Basis",
+      "type": "object"
+    },
+    "BasisSource": {
+      "enum": [
+        "QUOTE",
+        "TERMS",
+        "TARIFF"
+      ],
+      "title": "BasisSource",
+      "type": "string"
+    },
+    "ChargeName": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/LineKind"
+        },
+        "synonyms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Synonyms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "kind",
+        "synonyms"
+      ],
+      "title": "ChargeName",
+      "type": "object"
+    },
+    "Invoice": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "issued_on": {
+          "format": "date",
+          "title": "Issued On",
+          "type": "string"
+        },
+        "issuer": {
+          "title": "Issuer",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/InvoiceLine"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "number": {
+          "title": "Number",
+          "type": "string"
+        },
+        "total": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total"
+        },
+        "verified": {
+          "default": true,
+          "title": "Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "number",
+        "issuer",
+        "issued_on",
+        "currency",
+        "lines",
+        "label",
+        "citation"
+      ],
+      "title": "Invoice",
+      "type": "object"
+    },
+    "InvoiceLine": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "container": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "freight_conflict": {
+          "default": false,
+          "title": "Freight Conflict",
+          "type": "boolean"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "default": "DERIVED",
+          "title": "Label",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "percent_base": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Percent Base"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period Start"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Rate"
+        },
+        "service_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Service Date"
+        },
+        "shipment": {
+          "title": "Shipment",
+          "type": "string"
+        },
+        "tax": {
+          "default": false,
+          "title": "Tax",
+          "type": "boolean"
+        },
+        "verified": {
+          "default": true,
+          "title": "Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "shipment",
+        "currency",
+        "quantity",
+        "rate",
+        "amount",
+        "citation"
+      ],
+      "title": "InvoiceLine",
+      "type": "object"
+    },
+    "LineKind": {
+      "enum": [
+        "TIME_BASED",
+        "TAX",
+        "OTHER"
+      ],
+      "title": "LineKind",
+      "type": "string"
+    },
+    "Policy": {
+      "additionalProperties": false,
+      "properties": {
+        "duplicate_days": {
+          "default": 30,
+          "title": "Duplicate Days",
+          "type": "integer"
+        },
+        "near_band": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "default": "0.02",
+          "title": "Near Band"
+        },
+        "precedence": {
+          "default": [
+            0,
+            1,
+            2
+          ],
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Precedence",
+          "type": "array"
+        }
+      },
+      "title": "Policy",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    },
+    "RoundAt": {
+      "description": "The operation point to which a pack rule applies.",
+      "enum": [
+        "LINE",
+        "TOTAL",
+        "PRESENTATION"
+      ],
+      "title": "RoundAt",
+      "type": "string"
+    },
+    "RoundingRule": {
+      "additionalProperties": false,
+      "description": "The pack's approved rounding rule.",
+      "properties": {
+        "mode": {
+          "title": "Mode",
+          "type": "string"
+        },
+        "point": {
+          "$ref": "#/$defs/RoundAt"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "point",
+        "mode",
+        "source_id"
+      ],
+      "title": "RoundingRule",
+      "type": "object"
+    },
+    "Taxonomy": {
+      "additionalProperties": false,
+      "properties": {
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/ChargeName"
+          },
+          "title": "Entries",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "format": "date",
+          "title": "Valid Until",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "version",
+        "label",
+        "valid_from",
+        "valid_until",
+        "entries"
+      ],
+      "title": "Taxonomy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "bases": {
+      "items": {
+        "$ref": "#/$defs/Basis"
+      },
+      "title": "Bases",
+      "type": "array"
+    },
+    "basis_available": {
+      "default": true,
+      "title": "Basis Available",
+      "type": "boolean"
+    },
+    "currencies": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Currencies",
+      "type": "object"
+    },
+    "currency_source": {
+      "title": "Currency Source",
+      "type": "string"
+    },
+    "document_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Document Note"
+    },
+    "invoice": {
+      "$ref": "#/$defs/Invoice"
+    },
+    "policy": {
+      "$ref": "#/$defs/Policy",
+      "default": {
+        "duplicate_days": 30,
+        "near_band": "0.02",
+        "precedence": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    "previous": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Invoice"
+      },
+      "title": "Previous",
+      "type": "array"
+    },
+    "synthetic": {
+      "default": false,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "taxonomy": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Taxonomy"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verified_quantities": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/Quantity"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verified Quantities"
+    }
+  },
+  "required": [
+    "invoice",
+    "taxonomy",
+    "bases",
+    "currencies",
+    "currency_source"
+  ],
+  "title": "AuditInput",
+  "type": "object"
+}

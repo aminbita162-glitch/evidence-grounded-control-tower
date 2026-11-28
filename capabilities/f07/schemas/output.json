@@ -1,0 +1,421 @@
+{
+  "$defs": {
+    "Audit": {
+      "properties": {
+        "invoice_citation": {
+          "title": "Invoice Citation",
+          "type": "string"
+        },
+        "invoice_number": {
+          "title": "Invoice Number",
+          "type": "string"
+        },
+        "issuer": {
+          "title": "Issuer",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/ChargeLine"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "outcome": {
+          "$ref": "#/$defs/DecisionValue"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "totals": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Total"
+          },
+          "title": "Totals",
+          "type": "object"
+        }
+      },
+      "required": [
+        "invoice_number",
+        "issuer",
+        "invoice_citation",
+        "outcome",
+        "reason_codes",
+        "lines",
+        "totals",
+        "label"
+      ],
+      "title": "Audit",
+      "type": "object"
+    },
+    "ChargeLine": {
+      "properties": {
+        "billed": {
+          "title": "Billed",
+          "type": "string"
+        },
+        "charge_kind": {
+          "title": "Charge Kind",
+          "type": "string"
+        },
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/Classification"
+        },
+        "container": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Container"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "difference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Difference"
+        },
+        "events": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "line_id": {
+          "title": "Line Id",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/DecisionValue"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Reason"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "remainder": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Remainder"
+        },
+        "steps": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TariffStep"
+          },
+          "title": "Steps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "line_id",
+        "charge_kind",
+        "container",
+        "classification",
+        "reason",
+        "outcome",
+        "currency",
+        "billed",
+        "expected",
+        "difference",
+        "remainder",
+        "citation",
+        "label"
+      ],
+      "title": "ChargeLine",
+      "type": "object"
+    },
+    "Classification": {
+      "enum": [
+        "MATCH",
+        "UNDERCHARGE",
+        "OUT_OF_SCOPE",
+        "TAX_NOT_EVALUATED",
+        "DUPLICATE",
+        "NOT_BILLABLE_PERIOD",
+        "UNSUPPORTED",
+        "AMBIGUOUS_TARIFF",
+        "RATE_MISMATCH",
+        "DAY_COUNT_MISMATCH",
+        "ARITHMETIC",
+        "CLOCK_MISSING",
+        "MATCHING_MISSING",
+        "LABEL_INSUFFICIENT"
+      ],
+      "title": "Classification",
+      "type": "string"
+    },
+    "DecisionValue": {
+      "description": "The four decision values ordered by severity.",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "title": "DecisionValue",
+      "type": "integer"
+    },
+    "Dossier": {
+      "properties": {
+        "digest": {
+          "title": "Digest",
+          "type": "string"
+        },
+        "html": {
+          "title": "Html",
+          "type": "string"
+        },
+        "json": {
+          "title": "Json",
+          "type": "string"
+        },
+        "strength": {
+          "title": "Strength",
+          "type": "string"
+        }
+      },
+      "required": [
+        "json",
+        "html",
+        "digest",
+        "strength"
+      ],
+      "title": "Dossier",
+      "type": "object"
+    },
+    "Event": {
+      "properties": {
+        "instant": {
+          "format": "date-time",
+          "title": "Instant",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "zone_source": {
+          "title": "Zone Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "instant",
+        "source_id",
+        "zone_source",
+        "label",
+        "verified"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Reason": {
+      "enum": [
+        "F07.OK.MATCH",
+        "F07.OBS.UNDERCHARGE",
+        "F07.OBS.OUT_OF_SCOPE",
+        "F07.OVERCHARGE.DUPLICATE",
+        "F07.OVERCHARGE.NOT_BILLABLE_PERIOD",
+        "F07.OVERCHARGE.RATE_MISMATCH",
+        "F07.OVERCHARGE.DAY_COUNT",
+        "F07.OVERCHARGE.ARITHMETIC",
+        "F07.UNSUPPORTED.NO_TARIFF_BASIS",
+        "F07.AMBIGUOUS.TARIFF",
+        "F07.ABSTAIN.CLOCK_MISSING",
+        "F07.ABSTAIN.MATCHING_MISSING",
+        "F07.ABSTAIN.LABEL_INSUFFICIENT"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "TariffStep": {
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "string"
+        },
+        "days": {
+          "format": "fraction",
+          "title": "Days",
+          "type": "string"
+        },
+        "free_expiry": {
+          "format": "date-time",
+          "title": "Free Expiry",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "period_from": {
+          "format": "date-time",
+          "title": "Period From",
+          "type": "string"
+        },
+        "period_until": {
+          "format": "date-time",
+          "title": "Period Until",
+          "type": "string"
+        },
+        "rates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rates",
+          "type": "array"
+        },
+        "terms_id": {
+          "title": "Terms Id",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "format": "date-time",
+          "title": "Valid Until",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "terms_id",
+        "version",
+        "label",
+        "valid_from",
+        "valid_until",
+        "period_from",
+        "period_until",
+        "free_expiry",
+        "days",
+        "rates",
+        "amount"
+      ],
+      "title": "TariffStep",
+      "type": "object"
+    },
+    "Total": {
+      "properties": {
+        "billed": {
+          "title": "Billed",
+          "type": "string"
+        },
+        "difference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Difference"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected"
+        }
+      },
+      "required": [
+        "billed",
+        "expected",
+        "difference"
+      ],
+      "title": "Total",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/Audit"
+    },
+    "dossier": {
+      "$ref": "#/$defs/Dossier"
+    }
+  },
+  "required": [
+    "audit",
+    "dossier"
+  ],
+  "title": "ChargeReport",
+  "type": "object"
+}

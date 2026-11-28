@@ -1,0 +1,70 @@
+[
+  {
+    "case": "data/scenarios/l02/L02-S01.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S02.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S03.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S04.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S05.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S06.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S07.json",
+    "expected": "ABSTAINED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S08.json",
+    "expected": "ABSTAINED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S09.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S10.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S11.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S12.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S13.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S14.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S15.json",
+    "expected": "PROVIDED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S16.json",
+    "expected": "ABSTAINED"
+  },
+  {
+    "case": "data/scenarios/l02/L02-S17.json",
+    "expected": "PROVIDED"
+  }
+]
