@@ -14,3 +14,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - P13: shared capability templates, exact money and calculation traces, unblock requirements, tenant feed validation, conformal calibration, verified integer solving, stable plan selection and grounded model cross-checking.
 - P14: tenant-scoped document intake, sandboxed readers, and Arabic and English normalization, with K14 grounded extraction, F01 shipment consistency and canonical facts, and K09 document reuse detection.
 - P15: K05 valuation anomaly and F02 classification judgments with versioned synthetic calibration, role-scoped evidence, and paired decisions from F01 canonical facts.
+
+- P16: versioned free-time clocks, exact freight invoice audits, landed cost estimates, and evidence dossiers for time-based charges across the case API, CLI and walking skeleton.
